@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "civ6-webreplay"
+version = "0.41"
+description = "Civ6 WebReplay - replay Civilization VI saves in your browser"
+requires-python = ">=3.11"
+dependencies = ["fastapi>=0.110", "uvicorn[standard]>=0.27", "httpx>=0.27"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "httpx>=0.27"]
+
+[project.scripts]
+civ6-webreplay = "civ6replay.__main__:main"
+civ6replay = "civ6replay.__main__:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+markers = [
+    "integration: needs a real .Civ6Save (set CIV6_SAVE_DIR or CIV6_SAVE)",
+]
+addopts = "-q"

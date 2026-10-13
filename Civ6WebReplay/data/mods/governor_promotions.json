@@ -1,0 +1,2845 @@
+{
+ "schema": 1,
+ "generated": "2026-10-11",
+ "what": "每座城市总督的晋升词条名（供复盘显示「莫克夏，晋升：鉴赏家、神圣建筑师」这类信息）",
+ "how": "类型/树位置/前置来自游戏在 CCB 环境下生成的 Cache/DebugGameplay.sqlite；名称来自游戏与 MOD 的 Text（zh_Hans_CN 优先，en_US 备份），按 官方 DLC < BBG < CCB（1.6 → MPH → 文明拓展 → 受命于天）的加载顺序合并。",
+ "warning": "MOD 之间的译名会不同（如 共享知识/知识共享、外汇资金/国际贸易），name_zh_variants 保留了各来源的差异。",
+ "orders": {
+  "order_governor_panel": "「总督」总览面板（顶栏总督按钮）的顺序 = GovernorPromotionSets 行序，已在游戏内 7 位可选总督上逐条核对。",
+  "order_level_then_column": "城市总督页的晋升清单顺序 = 树层级升序、同层先右（Column 2）后左（Column 0）；与用户提供的 CCB 两个特色总督截图一致。",
+  "note": "两种界面顺序不同，全部晋升的 level/column 均已记录，可自行推导任意一种。"
+ },
+ "mods": {
+  "ccb": {
+   "label": "CCB（CCB 1.6 + 受命于天 + 文明拓展 + MPH + 地图包）",
+   "built": "2026-10-11",
+   "verified_in_game": "2026-10-11 游戏内「总督」总览面板：7 位可选总督共 42 条晋升的名称与顺序逐条一致（面板显示 共享知识、外汇资金，即 CCB 译名；顺序 = GovernorPromotionSets 行序）；两个领袖专属总督 易卜拉欣 / 西雅赫·卡克 依用户游戏截图的名称核对一致（该界面的排列顺序与面板不同，见 orders）",
+   "sources": [
+    {
+     "label": "Expansion1 官方文本",
+     "priority": 10,
+     "path": "D:\\SteamLibrary\\steamapps\\common\\Sid Meier's Civilization VI\\DLC\\Expansion1\\Text"
+    },
+    {
+     "label": "Expansion2 官方文本",
+     "priority": 20,
+     "path": "D:\\SteamLibrary\\steamapps\\common\\Sid Meier's Civilization VI\\DLC\\Expansion2\\Text"
+    },
+    {
+     "label": "CCB 1.6",
+     "priority": 30,
+     "path": "D:\\SteamLibrary\\steamapps\\workshop\\content\\289070\\3556314860"
+    },
+    {
+     "label": "CCB 地图 1.2.0",
+     "priority": 31,
+     "path": "D:\\SteamLibrary\\steamapps\\workshop\\content\\289070\\3556318517"
+    },
+    {
+     "label": "CCB MPH 多人游戏助手 1.13",
+     "priority": 32,
+     "path": "D:\\SteamLibrary\\steamapps\\workshop\\content\\289070\\3556319230"
+    },
+    {
+     "label": "CCB 文明拓展 2.0",
+     "priority": 33,
+     "path": "D:\\SteamLibrary\\steamapps\\workshop\\content\\289070\\3556373611"
+    },
+    {
+     "label": "CCB 多河地图包 2.1",
+     "priority": 34,
+     "path": "D:\\SteamLibrary\\steamapps\\workshop\\content\\289070\\3577637978"
+    },
+    {
+     "label": "CCB 受命于天 1.3.4",
+     "priority": 35,
+     "path": "D:\\SteamLibrary\\steamapps\\workshop\\content\\289070\\3786804985"
+    },
+    {
+     "label": "DebugGameplay.sqlite（类型 / 树位置 / 归属）",
+     "priority": 0,
+     "path": "C:\\Users\\Admin\\AppData\\Local\\Firaxis Games\\Sid Meier's Civilization VI\\Cache\\DebugGameplay.sqlite"
+    }
+   ],
+   "governors": [
+    {
+     "type": "GOVERNOR_THE_DEFENDER",
+     "name_zh": "维克多",
+     "name_en": "Victor",
+     "name_source": "Expansion2 官方文本",
+     "title_zh": "城主",
+     "orders": {
+      "level_column": [
+       "GOVERNOR_PROMOTION_REDOUBT",
+       "GOVERNOR_PROMOTION_DEFENSE_LOGISTICS",
+       "GOVERNOR_PROMOTION_GARRISON_COMMANDER",
+       "GOVERNOR_PROMOTION_EDUCATOR_ARMS_RACE_PROPONENT",
+       "GOVERNOR_PROMOTION_EMBRASURE",
+       "GOVERNOR_PROMOTION_AIR_DEFENSE_INITIATIVE"
+      ],
+      "governor_panel": [
+       "GOVERNOR_PROMOTION_REDOUBT",
+       "GOVERNOR_PROMOTION_GARRISON_COMMANDER",
+       "GOVERNOR_PROMOTION_DEFENSE_LOGISTICS",
+       "GOVERNOR_PROMOTION_EMBRASURE",
+       "GOVERNOR_PROMOTION_AIR_DEFENSE_INITIATIVE",
+       "GOVERNOR_PROMOTION_EDUCATOR_ARMS_RACE_PROPONENT"
+      ]
+     },
+     "promotions": [
+      {
+       "type": "GOVERNOR_PROMOTION_REDOUBT",
+       "name_zh": "棱堡",
+       "name_en": "Redoubt",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 0,
+       "column": 1,
+       "base_ability": true,
+       "prereq": []
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_GARRISON_COMMANDER",
+       "name_zh": "驻军司令",
+       "name_en": "Garrison Commander",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_REDOUBT"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_DEFENSE_LOGISTICS",
+       "name_zh": "城防后勤",
+       "name_en": "Defense Logistics",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_REDOUBT"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_EMBRASURE",
+       "name_zh": "射击孔",
+       "name_en": "Embrasure",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_GARRISON_COMMANDER"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_AIR_DEFENSE_INITIATIVE",
+       "name_zh": "防空计划",
+       "name_en": "Air Defense Initiative",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 3,
+       "column": 1,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_EDUCATOR_ARMS_RACE_PROPONENT",
+        "GOVERNOR_PROMOTION_EMBRASURE"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_EDUCATOR_ARMS_RACE_PROPONENT",
+       "name_zh": "军备竞赛倡导者",
+       "name_en": "Arms Race Proponent",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_DEFENSE_LOGISTICS"
+       ]
+      }
+     ]
+    },
+    {
+     "type": "GOVERNOR_THE_AMBASSADOR",
+     "name_zh": "阿玛妮",
+     "name_en": "Amani",
+     "name_source": "Expansion2 官方文本",
+     "title_zh": "外交官",
+     "orders": {
+      "level_column": [
+       "GOVERNOR_PROMOTION_AMBASSADOR_MESSENGER",
+       "GOVERNOR_PROMOTION_AMBASSADOR_AFFLUENCE",
+       "BBG_GOVERNOR_PROMOTION_NEGOTIATOR",
+       "GOVERNOR_PROMOTION_AMBASSADOR_FOREIGN_INVESTOR",
+       "GOVERNOR_PROMOTION_LOCAL_INFORMANTS",
+       "GOVERNOR_PROMOTION_AMBASSADOR_PUPPETEER"
+      ],
+      "governor_panel": [
+       "GOVERNOR_PROMOTION_AMBASSADOR_MESSENGER",
+       "GOVERNOR_PROMOTION_LOCAL_INFORMANTS",
+       "GOVERNOR_PROMOTION_AMBASSADOR_AFFLUENCE",
+       "GOVERNOR_PROMOTION_AMBASSADOR_FOREIGN_INVESTOR",
+       "GOVERNOR_PROMOTION_AMBASSADOR_PUPPETEER",
+       "BBG_GOVERNOR_PROMOTION_NEGOTIATOR"
+      ]
+     },
+     "promotions": [
+      {
+       "type": "GOVERNOR_PROMOTION_AMBASSADOR_MESSENGER",
+       "name_zh": "信使",
+       "name_en": "Messenger",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 0,
+       "column": 1,
+       "base_ability": true,
+       "prereq": []
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_LOCAL_INFORMANTS",
+       "name_zh": "本地线人",
+       "name_en": "Local Informants",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "BBG_GOVERNOR_PROMOTION_NEGOTIATOR"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_AMBASSADOR_AFFLUENCE",
+       "name_zh": "富裕",
+       "name_en": "Affluence",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_AMBASSADOR_MESSENGER"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_AMBASSADOR_FOREIGN_INVESTOR",
+       "name_zh": "外国投资者",
+       "name_en": "Foreign Investor",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_AMBASSADOR_AFFLUENCE"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_AMBASSADOR_PUPPETEER",
+       "name_zh": "幕后主脑",
+       "name_en": "Puppeteer",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 3,
+       "column": 1,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_AMBASSADOR_FOREIGN_INVESTOR",
+        "GOVERNOR_PROMOTION_LOCAL_INFORMANTS"
+       ]
+      },
+      {
+       "type": "BBG_GOVERNOR_PROMOTION_NEGOTIATOR",
+       "name_zh": "谈判者",
+       "name_en": "Negotiator",
+       "name_source": "CCB 受命于天 1.3.4",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_AMBASSADOR_MESSENGER"
+       ]
+      }
+     ]
+    },
+    {
+     "type": "GOVERNOR_THE_CARDINAL",
+     "name_zh": "莫克夏",
+     "name_en": "Moksha",
+     "name_source": "Expansion2 官方文本",
+     "title_zh": "红衣主教",
+     "orders": {
+      "level_column": [
+       "GOVERNOR_PROMOTION_CARDINAL_BISHOP",
+       "GOVERNOR_PROMOTION_CARDINAL_CITADEL_OF_GOD",
+       "GOVERNOR_PROMOTION_EDUCATOR_CONNOISSEUR",
+       "GOVERNOR_PROMOTION_CARDINAL_PATRON_SAINT",
+       "GOVERNOR_PROMOTION_CARDINAL_DIVINE_ARCHITECT",
+       "GOVERNOR_PROMOTION_MERCHANT_CURATOR"
+      ],
+      "governor_panel": [
+       "GOVERNOR_PROMOTION_CARDINAL_BISHOP",
+       "GOVERNOR_PROMOTION_CARDINAL_CITADEL_OF_GOD",
+       "GOVERNOR_PROMOTION_CARDINAL_PATRON_SAINT",
+       "GOVERNOR_PROMOTION_CARDINAL_DIVINE_ARCHITECT",
+       "GOVERNOR_PROMOTION_EDUCATOR_CONNOISSEUR",
+       "GOVERNOR_PROMOTION_MERCHANT_CURATOR"
+      ]
+     },
+     "promotions": [
+      {
+       "type": "GOVERNOR_PROMOTION_CARDINAL_BISHOP",
+       "name_zh": "大主教",
+       "name_en": "Bishop",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 0,
+       "column": 1,
+       "base_ability": true,
+       "prereq": []
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_CARDINAL_CITADEL_OF_GOD",
+       "name_zh": "神之堡垒",
+       "name_en": "Citadel of God",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_CARDINAL_BISHOP"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_CARDINAL_PATRON_SAINT",
+       "name_zh": "主保圣人",
+       "name_en": "Patron Saint",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_CARDINAL_CITADEL_OF_GOD"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_CARDINAL_DIVINE_ARCHITECT",
+       "name_zh": "神圣建筑师",
+       "name_en": "Divine Architect",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_EDUCATOR_CONNOISSEUR"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_EDUCATOR_CONNOISSEUR",
+       "name_zh": "鉴赏家",
+       "name_en": "Connoisseur",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_CARDINAL_BISHOP"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_MERCHANT_CURATOR",
+       "name_zh": "策展人",
+       "name_en": "Curator",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 3,
+       "column": 1,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_CARDINAL_DIVINE_ARCHITECT",
+        "GOVERNOR_PROMOTION_CARDINAL_PATRON_SAINT"
+       ]
+      }
+     ]
+    },
+    {
+     "type": "GOVERNOR_THE_RESOURCE_MANAGER",
+     "name_zh": "马格努斯",
+     "name_en": "Magnus",
+     "name_source": "Expansion2 官方文本",
+     "title_zh": "总务官",
+     "orders": {
+      "level_column": [
+       "GOVERNOR_PROMOTION_RESOURCE_MANAGER_GROUNDBREAKER",
+       "GOVERNOR_PROMOTION_RESOURCE_MANAGER_INDUSTRIALIST",
+       "GOVERNOR_PROMOTION_RESOURCE_MANAGER_BLACK_MARKETEER",
+       "GOVERNOR_PROMOTION_RESOURCE_MANAGER_EXPEDITION",
+       "GOVERNOR_PROMOTION_RESOURCE_MANAGER_SURPLUS_LOGISTICS",
+       "GOVERNOR_PROMOTION_RESOURCE_MANAGER_VERTICAL_INTEGRATION"
+      ],
+      "governor_panel": [
+       "GOVERNOR_PROMOTION_RESOURCE_MANAGER_GROUNDBREAKER",
+       "GOVERNOR_PROMOTION_RESOURCE_MANAGER_SURPLUS_LOGISTICS",
+       "GOVERNOR_PROMOTION_RESOURCE_MANAGER_EXPEDITION",
+       "GOVERNOR_PROMOTION_RESOURCE_MANAGER_INDUSTRIALIST",
+       "GOVERNOR_PROMOTION_RESOURCE_MANAGER_BLACK_MARKETEER",
+       "GOVERNOR_PROMOTION_RESOURCE_MANAGER_VERTICAL_INTEGRATION"
+      ]
+     },
+     "promotions": [
+      {
+       "type": "GOVERNOR_PROMOTION_RESOURCE_MANAGER_GROUNDBREAKER",
+       "name_zh": "破土者",
+       "name_en": "Groundbreaker",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 0,
+       "column": 1,
+       "base_ability": true,
+       "prereq": []
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_RESOURCE_MANAGER_SURPLUS_LOGISTICS",
+       "name_zh": "盈余物流",
+       "name_en": "Surplus Logistics",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_RESOURCE_MANAGER_BLACK_MARKETEER"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_RESOURCE_MANAGER_EXPEDITION",
+       "name_zh": "给养保障",
+       "name_en": "Provision",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_RESOURCE_MANAGER_INDUSTRIALIST"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_RESOURCE_MANAGER_INDUSTRIALIST",
+       "name_zh": "实业家",
+       "name_en": "Industrialist",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_RESOURCE_MANAGER_GROUNDBREAKER"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_RESOURCE_MANAGER_BLACK_MARKETEER",
+       "name_zh": "黑市商人",
+       "name_en": "Black Marketeer",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_RESOURCE_MANAGER_GROUNDBREAKER"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_RESOURCE_MANAGER_VERTICAL_INTEGRATION",
+       "name_zh": "纵向结合",
+       "name_en": "Vertical Integration",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 3,
+       "column": 1,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_RESOURCE_MANAGER_EXPEDITION",
+        "GOVERNOR_PROMOTION_RESOURCE_MANAGER_SURPLUS_LOGISTICS"
+       ]
+      }
+     ]
+    },
+    {
+     "type": "GOVERNOR_THE_BUILDER",
+     "name_zh": "梁",
+     "name_en": "Liang",
+     "name_source": "Expansion2 官方文本",
+     "title_zh": "测量师",
+     "orders": {
+      "level_column": [
+       "GOVERNOR_PROMOTION_BUILDER_GUILDMASTER",
+       "BBG_AGRICULTURE_PROMOTION",
+       "GOVERNOR_PROMOTION_REINFORCED_INFRASTRUCTURE",
+       "GOVERNOR_PROMOTION_ZONING_COMMISSIONER",
+       "GOVERNOR_PROMOTION_PARKS_RECREATION",
+       "GOVERNOR_PROMOTION_WATER_WORKS"
+      ],
+      "governor_panel": [
+       "GOVERNOR_PROMOTION_BUILDER_GUILDMASTER",
+       "GOVERNOR_PROMOTION_ZONING_COMMISSIONER",
+       "GOVERNOR_PROMOTION_REINFORCED_INFRASTRUCTURE",
+       "GOVERNOR_PROMOTION_WATER_WORKS",
+       "GOVERNOR_PROMOTION_PARKS_RECREATION",
+       "BBG_AGRICULTURE_PROMOTION"
+      ]
+     },
+     "promotions": [
+      {
+       "type": "GOVERNOR_PROMOTION_BUILDER_GUILDMASTER",
+       "name_zh": "公会首领",
+       "name_en": "Guildmaster",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 0,
+       "column": 1,
+       "base_ability": true,
+       "prereq": []
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_ZONING_COMMISSIONER",
+       "name_zh": "规划委员",
+       "name_en": "Zoning Commissioner",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "BBG_AGRICULTURE_PROMOTION"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_REINFORCED_INFRASTRUCTURE",
+       "name_zh": "加固材料",
+       "name_en": "Reinforced Materials",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_BUILDER_GUILDMASTER"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_WATER_WORKS",
+       "name_zh": "住房扩建",
+       "name_en": "Housing Boom",
+       "name_source": "CCB 受命于天 1.3.4",
+       "name_zh_variants": {
+        "自来水工程": [
+         "Expansion2 官方文本"
+        ],
+        "住房扩建": [
+         "CCB 1.6",
+         "CCB MPH 多人游戏助手 1.13",
+         "CCB 受命于天 1.3.4"
+        ]
+       },
+       "level": 3,
+       "column": 1,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_PARKS_RECREATION",
+        "GOVERNOR_PROMOTION_ZONING_COMMISSIONER"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_PARKS_RECREATION",
+       "name_zh": "公园与休憩",
+       "name_en": "Parks and Recreation",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_REINFORCED_INFRASTRUCTURE"
+       ]
+      },
+      {
+       "type": "BBG_AGRICULTURE_PROMOTION",
+       "name_zh": "农业发展",
+       "name_en": "Agriculture",
+       "name_source": "CCB 受命于天 1.3.4",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_BUILDER_GUILDMASTER"
+       ]
+      }
+     ]
+    },
+    {
+     "type": "GOVERNOR_THE_EDUCATOR",
+     "name_zh": "平伽拉",
+     "name_en": "Pingala",
+     "name_source": "Expansion2 官方文本",
+     "title_zh": "教育家",
+     "orders": {
+      "level_column": [
+       "GOVERNOR_PROMOTION_EDUCATOR_LIBRARIAN",
+       "GOVERNOR_PROMOTION_EDUCATOR_RESEARCHER",
+       "GOVERNOR_PROMOTION_EDUCATOR_GRANTS",
+       "BBG_GOVERNOR_PROMOTION_EDUCATOR_TRADE",
+       "BBG_GOVERNOR_PROMOTION_EDUCATOR_CAMPUS_BUILDING_YIELDS",
+       "GOVERNOR_PROMOTION_EDUCATOR_SPACE_INITIATIVE"
+      ],
+      "governor_panel": [
+       "GOVERNOR_PROMOTION_EDUCATOR_LIBRARIAN",
+       "GOVERNOR_PROMOTION_EDUCATOR_RESEARCHER",
+       "GOVERNOR_PROMOTION_EDUCATOR_GRANTS",
+       "GOVERNOR_PROMOTION_EDUCATOR_SPACE_INITIATIVE",
+       "BBG_GOVERNOR_PROMOTION_EDUCATOR_CAMPUS_BUILDING_YIELDS",
+       "BBG_GOVERNOR_PROMOTION_EDUCATOR_TRADE"
+      ]
+     },
+     "promotions": [
+      {
+       "type": "GOVERNOR_PROMOTION_EDUCATOR_LIBRARIAN",
+       "name_zh": "图书馆员",
+       "name_en": "Librarian",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 0,
+       "column": 1,
+       "base_ability": true,
+       "prereq": []
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_EDUCATOR_RESEARCHER",
+       "name_zh": "研究员",
+       "name_en": "Researcher",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_EDUCATOR_LIBRARIAN"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_EDUCATOR_GRANTS",
+       "name_zh": "拨款",
+       "name_en": "Grants",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_EDUCATOR_CONNOISSEUR",
+        "GOVERNOR_PROMOTION_EDUCATOR_LIBRARIAN",
+        "GOVERNOR_PROMOTION_EDUCATOR_RESEARCHER"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_EDUCATOR_SPACE_INITIATIVE",
+       "name_zh": "太空计划",
+       "name_en": "Space Initiative",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 3,
+       "column": 1,
+       "base_ability": false,
+       "prereq": [
+        "BBG_GOVERNOR_PROMOTION_EDUCATOR_CAMPUS_BUILDING_YIELDS",
+        "BBG_GOVERNOR_PROMOTION_EDUCATOR_TRADE"
+       ]
+      },
+      {
+       "type": "BBG_GOVERNOR_PROMOTION_EDUCATOR_CAMPUS_BUILDING_YIELDS",
+       "name_zh": "尤里卡",
+       "name_en": "Eureka",
+       "name_source": "CCB 受命于天 1.3.4",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_EDUCATOR_GRANTS"
+       ]
+      },
+      {
+       "type": "BBG_GOVERNOR_PROMOTION_EDUCATOR_TRADE",
+       "name_zh": "共享知识",
+       "name_en": "Shared Knowledge",
+       "name_source": "CCB 受命于天 1.3.4",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_EDUCATOR_RESEARCHER"
+       ]
+      }
+     ]
+    },
+    {
+     "type": "GOVERNOR_THE_MERCHANT",
+     "name_zh": "瑞娜",
+     "name_en": "Reyna",
+     "name_source": "Expansion2 官方文本",
+     "title_zh": "金融家",
+     "orders": {
+      "level_column": [
+       "GOVERNOR_PROMOTION_MERCHANT_LAND_ACQUISITION",
+       "GOVERNOR_PROMOTION_MERCHANT_FORESTRY_MANAGEMENT",
+       "GOVERNOR_PROMOTION_MERCHANT_HARBORMASTER",
+       "GOVERNOR_PROMOTION_MERCHANT_TAX_COLLECTOR",
+       "BBG_GOVERNOR_PROMOTION_MANAGER",
+       "GOVERNOR_PROMOTION_MERCHANT_CONTRACTOR"
+      ],
+      "governor_panel": [
+       "GOVERNOR_PROMOTION_MERCHANT_LAND_ACQUISITION",
+       "GOVERNOR_PROMOTION_MERCHANT_HARBORMASTER",
+       "GOVERNOR_PROMOTION_MERCHANT_FORESTRY_MANAGEMENT",
+       "GOVERNOR_PROMOTION_MERCHANT_TAX_COLLECTOR",
+       "GOVERNOR_PROMOTION_MERCHANT_CONTRACTOR",
+       "BBG_GOVERNOR_PROMOTION_MANAGER"
+      ]
+     },
+     "promotions": [
+      {
+       "type": "GOVERNOR_PROMOTION_MERCHANT_LAND_ACQUISITION",
+       "name_zh": "土地征用",
+       "name_en": "Land Acquisition",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 0,
+       "column": 1,
+       "base_ability": true,
+       "prereq": []
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_MERCHANT_HARBORMASTER",
+       "name_zh": "港务局长",
+       "name_en": "Harbormaster",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_MERCHANT_LAND_ACQUISITION"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_MERCHANT_FORESTRY_MANAGEMENT",
+       "name_zh": "林业管理",
+       "name_en": "Forestry Management",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_MERCHANT_LAND_ACQUISITION"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_MERCHANT_TAX_COLLECTOR",
+       "name_zh": "税务员",
+       "name_en": "Tax Collector",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 1,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_MERCHANT_FORESTRY_MANAGEMENT",
+        "GOVERNOR_PROMOTION_MERCHANT_HARBORMASTER"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_MERCHANT_CONTRACTOR",
+       "name_zh": "发包人",
+       "name_en": "Contractor",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 3,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_MERCHANT_TAX_COLLECTOR"
+       ]
+      },
+      {
+       "type": "BBG_GOVERNOR_PROMOTION_MANAGER",
+       "name_zh": "外汇资金",
+       "name_en": "Foreign Exchange",
+       "name_source": "CCB 受命于天 1.3.4",
+       "name_zh_variants": {},
+       "level": 3,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_MERCHANT_TAX_COLLECTOR"
+       ]
+      }
+     ]
+    },
+    {
+     "type": "GOVERNOR_IBRAHIM",
+     "name_zh": "易卜拉欣",
+     "name_en": "Ibrahim",
+     "name_source": "Expansion2 官方文本",
+     "title_zh": "大维齐尔",
+     "orders": {
+      "level_column": [
+       "GOVERNOR_PROMOTION_PASHA",
+       "GOVERNOR_PROMOTION_SERASKER",
+       "GOVERNOR_PROMOTION_HEAD_FALCONER",
+       "GOVERNOR_PROMOTION_CAPOU_AGHA",
+       "GOVERNOR_PROMOTION_KHASS_ODA_BASHI",
+       "GOVERNOR_PROMOTION_GRAND_VISIER"
+      ],
+      "governor_panel": [
+       "GOVERNOR_PROMOTION_PASHA",
+       "GOVERNOR_PROMOTION_HEAD_FALCONER",
+       "GOVERNOR_PROMOTION_SERASKER",
+       "GOVERNOR_PROMOTION_KHASS_ODA_BASHI",
+       "GOVERNOR_PROMOTION_CAPOU_AGHA",
+       "GOVERNOR_PROMOTION_GRAND_VISIER"
+      ]
+     },
+     "promotions": [
+      {
+       "type": "GOVERNOR_PROMOTION_PASHA",
+       "name_zh": "帕夏",
+       "name_en": "Pasha",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 0,
+       "column": 1,
+       "base_ability": true,
+       "prereq": []
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_HEAD_FALCONER",
+       "name_zh": "首席驯鹰师",
+       "name_en": "Head Falconer",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_PASHA"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_SERASKER",
+       "name_zh": "塞拉斯克尔",
+       "name_en": "Serasker",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_PASHA"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_KHASS_ODA_BASHI",
+       "name_zh": "卡斯-奥达-巴什",
+       "name_en": "Khass-Oda-Bashi",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_HEAD_FALCONER"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_CAPOU_AGHA",
+       "name_zh": "卡普阿迦",
+       "name_en": "Capou Agha",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_SERASKER"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_GRAND_VISIER",
+       "name_zh": "大维齐尔",
+       "name_en": "Grand Vizier",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 3,
+       "column": 1,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_CAPOU_AGHA",
+        "GOVERNOR_PROMOTION_KHASS_ODA_BASHI"
+       ]
+      }
+     ]
+    },
+    {
+     "type": "GOVERNOR_LIME_TEO_OWL_EMISSARY",
+     "name_zh": "西雅赫·卡克",
+     "name_en": "Fire is Born",
+     "name_source": "CCB 受命于天 1.3.4",
+     "title_zh": "神使",
+     "orders": {
+      "level_column": [
+       "GOV_PROMO_LIME_TEO_OWL_EMISSARY_ARRIVAL",
+       "GOV_PROMO_LIME_TEO_OWL_EMISSARY_EXPEDITION",
+       "GOV_PROMO_LIME_TEO_OWL_EMISSARY_OUTPOST",
+       "GOV_PROMO_LIME_TEO_OWL_EMISSARY_OVERSEER",
+       "GOV_PROMO_LIME_TEO_OWL_EMISSARY_FALL",
+       "GOV_PROMO_LIME_TEO_OWL_EMISSARY_HEGEMONY"
+      ],
+      "governor_panel": [
+       "GOV_PROMO_LIME_TEO_OWL_EMISSARY_ARRIVAL",
+       "GOV_PROMO_LIME_TEO_OWL_EMISSARY_OUTPOST",
+       "GOV_PROMO_LIME_TEO_OWL_EMISSARY_EXPEDITION",
+       "GOV_PROMO_LIME_TEO_OWL_EMISSARY_FALL",
+       "GOV_PROMO_LIME_TEO_OWL_EMISSARY_OVERSEER",
+       "GOV_PROMO_LIME_TEO_OWL_EMISSARY_HEGEMONY"
+      ]
+     },
+     "promotions": [
+      {
+       "type": "GOV_PROMO_LIME_TEO_OWL_EMISSARY_ARRIVAL",
+       "name_zh": "初来乍到",
+       "name_en": "Arrival of Strangers",
+       "name_source": "CCB 受命于天 1.3.4",
+       "name_zh_variants": {},
+       "level": 0,
+       "column": 1,
+       "base_ability": true,
+       "prereq": []
+      },
+      {
+       "type": "GOV_PROMO_LIME_TEO_OWL_EMISSARY_OUTPOST",
+       "name_zh": "瓦卡前哨",
+       "name_en": "Waka Outpost",
+       "name_source": "CCB 受命于天 1.3.4",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOV_PROMO_LIME_TEO_OWL_EMISSARY_ARRIVAL"
+       ]
+      },
+      {
+       "type": "GOV_PROMO_LIME_TEO_OWL_EMISSARY_EXPEDITION",
+       "name_zh": "佩腾远征",
+       "name_en": "Petén Expedition",
+       "name_source": "CCB 受命于天 1.3.4",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOV_PROMO_LIME_TEO_OWL_EMISSARY_ARRIVAL"
+       ]
+      },
+      {
+       "type": "GOV_PROMO_LIME_TEO_OWL_EMISSARY_FALL",
+       "name_zh": "伟大之爪的崩殂",
+       "name_en": "Fall of Jaguar Paw",
+       "name_source": "CCB 受命于天 1.3.4",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOV_PROMO_LIME_TEO_OWL_EMISSARY_OUTPOST"
+       ]
+      },
+      {
+       "type": "GOV_PROMO_LIME_TEO_OWL_EMISSARY_OVERSEER",
+       "name_zh": "瓦哈克通的攻占",
+       "name_en": "Assault on Uaxactun",
+       "name_source": "CCB 受命于天 1.3.4",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOV_PROMO_LIME_TEO_OWL_EMISSARY_EXPEDITION"
+       ]
+      },
+      {
+       "type": "GOV_PROMO_LIME_TEO_OWL_EMISSARY_HEGEMONY",
+       "name_zh": "统御诸王",
+       "name_en": "Overseer of Kings",
+       "name_source": "CCB 受命于天 1.3.4",
+       "name_zh_variants": {},
+       "level": 3,
+       "column": 1,
+       "base_ability": false,
+       "prereq": [
+        "GOV_PROMO_LIME_TEO_OWL_EMISSARY_FALL",
+        "GOV_PROMO_LIME_TEO_OWL_EMISSARY_OVERSEER"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  "vanilla": {
+   "label": "原版（迭起兴衰 + 风云变幻，无平衡 MOD）",
+   "built": "2026-10-11",
+   "verified_in_game": "2026-10-11 用户提供的原版游戏截图：7 位通用总督共 42 条晋升的名称与顺序逐条一致；领袖专属总督 易卜拉欣（大维齐尔）的 6 条名称一致（该界面的排列顺序与面板不同，见 orders）",
+   "sources": [
+    {
+     "label": "Expansion1 官方文本",
+     "priority": 10,
+     "path": "D:\\SteamLibrary\\steamapps\\common\\Sid Meier's Civilization VI\\DLC\\Expansion1\\Text"
+    },
+    {
+     "label": "Expansion2 官方文本",
+     "priority": 20,
+     "path": "D:\\SteamLibrary\\steamapps\\common\\Sid Meier's Civilization VI\\DLC\\Expansion2\\Text"
+    }
+   ],
+   "governors": [
+    {
+     "type": "GOVERNOR_THE_DEFENDER",
+     "name_zh": "维克多",
+     "name_en": "Victor",
+     "name_source": "Expansion2 官方文本",
+     "title_zh": "城主",
+     "orders": {
+      "governor_panel": [
+       "GOVERNOR_PROMOTION_REDOUBT",
+       "GOVERNOR_PROMOTION_GARRISON_COMMANDER",
+       "GOVERNOR_PROMOTION_DEFENSE_LOGISTICS",
+       "GOVERNOR_PROMOTION_EMBRASURE",
+       "GOVERNOR_PROMOTION_AIR_DEFENSE_INITIATIVE",
+       "GOVERNOR_PROMOTION_EDUCATOR_ARMS_RACE_PROPONENT"
+      ],
+      "level_column": [
+       "GOVERNOR_PROMOTION_REDOUBT",
+       "GOVERNOR_PROMOTION_DEFENSE_LOGISTICS",
+       "GOVERNOR_PROMOTION_GARRISON_COMMANDER",
+       "GOVERNOR_PROMOTION_EMBRASURE",
+       "GOVERNOR_PROMOTION_EDUCATOR_ARMS_RACE_PROPONENT",
+       "GOVERNOR_PROMOTION_AIR_DEFENSE_INITIATIVE"
+      ]
+     },
+     "promotions": [
+      {
+       "type": "GOVERNOR_PROMOTION_REDOUBT",
+       "name_zh": "棱堡",
+       "name_en": "Redoubt",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 0,
+       "column": 1,
+       "base_ability": true,
+       "prereq": []
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_GARRISON_COMMANDER",
+       "name_zh": "驻军司令",
+       "name_en": "Garrison Commander",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_REDOUBT"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_DEFENSE_LOGISTICS",
+       "name_zh": "城防后勤",
+       "name_en": "Defense Logistics",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_REDOUBT"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_EMBRASURE",
+       "name_zh": "射击孔",
+       "name_en": "Embrasure",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 1,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_DEFENSE_LOGISTICS",
+        "GOVERNOR_PROMOTION_GARRISON_COMMANDER"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_AIR_DEFENSE_INITIATIVE",
+       "name_zh": "防空计划",
+       "name_en": "Air Defense Initiative",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 3,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_EMBRASURE"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_EDUCATOR_ARMS_RACE_PROPONENT",
+       "name_zh": "军备竞赛倡导者",
+       "name_en": "Arms Race Proponent",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 3,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_EMBRASURE"
+       ]
+      }
+     ]
+    },
+    {
+     "type": "GOVERNOR_THE_AMBASSADOR",
+     "name_zh": "阿玛妮",
+     "name_en": "Amani",
+     "name_source": "Expansion2 官方文本",
+     "title_zh": "外交官",
+     "orders": {
+      "governor_panel": [
+       "GOVERNOR_PROMOTION_AMBASSADOR_MESSENGER",
+       "GOVERNOR_PROMOTION_AMBASSADOR_EMISSARY",
+       "GOVERNOR_PROMOTION_LOCAL_INFORMANTS",
+       "GOVERNOR_PROMOTION_AMBASSADOR_AFFLUENCE",
+       "GOVERNOR_PROMOTION_AMBASSADOR_FOREIGN_INVESTOR",
+       "GOVERNOR_PROMOTION_AMBASSADOR_PUPPETEER"
+      ],
+      "level_column": [
+       "GOVERNOR_PROMOTION_AMBASSADOR_MESSENGER",
+       "GOVERNOR_PROMOTION_AMBASSADOR_AFFLUENCE",
+       "GOVERNOR_PROMOTION_AMBASSADOR_EMISSARY",
+       "GOVERNOR_PROMOTION_AMBASSADOR_FOREIGN_INVESTOR",
+       "GOVERNOR_PROMOTION_LOCAL_INFORMANTS",
+       "GOVERNOR_PROMOTION_AMBASSADOR_PUPPETEER"
+      ]
+     },
+     "promotions": [
+      {
+       "type": "GOVERNOR_PROMOTION_AMBASSADOR_MESSENGER",
+       "name_zh": "信使",
+       "name_en": "Messenger",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 0,
+       "column": 1,
+       "base_ability": true,
+       "prereq": []
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_AMBASSADOR_EMISSARY",
+       "name_zh": "使者",
+       "name_en": "Emissary",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_AMBASSADOR_MESSENGER"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_LOCAL_INFORMANTS",
+       "name_zh": "本地线人",
+       "name_en": "Local Informants",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_AMBASSADOR_EMISSARY"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_AMBASSADOR_AFFLUENCE",
+       "name_zh": "富裕",
+       "name_en": "Affluence",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_AMBASSADOR_MESSENGER"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_AMBASSADOR_FOREIGN_INVESTOR",
+       "name_zh": "外国投资者",
+       "name_en": "Foreign Investor",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_AMBASSADOR_AFFLUENCE"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_AMBASSADOR_PUPPETEER",
+       "name_zh": "幕后主脑",
+       "name_en": "Puppeteer",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 3,
+       "column": 1,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_AMBASSADOR_FOREIGN_INVESTOR",
+        "GOVERNOR_PROMOTION_LOCAL_INFORMANTS"
+       ]
+      }
+     ]
+    },
+    {
+     "type": "GOVERNOR_THE_CARDINAL",
+     "name_zh": "莫克夏",
+     "name_en": "Moksha",
+     "name_source": "Expansion2 官方文本",
+     "title_zh": "红衣主教",
+     "orders": {
+      "governor_panel": [
+       "GOVERNOR_PROMOTION_CARDINAL_BISHOP",
+       "GOVERNOR_PROMOTION_CARDINAL_GRAND_INQUISITOR",
+       "GOVERNOR_PROMOTION_CARDINAL_LAYING_ON_OF_HANDS",
+       "GOVERNOR_PROMOTION_CARDINAL_CITADEL_OF_GOD",
+       "GOVERNOR_PROMOTION_CARDINAL_PATRON_SAINT",
+       "GOVERNOR_PROMOTION_CARDINAL_DIVINE_ARCHITECT"
+      ],
+      "level_column": [
+       "GOVERNOR_PROMOTION_CARDINAL_BISHOP",
+       "GOVERNOR_PROMOTION_CARDINAL_LAYING_ON_OF_HANDS",
+       "GOVERNOR_PROMOTION_CARDINAL_GRAND_INQUISITOR",
+       "GOVERNOR_PROMOTION_CARDINAL_CITADEL_OF_GOD",
+       "GOVERNOR_PROMOTION_CARDINAL_DIVINE_ARCHITECT",
+       "GOVERNOR_PROMOTION_CARDINAL_PATRON_SAINT"
+      ]
+     },
+     "promotions": [
+      {
+       "type": "GOVERNOR_PROMOTION_CARDINAL_BISHOP",
+       "name_zh": "大主教",
+       "name_en": "Bishop",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 0,
+       "column": 1,
+       "base_ability": true,
+       "prereq": []
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_CARDINAL_GRAND_INQUISITOR",
+       "name_zh": "大审判官",
+       "name_en": "Grand Inquisitor",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_CARDINAL_BISHOP"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_CARDINAL_LAYING_ON_OF_HANDS",
+       "name_zh": "按手礼",
+       "name_en": "Laying On Of Hands",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_CARDINAL_BISHOP"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_CARDINAL_CITADEL_OF_GOD",
+       "name_zh": "神之堡垒",
+       "name_en": "Citadel of God",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 1,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_CARDINAL_GRAND_INQUISITOR",
+        "GOVERNOR_PROMOTION_CARDINAL_LAYING_ON_OF_HANDS"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_CARDINAL_PATRON_SAINT",
+       "name_zh": "主保圣人",
+       "name_en": "Patron Saint",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 3,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_CARDINAL_CITADEL_OF_GOD"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_CARDINAL_DIVINE_ARCHITECT",
+       "name_zh": "神圣建筑师",
+       "name_en": "Divine Architect",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 3,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_CARDINAL_CITADEL_OF_GOD"
+       ]
+      }
+     ]
+    },
+    {
+     "type": "GOVERNOR_THE_RESOURCE_MANAGER",
+     "name_zh": "马格努斯",
+     "name_en": "Magnus",
+     "name_source": "Expansion2 官方文本",
+     "title_zh": "总务官",
+     "orders": {
+      "governor_panel": [
+       "GOVERNOR_PROMOTION_RESOURCE_MANAGER_GROUNDBREAKER",
+       "GOVERNOR_PROMOTION_RESOURCE_MANAGER_SURPLUS_LOGISTICS",
+       "GOVERNOR_PROMOTION_RESOURCE_MANAGER_EXPEDITION",
+       "GOVERNOR_PROMOTION_RESOURCE_MANAGER_INDUSTRIALIST",
+       "GOVERNOR_PROMOTION_RESOURCE_MANAGER_BLACK_MARKETEER",
+       "GOVERNOR_PROMOTION_RESOURCE_MANAGER_VERTICAL_INTEGRATION"
+      ],
+      "level_column": [
+       "GOVERNOR_PROMOTION_RESOURCE_MANAGER_GROUNDBREAKER",
+       "GOVERNOR_PROMOTION_RESOURCE_MANAGER_EXPEDITION",
+       "GOVERNOR_PROMOTION_RESOURCE_MANAGER_SURPLUS_LOGISTICS",
+       "GOVERNOR_PROMOTION_RESOURCE_MANAGER_BLACK_MARKETEER",
+       "GOVERNOR_PROMOTION_RESOURCE_MANAGER_INDUSTRIALIST",
+       "GOVERNOR_PROMOTION_RESOURCE_MANAGER_VERTICAL_INTEGRATION"
+      ]
+     },
+     "promotions": [
+      {
+       "type": "GOVERNOR_PROMOTION_RESOURCE_MANAGER_GROUNDBREAKER",
+       "name_zh": "破土者",
+       "name_en": "Groundbreaker",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 0,
+       "column": 1,
+       "base_ability": true,
+       "prereq": []
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_RESOURCE_MANAGER_SURPLUS_LOGISTICS",
+       "name_zh": "盈余物流",
+       "name_en": "Surplus Logistics",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_RESOURCE_MANAGER_GROUNDBREAKER"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_RESOURCE_MANAGER_EXPEDITION",
+       "name_zh": "给养保障",
+       "name_en": "Provision",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_RESOURCE_MANAGER_GROUNDBREAKER"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_RESOURCE_MANAGER_INDUSTRIALIST",
+       "name_zh": "实业家",
+       "name_en": "Industrialist",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_RESOURCE_MANAGER_SURPLUS_LOGISTICS"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_RESOURCE_MANAGER_BLACK_MARKETEER",
+       "name_zh": "黑市商人",
+       "name_en": "Black Marketeer",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_RESOURCE_MANAGER_EXPEDITION"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_RESOURCE_MANAGER_VERTICAL_INTEGRATION",
+       "name_zh": "纵向结合",
+       "name_en": "Vertical Integration",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 3,
+       "column": 1,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_RESOURCE_MANAGER_BLACK_MARKETEER",
+        "GOVERNOR_PROMOTION_RESOURCE_MANAGER_INDUSTRIALIST"
+       ]
+      }
+     ]
+    },
+    {
+     "type": "GOVERNOR_THE_BUILDER",
+     "name_zh": "梁",
+     "name_en": "Liang",
+     "name_source": "Expansion2 官方文本",
+     "title_zh": "测量师",
+     "orders": {
+      "governor_panel": [
+       "GOVERNOR_PROMOTION_BUILDER_GUILDMASTER",
+       "GOVERNOR_PROMOTION_ZONING_COMMISSIONER",
+       "GOVERNOR_PROMOTION_AQUACULTURE",
+       "GOVERNOR_PROMOTION_REINFORCED_INFRASTRUCTURE",
+       "GOVERNOR_PROMOTION_WATER_WORKS",
+       "GOVERNOR_PROMOTION_PARKS_RECREATION"
+      ],
+      "level_column": [
+       "GOVERNOR_PROMOTION_BUILDER_GUILDMASTER",
+       "GOVERNOR_PROMOTION_AQUACULTURE",
+       "GOVERNOR_PROMOTION_ZONING_COMMISSIONER",
+       "GOVERNOR_PROMOTION_WATER_WORKS",
+       "GOVERNOR_PROMOTION_REINFORCED_INFRASTRUCTURE",
+       "GOVERNOR_PROMOTION_PARKS_RECREATION"
+      ]
+     },
+     "promotions": [
+      {
+       "type": "GOVERNOR_PROMOTION_BUILDER_GUILDMASTER",
+       "name_zh": "公会首领",
+       "name_en": "Guildmaster",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 0,
+       "column": 1,
+       "base_ability": true,
+       "prereq": []
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_ZONING_COMMISSIONER",
+       "name_zh": "规划委员",
+       "name_en": "Zoning Commissioner",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_BUILDER_GUILDMASTER"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_AQUACULTURE",
+       "name_zh": "水产养殖",
+       "name_en": "Aquaculture",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_BUILDER_GUILDMASTER"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_REINFORCED_INFRASTRUCTURE",
+       "name_zh": "加固材料",
+       "name_en": "Reinforced Materials",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_ZONING_COMMISSIONER"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_WATER_WORKS",
+       "name_zh": "自来水工程",
+       "name_en": "Water Works",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_AQUACULTURE"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_PARKS_RECREATION",
+       "name_zh": "公园与休憩",
+       "name_en": "Parks and Recreation",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 3,
+       "column": 1,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_REINFORCED_INFRASTRUCTURE",
+        "GOVERNOR_PROMOTION_WATER_WORKS"
+       ]
+      }
+     ]
+    },
+    {
+     "type": "GOVERNOR_THE_EDUCATOR",
+     "name_zh": "平伽拉",
+     "name_en": "Pingala",
+     "name_source": "Expansion2 官方文本",
+     "title_zh": "教育家",
+     "orders": {
+      "governor_panel": [
+       "GOVERNOR_PROMOTION_EDUCATOR_LIBRARIAN",
+       "GOVERNOR_PROMOTION_EDUCATOR_CONNOISSEUR",
+       "GOVERNOR_PROMOTION_EDUCATOR_RESEARCHER",
+       "GOVERNOR_PROMOTION_EDUCATOR_GRANTS",
+       "GOVERNOR_PROMOTION_MERCHANT_CURATOR",
+       "GOVERNOR_PROMOTION_EDUCATOR_SPACE_INITIATIVE"
+      ],
+      "level_column": [
+       "GOVERNOR_PROMOTION_EDUCATOR_LIBRARIAN",
+       "GOVERNOR_PROMOTION_EDUCATOR_RESEARCHER",
+       "GOVERNOR_PROMOTION_EDUCATOR_CONNOISSEUR",
+       "GOVERNOR_PROMOTION_EDUCATOR_GRANTS",
+       "GOVERNOR_PROMOTION_EDUCATOR_SPACE_INITIATIVE",
+       "GOVERNOR_PROMOTION_MERCHANT_CURATOR"
+      ]
+     },
+     "promotions": [
+      {
+       "type": "GOVERNOR_PROMOTION_EDUCATOR_LIBRARIAN",
+       "name_zh": "图书馆员",
+       "name_en": "Librarian",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 0,
+       "column": 1,
+       "base_ability": true,
+       "prereq": []
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_EDUCATOR_CONNOISSEUR",
+       "name_zh": "鉴赏家",
+       "name_en": "Connoisseur",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_EDUCATOR_LIBRARIAN"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_EDUCATOR_RESEARCHER",
+       "name_zh": "研究员",
+       "name_en": "Researcher",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_EDUCATOR_LIBRARIAN"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_EDUCATOR_GRANTS",
+       "name_zh": "拨款",
+       "name_en": "Grants",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 1,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_EDUCATOR_CONNOISSEUR",
+        "GOVERNOR_PROMOTION_EDUCATOR_RESEARCHER"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_MERCHANT_CURATOR",
+       "name_zh": "策展人",
+       "name_en": "Curator",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 3,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_EDUCATOR_GRANTS"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_EDUCATOR_SPACE_INITIATIVE",
+       "name_zh": "太空计划",
+       "name_en": "Space Initiative",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 3,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_EDUCATOR_GRANTS"
+       ]
+      }
+     ]
+    },
+    {
+     "type": "GOVERNOR_THE_MERCHANT",
+     "name_zh": "瑞娜",
+     "name_en": "Reyna",
+     "name_source": "Expansion2 官方文本",
+     "title_zh": "金融家",
+     "orders": {
+      "governor_panel": [
+       "GOVERNOR_PROMOTION_MERCHANT_LAND_ACQUISITION",
+       "GOVERNOR_PROMOTION_MERCHANT_HARBORMASTER",
+       "GOVERNOR_PROMOTION_MERCHANT_FORESTRY_MANAGEMENT",
+       "GOVERNOR_PROMOTION_MERCHANT_TAX_COLLECTOR",
+       "GOVERNOR_PROMOTION_MERCHANT_RENEWABLE_ENERGY",
+       "GOVERNOR_PROMOTION_MERCHANT_CONTRACTOR"
+      ],
+      "level_column": [
+       "GOVERNOR_PROMOTION_MERCHANT_LAND_ACQUISITION",
+       "GOVERNOR_PROMOTION_MERCHANT_FORESTRY_MANAGEMENT",
+       "GOVERNOR_PROMOTION_MERCHANT_HARBORMASTER",
+       "GOVERNOR_PROMOTION_MERCHANT_TAX_COLLECTOR",
+       "GOVERNOR_PROMOTION_MERCHANT_RENEWABLE_ENERGY",
+       "GOVERNOR_PROMOTION_MERCHANT_CONTRACTOR"
+      ]
+     },
+     "promotions": [
+      {
+       "type": "GOVERNOR_PROMOTION_MERCHANT_LAND_ACQUISITION",
+       "name_zh": "土地征用",
+       "name_en": "Land Acquisition",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 0,
+       "column": 1,
+       "base_ability": true,
+       "prereq": []
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_MERCHANT_HARBORMASTER",
+       "name_zh": "港务局长",
+       "name_en": "Harbormaster",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_MERCHANT_LAND_ACQUISITION"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_MERCHANT_FORESTRY_MANAGEMENT",
+       "name_zh": "林业管理",
+       "name_en": "Forestry Management",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_MERCHANT_LAND_ACQUISITION"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_MERCHANT_TAX_COLLECTOR",
+       "name_zh": "税务员",
+       "name_en": "Tax Collector",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 1,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_MERCHANT_FORESTRY_MANAGEMENT",
+        "GOVERNOR_PROMOTION_MERCHANT_HARBORMASTER"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_MERCHANT_RENEWABLE_ENERGY",
+       "name_zh": "再生资源补贴",
+       "name_en": "Renewable Subsidizer",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 3,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_MERCHANT_TAX_COLLECTOR"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_MERCHANT_CONTRACTOR",
+       "name_zh": "发包人",
+       "name_en": "Contractor",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 3,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_MERCHANT_TAX_COLLECTOR"
+       ]
+      }
+     ]
+    },
+    {
+     "type": "GOVERNOR_IBRAHIM",
+     "name_zh": "易卜拉欣",
+     "name_en": "Ibrahim",
+     "name_source": "Expansion2 官方文本",
+     "title_zh": "大维齐尔",
+     "orders": {
+      "governor_panel": [
+       "GOVERNOR_PROMOTION_PASHA",
+       "GOVERNOR_PROMOTION_HEAD_FALCONER",
+       "GOVERNOR_PROMOTION_SERASKER",
+       "GOVERNOR_PROMOTION_KHASS_ODA_BASHI",
+       "GOVERNOR_PROMOTION_CAPOU_AGHA",
+       "GOVERNOR_PROMOTION_GRAND_VISIER"
+      ],
+      "level_column": [
+       "GOVERNOR_PROMOTION_PASHA",
+       "GOVERNOR_PROMOTION_SERASKER",
+       "GOVERNOR_PROMOTION_HEAD_FALCONER",
+       "GOVERNOR_PROMOTION_CAPOU_AGHA",
+       "GOVERNOR_PROMOTION_KHASS_ODA_BASHI",
+       "GOVERNOR_PROMOTION_GRAND_VISIER"
+      ]
+     },
+     "promotions": [
+      {
+       "type": "GOVERNOR_PROMOTION_PASHA",
+       "name_zh": "帕夏",
+       "name_en": "Pasha",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 0,
+       "column": 1,
+       "base_ability": true,
+       "prereq": []
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_HEAD_FALCONER",
+       "name_zh": "首席驯鹰师",
+       "name_en": "Head Falconer",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_PASHA"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_SERASKER",
+       "name_zh": "塞拉斯克尔",
+       "name_en": "Serasker",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_PASHA"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_KHASS_ODA_BASHI",
+       "name_zh": "卡斯-奥达-巴什",
+       "name_en": "Khass-Oda-Bashi",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_HEAD_FALCONER"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_CAPOU_AGHA",
+       "name_zh": "卡普阿迦",
+       "name_en": "Capou Agha",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_SERASKER"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_GRAND_VISIER",
+       "name_zh": "大维齐尔",
+       "name_en": "Grand Vizier",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 3,
+       "column": 1,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_CAPOU_AGHA",
+        "GOVERNOR_PROMOTION_KHASS_ODA_BASHI"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  "bbg": {
+   "label": "BBG（Better Balanced Game 7.5.1 + BBG Expanded 2.1）",
+   "built": "2026-10-11",
+   "verified_in_game": "2026-10-11 用户提供的 BBG 游戏截图：7 位可选总督面板的名称与顺序逐条一致（顺序 = GovernorPromotionSets 行序）；易卜拉欣为 帕夏、塞拉斯克尔、首席驯鹰师、卡普阿迦、卡斯-奥达-巴什、大维齐尔",
+   "sources": [
+    {
+     "label": "Expansion1 官方文本",
+     "priority": 10,
+     "path": "D:\\SteamLibrary\\steamapps\\common\\Sid Meier's Civilization VI\\DLC\\Expansion1\\Text"
+    },
+    {
+     "label": "Expansion2 官方文本",
+     "priority": 20,
+     "path": "D:\\SteamLibrary\\steamapps\\common\\Sid Meier's Civilization VI\\DLC\\Expansion2\\Text"
+    },
+    {
+     "label": "Better Balanced Game 7.5.1",
+     "priority": 30,
+     "path": "D:\\SteamLibrary\\steamapps\\workshop\\content\\289070\\2865001760"
+    },
+    {
+     "label": "BBG Expanded 2.1",
+     "priority": 31,
+     "path": "D:\\SteamLibrary\\steamapps\\workshop\\content\\289070\\3533091092"
+    },
+    {
+     "label": "DebugGameplay.sqlite（类型 / 树位置 / 归属）",
+     "priority": 0,
+     "path": "C:\\Users\\Admin\\AppData\\Local\\Firaxis Games\\Sid Meier's Civilization VI\\Cache\\DebugGameplay.sqlite"
+    }
+   ],
+   "governors": [
+    {
+     "type": "GOVERNOR_THE_DEFENDER",
+     "name_zh": "维克多",
+     "name_en": "Victor",
+     "name_source": "Expansion2 官方文本",
+     "title_zh": "城主",
+     "orders": {
+      "governor_panel": [
+       "GOVERNOR_PROMOTION_REDOUBT",
+       "GOVERNOR_PROMOTION_GARRISON_COMMANDER",
+       "GOVERNOR_PROMOTION_DEFENSE_LOGISTICS",
+       "GOVERNOR_PROMOTION_EMBRASURE",
+       "GOVERNOR_PROMOTION_AIR_DEFENSE_INITIATIVE",
+       "GOVERNOR_PROMOTION_EDUCATOR_ARMS_RACE_PROPONENT"
+      ],
+      "level_column": [
+       "GOVERNOR_PROMOTION_REDOUBT",
+       "GOVERNOR_PROMOTION_DEFENSE_LOGISTICS",
+       "GOVERNOR_PROMOTION_GARRISON_COMMANDER",
+       "GOVERNOR_PROMOTION_EDUCATOR_ARMS_RACE_PROPONENT",
+       "GOVERNOR_PROMOTION_EMBRASURE",
+       "GOVERNOR_PROMOTION_AIR_DEFENSE_INITIATIVE"
+      ]
+     },
+     "promotions": [
+      {
+       "type": "GOVERNOR_PROMOTION_REDOUBT",
+       "name_zh": "棱堡",
+       "name_en": "Redoubt",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 0,
+       "column": 1,
+       "base_ability": true,
+       "prereq": []
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_GARRISON_COMMANDER",
+       "name_zh": "驻军司令",
+       "name_en": "Garrison Commander",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_REDOUBT"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_DEFENSE_LOGISTICS",
+       "name_zh": "城防后勤",
+       "name_en": "Defense Logistics",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_REDOUBT"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_EMBRASURE",
+       "name_zh": "射击孔",
+       "name_en": "Embrasure",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_GARRISON_COMMANDER"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_AIR_DEFENSE_INITIATIVE",
+       "name_zh": "防空计划",
+       "name_en": "Air Defense Initiative",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 3,
+       "column": 1,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_EDUCATOR_ARMS_RACE_PROPONENT",
+        "GOVERNOR_PROMOTION_EMBRASURE"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_EDUCATOR_ARMS_RACE_PROPONENT",
+       "name_zh": "军备竞赛倡导者",
+       "name_en": "Arms Race Proponent",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_DEFENSE_LOGISTICS"
+       ]
+      }
+     ]
+    },
+    {
+     "type": "GOVERNOR_THE_AMBASSADOR",
+     "name_zh": "阿玛妮",
+     "name_en": "Amani",
+     "name_source": "Expansion2 官方文本",
+     "title_zh": "外交官",
+     "orders": {
+      "governor_panel": [
+       "GOVERNOR_PROMOTION_AMBASSADOR_MESSENGER",
+       "GOVERNOR_PROMOTION_LOCAL_INFORMANTS",
+       "GOVERNOR_PROMOTION_AMBASSADOR_AFFLUENCE",
+       "GOVERNOR_PROMOTION_AMBASSADOR_FOREIGN_INVESTOR",
+       "GOVERNOR_PROMOTION_AMBASSADOR_PUPPETEER",
+       "BBG_GOVERNOR_PROMOTION_NEGOTIATOR"
+      ],
+      "level_column": [
+       "GOVERNOR_PROMOTION_AMBASSADOR_MESSENGER",
+       "GOVERNOR_PROMOTION_AMBASSADOR_AFFLUENCE",
+       "BBG_GOVERNOR_PROMOTION_NEGOTIATOR",
+       "GOVERNOR_PROMOTION_AMBASSADOR_FOREIGN_INVESTOR",
+       "GOVERNOR_PROMOTION_LOCAL_INFORMANTS",
+       "GOVERNOR_PROMOTION_AMBASSADOR_PUPPETEER"
+      ]
+     },
+     "promotions": [
+      {
+       "type": "GOVERNOR_PROMOTION_AMBASSADOR_MESSENGER",
+       "name_zh": "信使",
+       "name_en": "Messenger",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 0,
+       "column": 1,
+       "base_ability": true,
+       "prereq": []
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_LOCAL_INFORMANTS",
+       "name_zh": "本地线人",
+       "name_en": "Local Informants",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "BBG_GOVERNOR_PROMOTION_NEGOTIATOR"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_AMBASSADOR_AFFLUENCE",
+       "name_zh": "富裕",
+       "name_en": "Affluence",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_AMBASSADOR_MESSENGER"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_AMBASSADOR_FOREIGN_INVESTOR",
+       "name_zh": "外国投资者",
+       "name_en": "Foreign Investor",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_AMBASSADOR_AFFLUENCE"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_AMBASSADOR_PUPPETEER",
+       "name_zh": "幕后主脑",
+       "name_en": "Puppeteer",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 3,
+       "column": 1,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_AMBASSADOR_FOREIGN_INVESTOR",
+        "GOVERNOR_PROMOTION_LOCAL_INFORMANTS"
+       ]
+      },
+      {
+       "type": "BBG_GOVERNOR_PROMOTION_NEGOTIATOR",
+       "name_zh": "谈判者",
+       "name_en": "Negotiator",
+       "name_source": "Better Balanced Game 7.5.1",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_AMBASSADOR_MESSENGER"
+       ]
+      }
+     ]
+    },
+    {
+     "type": "GOVERNOR_THE_CARDINAL",
+     "name_zh": "莫克夏",
+     "name_en": "Moksha",
+     "name_source": "Expansion2 官方文本",
+     "title_zh": "红衣主教",
+     "orders": {
+      "governor_panel": [
+       "GOVERNOR_PROMOTION_CARDINAL_BISHOP",
+       "GOVERNOR_PROMOTION_CARDINAL_CITADEL_OF_GOD",
+       "GOVERNOR_PROMOTION_CARDINAL_PATRON_SAINT",
+       "GOVERNOR_PROMOTION_CARDINAL_DIVINE_ARCHITECT",
+       "GOVERNOR_PROMOTION_EDUCATOR_CONNOISSEUR",
+       "GOVERNOR_PROMOTION_MERCHANT_CURATOR"
+      ],
+      "level_column": [
+       "GOVERNOR_PROMOTION_CARDINAL_BISHOP",
+       "GOVERNOR_PROMOTION_CARDINAL_CITADEL_OF_GOD",
+       "GOVERNOR_PROMOTION_EDUCATOR_CONNOISSEUR",
+       "GOVERNOR_PROMOTION_CARDINAL_PATRON_SAINT",
+       "GOVERNOR_PROMOTION_CARDINAL_DIVINE_ARCHITECT",
+       "GOVERNOR_PROMOTION_MERCHANT_CURATOR"
+      ]
+     },
+     "promotions": [
+      {
+       "type": "GOVERNOR_PROMOTION_CARDINAL_BISHOP",
+       "name_zh": "大主教",
+       "name_en": "Bishop",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 0,
+       "column": 1,
+       "base_ability": true,
+       "prereq": []
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_CARDINAL_CITADEL_OF_GOD",
+       "name_zh": "神之堡垒",
+       "name_en": "Citadel of God",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_CARDINAL_BISHOP"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_CARDINAL_PATRON_SAINT",
+       "name_zh": "主保圣人",
+       "name_en": "Patron Saint",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_CARDINAL_CITADEL_OF_GOD"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_CARDINAL_DIVINE_ARCHITECT",
+       "name_zh": "神圣建筑师",
+       "name_en": "Divine Architect",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_EDUCATOR_CONNOISSEUR"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_EDUCATOR_CONNOISSEUR",
+       "name_zh": "鉴赏家",
+       "name_en": "Connoisseur",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_CARDINAL_BISHOP"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_MERCHANT_CURATOR",
+       "name_zh": "策展人",
+       "name_en": "Curator",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 3,
+       "column": 1,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_CARDINAL_DIVINE_ARCHITECT",
+        "GOVERNOR_PROMOTION_CARDINAL_PATRON_SAINT"
+       ]
+      }
+     ]
+    },
+    {
+     "type": "GOVERNOR_THE_RESOURCE_MANAGER",
+     "name_zh": "马格努斯",
+     "name_en": "Magnus",
+     "name_source": "Expansion2 官方文本",
+     "title_zh": "总务官",
+     "orders": {
+      "governor_panel": [
+       "GOVERNOR_PROMOTION_RESOURCE_MANAGER_GROUNDBREAKER",
+       "GOVERNOR_PROMOTION_RESOURCE_MANAGER_SURPLUS_LOGISTICS",
+       "GOVERNOR_PROMOTION_RESOURCE_MANAGER_EXPEDITION",
+       "GOVERNOR_PROMOTION_RESOURCE_MANAGER_INDUSTRIALIST",
+       "GOVERNOR_PROMOTION_RESOURCE_MANAGER_BLACK_MARKETEER",
+       "GOVERNOR_PROMOTION_RESOURCE_MANAGER_VERTICAL_INTEGRATION"
+      ],
+      "level_column": [
+       "GOVERNOR_PROMOTION_RESOURCE_MANAGER_GROUNDBREAKER",
+       "GOVERNOR_PROMOTION_RESOURCE_MANAGER_INDUSTRIALIST",
+       "GOVERNOR_PROMOTION_RESOURCE_MANAGER_EXPEDITION",
+       "GOVERNOR_PROMOTION_RESOURCE_MANAGER_BLACK_MARKETEER",
+       "GOVERNOR_PROMOTION_RESOURCE_MANAGER_SURPLUS_LOGISTICS",
+       "GOVERNOR_PROMOTION_RESOURCE_MANAGER_VERTICAL_INTEGRATION"
+      ]
+     },
+     "promotions": [
+      {
+       "type": "GOVERNOR_PROMOTION_RESOURCE_MANAGER_GROUNDBREAKER",
+       "name_zh": "破土者",
+       "name_en": "Groundbreaker",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 0,
+       "column": 1,
+       "base_ability": true,
+       "prereq": []
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_RESOURCE_MANAGER_SURPLUS_LOGISTICS",
+       "name_zh": "盈余物流",
+       "name_en": "Surplus Logistics",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_RESOURCE_MANAGER_EXPEDITION"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_RESOURCE_MANAGER_EXPEDITION",
+       "name_zh": "给养保障",
+       "name_en": "Provision",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_RESOURCE_MANAGER_GROUNDBREAKER"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_RESOURCE_MANAGER_INDUSTRIALIST",
+       "name_zh": "实业家",
+       "name_en": "Industrialist",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_RESOURCE_MANAGER_GROUNDBREAKER"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_RESOURCE_MANAGER_BLACK_MARKETEER",
+       "name_zh": "黑市商人",
+       "name_en": "Black Marketeer",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_RESOURCE_MANAGER_INDUSTRIALIST"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_RESOURCE_MANAGER_VERTICAL_INTEGRATION",
+       "name_zh": "纵向结合",
+       "name_en": "Vertical Integration",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 3,
+       "column": 1,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_RESOURCE_MANAGER_BLACK_MARKETEER",
+        "GOVERNOR_PROMOTION_RESOURCE_MANAGER_SURPLUS_LOGISTICS"
+       ]
+      }
+     ]
+    },
+    {
+     "type": "GOVERNOR_THE_BUILDER",
+     "name_zh": "梁",
+     "name_en": "Liang",
+     "name_source": "Expansion2 官方文本",
+     "title_zh": "测量师",
+     "orders": {
+      "governor_panel": [
+       "GOVERNOR_PROMOTION_BUILDER_GUILDMASTER",
+       "GOVERNOR_PROMOTION_ZONING_COMMISSIONER",
+       "GOVERNOR_PROMOTION_REINFORCED_INFRASTRUCTURE",
+       "GOVERNOR_PROMOTION_WATER_WORKS",
+       "GOVERNOR_PROMOTION_PARKS_RECREATION",
+       "BBG_AGRICULTURE_PROMOTION"
+      ],
+      "level_column": [
+       "GOVERNOR_PROMOTION_BUILDER_GUILDMASTER",
+       "BBG_AGRICULTURE_PROMOTION",
+       "GOVERNOR_PROMOTION_REINFORCED_INFRASTRUCTURE",
+       "GOVERNOR_PROMOTION_ZONING_COMMISSIONER",
+       "GOVERNOR_PROMOTION_PARKS_RECREATION",
+       "GOVERNOR_PROMOTION_WATER_WORKS"
+      ]
+     },
+     "promotions": [
+      {
+       "type": "GOVERNOR_PROMOTION_BUILDER_GUILDMASTER",
+       "name_zh": "公会首领",
+       "name_en": "Guildmaster",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 0,
+       "column": 1,
+       "base_ability": true,
+       "prereq": []
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_ZONING_COMMISSIONER",
+       "name_zh": "规划委员",
+       "name_en": "Zoning Commissioner",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "BBG_AGRICULTURE_PROMOTION"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_REINFORCED_INFRASTRUCTURE",
+       "name_zh": "加固材料",
+       "name_en": "Reinforced Materials",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_BUILDER_GUILDMASTER"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_WATER_WORKS",
+       "name_zh": "住房扩建",
+       "name_en": "Housing Boom",
+       "name_source": "Better Balanced Game 7.5.1",
+       "name_zh_variants": {
+        "自来水工程": [
+         "Expansion2 官方文本"
+        ],
+        "住房扩建": [
+         "Better Balanced Game 7.5.1"
+        ]
+       },
+       "level": 3,
+       "column": 1,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_PARKS_RECREATION",
+        "GOVERNOR_PROMOTION_ZONING_COMMISSIONER"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_PARKS_RECREATION",
+       "name_zh": "公园与休憩",
+       "name_en": "Parks and Recreation",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_REINFORCED_INFRASTRUCTURE"
+       ]
+      },
+      {
+       "type": "BBG_AGRICULTURE_PROMOTION",
+       "name_zh": "农业发展",
+       "name_en": "Agriculture",
+       "name_source": "Better Balanced Game 7.5.1",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_BUILDER_GUILDMASTER"
+       ]
+      }
+     ]
+    },
+    {
+     "type": "GOVERNOR_THE_EDUCATOR",
+     "name_zh": "平伽拉",
+     "name_en": "Pingala",
+     "name_source": "Expansion2 官方文本",
+     "title_zh": "教育家",
+     "orders": {
+      "governor_panel": [
+       "GOVERNOR_PROMOTION_EDUCATOR_LIBRARIAN",
+       "GOVERNOR_PROMOTION_EDUCATOR_RESEARCHER",
+       "GOVERNOR_PROMOTION_EDUCATOR_GRANTS",
+       "GOVERNOR_PROMOTION_EDUCATOR_SPACE_INITIATIVE",
+       "BBG_GOVERNOR_PROMOTION_EDUCATOR_CAMPUS_BUILDING_YIELDS",
+       "BBG_GOVERNOR_PROMOTION_EDUCATOR_TRADE"
+      ],
+      "level_column": [
+       "GOVERNOR_PROMOTION_EDUCATOR_LIBRARIAN",
+       "GOVERNOR_PROMOTION_EDUCATOR_RESEARCHER",
+       "GOVERNOR_PROMOTION_EDUCATOR_GRANTS",
+       "BBG_GOVERNOR_PROMOTION_EDUCATOR_TRADE",
+       "BBG_GOVERNOR_PROMOTION_EDUCATOR_CAMPUS_BUILDING_YIELDS",
+       "GOVERNOR_PROMOTION_EDUCATOR_SPACE_INITIATIVE"
+      ]
+     },
+     "promotions": [
+      {
+       "type": "GOVERNOR_PROMOTION_EDUCATOR_LIBRARIAN",
+       "name_zh": "图书馆员",
+       "name_en": "Librarian",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 0,
+       "column": 1,
+       "base_ability": true,
+       "prereq": []
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_EDUCATOR_RESEARCHER",
+       "name_zh": "研究员",
+       "name_en": "Researcher",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_EDUCATOR_LIBRARIAN"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_EDUCATOR_GRANTS",
+       "name_zh": "拨款",
+       "name_en": "Grants",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_EDUCATOR_CONNOISSEUR",
+        "GOVERNOR_PROMOTION_EDUCATOR_LIBRARIAN",
+        "GOVERNOR_PROMOTION_EDUCATOR_RESEARCHER"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_EDUCATOR_SPACE_INITIATIVE",
+       "name_zh": "太空计划",
+       "name_en": "Space Initiative",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 3,
+       "column": 1,
+       "base_ability": false,
+       "prereq": [
+        "BBG_GOVERNOR_PROMOTION_EDUCATOR_CAMPUS_BUILDING_YIELDS",
+        "BBG_GOVERNOR_PROMOTION_EDUCATOR_TRADE"
+       ]
+      },
+      {
+       "type": "BBG_GOVERNOR_PROMOTION_EDUCATOR_CAMPUS_BUILDING_YIELDS",
+       "name_zh": "尤里卡",
+       "name_en": "Eureka",
+       "name_source": "Better Balanced Game 7.5.1",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_EDUCATOR_GRANTS"
+       ]
+      },
+      {
+       "type": "BBG_GOVERNOR_PROMOTION_EDUCATOR_TRADE",
+       "name_zh": "知识共享",
+       "name_en": "Shared Knowledge",
+       "name_source": "Better Balanced Game 7.5.1",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_EDUCATOR_RESEARCHER"
+       ]
+      }
+     ]
+    },
+    {
+     "type": "GOVERNOR_THE_MERCHANT",
+     "name_zh": "瑞娜",
+     "name_en": "Reyna",
+     "name_source": "Expansion2 官方文本",
+     "title_zh": "金融家",
+     "orders": {
+      "governor_panel": [
+       "GOVERNOR_PROMOTION_MERCHANT_LAND_ACQUISITION",
+       "GOVERNOR_PROMOTION_MERCHANT_HARBORMASTER",
+       "GOVERNOR_PROMOTION_MERCHANT_FORESTRY_MANAGEMENT",
+       "GOVERNOR_PROMOTION_MERCHANT_TAX_COLLECTOR",
+       "GOVERNOR_PROMOTION_MERCHANT_CONTRACTOR",
+       "BBG_GOVERNOR_PROMOTION_MANAGER"
+      ],
+      "level_column": [
+       "GOVERNOR_PROMOTION_MERCHANT_LAND_ACQUISITION",
+       "GOVERNOR_PROMOTION_MERCHANT_FORESTRY_MANAGEMENT",
+       "GOVERNOR_PROMOTION_MERCHANT_HARBORMASTER",
+       "GOVERNOR_PROMOTION_MERCHANT_TAX_COLLECTOR",
+       "BBG_GOVERNOR_PROMOTION_MANAGER",
+       "GOVERNOR_PROMOTION_MERCHANT_CONTRACTOR"
+      ]
+     },
+     "promotions": [
+      {
+       "type": "GOVERNOR_PROMOTION_MERCHANT_LAND_ACQUISITION",
+       "name_zh": "土地征用",
+       "name_en": "Land Acquisition",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 0,
+       "column": 1,
+       "base_ability": true,
+       "prereq": []
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_MERCHANT_HARBORMASTER",
+       "name_zh": "港务局长",
+       "name_en": "Harbormaster",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_MERCHANT_LAND_ACQUISITION"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_MERCHANT_FORESTRY_MANAGEMENT",
+       "name_zh": "林业管理",
+       "name_en": "Forestry Management",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_MERCHANT_LAND_ACQUISITION"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_MERCHANT_TAX_COLLECTOR",
+       "name_zh": "税务员",
+       "name_en": "Tax Collector",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 1,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_MERCHANT_FORESTRY_MANAGEMENT",
+        "GOVERNOR_PROMOTION_MERCHANT_HARBORMASTER"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_MERCHANT_CONTRACTOR",
+       "name_zh": "发包人",
+       "name_en": "Contractor",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 3,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_MERCHANT_TAX_COLLECTOR"
+       ]
+      },
+      {
+       "type": "BBG_GOVERNOR_PROMOTION_MANAGER",
+       "name_zh": "国际贸易",
+       "name_en": "Foreign Exchange",
+       "name_source": "Better Balanced Game 7.5.1",
+       "name_zh_variants": {},
+       "level": 3,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_MERCHANT_TAX_COLLECTOR"
+       ]
+      }
+     ]
+    },
+    {
+     "type": "GOVERNOR_IBRAHIM",
+     "name_zh": "易卜拉欣",
+     "name_en": "Ibrahim",
+     "name_source": "Expansion2 官方文本",
+     "title_zh": "大维齐尔",
+     "orders": {
+      "governor_panel": [
+       "GOVERNOR_PROMOTION_PASHA",
+       "GOVERNOR_PROMOTION_HEAD_FALCONER",
+       "GOVERNOR_PROMOTION_SERASKER",
+       "GOVERNOR_PROMOTION_KHASS_ODA_BASHI",
+       "GOVERNOR_PROMOTION_CAPOU_AGHA",
+       "GOVERNOR_PROMOTION_GRAND_VISIER"
+      ],
+      "level_column": [
+       "GOVERNOR_PROMOTION_PASHA",
+       "GOVERNOR_PROMOTION_SERASKER",
+       "GOVERNOR_PROMOTION_HEAD_FALCONER",
+       "GOVERNOR_PROMOTION_CAPOU_AGHA",
+       "GOVERNOR_PROMOTION_KHASS_ODA_BASHI",
+       "GOVERNOR_PROMOTION_GRAND_VISIER"
+      ]
+     },
+     "promotions": [
+      {
+       "type": "GOVERNOR_PROMOTION_PASHA",
+       "name_zh": "帕夏",
+       "name_en": "Pasha",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 0,
+       "column": 1,
+       "base_ability": true,
+       "prereq": []
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_HEAD_FALCONER",
+       "name_zh": "首席驯鹰师",
+       "name_en": "Head Falconer",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_PASHA"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_SERASKER",
+       "name_zh": "塞拉斯克尔",
+       "name_en": "Serasker",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_PASHA"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_KHASS_ODA_BASHI",
+       "name_zh": "卡斯-奥达-巴什",
+       "name_en": "Khass-Oda-Bashi",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_HEAD_FALCONER"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_CAPOU_AGHA",
+       "name_zh": "卡普阿迦",
+       "name_en": "Capou Agha",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_SERASKER"
+       ]
+      },
+      {
+       "type": "GOVERNOR_PROMOTION_GRAND_VISIER",
+       "name_zh": "大维齐尔",
+       "name_en": "Grand Vizier",
+       "name_source": "Expansion2 官方文本",
+       "name_zh_variants": {},
+       "level": 3,
+       "column": 1,
+       "base_ability": false,
+       "prereq": [
+        "GOVERNOR_PROMOTION_CAPOU_AGHA",
+        "GOVERNOR_PROMOTION_KHASS_ODA_BASHI"
+       ]
+      }
+     ]
+    },
+    {
+     "type": "GOVERNOR_LIME_TEO_OWL_EMISSARY",
+     "name_zh": "浴火而生",
+     "name_en": "Fire Is Born",
+     "name_source": "Better Balanced Game 7.5.1",
+     "title_zh": "特使",
+     "orders": {
+      "governor_panel": [
+       "GOV_PROMO_LIME_TEO_OWL_EMISSARY_ARRIVAL",
+       "GOV_PROMO_LIME_TEO_OWL_EMISSARY_OUTPOST",
+       "GOV_PROMO_LIME_TEO_OWL_EMISSARY_EXPEDITION",
+       "GOV_PROMO_LIME_TEO_OWL_EMISSARY_FALL",
+       "GOV_PROMO_LIME_TEO_OWL_EMISSARY_OVERSEER",
+       "GOV_PROMO_LIME_TEO_OWL_EMISSARY_HEGEMONY"
+      ],
+      "level_column": [
+       "GOV_PROMO_LIME_TEO_OWL_EMISSARY_ARRIVAL",
+       "GOV_PROMO_LIME_TEO_OWL_EMISSARY_EXPEDITION",
+       "GOV_PROMO_LIME_TEO_OWL_EMISSARY_OUTPOST",
+       "GOV_PROMO_LIME_TEO_OWL_EMISSARY_OVERSEER",
+       "GOV_PROMO_LIME_TEO_OWL_EMISSARY_FALL",
+       "GOV_PROMO_LIME_TEO_OWL_EMISSARY_HEGEMONY"
+      ]
+     },
+     "promotions": [
+      {
+       "type": "GOV_PROMO_LIME_TEO_OWL_EMISSARY_ARRIVAL",
+       "name_zh": "特使驾临",
+       "name_en": "Arrival of Strangers",
+       "name_source": "Better Balanced Game 7.5.1",
+       "name_zh_variants": {},
+       "level": 0,
+       "column": 1,
+       "base_ability": true,
+       "prereq": []
+      },
+      {
+       "type": "GOV_PROMO_LIME_TEO_OWL_EMISSARY_OUTPOST",
+       "name_zh": "前哨基地",
+       "name_en": "Waka Outpost",
+       "name_source": "Better Balanced Game 7.5.1",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOV_PROMO_LIME_TEO_OWL_EMISSARY_ARRIVAL"
+       ]
+      },
+      {
+       "type": "GOV_PROMO_LIME_TEO_OWL_EMISSARY_EXPEDITION",
+       "name_zh": "佩腾远征",
+       "name_en": "Petén Expedition",
+       "name_source": "Better Balanced Game 7.5.1",
+       "name_zh_variants": {},
+       "level": 1,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOV_PROMO_LIME_TEO_OWL_EMISSARY_ARRIVAL"
+       ]
+      },
+      {
+       "type": "GOV_PROMO_LIME_TEO_OWL_EMISSARY_FALL",
+       "name_zh": "美洲豹之陨",
+       "name_en": "Fall of Jaguar Paw",
+       "name_source": "Better Balanced Game 7.5.1",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 0,
+       "base_ability": false,
+       "prereq": [
+        "GOV_PROMO_LIME_TEO_OWL_EMISSARY_OUTPOST"
+       ]
+      },
+      {
+       "type": "GOV_PROMO_LIME_TEO_OWL_EMISSARY_OVERSEER",
+       "name_zh": "突袭乌瓦夏克通",
+       "name_en": "Assault on Uaxactun",
+       "name_source": "Better Balanced Game 7.5.1",
+       "name_zh_variants": {},
+       "level": 2,
+       "column": 2,
+       "base_ability": false,
+       "prereq": [
+        "GOV_PROMO_LIME_TEO_OWL_EMISSARY_EXPEDITION"
+       ]
+      },
+      {
+       "type": "GOV_PROMO_LIME_TEO_OWL_EMISSARY_HEGEMONY",
+       "name_zh": "万王之王",
+       "name_en": "Overseer of Kings",
+       "name_source": "Better Balanced Game 7.5.1",
+       "name_zh_variants": {},
+       "level": 3,
+       "column": 1,
+       "base_ability": false,
+       "prereq": [
+        "GOV_PROMO_LIME_TEO_OWL_EMISSARY_FALL",
+        "GOV_PROMO_LIME_TEO_OWL_EMISSARY_OVERSEER"
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ }
+}

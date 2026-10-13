@@ -1,0 +1,2610 @@
+{
+  "format": 1,
+  "generator": "tools/build_player_colors.py",
+  "sources": {
+    "shared": [
+      {
+        "mod": "3533091092",
+        "file": "BBGExpanded.modinfo",
+        "sha256": "f099ba877833003704246b65ee123db6f21346f7c9155c1f26ab62dd891f4b79"
+      },
+      {
+        "mod": "3556373611",
+        "file": "CCBExpanded.modinfo",
+        "sha256": "9b7647e5f956ea7399fa41458eaa14a1c968cc7084a9865c0c6d0d1979857164"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3533091092/Europe/Austria/Core/Maria_Colours.sql",
+        "loadOrder": 0,
+        "sha256": "332b431b303aaa0295eca6af06e654e25255f7e9107d7dab43e85b2dfefd3ceb"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3533091092/Europe/Goths/Core/Goth_Colours.sql",
+        "loadOrder": 0,
+        "sha256": "87e8636458d74260d41f74ec2d2cd9828bd7dc2f52c322dda91923f413f4d27e"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3533091092/Europe/PolandStanislaw/Core/PolandStanislawII_GameColors.sql",
+        "loadOrder": 0,
+        "sha256": "95e104969dd7aef5f37b03941b8ea0bd4def081296090f46ab7367540b6be46c"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3533091092/Mediterranean/MacedonOlympias/Core/MacedonOlympias_GameColors.sql",
+        "loadOrder": 0,
+        "sha256": "0ff7174d2a17e27b7b102bf937278a8c26e35870b937bc7b7c9f6716f608c4e1"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3533091092/NorthAmerica/ThuleKiviuq/core/leader/kiviuq_dave/ThuleKiviuq_Colors.sql",
+        "loadOrder": 0,
+        "sha256": "10515cd4e0f9e1ad96b62cf7ed0f0ceb1df9241d63ea500005a5aab38bccad13"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3556373611/Europe/Bismark/Core/Colour.sql",
+        "loadOrder": 0,
+        "sha256": "27924c3e273f9d1d5396f085ecb15af7869be7e16e2e1acf22d51a4f0cc6aad0"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3556373611/Europe/Finland/Core/Finland_Colours.sql",
+        "loadOrder": 0,
+        "sha256": "76acd15cdd6b6ecb1f51d684e9741c07e4c51437f9c03a477a78faddb2410396"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3556373611/Europe/Switzerland/Core/Switzerland_Colors.sql",
+        "loadOrder": 0,
+        "sha256": "fea927104b910ed857ee6e83a7ded5c6b0c507afda8f76d6927bc8824af74273"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3556373611/Mediterranean/MacedonOlympias/Core/MacedonOlympias_GameColors.sql",
+        "loadOrder": 0,
+        "sha256": "0ff7174d2a17e27b7b102bf937278a8c26e35870b937bc7b7c9f6716f608c4e1"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3556373611/NorthAmerica/ThuleKiviuq/core/leader/kiviuq_dave/ThuleKiviuq_Colors.sql",
+        "loadOrder": 0,
+        "sha256": "10515cd4e0f9e1ad96b62cf7ed0f0ceb1df9241d63ea500005a5aab38bccad13"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3556373611/NorthAmerica/CCBThuleWhalemaker/Color.sql",
+        "loadOrder": 0,
+        "sha256": "2c1b6c535f911a104faf337cba011cabd9240333bd863a544d19269ad00bbfb8"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3533091092/Asia/TibetTrisongDetsen/Core/Suk_Trisong_Color.sql",
+        "loadOrder": 100,
+        "sha256": "6605656bc628ee35be7c0dbc8e8233c5ec8c53521083af7cd55e39d2cdf8cdc0"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3533091092/Europe/GaulVercingetorix/Core/Common/Suk_Vercingetorix_Color.sql",
+        "loadOrder": 100,
+        "sha256": "96be5df313b4f340096a103bbacd34c44b8c18dcfa48a2ad4121a2c06b55458e"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3533091092/Mediterranean/PhoeniciaAhiram/core/Ahiram - Colours.sql",
+        "loadOrder": 100,
+        "sha256": "f9507d3adb0beed2a0c17d103d4fb2b1e465c930a283bec8cfef79eb328480a6"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3533091092/Meso/Taino/Core/Taino_Colors.sql",
+        "loadOrder": 100,
+        "sha256": "0c5a4befb4495f1344f2f4b1b1836710dc6793f78d3fa5ec4d3c7eeadc305dd6"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3533091092/Africa/SwahiliAlHasanibn/Core/Config/Suk_Al_Hasan_Color.sql",
+        "loadOrder": 101,
+        "sha256": "a4767e3fa033ca08e1f4677371d9937309dddcd7e9a05254531b4b4c4073630a"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3533091092/Meso/TainoAnacaona/Core/Anacaona_Colors.sql",
+        "loadOrder": 110,
+        "sha256": "24a70edf185007a23f9b2575c7671887ccacb96c2497fdf6d9e9d5a567f1e020"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3533091092/Meso/MayaTeKinichII/core/Port Lime - Te Kinich - Colours.sql",
+        "loadOrder": 333,
+        "sha256": "cef142feccff4e14d268aa3f44e727d3295e412bcff60f8a5dc92f58d597195f"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3533091092/Meso/TheoticuanasTeotihuacan/Spearthrower Owl/Colors.sql",
+        "loadOrder": 350,
+        "sha256": "84609b355692464ecdbcf61b6052d689de2656783486d70a3ed932e961dfebdd"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3556373611/Meso/Argentina/sql/Color.sql",
+        "loadOrder": 8650,
+        "sha256": "23dad27004610f6d327abb59f030e5bd5d3f436b52991232ab63624a87d62ba2"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3556373611/Meso/TheoticuanasTeotihuacan/Spearthrower Owl/Colors.sql",
+        "loadOrder": 84350,
+        "sha256": "84609b355692464ecdbcf61b6052d689de2656783486d70a3ed932e961dfebdd"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3556373611/Meso/MayaTeKinichII/core/Port Lime - Te Kinich - Colours.sql",
+        "loadOrder": 85333,
+        "sha256": "cef142feccff4e14d268aa3f44e727d3295e412bcff60f8a5dc92f58d597195f"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3556373611/Mediterranean/PhoeniciaAhiram/core/Ahiram - Colours.sql",
+        "loadOrder": 87100,
+        "sha256": "f9507d3adb0beed2a0c17d103d4fb2b1e465c930a283bec8cfef79eb328480a6"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3556373611/Europe/GaulVercingetorix/Core/Common/Suk_Vercingetorix_Color.sql",
+        "loadOrder": 90100,
+        "sha256": "96be5df313b4f340096a103bbacd34c44b8c18dcfa48a2ad4121a2c06b55458e"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3556373611/Europe/AlfredEscher/Core/Escher_Colors.sql",
+        "loadOrder": 93110,
+        "sha256": "5e3b61f5d92e45ae827de5763129f06c1e098e89473d9f4118d7fa6f8c6348ca"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3556373611/Asia/TibetTrisongDetsen/Core/Suk_Trisong_Color.sql",
+        "loadOrder": 96100,
+        "sha256": "6605656bc628ee35be7c0dbc8e8233c5ec8c53521083af7cd55e39d2cdf8cdc0"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3556373611/Asia/Malaysia/Core/Malaysia_Colors.sql",
+        "loadOrder": 97100,
+        "sha256": "5451bc3b54a248497e6b1327d8550af377dd9dcdf1771595ceca5f52be2a2d88"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3556373611/Asia/Iskandar/Core/Iskandar_Colors.sql",
+        "loadOrder": 98110,
+        "sha256": "656478a878fc408eb5e0f5fed0d361d313290e93c4ed1231947545e525b53b45"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3556373611/Africa/SwahiliAlHasanibn/Core/Config/Suk_Al_Hasan_Color.sql",
+        "loadOrder": 99101,
+        "sha256": "a4767e3fa033ca08e1f4677371d9937309dddcd7e9a05254531b4b4c4073630a"
+      }
+    ],
+    "bbg": [
+      {
+        "mod": "3533091092",
+        "file": "BBGExpanded.modinfo",
+        "sha256": "f099ba877833003704246b65ee123db6f21346f7c9155c1f26ab62dd891f4b79"
+      },
+      {
+        "mod": "2865001760",
+        "file": "BetterBalancedGame.modinfo",
+        "sha256": "f4f918bd18a7189d9f8ee64a4123952e72bded754e5154d7521d25f90bf305a5"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3533091092/Europe/Austria/Core/Maria_Colours.sql",
+        "loadOrder": 0,
+        "sha256": "332b431b303aaa0295eca6af06e654e25255f7e9107d7dab43e85b2dfefd3ceb"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3533091092/Europe/Goths/Core/Goth_Colours.sql",
+        "loadOrder": 0,
+        "sha256": "87e8636458d74260d41f74ec2d2cd9828bd7dc2f52c322dda91923f413f4d27e"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3533091092/Europe/PolandStanislaw/Core/PolandStanislawII_GameColors.sql",
+        "loadOrder": 0,
+        "sha256": "95e104969dd7aef5f37b03941b8ea0bd4def081296090f46ab7367540b6be46c"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3533091092/Mediterranean/MacedonOlympias/Core/MacedonOlympias_GameColors.sql",
+        "loadOrder": 0,
+        "sha256": "0ff7174d2a17e27b7b102bf937278a8c26e35870b937bc7b7c9f6716f608c4e1"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3533091092/NorthAmerica/ThuleKiviuq/core/leader/kiviuq_dave/ThuleKiviuq_Colors.sql",
+        "loadOrder": 0,
+        "sha256": "10515cd4e0f9e1ad96b62cf7ed0f0ceb1df9241d63ea500005a5aab38bccad13"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3533091092/Asia/TibetTrisongDetsen/Core/Suk_Trisong_Color.sql",
+        "loadOrder": 100,
+        "sha256": "6605656bc628ee35be7c0dbc8e8233c5ec8c53521083af7cd55e39d2cdf8cdc0"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3533091092/Europe/GaulVercingetorix/Core/Common/Suk_Vercingetorix_Color.sql",
+        "loadOrder": 100,
+        "sha256": "96be5df313b4f340096a103bbacd34c44b8c18dcfa48a2ad4121a2c06b55458e"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3533091092/Mediterranean/PhoeniciaAhiram/core/Ahiram - Colours.sql",
+        "loadOrder": 100,
+        "sha256": "f9507d3adb0beed2a0c17d103d4fb2b1e465c930a283bec8cfef79eb328480a6"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3533091092/Meso/Taino/Core/Taino_Colors.sql",
+        "loadOrder": 100,
+        "sha256": "0c5a4befb4495f1344f2f4b1b1836710dc6793f78d3fa5ec4d3c7eeadc305dd6"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3533091092/Africa/SwahiliAlHasanibn/Core/Config/Suk_Al_Hasan_Color.sql",
+        "loadOrder": 101,
+        "sha256": "a4767e3fa033ca08e1f4677371d9937309dddcd7e9a05254531b4b4c4073630a"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3533091092/Meso/TainoAnacaona/Core/Anacaona_Colors.sql",
+        "loadOrder": 110,
+        "sha256": "24a70edf185007a23f9b2575c7671887ccacb96c2497fdf6d9e9d5a567f1e020"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3533091092/Meso/MayaTeKinichII/core/Port Lime - Te Kinich - Colours.sql",
+        "loadOrder": 333,
+        "sha256": "cef142feccff4e14d268aa3f44e727d3295e412bcff60f8a5dc92f58d597195f"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3533091092/Meso/TheoticuanasTeotihuacan/Spearthrower Owl/Colors.sql",
+        "loadOrder": 350,
+        "sha256": "84609b355692464ecdbcf61b6052d689de2656783486d70a3ed932e961dfebdd"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/2865001760/sql/colors.sql",
+        "loadOrder": 10000,
+        "sha256": "1c68b78531d8e79a42ce1eddfad8063b7d59897b2f2ac37b087cb21f0c68bf2d"
+      }
+    ],
+    "ccb": [
+      {
+        "mod": "3556373611",
+        "file": "CCBExpanded.modinfo",
+        "sha256": "9b7647e5f956ea7399fa41458eaa14a1c968cc7084a9865c0c6d0d1979857164"
+      },
+      {
+        "mod": "3556314860",
+        "file": "CCB.modinfo",
+        "sha256": "b2d86e6fc47ed8214379148f4bc9f72164f838f25b5a1f621f77cb5bc2274159"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3556373611/Europe/Bismark/Core/Colour.sql",
+        "loadOrder": 0,
+        "sha256": "27924c3e273f9d1d5396f085ecb15af7869be7e16e2e1acf22d51a4f0cc6aad0"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3556373611/Europe/Finland/Core/Finland_Colours.sql",
+        "loadOrder": 0,
+        "sha256": "76acd15cdd6b6ecb1f51d684e9741c07e4c51437f9c03a477a78faddb2410396"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3556373611/Europe/Switzerland/Core/Switzerland_Colors.sql",
+        "loadOrder": 0,
+        "sha256": "fea927104b910ed857ee6e83a7ded5c6b0c507afda8f76d6927bc8824af74273"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3556373611/Mediterranean/MacedonOlympias/Core/MacedonOlympias_GameColors.sql",
+        "loadOrder": 0,
+        "sha256": "0ff7174d2a17e27b7b102bf937278a8c26e35870b937bc7b7c9f6716f608c4e1"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3556373611/NorthAmerica/ThuleKiviuq/core/leader/kiviuq_dave/ThuleKiviuq_Colors.sql",
+        "loadOrder": 0,
+        "sha256": "10515cd4e0f9e1ad96b62cf7ed0f0ceb1df9241d63ea500005a5aab38bccad13"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3556373611/NorthAmerica/CCBThuleWhalemaker/Color.sql",
+        "loadOrder": 0,
+        "sha256": "2c1b6c535f911a104faf337cba011cabd9240333bd863a544d19269ad00bbfb8"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3556373611/Meso/Argentina/sql/Color.sql",
+        "loadOrder": 8650,
+        "sha256": "23dad27004610f6d327abb59f030e5bd5d3f436b52991232ab63624a87d62ba2"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3556373611/Meso/TheoticuanasTeotihuacan/Spearthrower Owl/Colors.sql",
+        "loadOrder": 84350,
+        "sha256": "84609b355692464ecdbcf61b6052d689de2656783486d70a3ed932e961dfebdd"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3556373611/Meso/MayaTeKinichII/core/Port Lime - Te Kinich - Colours.sql",
+        "loadOrder": 85333,
+        "sha256": "cef142feccff4e14d268aa3f44e727d3295e412bcff60f8a5dc92f58d597195f"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3556373611/Mediterranean/PhoeniciaAhiram/core/Ahiram - Colours.sql",
+        "loadOrder": 87100,
+        "sha256": "f9507d3adb0beed2a0c17d103d4fb2b1e465c930a283bec8cfef79eb328480a6"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3556373611/Europe/GaulVercingetorix/Core/Common/Suk_Vercingetorix_Color.sql",
+        "loadOrder": 90100,
+        "sha256": "96be5df313b4f340096a103bbacd34c44b8c18dcfa48a2ad4121a2c06b55458e"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3556373611/Europe/AlfredEscher/Core/Escher_Colors.sql",
+        "loadOrder": 93110,
+        "sha256": "5e3b61f5d92e45ae827de5763129f06c1e098e89473d9f4118d7fa6f8c6348ca"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3556373611/Asia/TibetTrisongDetsen/Core/Suk_Trisong_Color.sql",
+        "loadOrder": 96100,
+        "sha256": "6605656bc628ee35be7c0dbc8e8233c5ec8c53521083af7cd55e39d2cdf8cdc0"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3556373611/Asia/Malaysia/Core/Malaysia_Colors.sql",
+        "loadOrder": 97100,
+        "sha256": "5451bc3b54a248497e6b1327d8550af377dd9dcdf1771595ceca5f52be2a2d88"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3556373611/Asia/Iskandar/Core/Iskandar_Colors.sql",
+        "loadOrder": 98110,
+        "sha256": "656478a878fc408eb5e0f5fed0d361d313290e93c4ed1231947545e525b53b45"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3556373611/Africa/SwahiliAlHasanibn/Core/Config/Suk_Al_Hasan_Color.sql",
+        "loadOrder": 99101,
+        "sha256": "a4767e3fa033ca08e1f4677371d9937309dddcd7e9a05254531b4b4c4073630a"
+      },
+      {
+        "file": "D:/SteamLibrary/steamapps/workshop/content/289070/3556314860/sql/colors.sql",
+        "loadOrder": 100000000,
+        "sha256": "ff2a3a38a0e676cc09b1b055c93af3bb0e3ffbc3af7ddfbfedfb6226ae072ea6"
+      }
+    ]
+  },
+  "palettes": {
+    "032775ce98d5f5d3": [
+      [
+        202,
+        20,
+        21,
+        255
+      ],
+      [
+        255,
+        195,
+        195,
+        255
+      ],
+      [
+        25,
+        7,
+        35,
+        255
+      ],
+      [
+        121,
+        224,
+        119,
+        255
+      ],
+      [
+        255,
+        195,
+        195,
+        255
+      ],
+      [
+        202,
+        20,
+        21,
+        255
+      ],
+      [
+        1,
+        42,
+        108,
+        255
+      ],
+      [
+        125,
+        236,
+        227,
+        255
+      ]
+    ],
+    "03e26a5579cad497": [
+      [
+        249,
+        249,
+        249,
+        255
+      ],
+      [
+        202,
+        20,
+        21,
+        255
+      ],
+      [
+        202,
+        20,
+        21,
+        255
+      ],
+      [
+        249,
+        249,
+        249,
+        255
+      ],
+      [
+        0,
+        0,
+        204,
+        255
+      ],
+      [
+        153,
+        204,
+        255,
+        255
+      ],
+      [
+        229,
+        117,
+        116,
+        255
+      ],
+      [
+        120,
+        0,
+        1,
+        255
+      ]
+    ],
+    "0a3834ab1112a954": [
+      [
+        210,
+        210,
+        210,
+        255
+      ],
+      [
+        0,
+        0,
+        0,
+        255
+      ],
+      [
+        155,
+        25,
+        62,
+        255
+      ],
+      [
+        255,
+        189,
+        102,
+        255
+      ],
+      [
+        38,
+        96,
+        94,
+        255
+      ],
+      [
+        252,
+        202,
+        132,
+        255
+      ],
+      [
+        3,
+        103,
+        152,
+        255
+      ],
+      [
+        242,
+        178,
+        48,
+        255
+      ]
+    ],
+    "156208c0b96c3d45": [
+      [
+        202,
+        20,
+        21,
+        255
+      ],
+      [
+        255,
+        195,
+        195,
+        255
+      ],
+      [
+        120,
+        61,
+        2,
+        255
+      ],
+      [
+        247,
+        216,
+        1,
+        255
+      ],
+      [
+        255,
+        195,
+        195,
+        255
+      ],
+      [
+        202,
+        20,
+        21,
+        255
+      ],
+      [
+        1,
+        42,
+        108,
+        255
+      ],
+      [
+        125,
+        236,
+        227,
+        255
+      ]
+    ],
+    "1daab91a016ff1e6": [
+      [
+        255,
+        178,
+        60,
+        255
+      ],
+      [
+        120,
+        0,
+        1,
+        255
+      ],
+      [
+        120,
+        61,
+        2,
+        255
+      ],
+      [
+        249,
+        249,
+        249,
+        255
+      ],
+      [
+        120,
+        0,
+        1,
+        255
+      ],
+      [
+        234,
+        225,
+        157,
+        255
+      ],
+      [
+        174,
+        174,
+        174,
+        255
+      ],
+      [
+        68,
+        46,
+        26,
+        255
+      ]
+    ],
+    "1e319c7f1b91a7a1": [
+      [
+        120,
+        0,
+        1,
+        255
+      ],
+      [
+        116,
+        163,
+        243,
+        255
+      ],
+      [
+        116,
+        163,
+        243,
+        255
+      ],
+      [
+        120,
+        0,
+        1,
+        255
+      ],
+      [
+        141,
+        0,
+        51,
+        255
+      ],
+      [
+        174,
+        174,
+        174,
+        255
+      ],
+      [
+        249,
+        249,
+        249,
+        255
+      ],
+      [
+        116,
+        163,
+        243,
+        255
+      ]
+    ],
+    "1f62789aba3b4b6c": [
+      [
+        148,
+        215,
+        234,
+        255
+      ],
+      [
+        255,
+        129,
+        18,
+        255
+      ],
+      [
+        0,
+        119,
+        168,
+        255
+      ],
+      [
+        249,
+        249,
+        249,
+        255
+      ],
+      [
+        121,
+        224,
+        119,
+        255
+      ],
+      [
+        249,
+        249,
+        249,
+        255
+      ],
+      [
+        255,
+        129,
+        18,
+        255
+      ],
+      [
+        83,
+        83,
+        83,
+        255
+      ]
+    ],
+    "1fd6e3543c905bae": [
+      [
+        55,
+        0,
+        101,
+        255
+      ],
+      [
+        0,
+        192,
+        155,
+        255
+      ],
+      [
+        120,
+        0,
+        1,
+        255
+      ],
+      [
+        229,
+        117,
+        116,
+        255
+      ],
+      [
+        21,
+        108,
+        48,
+        255
+      ],
+      [
+        0,
+        192,
+        155,
+        255
+      ],
+      [
+        247,
+        216,
+        1,
+        255
+      ],
+      [
+        120,
+        61,
+        2,
+        255
+      ]
+    ],
+    "1ffae7e5f3234b76": [
+      [
+        109,
+        0,
+        205,
+        255
+      ],
+      [
+        116,
+        163,
+        243,
+        255
+      ],
+      [
+        68,
+        46,
+        26,
+        255
+      ],
+      [
+        255,
+        178,
+        60,
+        255
+      ],
+      [
+        0,
+        60,
+        86,
+        255
+      ],
+      [
+        125,
+        236,
+        227,
+        255
+      ],
+      [
+        21,
+        108,
+        48,
+        255
+      ],
+      [
+        234,
+        225,
+        157,
+        255
+      ]
+    ],
+    "21b5b9883a1d3911": [
+      [
+        247,
+        216,
+        1,
+        255
+      ],
+      [
+        117,
+        0,
+        115,
+        255
+      ],
+      [
+        0,
+        204,
+        102,
+        255
+      ],
+      [
+        0,
+        0,
+        0,
+        255
+      ],
+      [
+        202,
+        20,
+        21,
+        255
+      ],
+      [
+        247,
+        216,
+        1,
+        255
+      ],
+      [
+        247,
+        216,
+        1,
+        255
+      ],
+      [
+        24,
+        24,
+        24,
+        255
+      ]
+    ],
+    "23a9510fffc00cc1": [
+      [
+        120,
+        0,
+        1,
+        255
+      ],
+      [
+        116,
+        163,
+        243,
+        255
+      ],
+      [
+        116,
+        163,
+        243,
+        255
+      ],
+      [
+        120,
+        0,
+        1,
+        255
+      ],
+      [
+        153,
+        0,
+        76,
+        255
+      ],
+      [
+        0,
+        0,
+        0,
+        255
+      ],
+      [
+        249,
+        249,
+        249,
+        255
+      ],
+      [
+        116,
+        163,
+        243,
+        255
+      ]
+    ],
+    "2cb8c71f6a79e4e1": [
+      [
+        21,
+        108,
+        48,
+        255
+      ],
+      [
+        191,
+        219,
+        28,
+        255
+      ],
+      [
+        0,
+        119,
+        168,
+        255
+      ],
+      [
+        1,
+        42,
+        108,
+        255
+      ],
+      [
+        174,
+        174,
+        174,
+        255
+      ],
+      [
+        1,
+        79,
+        81,
+        255
+      ],
+      [
+        21,
+        108,
+        48,
+        255
+      ],
+      [
+        141,
+        0,
+        51,
+        255
+      ]
+    ],
+    "37e99dbfb4d5e475": [
+      [
+        236,
+        218,
+        191,
+        255
+      ],
+      [
+        120,
+        0,
+        1,
+        255
+      ],
+      [
+        67,
+        91,
+        129,
+        255
+      ],
+      [
+        228,
+        205,
+        140,
+        255
+      ],
+      [
+        52,
+        30,
+        30,
+        255
+      ],
+      [
+        208,
+        198,
+        177,
+        255
+      ],
+      [
+        60,
+        60,
+        60,
+        255
+      ],
+      [
+        255,
+        255,
+        255,
+        255
+      ]
+    ],
+    "3c9bff3a21b2d320": [
+      [
+        1,
+        79,
+        81,
+        255
+      ],
+      [
+        247,
+        216,
+        1,
+        255
+      ],
+      [
+        255,
+        129,
+        18,
+        255
+      ],
+      [
+        21,
+        108,
+        48,
+        255
+      ],
+      [
+        174,
+        174,
+        174,
+        255
+      ],
+      [
+        1,
+        79,
+        81,
+        255
+      ],
+      [
+        1,
+        79,
+        81,
+        255
+      ],
+      [
+        202,
+        20,
+        21,
+        255
+      ]
+    ],
+    "3e5e2983486fbb8c": [
+      [
+        200,
+        217,
+        246,
+        255
+      ],
+      [
+        25,
+        66,
+        149,
+        255
+      ],
+      [
+        30,
+        56,
+        85,
+        255
+      ],
+      [
+        205,
+        205,
+        205,
+        255
+      ],
+      [
+        158,
+        19,
+        45,
+        255
+      ],
+      [
+        255,
+        199,
+        38,
+        255
+      ],
+      [
+        206,
+        192,
+        166,
+        255
+      ],
+      [
+        0,
+        68,
+        111,
+        255
+      ]
+    ],
+    "3f60d55e586ea5a8": [
+      [
+        249,
+        249,
+        249,
+        255
+      ],
+      [
+        202,
+        20,
+        21,
+        255
+      ],
+      [
+        202,
+        20,
+        21,
+        255
+      ],
+      [
+        249,
+        249,
+        249,
+        255
+      ],
+      [
+        1,
+        42,
+        108,
+        255
+      ],
+      [
+        116,
+        163,
+        243,
+        255
+      ],
+      [
+        229,
+        117,
+        116,
+        255
+      ],
+      [
+        120,
+        0,
+        1,
+        255
+      ]
+    ],
+    "40ac8afa381b87fa": [
+      [
+        249,
+        249,
+        249,
+        255
+      ],
+      [
+        14,
+        117,
+        85,
+        255
+      ],
+      [
+        14,
+        117,
+        85,
+        255
+      ],
+      [
+        249,
+        249,
+        249,
+        255
+      ],
+      [
+        120,
+        0,
+        1,
+        255
+      ],
+      [
+        255,
+        178,
+        60,
+        255
+      ],
+      [
+        255,
+        178,
+        60,
+        255
+      ],
+      [
+        120,
+        0,
+        1,
+        255
+      ]
+    ],
+    "50f5040724fc81ec": [
+      [
+        174,
+        174,
+        174,
+        255
+      ],
+      [
+        1,
+        42,
+        108,
+        255
+      ],
+      [
+        1,
+        42,
+        108,
+        255
+      ],
+      [
+        174,
+        174,
+        174,
+        255
+      ],
+      [
+        247,
+        216,
+        1,
+        255
+      ],
+      [
+        0,
+        119,
+        168,
+        255
+      ],
+      [
+        83,
+        83,
+        83,
+        255
+      ],
+      [
+        249,
+        249,
+        249,
+        255
+      ]
+    ],
+    "52489e438ff90807": [
+      [
+        120,
+        0,
+        1,
+        255
+      ],
+      [
+        247,
+        216,
+        1,
+        255
+      ],
+      [
+        40,
+        5,
+        31,
+        255
+      ],
+      [
+        179,
+        172,
+        237,
+        255
+      ],
+      [
+        179,
+        172,
+        237,
+        255
+      ],
+      [
+        40,
+        5,
+        31,
+        255
+      ],
+      [
+        0,
+        60,
+        86,
+        255
+      ],
+      [
+        249,
+        249,
+        249,
+        255
+      ]
+    ],
+    "531046ea3bd7bc49": [
+      [
+        19,
+        126,
+        161,
+        255
+      ],
+      [
+        255,
+        174,
+        136,
+        255
+      ],
+      [
+        120,
+        61,
+        2,
+        255
+      ],
+      [
+        125,
+        236,
+        227,
+        255
+      ],
+      [
+        1,
+        79,
+        81,
+        255
+      ],
+      [
+        255,
+        129,
+        18,
+        255
+      ],
+      [
+        1,
+        79,
+        81,
+        255
+      ],
+      [
+        125,
+        236,
+        227,
+        255
+      ]
+    ],
+    "56313af6ddaf5e93": [
+      [
+        0,
+        192,
+        155,
+        255
+      ],
+      [
+        55,
+        0,
+        101,
+        255
+      ],
+      [
+        55,
+        0,
+        101,
+        255
+      ],
+      [
+        0,
+        192,
+        155,
+        255
+      ],
+      [
+        21,
+        108,
+        48,
+        255
+      ],
+      [
+        255,
+        178,
+        60,
+        255
+      ],
+      [
+        60,
+        60,
+        60,
+        255
+      ],
+      [
+        0,
+        204,
+        204,
+        255
+      ]
+    ],
+    "5ed74f408855ef89": [
+      [
+        249,
+        249,
+        249,
+        255
+      ],
+      [
+        21,
+        108,
+        48,
+        255
+      ],
+      [
+        21,
+        108,
+        48,
+        255
+      ],
+      [
+        249,
+        249,
+        249,
+        255
+      ],
+      [
+        120,
+        0,
+        1,
+        255
+      ],
+      [
+        255,
+        178,
+        60,
+        255
+      ],
+      [
+        255,
+        178,
+        60,
+        255
+      ],
+      [
+        120,
+        0,
+        1,
+        255
+      ]
+    ],
+    "63423d78c9fb58f9": [
+      [
+        231,
+        66,
+        63,
+        255
+      ],
+      [
+        234,
+        231,
+        220,
+        255
+      ],
+      [
+        234,
+        231,
+        220,
+        255
+      ],
+      [
+        231,
+        66,
+        63,
+        255
+      ],
+      [
+        36,
+        139,
+        204,
+        255
+      ],
+      [
+        234,
+        231,
+        220,
+        255
+      ],
+      [
+        22,
+        167,
+        78,
+        255
+      ],
+      [
+        234,
+        231,
+        220,
+        255
+      ]
+    ],
+    "64859807efef7a68": [
+      [
+        96,
+        12,
+        101,
+        255
+      ],
+      [
+        26,
+        211,
+        122,
+        255
+      ],
+      [
+        84,
+        17,
+        17,
+        255
+      ],
+      [
+        244,
+        71,
+        72,
+        255
+      ],
+      [
+        24,
+        137,
+        82,
+        255
+      ],
+      [
+        61,
+        17,
+        47,
+        255
+      ],
+      [
+        206,
+        168,
+        62,
+        255
+      ],
+      [
+        39,
+        32,
+        10,
+        255
+      ]
+    ],
+    "7823c0a0319f758c": [
+      [
+        50,
+        50,
+        133,
+        255
+      ],
+      [
+        154,
+        154,
+        238,
+        255
+      ],
+      [
+        43,
+        41,
+        107,
+        255
+      ],
+      [
+        255,
+        189,
+        102,
+        255
+      ],
+      [
+        0,
+        87,
+        114,
+        255
+      ],
+      [
+        102,
+        240,
+        250,
+        255
+      ],
+      [
+        23,
+        77,
+        114,
+        255
+      ],
+      [
+        215,
+        214,
+        165,
+        255
+      ]
+    ],
+    "79bd46f09e477f20": [
+      [
+        234,
+        225,
+        157,
+        255
+      ],
+      [
+        120,
+        0,
+        1,
+        255
+      ],
+      [
+        67,
+        91,
+        129,
+        255
+      ],
+      [
+        228,
+        205,
+        140,
+        255
+      ],
+      [
+        52,
+        30,
+        30,
+        255
+      ],
+      [
+        208,
+        198,
+        177,
+        255
+      ],
+      [
+        60,
+        60,
+        60,
+        255
+      ],
+      [
+        255,
+        255,
+        255,
+        255
+      ]
+    ],
+    "893aee00caefb274": [
+      [
+        163,
+        52,
+        68,
+        255
+      ],
+      [
+        174,
+        211,
+        253,
+        255
+      ],
+      [
+        249,
+        249,
+        249,
+        255
+      ],
+      [
+        229,
+        117,
+        116,
+        255
+      ],
+      [
+        1,
+        42,
+        108,
+        255
+      ],
+      [
+        249,
+        249,
+        249,
+        255
+      ],
+      [
+        249,
+        249,
+        249,
+        255
+      ],
+      [
+        1,
+        42,
+        108,
+        255
+      ]
+    ],
+    "8f2bc1c13ab06595": [
+      [
+        234,
+        225,
+        157,
+        255
+      ],
+      [
+        120,
+        61,
+        2,
+        255
+      ],
+      [
+        153,
+        0,
+        76,
+        255
+      ],
+      [
+        255,
+        185,
+        15,
+        255
+      ],
+      [
+        249,
+        249,
+        249,
+        255
+      ],
+      [
+        120,
+        61,
+        2,
+        255
+      ],
+      [
+        255,
+        185,
+        15,
+        255
+      ],
+      [
+        0,
+        70,
+        240,
+        255
+      ]
+    ],
+    "982a132626e33ecb": [
+      [
+        120,
+        0,
+        1,
+        255
+      ],
+      [
+        234,
+        225,
+        157,
+        255
+      ],
+      [
+        55,
+        0,
+        101,
+        255
+      ],
+      [
+        183,
+        128,
+        230,
+        255
+      ],
+      [
+        109,
+        0,
+        205,
+        255
+      ],
+      [
+        249,
+        249,
+        249,
+        255
+      ],
+      [
+        0,
+        60,
+        86,
+        255
+      ],
+      [
+        249,
+        249,
+        249,
+        255
+      ]
+    ],
+    "b679892a1ee7eef4": [
+      [
+        229,
+        117,
+        116,
+        255
+      ],
+      [
+        125,
+        236,
+        227,
+        255
+      ],
+      [
+        69,
+        206,
+        216,
+        255
+      ],
+      [
+        229,
+        66,
+        62,
+        255
+      ],
+      [
+        21,
+        108,
+        48,
+        255
+      ],
+      [
+        121,
+        224,
+        119,
+        255
+      ],
+      [
+        97,
+        191,
+        34,
+        255
+      ],
+      [
+        97,
+        191,
+        34,
+        255
+      ]
+    ],
+    "b6cd03686c037fcf": [
+      [
+        120,
+        0,
+        1,
+        255
+      ],
+      [
+        249,
+        249,
+        249,
+        255
+      ],
+      [
+        247,
+        216,
+        1,
+        255
+      ],
+      [
+        24,
+        24,
+        24,
+        255
+      ],
+      [
+        249,
+        249,
+        249,
+        255
+      ],
+      [
+        202,
+        20,
+        21,
+        255
+      ],
+      [
+        21,
+        108,
+        48,
+        255
+      ],
+      [
+        202,
+        20,
+        21,
+        255
+      ]
+    ],
+    "bd8127aa3ec815c0": [
+      [
+        1,
+        79,
+        81,
+        255
+      ],
+      [
+        125,
+        236,
+        227,
+        255
+      ],
+      [
+        125,
+        236,
+        227,
+        255
+      ],
+      [
+        1,
+        79,
+        81,
+        255
+      ],
+      [
+        0,
+        192,
+        155,
+        255
+      ],
+      [
+        1,
+        42,
+        108,
+        255
+      ],
+      [
+        249,
+        249,
+        249,
+        255
+      ],
+      [
+        0,
+        192,
+        155,
+        255
+      ]
+    ],
+    "c00814f753f6e1de": [
+      [
+        1,
+        79,
+        81,
+        255
+      ],
+      [
+        247,
+        216,
+        1,
+        255
+      ],
+      [
+        116,
+        163,
+        243,
+        255
+      ],
+      [
+        1,
+        79,
+        81,
+        255
+      ],
+      [
+        174,
+        174,
+        174,
+        255
+      ],
+      [
+        1,
+        79,
+        81,
+        255
+      ],
+      [
+        1,
+        79,
+        81,
+        255
+      ],
+      [
+        202,
+        20,
+        21,
+        255
+      ]
+    ],
+    "c507b6400cd46188": [
+      [
+        234,
+        225,
+        157,
+        255
+      ],
+      [
+        120,
+        61,
+        2,
+        255
+      ],
+      [
+        120,
+        61,
+        2,
+        255
+      ],
+      [
+        234,
+        225,
+        157,
+        255
+      ],
+      [
+        62,
+        74,
+        0,
+        255
+      ],
+      [
+        234,
+        225,
+        157,
+        255
+      ],
+      [
+        120,
+        61,
+        2,
+        255
+      ],
+      [
+        249,
+        249,
+        249,
+        255
+      ]
+    ],
+    "c6f43f0dbf94562a": [
+      [
+        255,
+        129,
+        18,
+        255
+      ],
+      [
+        0,
+        79,
+        206,
+        255
+      ],
+      [
+        255,
+        129,
+        18,
+        255
+      ],
+      [
+        249,
+        249,
+        249,
+        255
+      ],
+      [
+        0,
+        79,
+        206,
+        255
+      ],
+      [
+        255,
+        178,
+        60,
+        255
+      ],
+      [
+        0,
+        119,
+        168,
+        255
+      ],
+      [
+        255,
+        178,
+        60,
+        255
+      ]
+    ],
+    "cb2cc40b3cec2abb": [
+      [
+        141,
+        0,
+        51,
+        255
+      ],
+      [
+        234,
+        225,
+        157,
+        255
+      ],
+      [
+        40,
+        5,
+        31,
+        255
+      ],
+      [
+        179,
+        172,
+        237,
+        255
+      ],
+      [
+        179,
+        172,
+        237,
+        255
+      ],
+      [
+        40,
+        5,
+        31,
+        255
+      ],
+      [
+        0,
+        60,
+        86,
+        255
+      ],
+      [
+        249,
+        249,
+        249,
+        255
+      ]
+    ],
+    "d0cbdfa46380e193": [
+      [
+        196,
+        45,
+        45,
+        255
+      ],
+      [
+        63,
+        209,
+        209,
+        255
+      ],
+      [
+        69,
+        206,
+        216,
+        255
+      ],
+      [
+        229,
+        66,
+        62,
+        255
+      ],
+      [
+        43,
+        88,
+        46,
+        255
+      ],
+      [
+        147,
+        222,
+        100,
+        255
+      ],
+      [
+        151,
+        223,
+        10,
+        255
+      ],
+      [
+        42,
+        84,
+        45,
+        255
+      ]
+    ],
+    "d4215a60764a61fc": [
+      [
+        1,
+        42,
+        108,
+        255
+      ],
+      [
+        97,
+        191,
+        34,
+        255
+      ],
+      [
+        97,
+        191,
+        34,
+        255
+      ],
+      [
+        1,
+        42,
+        108,
+        255
+      ],
+      [
+        116,
+        163,
+        243,
+        255
+      ],
+      [
+        247,
+        216,
+        1,
+        255
+      ],
+      [
+        0,
+        102,
+        102,
+        255
+      ],
+      [
+        224,
+        224,
+        224,
+        255
+      ]
+    ],
+    "d6da71005b9fac8d": [
+      [
+        229,
+        117,
+        116,
+        255
+      ],
+      [
+        249,
+        249,
+        249,
+        255
+      ],
+      [
+        174,
+        174,
+        174,
+        255
+      ],
+      [
+        181,
+        0,
+        69,
+        255
+      ],
+      [
+        0,
+        119,
+        168,
+        255
+      ],
+      [
+        249,
+        249,
+        249,
+        255
+      ],
+      [
+        97,
+        191,
+        34,
+        255
+      ],
+      [
+        249,
+        249,
+        249,
+        255
+      ]
+    ],
+    "dd7ff944ea4ba503": [
+      [
+        247,
+        216,
+        1,
+        255
+      ],
+      [
+        117,
+        0,
+        115,
+        255
+      ],
+      [
+        55,
+        0,
+        101,
+        255
+      ],
+      [
+        234,
+        225,
+        157,
+        255
+      ],
+      [
+        202,
+        20,
+        21,
+        255
+      ],
+      [
+        247,
+        216,
+        1,
+        255
+      ],
+      [
+        247,
+        216,
+        1,
+        255
+      ],
+      [
+        24,
+        24,
+        24,
+        255
+      ]
+    ],
+    "e034e98a250fb4b3": [
+      [
+        153,
+        0,
+        51,
+        255
+      ],
+      [
+        255,
+        255,
+        233,
+        255
+      ],
+      [
+        247,
+        216,
+        1,
+        255
+      ],
+      [
+        24,
+        24,
+        24,
+        255
+      ],
+      [
+        249,
+        249,
+        249,
+        255
+      ],
+      [
+        202,
+        20,
+        21,
+        255
+      ],
+      [
+        21,
+        108,
+        48,
+        255
+      ],
+      [
+        202,
+        20,
+        21,
+        255
+      ]
+    ],
+    "eaa0f78d66896525": [
+      [
+        207,
+        91,
+        105,
+        255
+      ],
+      [
+        244,
+        194,
+        56,
+        255
+      ],
+      [
+        1,
+        42,
+        108,
+        255
+      ],
+      [
+        247,
+        216,
+        1,
+        255
+      ],
+      [
+        202,
+        20,
+        21,
+        255
+      ],
+      [
+        247,
+        216,
+        1,
+        255
+      ],
+      [
+        247,
+        216,
+        1,
+        255
+      ],
+      [
+        1,
+        42,
+        108,
+        255
+      ]
+    ],
+    "f342196d5be64ea8": [
+      [
+        255,
+        129,
+        18,
+        255
+      ],
+      [
+        0,
+        79,
+        206,
+        255
+      ],
+      [
+        255,
+        129,
+        18,
+        255
+      ],
+      [
+        249,
+        249,
+        249,
+        255
+      ],
+      [
+        60,
+        60,
+        60,
+        255
+      ],
+      [
+        255,
+        129,
+        18,
+        255
+      ],
+      [
+        255,
+        129,
+        18,
+        255
+      ],
+      [
+        120,
+        0,
+        1,
+        255
+      ]
+    ],
+    "f3cc6009fcf4d9fb": [
+      [
+        19,
+        126,
+        161,
+        255
+      ],
+      [
+        255,
+        174,
+        136,
+        255
+      ],
+      [
+        120,
+        61,
+        2,
+        255
+      ],
+      [
+        125,
+        236,
+        227,
+        255
+      ],
+      [
+        1,
+        79,
+        81,
+        255
+      ],
+      [
+        255,
+        129,
+        18,
+        255
+      ],
+      [
+        0,
+        102,
+        102,
+        255
+      ],
+      [
+        125,
+        236,
+        227,
+        255
+      ]
+    ]
+  },
+  "profiles": {
+    "shared": {
+      "LEADER_CVS_ANACAONA": "d0cbdfa46380e193",
+      "LEADER_CVS_ESCHER": "63423d78c9fb58f9",
+      "LEADER_CVS_ISKANDAR": "7823c0a0319f758c",
+      "LEADER_GEDEMO_BISMARK": "0a3834ab1112a954",
+      "LEADER_JFD_OLYMPIAS": "eaa0f78d66896525",
+      "LEADER_JFD_STANISLAW": "893aee00caefb274",
+      "LEADER_LEU_SANMARTIN": "1f62789aba3b4b6c",
+      "LEADER_LIME_PHOE_AHIRAM": "cb2cc40b3cec2abb",
+      "LEADER_LIME_TEO_OWL": "032775ce98d5f5d3",
+      "LEADER_LIME_THULE_DAVE": "bd8127aa3ec815c0",
+      "LEADER_LL_TEKINICH_II": "64859807efef7a68",
+      "LEADER_MER_MANNERHEIM": "3e5e2983486fbb8c",
+      "LEADER_MER_MARIA_THERESA": "e034e98a250fb4b3",
+      "LEADER_MER_THEODORIC": "37e99dbfb4d5e475",
+      "LEADER_SUK_AL_HASAN": "531046ea3bd7bc49",
+      "LEADER_SUK_TRISONG_DETSEN": "40ac8afa381b87fa",
+      "LEADER_SUK_VERCINGETORIX": "c00814f753f6e1de",
+      "LEADER_SUK_VERCINGETORIX_DLC": "c00814f753f6e1de"
+    },
+    "bbg": {
+      "LEADER_AMANITORE": "8f2bc1c13ab06595",
+      "LEADER_CHANDRAGUPTA": "56313af6ddaf5e93",
+      "LEADER_CVS_ANACAONA": "b679892a1ee7eef4",
+      "LEADER_GORGO": "23a9510fffc00cc1",
+      "LEADER_JFD_OLYMPIAS": "eaa0f78d66896525",
+      "LEADER_JFD_STANISLAW": "893aee00caefb274",
+      "LEADER_LADY_TRIEU": "21b5b9883a1d3911",
+      "LEADER_LAURIER": "03e26a5579cad497",
+      "LEADER_LIME_PHOE_AHIRAM": "52489e438ff90807",
+      "LEADER_LIME_TEO_OWL": "032775ce98d5f5d3",
+      "LEADER_LIME_THULE_DAVE": "bd8127aa3ec815c0",
+      "LEADER_LL_TEKINICH_II": "64859807efef7a68",
+      "LEADER_MER_MARIA_THERESA": "b6cd03686c037fcf",
+      "LEADER_MER_THEODORIC": "79bd46f09e477f20",
+      "LEADER_POUNDMAKER": "d4215a60764a61fc",
+      "LEADER_SUK_AL_HASAN": "f3cc6009fcf4d9fb",
+      "LEADER_SUK_TRISONG_DETSEN": "40ac8afa381b87fa",
+      "LEADER_SUK_VERCINGETORIX": "3c9bff3a21b2d320",
+      "LEADER_SUK_VERCINGETORIX_DLC": "3c9bff3a21b2d320",
+      "LEADER_WILHELMINA": "f342196d5be64ea8"
+    },
+    "ccb": {
+      "LEADER_AMANITORE": "c507b6400cd46188",
+      "LEADER_CVS_ESCHER": "d6da71005b9fac8d",
+      "LEADER_CVS_ISKANDAR": "1ffae7e5f3234b76",
+      "LEADER_GEDEMO_BISMARK": "0a3834ab1112a954",
+      "LEADER_GORGO": "1e319c7f1b91a7a1",
+      "LEADER_JFD_OLYMPIAS": "eaa0f78d66896525",
+      "LEADER_LADY_TRIEU": "dd7ff944ea4ba503",
+      "LEADER_LAURIER": "3f60d55e586ea5a8",
+      "LEADER_LEU_SANMARTIN": "1f62789aba3b4b6c",
+      "LEADER_LIME_PHOE_AHIRAM": "982a132626e33ecb",
+      "LEADER_LIME_TEO_OWL": "156208c0b96c3d45",
+      "LEADER_LIME_THULE_DAVE": "bd8127aa3ec815c0",
+      "LEADER_LL_TEKINICH_II": "1fd6e3543c905bae",
+      "LEADER_MER_MANNERHEIM": "50f5040724fc81ec",
+      "LEADER_SUK_AL_HASAN": "531046ea3bd7bc49",
+      "LEADER_SUK_TRISONG_DETSEN": "5ed74f408855ef89",
+      "LEADER_SUK_VERCINGETORIX": "2cb8c71f6a79e4e1",
+      "LEADER_SUK_VERCINGETORIX_DLC": "2cb8c71f6a79e4e1",
+      "LEADER_TOMYRIS": "1daab91a016ff1e6",
+      "LEADER_WILHELMINA": "c6f43f0dbf94562a"
+    }
+  }
+}

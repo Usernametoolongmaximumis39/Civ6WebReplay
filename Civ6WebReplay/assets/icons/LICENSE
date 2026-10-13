@@ -1,0 +1,14 @@
+Civ6 WebReplay - bundled icon assets
+======================================
+
+The legacy PNG icons under assets/icons/ are copied from the CivVIReplay project
+(https://github.com/Keride/CivVIReplay), which is distributed under the MIT
+License.  Copyright (c) the CivVIReplay authors.  See the upstream repository
+for the full license text.
+
+Shared mod art (assets/icons/shared/)
+-----------------------------------
+These PNGs are extracted from the locally installed Civilization VI / SDK and
+mod textures by tools/vendor_shared_mod_icons.py. Original artwork belongs to
+Firaxis and the respective mod artists; the CivVIReplay MIT notice above does
+not relicense it. data/shared/identities.json records source files and hashes.

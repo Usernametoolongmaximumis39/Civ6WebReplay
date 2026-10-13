@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Mod id="00000000-4429-0F54-6B46-F9DF7B18CD5B" version="20240313">
+	<Properties>
+		<Name>LOC_MPT_NAME</Name>
+		<Description>LOC_MPT_DESCRIPTION</Description>
+		<Teaser>LOC_MPT_TEASER</Teaser>
+		<Authors>LOC_MPT_AUTHORS</Authors>
+		<SpecialThanks></SpecialThanks>
+		<AffectsSavedGames>0</AffectsSavedGames>
+		<CompatibleVersions>1.2,2.0</CompatibleVersions>
+	</Properties>
+
+	<LocalizedText>
+		<Text id="LOC_MPT_NAME">
+			<en_US>[ENDCOLOR][ENDCOLOR][COLOR_LIGHTBLUE]Multiplayer Toolkits (UI)[ENDCOLOR]</en_US>
+			<zh_Hans_CN>[ENDCOLOR][ENDCOLOR][COLOR_LIGHTBLUE]Multiplayer Toolkits (UI)[ENDCOLOR]</zh_Hans_CN>
+		</Text>
+		<Text id="LOC_MPT_DESCRIPTION">
+			<en_US>[size_16][ICON_Bolt]Esport oriented mod with multiple UI enhancements to improve the multiplayer experience[NEWLINE][NEWLINE][ICON_CHARGES_LARGE]You can customize it in the advanced options[NEWLINE][NEWLINE][icon_You]Better Great People Panel[NEWLINE][NEWLINE][icon_You]Tech Civic Boost Ratio Fix[NEWLINE][NEWLINE][icon_You]Extended Policy Cards[NEWLINE][NEWLINE][icon_You]Top Panel Extension Pro[NEWLINE][NEWLINE][icon_You]Better City States Lite[NEWLINE][NEWLINE][icon_You]Remove Create City Confirm Popup[NEWLINE][NEWLINE][icon_You]Notification Panel Quick Clear[NEWLINE][NEWLINE][icon_You]Multiplayer Resource Visibility Sharing[NEWLINE][NEWLINE][icon_You]Better Builder Charges Tracking[NEWLINE][NEWLINE][icon_You]City Banner Refresh Fix[NEWLINE][NEWLINE][ENDCOLOR][size_20]      [ICON_LIFESPAN][NEWLINE][Size_38][NEWLINE][Size_0][ICON_ICON_TECH_LASERS][NEWLINE][Size_20][ICON_ICON_ETHNICITY_ASIAN_UNIT_GIANT_DEATH_ROBOT_PORTRAIT]</en_US>
+			<zh_Hans_CN>[size_16][ICON_Bolt]面向电子竞技的模组，包含有多个UI优化工具，改善多人游戏体验[NEWLINE][NEWLINE][ICON_CHARGES_LARGE]你可以在高级设置中自定义启用[NEWLINE][NEWLINE][icon_You]伟人招募界面优化[NEWLINE][NEWLINE][icon_You]真实科文进度[NEWLINE][NEWLINE][icon_You]政策卡拓展[NEWLINE][NEWLINE][icon_You]顶部面板拓展[NEWLINE][NEWLINE][icon_You]城邦界面优化[NEWLINE][NEWLINE][icon_You]移除坐城确认弹窗[NEWLINE][NEWLINE][icon_You]通知栏快速清理[NEWLINE][NEWLINE][icon_You]团队资源能见度共享[NEWLINE][NEWLINE][icon_You]工人劳动力助手[NEWLINE][NEWLINE][icon_You]城市横幅刷新修复[NEWLINE][NEWLINE][ENDCOLOR][size_16]      [ICON_LIFESPAN][NEWLINE][Size_38][NEWLINE][Size_0][ICON_ICON_TECH_LASERS][NEWLINE][Size_20][ICON_ICON_ETHNICITY_ASIAN_UNIT_GIANT_DEATH_ROBOT_PORTRAIT]</zh_Hans_CN>
+		</Text>
+		<Text id="LOC_MPT_TEASER">
+			<en_US>[Size_20]Esport oriented mod with multiple UI enhancements</en_US>
+			<zh_Hans_CN>[Size_20]面向电子竞技的模组，包含多种UI增强功能</zh_Hans_CN>
+		</Text>
+		<Text id="LOC_MPT_AUTHORS">
+			<en_US>[COLOR:ResGoldLabelCS]Azukii[ENDCOLOR]</en_US>
+			<zh_Hans_CN>[COLOR:ResGoldLabelCS]号码菌[ENDCOLOR]</zh_Hans_CN>
+		</Text>
+	</LocalizedText>
+
+	<ActionCriteria>
+		<!--Better City States (BCS)-->
+		<Criteria id="SETTINGS_UI_CityStates" any="1">
+			<ConfigurationValueMatches>
+				<Group>Game</Group>
+				<ConfigurationId>SETTINGS_UI_BCS</ConfigurationId>
+				<Value>1</Value>
+			</ConfigurationValueMatches>
+			<ConfigurationValueMatches>
+				<Group>Game</Group>
+				<ConfigurationId>SETTINGS_UI</ConfigurationId>
+				<Value>SETTINGS_UI_ENABLE_ALL</Value>
+			</ConfigurationValueMatches>
+		</Criteria>
+
+		<Criteria id="SETTINGS_UI_CityStates_BSM_1" any="0">
+			<ConfigurationValueMatches>
+				<Group>Game</Group>
+				<ConfigurationId>SETTINGS_UI_BCS</ConfigurationId>
+				<Value>1</Value>
+			</ConfigurationValueMatches>
+			<ModInUse>c6e5ad32-0600-4a98-a7cd-5854a1abcaaf</ModInUse>	<!--	Better Spectator Mod v1.2.6	-->
+		</Criteria>
+		
+		<Criteria id="SETTINGS_UI_CityStates_BSM_2" any="0">
+			<ConfigurationValueMatches>
+				<Group>Game</Group>
+				<ConfigurationId>SETTINGS_UI</ConfigurationId>
+				<Value>SETTINGS_UI_ENABLE_ALL</Value>
+			</ConfigurationValueMatches>
+			<ModInUse>c6e5ad32-0600-4a98-a7cd-5854a1abcaaf</ModInUse>	<!--	Better Spectator Mod v1.2.6	-->
+		</Criteria>
+
+		<!--Better Great People Popup (BGP)-->
+		<Criteria id="SETTINGS_UI_GreatPeoplePopup" any="1">
+			<ConfigurationValueMatches>
+				<Group>Game</Group>
+				<ConfigurationId>SETTINGS_UI_BGP</ConfigurationId>
+				<Value>1</Value>
+			</ConfigurationValueMatches>
+			<ConfigurationValueMatches>
+				<Group>Game</Group>
+				<ConfigurationId>SETTINGS_UI</ConfigurationId>
+				<Value>SETTINGS_UI_ENABLE_ALL</Value>
+			</ConfigurationValueMatches>
+		</Criteria>
+		<!-- Better Report Screen (BRS)-->
+		<Criteria id="SETTINGS_UI_BetterReportScreen" any="1">
+			<ConfigurationValueMatches>
+				<Group>Game</Group>
+				<ConfigurationId>SETTINGS_UI_BRS</ConfigurationId>
+				<Value>1</Value>
+			</ConfigurationValueMatches>
+			<ConfigurationValueMatches>
+				<Group>Game</Group>
+				<ConfigurationId>SETTINGS_UI</ConfigurationId>
+				<Value>SETTINGS_UI_ENABLE_ALL</Value>
+			</ConfigurationValueMatches>
+		</Criteria>
+		<!-- Notification Panel Quick Clear (NQC)-->
+		<Criteria id="SETTINGS_UI_NotificationPanel_QuickClear" any="1">
+			<ConfigurationValueMatches>
+				<Group>Game</Group>
+				<ConfigurationId>SETTINGS_UI_NQC</ConfigurationId>
+				<Value>1</Value>
+			</ConfigurationValueMatches>
+			<ConfigurationValueMatches>
+				<Group>Game</Group>
+				<ConfigurationId>SETTINGS_UI</ConfigurationId>
+				<Value>SETTINGS_UI_ENABLE_ALL</Value>
+			</ConfigurationValueMatches>
+		</Criteria>
+		<!--Tech Civic Progress Boost Ratio Fix (TCP)-->
+		<Criteria id="SETTINGS_UI_TechCivicProgressPro" any="1">
+			<ConfigurationValueMatches>
+				<Group>Game</Group>
+				<ConfigurationId>SETTINGS_UI_TCP</ConfigurationId>
+				<Value>1</Value>
+			</ConfigurationValueMatches>
+			<ConfigurationValueMatches>
+				<Group>Game</Group>
+				<ConfigurationId>SETTINGS_UI</ConfigurationId>
+				<Value>SETTINGS_UI_ENABLE_ALL</Value>
+			</ConfigurationValueMatches>
+		</Criteria>
+		<!--Top Panel Extension Pro (TPE)-->
+		<Criteria id="SETTINGS_UI_TopPanelExtension" any="1">
+			<ConfigurationValueMatches>
+				<Group>Game</Group>
+				<ConfigurationId>SETTINGS_UI_TPE</ConfigurationId>
+				<Value>1</Value>
+			</ConfigurationValueMatches>
+			<ConfigurationValueMatches>
+				<Group>Game</Group>
+				<ConfigurationId>SETTINGS_UI</ConfigurationId>
+				<Value>SETTINGS_UI_ENABLE_ALL</Value>
+			</ConfigurationValueMatches>
+		</Criteria>
+	</ActionCriteria>
+
+	<FrontEndActions>
+		<!--Advanced Options (Settings)-->
+		<UpdateDatabase id="Config_Settings">
+			<Properties>
+				<LoadOrder>10</LoadOrder>
+			</Properties>
+			<File>Settings/Config_UI.xml</File>
+		</UpdateDatabase>
+		<UpdateText id="Config_Text">
+			<File>Settings/Config_UI_Text.xml</File>
+		</UpdateText>
+		<!-- Better Report Screen(BRS)-->
+		<UpdateDatabase id="BRS_FrontEnd_Database">
+			<File>BRS/Config/BRS_Config.xml</File>
+		</UpdateDatabase>
+		<UpdateText id="BRS_FrontEnd_Text">
+			<File>BRS/Config/BRS_Config_Text.xml</File>
+		</UpdateText>
+		<!--Better Net Connection Icon Logic (BNL)-->
+		<ImportFiles id="Replace_NetConnectionIconLogic">
+			<Properties>
+				<LoadOrder>20</LoadOrder>
+			</Properties>
+			<File>BNL/NetConnectionIconLogic.lua</File>
+		</ImportFiles>
+	</FrontEndActions>
+
+	<InGameActions>
+		<!--Advanced Options (Settings)-->
+		<UpdateText id="Config_Text">
+			<File>Settings/Config_UI_Text.xml</File>
+		</UpdateText>
+		<!--Better City States (BCS)-->
+		<ReplaceUIScript id="Replace_UI_CityStates" criteria="SETTINGS_UI_CityStates">
+			<Properties>
+				<LoadOrder>1000</LoadOrder>
+				<LuaContext>CityStates</LuaContext>
+				<LuaReplace>BCS/UI/CityStates_BCS.lua</LuaReplace>
+			</Properties>
+		</ReplaceUIScript>
+		<ImportFiles id="Replace_UI_CityStates_Import" criteria="SETTINGS_UI_CityStates">
+			<Properties>
+				<LoadOrder>1010</LoadOrder>
+			</Properties>
+			<File>BCS/UI/CityStates.xml</File>
+			<File>BCS/UI/CityStates_BCS.lua</File>
+		</ImportFiles>
+		<!--Compatible BSM (BCS)-->
+		<ReplaceUIScript id="CityStates" criteria="SETTINGS_UI_CityStates_BSM_1">
+			<Properties>
+				<LoadOrder>11000</LoadOrder>
+				<LuaContext>CityStates</LuaContext>
+				<LuaReplace>BCS/UI/CityStates_SPEC.lua</LuaReplace>
+			</Properties>
+		</ReplaceUIScript>
+		<ImportFiles id="Replace_UI_CityStates" criteria="SETTINGS_UI_CityStates_BSM_1">
+			<Properties>
+				<LoadOrder>11100</LoadOrder>
+			</Properties>
+			<File>BCS/UI/CityStates.xml</File>
+			<File>BCS/UI/CityStates_SPEC.lua</File>
+		</ImportFiles>
+		<ReplaceUIScript id="CityStates" criteria="SETTINGS_UI_CityStates_BSM_2">
+			<Properties>
+				<LoadOrder>11000</LoadOrder>
+				<LuaContext>CityStates</LuaContext>
+				<LuaReplace>BCS/UI/CityStates_SPEC.lua</LuaReplace>
+			</Properties>
+		</ReplaceUIScript>
+		<ImportFiles id="Replace_UI_CityStates" criteria="SETTINGS_UI_CityStates_BSM_2">
+			<Properties>
+				<LoadOrder>11100</LoadOrder>
+			</Properties>
+			<File>BCS/UI/CityStates.xml</File>
+			<File>BCS/UI/CityStates_SPEC.lua</File>
+		</ImportFiles>
+		<!--Better Builder Charges Tracking (BCT)-->
+		<ReplaceUIScript id="BuilderChargesUnitFlagManager">
+			<Properties>
+				<LoadOrder>4000</LoadOrder>
+				<LuaContext>UnitFlagManager</LuaContext>
+				<LuaReplace>BCT/UnitFlagManager_BuilderCharges.lua</LuaReplace>
+			</Properties>
+		</ReplaceUIScript>
+		<ImportFiles id="BuilderChargesUnitFlagManager_Import">
+			<File>BCT/UnitFlagManager_BuilderCharges.lua</File>
+		</ImportFiles>
+		<!--Better Great People Popup (BGP)-->
+		<ReplaceUIScript id="Replace_UI_GreatPeoplePopup" criteria="SETTINGS_UI_GreatPeoplePopup">
+			<Properties>
+				<LoadOrder>1000</LoadOrder>
+				<LuaContext>GreatPeoplePopup</LuaContext>
+				<LuaReplace>BGP/UI/GreatPeoplePopup.lua</LuaReplace>
+			</Properties>
+		</ReplaceUIScript>
+		<ImportFiles id="Replace_UI_GreatPeoplePopup_Import" criteria="SETTINGS_UI_GreatPeoplePopup">
+			<Properties>
+				<LoadOrder>1010</LoadOrder>
+			</Properties>
+			<File>BGP/UI/GreatPeoplePopup.xml</File>
+			<File>BGP/UI/GreatPeoplePopup.lua</File>
+		</ImportFiles>
+		<!--Better Net Connection Icon Logic (BNL)-->
+		<ImportFiles id="InGameActions_Replace_NetConnectionIconLogic">
+			<Properties>
+				<LoadOrder>110</LoadOrder>
+			</Properties>
+			<File>BNL/NetConnectionIconLogic.lua</File>
+		</ImportFiles>
+		<!-- Better Report Screen (BRS)-->
+		<UpdateDatabase id="BRS_UpdateDatabase" criteria="SETTINGS_UI_BetterReportScreen">
+			<Properties>
+				<LoadOrder>1</LoadOrder>
+			</Properties>
+			<File>BRS/BetterReportScreen_Database.sql</File>
+		</UpdateDatabase>
+		<AddUserInterfaces id="RMA_Main" criteria="SETTINGS_UI_BetterReportScreen">
+			<Properties>
+				<Context>InGame</Context>
+			</Properties>
+			<File>BRS/RealModifierAnalysis.xml</File>
+		</AddUserInterfaces>
+		<ImportFiles id="BRS_ImportFiles" criteria="SETTINGS_UI_BetterReportScreen">
+			<Properties>
+				<LoadOrder>1001</LoadOrder>
+			</Properties>
+			<Items>
+				<File>BRS/reportscreen.lua</File>
+				<File>BRS/reportscreen.xml</File>
+				<File>BRS/BRSPage_Yields.lua</File>
+				<File>BRS/BRSPage_Resources.lua</File>
+				<File>BRS/BRSPage_CityStatus.lua</File>
+				<File>BRS/BRSPage_Gossip.lua</File>
+				<File>BRS/BRSPage_Deals.lua</File>
+				<File>BRS/BRSPage_Units.lua</File>
+				<File>BRS/BRSPage_Policy.lua</File>
+				<File>BRS/BRSPage_Minor.lua</File>
+				<File>BRS/BRSPage_Cities2.lua</File>
+			</Items>
+		</ImportFiles>
+		<UpdateText id="BRS_UpdateText" criteria="SETTINGS_UI_BetterReportScreen">
+			<File>BRS/Config/BRS_Config_Text.xml</File>
+			<File>BRS/Text/BetterReportScreen_Text.xml</File>
+			<File>BRS/Text/BetterReportScreen_Text_de_DE.xml</File>
+			<File>BRS/Text/BetterReportScreen_Text_es_ES.xml</File>
+			<File>BRS/Text/BetterReportScreen_Text_fr_FR.xml</File>
+			<File>BRS/Text/BetterReportScreen_Text_it_IT.xml</File>
+			<File>BRS/Text/BetterReportScreen_Text_ja_JP.xml</File>
+			<File>BRS/Text/BetterReportScreen_Text_ko_KR.xml</File>
+			<File>BRS/Text/BetterReportScreen_Text_pl_PL.xml</File>
+			<File>BRS/Text/BetterReportScreen_Text_pt_BR.xml</File>
+			<File>BRS/Text/BetterReportScreen_Text_ru_RU.xml</File>
+			<File>BRS/Text/BetterReportScreen_Text_zh_Hans_CN.xml</File>
+			<File>BRS/Text/BetterReportScreen_Text_zh_Hant_HK.xml</File>
+		</UpdateText>
+		<ReplaceUIScript id="BRS_ReplaceUI_ReportScreen_XP2" criteria="SETTINGS_UI_BetterReportScreen">
+			<Properties>
+				<LoadOrder>1021</LoadOrder>
+				<LuaContext>ReportScreen</LuaContext>
+				<LuaReplace>BRS/reportscreen.lua</LuaReplace>
+			</Properties>
+		</ReplaceUIScript>
+		<ImportFiles id="RMI_Imports" criteria="SETTINGS_UI_BetterReportScreen">
+			<File>BRS/Icons/FontIconsRMI.dds</File>
+		</ImportFiles>
+		<UpdateIcons id="RMI_Icons" criteria="SETTINGS_UI_BetterReportScreen">
+			<Properties><LoadOrder>2</LoadOrder></Properties>
+			<File>BRS/Icons/FontIconsRMI.xml</File>
+		</UpdateIcons>
+		<UpdateDatabase id="RLL_Database" criteria="SETTINGS_UI_BetterReportScreen">
+			<File>BRS/RLL/ReportsListLoader.sql</File>
+		</UpdateDatabase>
+		<ImportFiles id="RLL_Imports" criteria="SETTINGS_UI_BetterReportScreen">
+			<File>BRS/RLL/ReportsListLoader.lua</File>
+		</ImportFiles>
+		<ReplaceUIScript id="RLL_ReplaceUI_ReportsList" criteria="SETTINGS_UI_BetterReportScreen">
+			<Properties>
+				<LoadOrder>100000</LoadOrder>
+				<LuaContext>ReportsList</LuaContext>
+				<LuaReplace>BRS/RLL/ReportsListLoader.lua</LuaReplace>
+			</Properties>
+		</ReplaceUIScript>
+		<ImportFiles id="EPC_IMPORT_FILES" criteria="SETTINGS_UI_BetterReportScreen">
+			<Properties>
+				<LoadOrder>12001</LoadOrder>
+			</Properties>
+			<Items>
+				<File>BRS/UI/GovernmentScreen.lua</File>
+				<File>BRS/UI/GovernmentScreen.xml</File>
+			</Items>
+		</ImportFiles>
+		<!-- CityBanner Refresh Fix (CRF)-->
+		<ImportFiles id="CityBannerManager_CRF">
+			<Properties>
+				<LoadOrder>5</LoadOrder>
+			</Properties>
+			<File>CRF/UI/CityBannerManager_CRF.lua</File>
+		</ImportFiles>
+		<!-- Notification Panel Quick Clear (NQC)-->
+		<ImportFiles id="NotificationClear_Import" criteria="SETTINGS_UI_NotificationPanel_QuickClear">
+			<Properties>
+				<LoadOrder>100</LoadOrder>
+			</Properties>
+			<File>NQC/NotificationPanel_QuickClear.lua</File>
+		</ImportFiles>
+		<!--Reveal Map Corners (RMC)-->
+		<AddUserInterfaces id="ForcedEnd">
+			<Properties>
+				<LoadOrder>100</LoadOrder>
+				<Context>InGame</Context>
+			</Properties>
+			<File>RMC/UI/RevealMapCorners.xml</File>
+		</AddUserInterfaces>
+		<!--Remove Create City Confirm Popup (RCP)-->
+		<ReplaceUIScript id="UnitPanel">
+			<Properties>
+				<LoadOrder>10100</LoadOrder>
+				<LuaContext>UnitPanel</LuaContext>
+				<LuaReplace>RCP/UI/UnitPanel_RCP.lua</LuaReplace>
+			</Properties>
+		</ReplaceUIScript>
+		<ImportFiles id="Replace_UI_UnitPanel">
+			<Properties>
+				<LoadOrder>10100</LoadOrder>
+			</Properties>
+			<File>RCP/UI/UnitPanel_RCP.lua</File>
+		</ImportFiles>
+		<!--Multiplayer Resource Visibility Sharing (RVS)-->
+		<ReplaceUIScript id="WorldViewIconsManager">
+			<Properties>
+				<LoadOrder>20000</LoadOrder>
+				<LuaContext>WorldViewIconsManager</LuaContext>
+				<LuaReplace>RVS/UI/WorldViewIconsManager_RVS.lua</LuaReplace>
+			</Properties>
+		</ReplaceUIScript>
+		<ImportFiles id="Replace_UI_WorldViewIconsManager">
+			<Properties>
+				<LoadOrder>21000</LoadOrder>
+			</Properties>
+			<File>RVS/UI/WorldViewIconsManager_RVS.lua</File>
+		</ImportFiles>
+		<!--Tech Civic Progress Boost Ratio Fix (TCP)-->
+		<UpdateText id="Text_TCP" criteria="SETTINGS_UI_TechCivicProgressPro">
+			<File>TCP/Text_TCP.xml</File>
+		</UpdateText>
+		<ImportFiles id="Replace_TechAndCivicSupport" criteria="SETTINGS_UI_TechCivicProgressPro">
+			<Properties>
+				<LoadOrder>2001</LoadOrder>
+			</Properties>
+			<File>TCP/TechAndCivicSupport.lua</File>
+		</ImportFiles>
+		<!--Top Panel Extension Pro (TPE)-->
+		<UpdateText id="UpdateText" criteria="SETTINGS_UI_TopPanelExtension">
+			<File>TPE/TopPanel_Text.xml</File>
+		</UpdateText>
+		<ReplaceUIScript id="TopPanel" criteria="SETTINGS_UI_TopPanelExtension">
+			<Properties>
+				<LoadOrder>20010</LoadOrder>
+				<LuaContext>TopPanel</LuaContext>
+				<LuaReplace>TPE/UI/TopPanelExtension.lua</LuaReplace>
+			</Properties>
+		</ReplaceUIScript>
+		<ImportFiles id="ImportFiles" criteria="SETTINGS_UI_TopPanelExtension">
+			<Properties>
+				<LoadOrder>20020</LoadOrder>
+			</Properties>
+			<File>TPE/UI/TopPanelExtension.lua</File>
+		</ImportFiles>
+		<AddUserInterfaces id="TopPanel_TT" criteria="SETTINGS_UI_TopPanelExtension">
+			<Properties>
+				<LoadOrder>20030</LoadOrder>
+				<Context>InGame</Context>
+			</Properties>
+			<File>TPE/UI/TopPanel_TT.xml</File>
+		</AddUserInterfaces>
+		<!--Auto Update (Update)-->
+		<AddUserInterfaces id="AutoUpdate">
+			<Properties>
+				<Context>InGame</Context>
+			</Properties>
+			<File>Update/UI/AutoUpdate.xml</File>
+		</AddUserInterfaces>
+	</InGameActions>
+	<Files>
+		<File>BCS/UI/CityStates.xml</File>
+		<File>BCS/UI/CityStates_BCS.lua</File>
+		<File>BCS/UI/CityStates_SPEC.lua</File>
+		<File>BCT/UnitFlagManager_BuilderCharges.lua</File>
+		<File>BGP/UI/GreatPeoplePopup.xml</File>
+		<File>BGP/UI/GreatPeoplePopup.lua</File>
+		<File>BNL/NetConnectionIconLogic.lua</File>
+		<File>BRS/UI/GovernmentScreen.lua</File>
+		<File>BRS/UI/GovernmentScreen.xml</File>
+		<File>BRS/Config/BRS_Config.xml</File>
+		<File>BRS/Config/BRS_Config_Text.xml</File>
+		<File>BRS/BetterReportScreen_Database.sql</File>
+		<File>BRS/reportscreen.lua</File>
+		<File>BRS/reportscreen.xml</File>
+		<File>BRS/BRSPage_Yields.lua</File>
+		<File>BRS/BRSPage_Resources.lua</File>
+		<File>BRS/BRSPage_CityStatus.lua</File>
+		<File>BRS/BRSPage_Gossip.lua</File>
+		<File>BRS/BRSPage_Deals.lua</File>
+		<File>BRS/BRSPage_Units.lua</File>
+		<File>BRS/BRSPage_Policy.lua</File>
+		<File>BRS/BRSPage_Minor.lua</File>
+		<File>BRS/BRSPage_Cities2.lua</File>
+		<File>BRS/RealModifierAnalysis.lua</File>
+		<File>BRS/RealModifierAnalysis.xml</File>
+		<File>BRS/Text/BetterReportScreen_Text.xml</File>
+		<File>BRS/Text/BetterReportScreen_Text_de_DE.xml</File>
+		<File>BRS/Text/BetterReportScreen_Text_es_ES.xml</File>
+		<File>BRS/Text/BetterReportScreen_Text_fr_FR.xml</File>
+		<File>BRS/Text/BetterReportScreen_Text_it_IT.xml</File>
+		<File>BRS/Text/BetterReportScreen_Text_ja_JP.xml</File>
+		<File>BRS/Text/BetterReportScreen_Text_ko_KR.xml</File>
+		<File>BRS/Text/BetterReportScreen_Text_pl_PL.xml</File>
+		<File>BRS/Text/BetterReportScreen_Text_pt_BR.xml</File>
+		<File>BRS/Text/BetterReportScreen_Text_ru_RU.xml</File>
+		<File>BRS/Text/BetterReportScreen_Text_zh_Hans_CN.xml</File>
+		<File>BRS/Text/BetterReportScreen_Text_zh_Hant_HK.xml</File>
+		<File>BRS/Icons/FontIconsRMI.dds</File>
+		<File>BRS/Icons/FontIconsRMI.xml</File>
+		<File>BRS/RLL/ReportsListLoader.sql</File>
+		<File>BRS/RLL/ReportsListLoader.lua</File>
+		<File>CRF/UI/CityBannerManager_CRF.lua</File>
+		<File>NQC/NotificationPanel_QuickClear.lua</File>
+		<File>RMC/UI/RevealMapCorners.xml</File>
+		<File>RMC/UI/RevealMapCorners.lua</File>
+		<File>RCP/UI/UnitPanel_RCP.lua</File>
+		<File>RVS/UI/WorldViewIconsManager_RVS.lua</File>
+		<File>TCP/Text_TCP.xml</File>
+		<File>TCP/TechAndCivicSupport.lua</File>
+		<File>TPE/TopPanel_Text.xml</File>
+		<File>TPE/UI/TopPanelExtension.lua</File>
+		<File>TPE/UI/TopPanel_TT.lua</File>
+		<File>TPE/UI/TopPanel_TT.xml</File>
+		<File>Settings/Config_UI.xml</File>
+		<File>Settings/Config_UI_Text.xml</File>
+		<File>Update/UI/AutoUpdate.lua</File>
+		<File>Update/UI/AutoUpdate.xml</File>
+	</Files>
+</Mod>

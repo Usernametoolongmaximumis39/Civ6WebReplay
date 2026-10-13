@@ -1,0 +1,1220 @@
+{
+  "format": 1,
+  "profile": "bbg",
+  "stage": "captured",
+  "capturedAt": "2026-10-11T19:51:20.454013+00:00",
+  "referenceSaveSha256": "412261ff7c33b56d001cc0ca5ca3ff48a2f3f75209704bdc2e9a6620e18e9f71",
+  "packages": [
+    {
+      "key": "LOC_AZTEC_MONTEZUMA_MOD_TITLE",
+      "name": "Aztec Montezuma"
+    },
+    {
+      "key": "LOC_TEDDY_ROOSEVELT_MOD_TITLE",
+      "name": "泰迪·罗斯福领袖包"
+    },
+    {
+      "key": "LOC_EXPANSION1_MOD_TITLE",
+      "name": "Expansion1"
+    },
+    {
+      "key": "LOC_ETHIOPIA_MOD_TITLE",
+      "name": "埃塞俄比亚包"
+    },
+    {
+      "key": "LOC_INDONESIA_KHMER_MOD_TITLE",
+      "name": "Indonesia Khmer"
+    },
+    {
+      "key": "LOC_GREAT_BUILDERS_MOD_TITLE",
+      "name": "Great Builders"
+    },
+    {
+      "key": "LOC_RULERS_OF_ENGLAND_MOD_TITLE",
+      "name": "Rulers Of England"
+    },
+    {
+      "key": "LOC_MOD_VIKINGSLANDMARKS_TITLE",
+      "name": "Mod Vikingslandmarks"
+    },
+    {
+      "key": "BBG Expanded 2.1",
+      "name": "BBG Expanded 2.1"
+    },
+    {
+      "key": "LOC_POLAND_JADWIGA_MOD_TITLE",
+      "name": "Poland Jadwiga"
+    },
+    {
+      "key": "LOC_EXPANSION2_MOD_TITLE",
+      "name": "Expansion2"
+    },
+    {
+      "key": "LOC_MPH_TITLE",
+      "name": "MPH 多人游戏助手 1.8.0"
+    },
+    {
+      "key": "LOC_NUBIA_MOD_TITLE",
+      "name": "Nubia"
+    },
+    {
+      "key": "LOC_GREAT_NEGOTIATORS_MOD_TITLE",
+      "name": "Great Negotiators"
+    },
+    {
+      "key": "LOC_RULERS_OF_CHINA_MOD_TITLE",
+      "name": "Rulers Of China"
+    },
+    {
+      "key": "LOC_RULERS_OF_THE_SAHARA_MOD_TITLE",
+      "name": "Rulers Of The Sahara"
+    },
+    {
+      "key": "Advanced Cheat Menu (Light) Hotseat patch",
+      "name": "Advanced Cheat Menu (Light) Hotseat patch"
+    },
+    {
+      "key": "LOC_BABYLON_MOD_TITLE",
+      "name": "巴比伦包"
+    },
+    {
+      "key": "LOC_GRANCOLOMBIA_MAYA_MOD_TITLE",
+      "name": "玛雅和大哥伦比亚包"
+    },
+    {
+      "key": "LOC_JULIUS_CAESAR_MOD_TITLE",
+      "name": "Julius Caesar"
+    },
+    {
+      "key": "LOC_BYZANTIUM_GAUL_MOD_TITLE",
+      "name": "拜占庭和高卢包"
+    },
+    {
+      "key": "LOC_KUBLAIKHAN_VIETNAM_MOD_TITLE",
+      "name": "越南和忽必烈包"
+    },
+    {
+      "key": "LOC_CATHERINE_DE_MEDICI_MOD_TITLE",
+      "name": "凯瑟琳·德·美第奇领袖包"
+    },
+    {
+      "key": "LOC_MACEDONIA_PERSIA_MOD_TITLE",
+      "name": "Macedonia Persia"
+    },
+    {
+      "key": "LOC_AUSTRALIA_MOD_TITLE",
+      "name": "Australia"
+    },
+    {
+      "key": "LOC_GREAT_WARLORDS_MOD_TITLE",
+      "name": "Great Warlords"
+    },
+    {
+      "key": "LOC_PORTUGAL_MOD_TITLE",
+      "name": "葡萄牙包"
+    },
+    {
+      "key": "LOC_BBM_TITLE",
+      "name": "Better Balanced Map 1.39.5"
+    },
+    {
+      "key": "Better Balanced Game 7.5.1",
+      "name": "Better Balanced Game 7.5.1"
+    },
+    {
+      "key": "LOC_MPT_NAME",
+      "name": "[ENDCOLOR][ENDCOLOR][COLOR_LIGHTBLUE]Multiplayer Toolkits (UI)[ENDCOLOR]"
+    },
+    {
+      "key": "LOC_MOD_SCOUT_CAT_TITLE",
+      "name": "Mod Scout Cat"
+    },
+    {
+      "key": "[COLOR_LIGHTBLUE]Advanced Cheat Menu (Light)[ENDCOLOR]",
+      "name": "[COLOR_LIGHTBLUE]Advanced Cheat Menu (Light)[ENDCOLOR]"
+    }
+  ],
+  "sources": [
+    {
+      "name": "[COLOR_LIGHTBLUE]Advanced Cheat Menu (Light)[ENDCOLOR]",
+      "id": "f1e02dd3-6a94-47c4-a2d7-1d5219d8a40e",
+      "version": "1.0",
+      "modinfo": "scripts/f1e02dd3-6a94-47c4-a2d7-1d5219d8a40e/CheatMenuPanel.modinfo",
+      "modinfoSha256": "2e79f86b79a0d283388f6f903a1a8c0679847e6c65ae7177dfdd815b1432f679",
+      "scripts": [
+        {
+          "path": "scripts/f1e02dd3-6a94-47c4-a2d7-1d5219d8a40e/Base/UI/Panels/Cheat_Menu_Panel_Functions.lua",
+          "sha256": "ee6d1d8dca8481c934fcd4f010cd8a9ac27021ac7f9d3e35811e4ad995f78d51"
+        },
+        {
+          "path": "scripts/f1e02dd3-6a94-47c4-a2d7-1d5219d8a40e/Base/UI/Panels/Cheat_Panel_World_Tracker.lua",
+          "sha256": "7c0b076a152de978bdcb19b926124150879f8469124472265f564ab7ff544b79"
+        },
+        {
+          "path": "scripts/f1e02dd3-6a94-47c4-a2d7-1d5219d8a40e/Base/UI/Popups/Raze_City_Reminder_Popup.lua",
+          "sha256": "00888c9951dfbffcab9018c42f80fbe35785be48ba2827e12c2c1a6371021fec"
+        },
+        {
+          "path": "scripts/f1e02dd3-6a94-47c4-a2d7-1d5219d8a40e/Base/UI/Script/Cheat_Menu_Panel_Script.lua",
+          "sha256": "fb4755c5cb39d8ba26cdde73eab714923840d43018fa4398207e837f896100dd"
+        }
+      ]
+    },
+    {
+      "name": "Better Balanced Game 7.5.1",
+      "id": "cb84075d-5007-4207-b662-c35a5f7be260",
+      "version": "70501",
+      "modinfo": "scripts/cb84075d-5007-4207-b662-c35a5f7be260/BetterBalancedGame.modinfo",
+      "modinfoSha256": "f4f918bd18a7189d9f8ee64a4123952e72bded754e5154d7521d25f90bf305a5",
+      "scripts": [
+        {
+          "path": "scripts/cb84075d-5007-4207-b662-c35a5f7be260/lua/BBG_Expanded/Al_Hasan.lua",
+          "sha256": "3957d7a251f54006a9d66ccc3a4353a7fe0134c3f859dc8553d1f731ecac14fe"
+        },
+        {
+          "path": "scripts/cb84075d-5007-4207-b662-c35a5f7be260/lua/BBG_Expanded/Goth.lua",
+          "sha256": "fb5cd0cd14e02dcc52a72ee11485d81a7c19feb49fb66e433ac30bcc1e4192ed"
+        },
+        {
+          "path": "scripts/cb84075d-5007-4207-b662-c35a5f7be260/lua/BBG_Expanded/Olympia.lua",
+          "sha256": "5587eb8a0bc133eb2c6025cca21eb3b768f14687c07d9625e474b33ab130ff6a"
+        },
+        {
+          "path": "scripts/cb84075d-5007-4207-b662-c35a5f7be260/lua/BBG_Expanded/Te_Kinich.lua",
+          "sha256": "e7956430220ae150e577ba57a8fc58051053274775d5d6df00493c7ecc64edec"
+        },
+        {
+          "path": "scripts/cb84075d-5007-4207-b662-c35a5f7be260/lua/BBG_Expanded/Thule.lua",
+          "sha256": "6d9ef0eb802c161098ec7c7bc30f02aaca142bb1539baeeed97d5357933c03fc"
+        },
+        {
+          "path": "scripts/cb84075d-5007-4207-b662-c35a5f7be260/scripts/bbg_script.lua",
+          "sha256": "6538613569e4ab38b271104e800b54959192472a5ae3f2b3ea92ca3d4813cc6d"
+        },
+        {
+          "path": "scripts/cb84075d-5007-4207-b662-c35a5f7be260/scripts/bbg_stateutils.lua",
+          "sha256": "795863ed3c36b7ee03bc1f28941d760d2715f87c8a7d3d213e1797dcee024b34"
+        },
+        {
+          "path": "scripts/cb84075d-5007-4207-b662-c35a5f7be260/scripts/bbg_uitogameplay.lua",
+          "sha256": "65aded4dfc11b8c088b62d7be4c998970b59d6fbf6a73e75c48d45b6d1052ef3"
+        },
+        {
+          "path": "scripts/cb84075d-5007-4207-b662-c35a5f7be260/scripts/bbg_unitcommanddefs.lua",
+          "sha256": "caddf4af9d86d8332df13e525e86b51175087f64758069d861f435a48538e2ab"
+        },
+        {
+          "path": "scripts/cb84075d-5007-4207-b662-c35a5f7be260/scripts/bbg_unitcommands.lua",
+          "sha256": "32cfed72f3875d7f608977c18520519313abf07a39798b44f4cb1390dc3a6f2b"
+        },
+        {
+          "path": "scripts/cb84075d-5007-4207-b662-c35a5f7be260/ui/bbg_customplacement.lua",
+          "sha256": "776d851af896d3406ac962004aa842e196a7293d698e9734bfb486ceb5ee1b13"
+        },
+        {
+          "path": "scripts/cb84075d-5007-4207-b662-c35a5f7be260/ui/replacements/civ6common.lua",
+          "sha256": "ce55f409b41d4e390980b95d4c2dfe008b4e3cb72e75ddf8d7474de3b95ec02f"
+        },
+        {
+          "path": "scripts/cb84075d-5007-4207-b662-c35a5f7be260/ui/replacements/compatibility/tradeoverview.lua",
+          "sha256": "a73457f25243fa1d22175a0f8f6f2b183e33645180ebe5ff1663431a85b02718"
+        },
+        {
+          "path": "scripts/cb84075d-5007-4207-b662-c35a5f7be260/ui/replacements/compatibility/traderoutechooser.lua",
+          "sha256": "1b4859f066fb33cb735c05593b518e5285806a2381c5d02178f1a244bfcbc8d9"
+        },
+        {
+          "path": "scripts/cb84075d-5007-4207-b662-c35a5f7be260/ui/replacements/endgamemenu_bbg.lua",
+          "sha256": "24ca374b4f638ca96f35dbd6b4e25ead1a3509916362994a490cbe7d212dd8d9"
+        },
+        {
+          "path": "scripts/cb84075d-5007-4207-b662-c35a5f7be260/ui/replacements/greatpeoplepopup_bbg.lua",
+          "sha256": "8897ea3c97c23f063ffe22b261ee398b379c43a28504a60a757cd4aad35f4065"
+        },
+        {
+          "path": "scripts/cb84075d-5007-4207-b662-c35a5f7be260/ui/replacements/productionpanel_bbg.lua",
+          "sha256": "a0a5708e7e8040780699cf7508fbee7a4fa76e782320eb5a2f17c485a4296498"
+        },
+        {
+          "path": "scripts/cb84075d-5007-4207-b662-c35a5f7be260/ui/replacements/strategicview_mapplacement.lua",
+          "sha256": "72046b64d56cb3e4bed7fd14644e93ae32784d46f575840eae714a0b10090e8b"
+        },
+        {
+          "path": "scripts/cb84075d-5007-4207-b662-c35a5f7be260/ui/replacements/tradeoverview_bbg.lua",
+          "sha256": "b6c1cfcad3a402f87f4095a11e6c011c5683f3881a33448fa2820943a5449182"
+        },
+        {
+          "path": "scripts/cb84075d-5007-4207-b662-c35a5f7be260/ui/replacements/tradesupport.lua",
+          "sha256": "4d93fb9ec902b6ec732e5312b63eeeaad997e3f042b7688bce24d84f08e67e2b"
+        },
+        {
+          "path": "scripts/cb84075d-5007-4207-b662-c35a5f7be260/ui/replacements/unitpanel_bbg.lua",
+          "sha256": "8693e6708c30e5630eec62b12a8b6249ccb0f6a7c8be801132e2645ad00e308b"
+        },
+        {
+          "path": "scripts/cb84075d-5007-4207-b662-c35a5f7be260/ui/replacements/unitpanel_bbg_legacy.lua",
+          "sha256": "8069f872c25b999f8079e251e5b3a66adff5ba921a3f2bc27a56e47991967df5"
+        },
+        {
+          "path": "scripts/cb84075d-5007-4207-b662-c35a5f7be260/ui/replacements/worldrankings_bbg.lua",
+          "sha256": "d673c12de5e7bba4a8b7bb0deff012454f87be37ee5bbb50be051cdc23c72241"
+        }
+      ]
+    },
+    {
+      "name": "LOC_MPT_NAME",
+      "id": "00000000-4429-0F54-6B46-F9DF7B18CD5B",
+      "version": "20240313",
+      "modinfo": "scripts/00000000-4429-0F54-6B46-F9DF7B18CD5B/MultiplayerToolkits.modinfo",
+      "modinfoSha256": "099d77f06f33b75d18cefaffaf9d7724cae08d66e8181c2ef1c33de0c884300d",
+      "scripts": [
+        {
+          "path": "scripts/00000000-4429-0F54-6B46-F9DF7B18CD5B/BCS/UI/CityStates_BCS.lua",
+          "sha256": "210a7e094ac3671f755da81254f9b0eff08af4790761723e86af8560b2087b90"
+        },
+        {
+          "path": "scripts/00000000-4429-0F54-6B46-F9DF7B18CD5B/BCS/UI/CityStates_SPEC.lua",
+          "sha256": "68a086e95f803ae7818ef61b1329484fa0a96bbc67f27709db2d6d8873cd7df3"
+        },
+        {
+          "path": "scripts/00000000-4429-0F54-6B46-F9DF7B18CD5B/BCT/UnitFlagManager_BuilderCharges.lua",
+          "sha256": "5438edb01901f98bd0a9d8e3c10f2e8bebcaae60f7f2cccfc325e9edabe76bc9"
+        },
+        {
+          "path": "scripts/00000000-4429-0F54-6B46-F9DF7B18CD5B/BGP/UI/GreatPeoplePopup.lua",
+          "sha256": "d9066e35fdc16ea832765b421bcfe4e87936bd7cb4e372b6b37e71d2ac097cd3"
+        },
+        {
+          "path": "scripts/00000000-4429-0F54-6B46-F9DF7B18CD5B/BNL/NetConnectionIconLogic.lua",
+          "sha256": "6c8277f86e31b0c5b562d1e22f04047d8c017bceb8c00dfe1d8e6a851a07fd3b"
+        },
+        {
+          "path": "scripts/00000000-4429-0F54-6B46-F9DF7B18CD5B/BRS/BRSPage_Cities2.lua",
+          "sha256": "4dcffecaa6038b9954f74e0d7c1f8b934fd16578957ab47955ac565277c6e2bd"
+        },
+        {
+          "path": "scripts/00000000-4429-0F54-6B46-F9DF7B18CD5B/BRS/BRSPage_CityStatus.lua",
+          "sha256": "f6f218700a100b1025b392d95d1dd7fd06384e221b5f337ad2465423d178e53b"
+        },
+        {
+          "path": "scripts/00000000-4429-0F54-6B46-F9DF7B18CD5B/BRS/BRSPage_Deals.lua",
+          "sha256": "4b09974b92b7dab61db7407cd5bf002b939001bf70cc9a74fb96609f7a5b9983"
+        },
+        {
+          "path": "scripts/00000000-4429-0F54-6B46-F9DF7B18CD5B/BRS/BRSPage_Gossip.lua",
+          "sha256": "0541f8ef1ac26df00de001e7a42693382756c33ee2d299da34be03413820e7b8"
+        },
+        {
+          "path": "scripts/00000000-4429-0F54-6B46-F9DF7B18CD5B/BRS/BRSPage_Minor.lua",
+          "sha256": "65260c6b595f2a3f54c7331e4cbc997a7b42dacc427aad2156ed6c68e52e867f"
+        },
+        {
+          "path": "scripts/00000000-4429-0F54-6B46-F9DF7B18CD5B/BRS/BRSPage_Policy.lua",
+          "sha256": "72651cd85b1f9ae42dc95543bc046c98f8020b5318c51af723803147e9cce6ad"
+        },
+        {
+          "path": "scripts/00000000-4429-0F54-6B46-F9DF7B18CD5B/BRS/BRSPage_Resources.lua",
+          "sha256": "bb27b21ac36c99bec6a9ce17fec085617c96fb81e853a94d183b390a0d21e9be"
+        },
+        {
+          "path": "scripts/00000000-4429-0F54-6B46-F9DF7B18CD5B/BRS/BRSPage_Units.lua",
+          "sha256": "73c89cc8606fca1a25d30ebd95c0a18936f9262dce1abe1bc811f51fcddd916e"
+        },
+        {
+          "path": "scripts/00000000-4429-0F54-6B46-F9DF7B18CD5B/BRS/BRSPage_Yields.lua",
+          "sha256": "37be4290f3635f543a5d3923de47e45fcdbd99135fc764b7c3b5ad3a101db171"
+        },
+        {
+          "path": "scripts/00000000-4429-0F54-6B46-F9DF7B18CD5B/BRS/RealModifierAnalysis.lua",
+          "sha256": "9e4941e265a8b5afa7c736e4637b0bd0838ff24d02cdd6a720906d734eead2be"
+        },
+        {
+          "path": "scripts/00000000-4429-0F54-6B46-F9DF7B18CD5B/BRS/reportscreen.lua",
+          "sha256": "333a769bd6838bac55cadde3ec54f92f16e8ad2fbfeab7688cafa135e702ef62"
+        },
+        {
+          "path": "scripts/00000000-4429-0F54-6B46-F9DF7B18CD5B/BRS/RLL/ReportsListLoader.lua",
+          "sha256": "d2e8defadcd36732baab45d341137b5ca04e81d2b0078a7da7c47d21db8faae8"
+        },
+        {
+          "path": "scripts/00000000-4429-0F54-6B46-F9DF7B18CD5B/BRS/UI/GovernmentScreen.lua",
+          "sha256": "a2aab1b713f96258ca18dfc0f681a1876f966d6dd6767900b5929ffcaa1f58f3"
+        },
+        {
+          "path": "scripts/00000000-4429-0F54-6B46-F9DF7B18CD5B/CRF/UI/CityBannerManager_CRF.lua",
+          "sha256": "4466324ea550be57076a6824019a0c7c1390973af5bddf2c4defda95c8c39bbc"
+        },
+        {
+          "path": "scripts/00000000-4429-0F54-6B46-F9DF7B18CD5B/NQC/NotificationPanel_QuickClear.lua",
+          "sha256": "e7ae2e657d204f7e3e15cee532a387d63f66fbad5777fd74e28a75ae91feead3"
+        },
+        {
+          "path": "scripts/00000000-4429-0F54-6B46-F9DF7B18CD5B/RCP/UI/UnitPanel_RCP.lua",
+          "sha256": "0fc19f137728adcb0c43e09e1f4b3baf32af06e1e909918fbc9d5226afe24b96"
+        },
+        {
+          "path": "scripts/00000000-4429-0F54-6B46-F9DF7B18CD5B/RMC/UI/RevealMapCorners.lua",
+          "sha256": "86899d96e30c03d8840df6c587904d8f92fa2844068d259fa8d4d9e92a4d59a6"
+        },
+        {
+          "path": "scripts/00000000-4429-0F54-6B46-F9DF7B18CD5B/RVS/UI/WorldViewIconsManager_RVS.lua",
+          "sha256": "6685a2ba42595bdb8bc8f1b6dd02edc632078e640d8b00eaf60808d7b2e639fa"
+        },
+        {
+          "path": "scripts/00000000-4429-0F54-6B46-F9DF7B18CD5B/TCP/TechAndCivicSupport.lua",
+          "sha256": "4066028f5d690399c7bda0b014c8d5ae0c003fe89250882fe3685b473d462697"
+        },
+        {
+          "path": "scripts/00000000-4429-0F54-6B46-F9DF7B18CD5B/TPE/UI/TopPanel_TT.lua",
+          "sha256": "60d81a502c888afcd75498fc890dafc2f5228fbad199c2c345f2e0c67ace3b1f"
+        },
+        {
+          "path": "scripts/00000000-4429-0F54-6B46-F9DF7B18CD5B/TPE/UI/TopPanelExtension.lua",
+          "sha256": "67764d804912a648692e1e2cf49b82f4f68f5164946647bed06ae9d607123002"
+        },
+        {
+          "path": "scripts/00000000-4429-0F54-6B46-F9DF7B18CD5B/Update/UI/AutoUpdate.lua",
+          "sha256": "a3eb9baff58c9d54b418a295250915aae8173f806e8439eaf8156de32ddbd731"
+        }
+      ]
+    },
+    {
+      "name": "LOC_BBM_TITLE",
+      "id": "c88cba8b-8311-4d35-90c3-51a4a5d66542",
+      "version": "3",
+      "modinfo": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/BBM_139.modinfo",
+      "modinfoSha256": "9fdebe86eb80a365d7e794c2fb85a45213daf125e9e18674634ddd8cedff49c0",
+      "scripts": [
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/archipelago_xp2.lua",
+          "sha256": "765e257b082f3a927dd0c162707862f3a74d7ec6f73fc4c897f796718af9b5f5"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/continents.lua",
+          "sha256": "41acc287df44f073383ba4b62aefb7ddc71959d3a14e91ac4dab9b955c49f371"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/continents_islands.lua",
+          "sha256": "70c19d2249d44c1c8387877cf5af61d707a945d736e45004357f728f0ffc5ed1"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/dwarchipelago.lua",
+          "sha256": "6ed3074c25fbaae04aa9a542aa764ac9ecd4973729c0e1d418aad2fed07c9043"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/dwcontinents.lua",
+          "sha256": "7467fc1871f301d15c0d0f4a456bf5df8860e51204873d85f2eb3ed480a83a09"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/dwfractal.lua",
+          "sha256": "8c98748b5c0e415668e81fab6af7be01bdba922d475357502bd859af55aeb7bb"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/dwmixedislands.lua",
+          "sha256": "323ce2c4a5fde0d19cf71d171bf790e0a3c692cbcefbb303dc115eadf816ace4"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/dwmixedland.lua",
+          "sha256": "cb5226220acca6c913d268a614abf75e684fe2b480d4ad3db069e595f95354dc"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/dwpangaea.lua",
+          "sha256": "a267265f0b8325c14ab782292d11b266874aa364607f53135cad2010e5b86c6c"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/dwsmallcontinents.lua",
+          "sha256": "1f56ef3986f060f90b3844b4fda396a882fa1e268dd5af7e2c799fb2b2a60514"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/fractal.lua",
+          "sha256": "243dbbebb399e13b4738ac6e5729d5e9956dea5eb74c7984afa0a2b88faa6c7c"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/highlands_xp2.lua",
+          "sha256": "50d80b33fe8705b804a80220c72c9007e2945446e22354daae103158e8d342d6"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/inlandsea.lua",
+          "sha256": "d17f96810ec1f7aec564c44bce3be894c386148d34c0de47f7fc40fe90c0c319"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/island_plates.lua",
+          "sha256": "ed80d2c0fe6c196496fa85834f0d69cd030cbfc83a9f77072e7adebd5c7f202b"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/lakes.lua",
+          "sha256": "c744eb78581e7ac8685d4b52188b7b3f426782ac242dff2c4005d8f2be6d881d"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/pangaea.lua",
+          "sha256": "7c24d476692c91e16531a36196b0285c8053dc3f2ce89a7d237e61d8b0674f3f"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/pangaea_ultima.lua",
+          "sha256": "5ec25026baef5953d817ea5db4046546816b5080bd25b2af87188a2d5f1fea64"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/perfectworld6.lua",
+          "sha256": "4c41e6aea9ab1bc947b0fde134b44805fe5cd47b572d917c4e7b35166c92f4d0"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/primordial.lua",
+          "sha256": "8721329ad39a9d6281c9fe61017e2b4c13f812b2dbe354088eadd4d2cefb0200"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/rich_highlands_xp2.lua",
+          "sha256": "fd3b8e6b4852b57b8cc64914fe19680f9aeefa809fd774fbbf7f100e289c2f03"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/rich_riverlands.lua",
+          "sha256": "93c7bbb8dd211b6dcb41fcc06831a84464612ae31ec463debe0eee4944134ba0"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/seven_seas.lua",
+          "sha256": "8ce47454524c89a84b6867a2e8b33d941461c180c1fbdfe3320f7ac60f2ce3d1"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/shuffle.lua",
+          "sha256": "a7a812135d719bb735dd34705dd5c6df3be82bd969dc6eba55a047d2450a85a3"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/small_continents.lua",
+          "sha256": "3122d29431a430a853b78c6e93a1fe404396c5a4ea96b8d9ae163fd6d79c3252"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/splintered_fractal.lua",
+          "sha256": "253a9b2aa0a3eeec3aa61266df0216edb5569c093d0eaf08fdfe87e396dda160"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/terra.lua",
+          "sha256": "a13fe2ae65fec44924b343cbf17cae604a10a230da3967e548fcaf6e5c602613"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/tilted_axis.lua",
+          "sha256": "20cf18d23ac783929012c524dd8dc2de9dc1d6e4ca348b52a36d446f02074377"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/Utility/BBM_AssignStartingPlots.lua",
+          "sha256": "09e85f7cdff02d276602688f6d9168849693cfed4bb86747994249dbeb9b7add"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/Utility/BBM_CivilizationAssign.lua",
+          "sha256": "38647945a68ee0527de731a043c8e60be97b4e15e41e47b3937ab141ddc89ab8"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/Utility/BBM_FeatureGenerator.lua",
+          "sha256": "5d417b3dbfe51e02960ce0d2f63ce0e3b12af43b2ee99e3d5048093933931c69"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/Utility/BBM_MapUtils.lua",
+          "sha256": "f15f6564d17aef283d3910e805f91cd77fe1ef92be88463cc197a0e0a8f70d75"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/Utility/BBM_SpawnBalancing.lua",
+          "sha256": "864a3c4f6bd7464147f540bd1528b9e5d794c9e105fe485543d0a96cf94012a5"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/Utility/BBS_MountainsCliffs.lua",
+          "sha256": "0825eb7a8b79fe39a61b1b319f64ee84b7c66f6d7c4973cc1f817014a559ff11"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/Utility/BBS_NaturalWonderGenerator.lua",
+          "sha256": "3b707c486abe90760545de7209a523c26c02f6c7b36ef7921585911127073cf8"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/Utility/BBS_ResourceGenerator.lua",
+          "sha256": "00f90f1e525fea0cd1d0c5167510651c64fd10610ade5d2084e379ac8f4bfef2"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/Utility/BBS_TerrainGenerator.lua",
+          "sha256": "a9cc136da44b66fe697360e9ce34999d8d26b7503395d5318b992635fc732c1c"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/Utility/DW_CoastalLowlands.lua",
+          "sha256": "8830c7ff08cd904dc7420221a1d9d9bea2601ec6d252358b78d1e452fa5303c7"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/Utility/DW_MapUtilities.lua",
+          "sha256": "98fd587e623c40bdb86246d0f16b6550b9700ca6349f275528a866061cc7611f"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/Utility/DW_MountainsCliffs.lua",
+          "sha256": "6feae0875d91ffb61a193fb23951c372a178fb15eeca0457d76e605d8f8a093b"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/Utility/DW_RiversLakes.lua",
+          "sha256": "39ce2a1915f654eead4411480dc5361f6fdb5f6a4aeca3cabffcd6d3705ef5c8"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/Utility/DW_TerrainGenerator.lua",
+          "sha256": "7970b042b70356483b0d4eebd7d8dd82bde0c1d00b6ff9bb221f126fe5ac60f8"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/Utility/NaturalWonderGenerator.lua",
+          "sha256": "a1a9403f2117103e822740383ce91512c45573eeb03fdc53b600dad86a4768c9"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/Data/BBS Maps/wetlands_xp2.lua",
+          "sha256": "28f445dc70d445c9ecb2a9ef04441cb3ad5e2fad27f8e2bf6fb03d3b656e7519"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/sample_code.lua",
+          "sha256": "78746caa897c72506f690d45dfc7766586afc8df3a11f242819e296db3a2e9b6"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/test.lua",
+          "sha256": "1f16723b987398c6ebf76c9fdd113d31f040757e9fa9eaccc5602ac033e77faf"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/UI/BBM_UI.lua",
+          "sha256": "5541f4701121fb67308e1aa09564556fea87e4f850d7c12bc7f33c3f528157da"
+        },
+        {
+          "path": "scripts/c88cba8b-8311-4d35-90c3-51a4a5d66542/utils.lua",
+          "sha256": "4dec1253aa194c66d54432088aa22ff70840e36b58bb2026ea9b15a451ab785a"
+        }
+      ]
+    },
+    {
+      "name": "Advanced Cheat Menu (Light) Hotseat patch",
+      "id": "836b3031-ee76-4f3a-a74b-864e50cf64bb",
+      "version": "1",
+      "modinfo": "scripts/836b3031-ee76-4f3a-a74b-864e50cf64bb/Advanced Cheat Menu (Light) pach.modinfo",
+      "modinfoSha256": "80f36681b751b2d1035665a540a920cd7a15db9f0467ee49b0201123126fe722",
+      "scripts": [
+        {
+          "path": "scripts/836b3031-ee76-4f3a-a74b-864e50cf64bb/Base/UI/Panels/Cheat_Menu_Panel_Functions.lua",
+          "sha256": "97ea7b7616363b91647145632bc6173ca7f913cca98bdd4926d2c360760d16a2"
+        }
+      ]
+    },
+    {
+      "name": "LOC_MPH_TITLE",
+      "id": "619ac86e-d99d-4bf3-b8f0-8c5b8c402567",
+      "version": "180",
+      "modinfo": "scripts/619ac86e-d99d-4bf3-b8f0-8c5b8c402567/MPH Core v1xx.modinfo",
+      "modinfoSha256": "471b08d6f93999639f960cb3e25c4ae5496b13731070a0190f8b368774eccfeb",
+      "scripts": [
+        {
+          "path": "scripts/619ac86e-d99d-4bf3-b8f0-8c5b8c402567/data/MP_helper.lua",
+          "sha256": "dfa4198d7f669853cda7a4d9960ce983c2a292d594adf045608af6ca3a82c5ac"
+        },
+        {
+          "path": "scripts/619ac86e-d99d-4bf3-b8f0-8c5b8c402567/mode/lastmove/lastmove.lua",
+          "sha256": "d2e2f7c391a179833be25150e5d62d513541d16e71ce46681096cac222977b5b"
+        },
+        {
+          "path": "scripts/619ac86e-d99d-4bf3-b8f0-8c5b8c402567/mode/lastmove/lastmove_UI.lua",
+          "sha256": "11e6cf4bfd26ff3dadbea33fb59360edb299753c87a7d3410ab91a46ace02d65"
+        },
+        {
+          "path": "scripts/619ac86e-d99d-4bf3-b8f0-8c5b8c402567/ui/Additions/DropControl.lua",
+          "sha256": "8520f2f48eb13aab5e0faeccc2ed80fbb73fd165c10a7db1872688c025e78c68"
+        },
+        {
+          "path": "scripts/619ac86e-d99d-4bf3-b8f0-8c5b8c402567/ui/Additions/MPHOptions.lua",
+          "sha256": "7b775e897754708e9d5c43af58b8fe3de3d4116820c050acd4716bb0bce7d181"
+        },
+        {
+          "path": "scripts/619ac86e-d99d-4bf3-b8f0-8c5b8c402567/ui/Additions/SuddenDeathPanel.lua",
+          "sha256": "071a7a0e9dd530579aac7ad38c5fb128657cbf1210c25706d705d5d7b6aa1d56"
+        },
+        {
+          "path": "scripts/619ac86e-d99d-4bf3-b8f0-8c5b8c402567/ui/Additions/TurnProcessing.lua",
+          "sha256": "1b552b683d6584b5cd63bfa8b7bc9460e13e10beae915a9d05cbf567c1cee6cf"
+        },
+        {
+          "path": "scripts/619ac86e-d99d-4bf3-b8f0-8c5b8c402567/ui/Additions/VotePanel.lua",
+          "sha256": "2e9f14e488c1860c4288d547c5ffc8532d027f3e8264fc8f3b64be1ae283cc3d"
+        },
+        {
+          "path": "scripts/619ac86e-d99d-4bf3-b8f0-8c5b8c402567/ui/gamesetuplogic.lua",
+          "sha256": "13d0b6db5ba40b63770f352836e7765cbfcf8ec421a63d721292ae6c4a2a3dc6"
+        },
+        {
+          "path": "scripts/619ac86e-d99d-4bf3-b8f0-8c5b8c402567/ui/hostgame.lua",
+          "sha256": "d6a767e8ebb5f474eaf49f65b369ff2ac1218333f01892ab0fbe0fd2d2646230"
+        },
+        {
+          "path": "scripts/619ac86e-d99d-4bf3-b8f0-8c5b8c402567/ui/ingame.lua",
+          "sha256": "af11dc575f871fdb3915674dddede980a3f43be7a0de5f7fcdee497d8ba4107e"
+        },
+        {
+          "path": "scripts/619ac86e-d99d-4bf3-b8f0-8c5b8c402567/ui/mainmenu.lua",
+          "sha256": "2f090a8a7bc518c44d24b633820011196faec3114cf8cbb94423eecfa363be34"
+        },
+        {
+          "path": "scripts/619ac86e-d99d-4bf3-b8f0-8c5b8c402567/ui/playertargetlogic.lua",
+          "sha256": "2876e06928f0081c4b7e81cb6343579e30ec62544c65b1efc27231cfccd18954"
+        },
+        {
+          "path": "scripts/619ac86e-d99d-4bf3-b8f0-8c5b8c402567/ui/Replacements/chatpanel_MPH.lua",
+          "sha256": "4bab19a3279d5f074c200c202edc8a537db2d5379a11fb255f90a87d90551115"
+        },
+        {
+          "path": "scripts/619ac86e-d99d-4bf3-b8f0-8c5b8c402567/ui/Replacements/diplomacyactionview_MPH.lua",
+          "sha256": "1bcccb10d4d71f474e33135abf2b52fb9f28c024554ee8cd324a0b0825a5fb36"
+        },
+        {
+          "path": "scripts/619ac86e-d99d-4bf3-b8f0-8c5b8c402567/ui/Replacements/diplomacydealview_MPH.lua",
+          "sha256": "506f5bbc3a0449727f87b34d4586818d0a31c79f3fe082b294daa94218d1d2b9"
+        },
+        {
+          "path": "scripts/619ac86e-d99d-4bf3-b8f0-8c5b8c402567/ui/Replacements/endgamemenu.lua",
+          "sha256": "36e30a20195b031312862b7c6c5b5b3de36b4cc262c33dced4782777ecffad88"
+        },
+        {
+          "path": "scripts/619ac86e-d99d-4bf3-b8f0-8c5b8c402567/ui/Replacements/ingametopoptionsmenu_MPH.lua",
+          "sha256": "09d6961530d0ca0d3cbde35c432489f74e8d29489b3b86ee3bf207aed9c07e0c"
+        },
+        {
+          "path": "scripts/619ac86e-d99d-4bf3-b8f0-8c5b8c402567/ui/Replacements/mappinlistpanel.lua",
+          "sha256": "639c3d96fafe86b6dc6f07e2ee5f43527fec2d23fbb512f15420a6bece8928f6"
+        },
+        {
+          "path": "scripts/619ac86e-d99d-4bf3-b8f0-8c5b8c402567/ui/Replacements/pausepanel.lua",
+          "sha256": "1946f724b2248cf6430cc85449187037b8f0cc64bda6f6e6f106769fea59b2c8"
+        },
+        {
+          "path": "scripts/619ac86e-d99d-4bf3-b8f0-8c5b8c402567/ui/Replacements/statusmessagepanel.lua",
+          "sha256": "54fd32c3d026e855fb760b5baa6d427744cd4b9eecf45f71ef52349dc4951919"
+        },
+        {
+          "path": "scripts/619ac86e-d99d-4bf3-b8f0-8c5b8c402567/ui/Replacements/unitflagmanager.lua",
+          "sha256": "a656a3dc07931925e2c1100002b9d9b4734258ce1700640601c7ac9fd0b421f3"
+        },
+        {
+          "path": "scripts/619ac86e-d99d-4bf3-b8f0-8c5b8c402567/ui/setupparameters.lua",
+          "sha256": "09a7118a87965cac02ae75b7a6d1ae6743b003b5b803355064a6a08c17451321"
+        },
+        {
+          "path": "scripts/619ac86e-d99d-4bf3-b8f0-8c5b8c402567/ui/stagingroom.lua",
+          "sha256": "49acd8c9e3288a724e9ee58caf91065993de37b4d8f7c0802767ec085e521081"
+        }
+      ]
+    },
+    {
+      "name": "BBG Expanded 2.1",
+      "id": "2a0aa96a-a31c-4ce2-87ec-09152f6f3e00",
+      "version": "201",
+      "modinfo": "scripts/2a0aa96a-a31c-4ce2-87ec-09152f6f3e00/BBGExpanded.modinfo",
+      "modinfoSha256": "f099ba877833003704246b65ee123db6f21346f7c9155c1f26ab62dd891f4b79",
+      "scripts": [
+        {
+          "path": "scripts/2a0aa96a-a31c-4ce2-87ec-09152f6f3e00/Africa/SwahiliAlHasanibn/Lua/Suk_AdjacencyHandlerItem_CoralConstructionBonus.lua",
+          "sha256": "8bd29db95766ea9f8b42c51eb52795e92b8fda91c95d0b7a964b5d795d749bff"
+        },
+        {
+          "path": "scripts/2a0aa96a-a31c-4ce2-87ec-09152f6f3e00/Africa/SwahiliAlHasanibn/Lua/Suk_Al_Hasan_CoreFunctions.lua",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "scripts/2a0aa96a-a31c-4ce2-87ec-09152f6f3e00/Asia/TibetTrisongDetsen/Lua/Suk_Dzong.lua",
+          "sha256": "a11e15c7abff6cee8deecdce09c075cbd3d914811dacce21ca28c79921fcffd5"
+        },
+        {
+          "path": "scripts/2a0aa96a-a31c-4ce2-87ec-09152f6f3e00/Europe/Austria/Core/SC_Austria.lua",
+          "sha256": "ffea105533034dfe90276112f13cab0b76d8502e4cd2e2ba54a83b82641b9e33"
+        },
+        {
+          "path": "scripts/2a0aa96a-a31c-4ce2-87ec-09152f6f3e00/Europe/GaulVercingetorix/Lua/Suk_Vercingetorix_CoreFunctions.lua",
+          "sha256": "5a64e78e17499901b67e9fa325378d2bff7cce6f35e09bd14a551f38c392f778"
+        },
+        {
+          "path": "scripts/2a0aa96a-a31c-4ce2-87ec-09152f6f3e00/Europe/Goths/Core/SeelingCat's Goth.lua",
+          "sha256": "ab3e638c41d9a1ba1827987996086cd888b91e13d332d0030e6412f5c484dfba"
+        },
+        {
+          "path": "scripts/2a0aa96a-a31c-4ce2-87ec-09152f6f3e00/Mediterranean/MacedonOlympias/Lua/JFD_MacedonOlympias_Functions.lua",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "scripts/2a0aa96a-a31c-4ce2-87ec-09152f6f3e00/Mediterranean/PhoeniciaAhiram/core/Ahiram - Lua.lua",
+          "sha256": "551f9a9366fa54d3a76e0eab8c36032e58c34288de466ecd9ce8ab4546198e31"
+        },
+        {
+          "path": "scripts/2a0aa96a-a31c-4ce2-87ec-09152f6f3e00/Meso/MayaTeKinichII/core/Port Lime - Te Kinich - Functions.lua",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "scripts/2a0aa96a-a31c-4ce2-87ec-09152f6f3e00/Meso/Taino/Core/Taino_Scripts.lua",
+          "sha256": "b0b07f0673ad0cb9a08c6bc3441c16464ea5b26a9fa0cc4a4951269c3751bdeb"
+        },
+        {
+          "path": "scripts/2a0aa96a-a31c-4ce2-87ec-09152f6f3e00/Meso/TheoticuanasTeotihuacan/Spearthrower Owl/Spearthrower-PopConqueror.lua",
+          "sha256": "187b4862750cd68353024a7a1eebeadb7715300f8d3e5c911f0f1aacae8c998d"
+        },
+        {
+          "path": "scripts/2a0aa96a-a31c-4ce2-87ec-09152f6f3e00/Meso/TheoticuanasTeotihuacan/Teotihuacan/Teotihuacan-EnvoyDoubler.lua",
+          "sha256": "508d860104d91e1baaf6260dd0ce6feda80dfc83d52285f932c2be5466ddf6f4"
+        },
+        {
+          "path": "scripts/2a0aa96a-a31c-4ce2-87ec-09152f6f3e00/NorthAmerica/ThuleKiviuq/lua/Lime_Thule_Function.lua",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "files": {
+    "gameplay.sqlite": {
+      "size": 13733888,
+      "sha256": "3ed9d27dbf408d559ea221184ec12d3817ad588c0a4292adf6f4e65692731392"
+    },
+    "adjacency.json": {
+      "size": 6290450,
+      "sha256": "c1e377d1b829bde24561752f252f7d4fd06ff3d52b3849e9e1ddd76bd0a2b4ba"
+    },
+    "labels.json": {
+      "size": 5688858,
+      "sha256": "73fc06094522be781bb089e1c0539af09c401e503d3d12c6f53bcd3b91363cd4"
+    }
+  },
+  "tableCounts": {
+    "AbstractModifiers": 0,
+    "Adjacency_YieldChanges": 244,
+    "Adjacent_AppealYieldChanges": 12,
+    "AgendaPreferredLeaders": 16,
+    "AgendaTags": 3,
+    "AgendaTraits": 127,
+    "Agendas": 125,
+    "AiBuildSpecializations": 9,
+    "AiEvents": 10,
+    "AiFavoredItems": 1708,
+    "AiListTypes": 614,
+    "AiLists": 624,
+    "AiOperationDefs": 16,
+    "AiOperationLimits": 0,
+    "AiOperationLists": 4,
+    "AiOperationTeams": 21,
+    "AiOperationTypes": 7,
+    "AiScoutUses": 5,
+    "AiTeams": 14,
+    "AllianceEffects": 28,
+    "Alliances": 5,
+    "AllowedMoves": 36,
+    "AllowedOperations": 17,
+    "AppealHousingChanges": 10,
+    "BarbarianAttackForces": 18,
+    "BarbarianTribeForces": 18,
+    "BarbarianTribeNames": 30,
+    "BarbarianTribe_ExtraUnits": 0,
+    "BarbarianTribe_MapConditionSets": 0,
+    "BarbarianTribe_MapConditions": 0,
+    "BarbarianTribe_UnitConditions": 0,
+    "BarbarianTribes": 3,
+    "BehaviorTreeNodes": 594,
+    "BehaviorTrees": 30,
+    "BeliefClasses": 5,
+    "BeliefModifiers": 133,
+    "Beliefs": 59,
+    "BonusMinorStartingUnits": 33,
+    "BoostHandlers": 19,
+    "BoostNames": 64,
+    "Boosts": 131,
+    "BuildingConditions": 0,
+    "BuildingModifiers": 436,
+    "BuildingPrereqs": 85,
+    "BuildingReplaces": 19,
+    "Building_BuildChargeProductions": 1,
+    "Building_CitizenYieldChanges": 18,
+    "Building_GreatPersonPoints": 68,
+    "Building_GreatWorks": 24,
+    "Building_RequiredFeatures": 14,
+    "Building_ResourceCosts": 0,
+    "Building_TourismBombs_XP2": 13,
+    "Building_ValidFeatures": 2,
+    "Building_ValidTerrains": 114,
+    "Building_YieldChanges": 104,
+    "Building_YieldChangesBonusWithPower": 9,
+    "Building_YieldDistrictCopies": 3,
+    "Building_YieldsPerEra": 0,
+    "Buildings": 144,
+    "Buildings_XP2": 19,
+    "Calendars": 5,
+    "CityEvents": 6,
+    "CityNames": 1886,
+    "CivicModifiers": 51,
+    "CivicPrereqs": 80,
+    "CivicQuotes": 113,
+    "CivicRandomCosts": 10,
+    "Civics": 61,
+    "Civics_XP2": 6,
+    "CivilizationAudioTags": 15,
+    "CivilizationCitizenNames": 2262,
+    "CivilizationInfo": 218,
+    "CivilizationLeaders": 138,
+    "CivilizationLevels": 4,
+    "CivilizationTraits": 178,
+    "Civilization_StartingGovernment": 2,
+    "Civilization_Titles": 24,
+    "Civilizations": 107,
+    "CivilopediaPageChapterHeaders": 0,
+    "CivilopediaPageChapterParagraphs": 146,
+    "CivilopediaPageExcludes": 6,
+    "CivilopediaPageGroupExcludes": 0,
+    "CivilopediaPageGroupQueries": 7,
+    "CivilopediaPageGroups": 56,
+    "CivilopediaPageLayoutChapters": 42,
+    "CivilopediaPageLayouts": 29,
+    "CivilopediaPageQueries": 27,
+    "CivilopediaPageSearchTermQueries": 1,
+    "CivilopediaPageSearchTerms": 19,
+    "CivilopediaPages": 152,
+    "CivilopediaSectionExcludes": 0,
+    "CivilopediaSections": 18,
+    "CivilopediaTranslateCharacters": 37,
+    "CoastalLowlands": 3,
+    "Colors": 0,
+    "CommemorationModifiers": 79,
+    "CommemorationTypes": 12,
+    "ComplimentModifiers": 0,
+    "CongressAiChanges": 8,
+    "Continents": 43,
+    "CorporationNames": 0,
+    "CustomPlacement": 4,
+    "DataTypes": 12,
+    "DealItems": 8,
+    "Defeats": 3,
+    "DeforestationEffects": 5,
+    "DeforestationLevels": 4,
+    "Difficulties": 8,
+    "DiplomacyInfo": 0,
+    "DiplomacyMoodTypes": 5,
+    "DiplomacySelections": 107,
+    "DiplomacyStatementSubTypes": 7,
+    "DiplomacyStatementTypes": 54,
+    "DiplomacyStatements": 269,
+    "DiplomaticActions": 42,
+    "DiplomaticActions_XP1": 8,
+    "DiplomaticActions_XP2": 4,
+    "DiplomaticStartStates": 8,
+    "DiplomaticStateActions": 109,
+    "DiplomaticStateTransitions": 20,
+    "DiplomaticStates": 18,
+    "DiplomaticTriggeredTransitions": 14,
+    "DiplomaticTriggers": 8,
+    "DiplomaticTriggers_RequiredStates": 7,
+    "DiplomaticVisibilitySources": 8,
+    "DiplomaticVisibilitySources_XP1": 0,
+    "Discussions": 14,
+    "DistrictModifiers": 47,
+    "DistrictReplaces": 19,
+    "District_Adjacencies": 180,
+    "District_BuildChargeProductions": 4,
+    "District_CitizenGreatPersonPoints": 0,
+    "District_CitizenYieldChanges": 26,
+    "District_GreatPersonPoints": 22,
+    "District_RequiredFeatures": 5,
+    "District_TradeRouteYields": 50,
+    "District_ValidTerrains": 30,
+    "Districts": 39,
+    "Districts_XP2": 9,
+    "DuplicateCivilizations": 0,
+    "DuplicateLeaders": 10,
+    "DynamicModifiers": 998,
+    "Emergencies_XP2": 15,
+    "EmergencyAlliances": 15,
+    "EmergencyBuffs": 23,
+    "EmergencyGoalTexts": 4,
+    "EmergencyRewards": 65,
+    "EmergencyScoreSources": 45,
+    "EmergencyTexts": 14,
+    "EnabledUniqueUnits": 72,
+    "Eras": 9,
+    "Eras_XP1": 9,
+    "Eras_XP2": 9,
+    "EventPopupData": 0,
+    "ExcludedAdjacencies": 605,
+    "ExcludedDistricts": 1,
+    "ExcludedGreatPersonClasses": 3,
+    "ExclusiveAgendas": 93,
+    "FavoredReligions": 61,
+    "Feature_AdjacentFeatures": 7,
+    "Feature_AdjacentTerrains": 57,
+    "Feature_AdjacentYields": 46,
+    "Feature_Floodplains": 3,
+    "Feature_NotAdjacentTerrains": 95,
+    "Feature_NotNearFeatures": 4,
+    "Feature_Removes": 4,
+    "Feature_UnitMovements": 1,
+    "Feature_ValidTerrains": 243,
+    "Feature_YieldChanges": 84,
+    "Features": 70,
+    "Features_XP2": 17,
+    "Flavors": 0,
+    "GameCapabilities": 97,
+    "GameCapabilityDependencies": 44,
+    "GameEffectArguments": 150,
+    "GameEffects": 1158,
+    "GameModifiers": 51,
+    "GameSpeed_Durations": 24,
+    "GameSpeed_Scalings": 8,
+    "GameSpeed_Turns": 39,
+    "GameSpeeds": 5,
+    "GlobalParameters": 481,
+    "GoodyHutSubTypes": 26,
+    "GoodyHutSubTypes_XP2": 8,
+    "GoodyHuts": 8,
+    "Gossips": 63,
+    "GovernmentBonusNames": 11,
+    "GovernmentModifiers": 218,
+    "GovernmentSlots": 5,
+    "GovernmentTiers": 4,
+    "Government_SlotCounts": 48,
+    "Governments": 13,
+    "Governments_XP2": 13,
+    "GovernorModifiers": 0,
+    "GovernorPromotionConditions": 0,
+    "GovernorPromotionModifiers": 151,
+    "GovernorPromotionPrereqs": 56,
+    "GovernorPromotionSets": 54,
+    "GovernorPromotions": 55,
+    "GovernorReplaces": 0,
+    "Governors": 9,
+    "GovernorsCannotAssign": 0,
+    "Governors_XP2": 1,
+    "GreatPersonClasses": 11,
+    "GreatPersonIndividualActionModifiers": 253,
+    "GreatPersonIndividualBirthModifiers": 156,
+    "GreatPersonIndividualIconModifiers": 0,
+    "GreatPersonIndividuals": 224,
+    "GreatWorkModifiers": 0,
+    "GreatWorkObjectTypes": 8,
+    "GreatWorkSlotTypes": 7,
+    "GreatWork_ValidSubTypes": 16,
+    "GreatWork_YieldChanges": 215,
+    "GreatWorks": 215,
+    "GreatWorks_ImprovementType": 0,
+    "GreatWorks_MODE": 0,
+    "Happinesses": 7,
+    "Happinesses_XP1": 7,
+    "HeroClassProgressions": 0,
+    "HeroClassUnitCommands": 0,
+    "HeroClasses": 0,
+    "HistoricRankings": 21,
+    "HistoricalAgendas": 88,
+    "HistoricalSpawnDates": 1,
+    "ImprovementModifiers": 84,
+    "Improvement_Adjacencies": 123,
+    "Improvement_BonusYieldChanges": 39,
+    "Improvement_InvalidAdjacentFeatures": 0,
+    "Improvement_Tourism": 33,
+    "Improvement_ValidAdjacentResources": 0,
+    "Improvement_ValidAdjacentTerrains": 10,
+    "Improvement_ValidBuildUnits": 65,
+    "Improvement_ValidFeatures": 51,
+    "Improvement_ValidResources": 55,
+    "Improvement_ValidTerrains": 334,
+    "Improvement_YieldChanges": 117,
+    "Improvement_YieldsOutsideTerritories": 0,
+    "Improvements": 62,
+    "Improvements_MODE": 0,
+    "Improvements_XP2": 7,
+    "InterfaceModes": 0,
+    "Kinds": 90,
+    "LeaderAnimations": 21,
+    "LeaderInfo": 0,
+    "LeaderQuotes": 89,
+    "LeaderTraits": 277,
+    "Leaders": 149,
+    "Leaders_XP2": 51,
+    "LoadingInfo": 32,
+    "LoyaltyLevels": 4,
+    "MajorStartingUnits": 67,
+    "MapRainfalls": 0,
+    "MapResourceDistributions": 0,
+    "MapSeaLevels": 0,
+    "MapStartPositions": 0,
+    "MapTemperatures": 0,
+    "MapWorldAges": 0,
+    "Map_GreatPersonClasses": 7,
+    "Maps": 7,
+    "Maps_XP2": 7,
+    "MinorCivBonuses": 6,
+    "ModifierArguments": 9904,
+    "ModifierStrings": 930,
+    "Modifiers": 5491,
+    "MomentDataTypes": 23,
+    "MomentIllustrationTypes": 13,
+    "MomentIllustrations": 268,
+    "Moments": 150,
+    "Months": 12,
+    "MutuallyExclusiveBuildings": 38,
+    "MutuallyExclusiveDistricts": 7,
+    "NamedDesertCivilizations": 56,
+    "NamedDeserts": 55,
+    "NamedLakeCivilizations": 322,
+    "NamedLakes": 299,
+    "NamedMountainCivilizations": 291,
+    "NamedMountains": 254,
+    "NamedOceanCivilizations": 0,
+    "NamedOceans": 9,
+    "NamedRiverCivilizations": 366,
+    "NamedRivers": 310,
+    "NamedSeaCivilizations": 290,
+    "NamedSeas": 206,
+    "NamedVolcanoCivilizations": 147,
+    "NamedVolcanoes": 150,
+    "NavigationProperties": 530,
+    "NodeDataDefinitions": 196,
+    "NodeDefinitions": 73,
+    "Notifications": 198,
+    "ObsoletePolicies": 62,
+    "OpTeamRequirements": 64,
+    "PlayerColors": 0,
+    "PlotEvalConditions": 12,
+    "Policies": 153,
+    "Policies_XP1": 13,
+    "PolicyModifiers": 764,
+    "Policy_GovernmentExclusives_XP2": 5,
+    "PrevailingWinds": 22,
+    "ProjectCompletionModifiers": 17,
+    "ProjectPrereqs": 8,
+    "Project_BuildingCosts": 9,
+    "Project_GreatPersonPoints": 22,
+    "Project_ResourceCosts": 3,
+    "Project_YieldConversions": 10,
+    "Projects": 38,
+    "Projects_MODE": 0,
+    "Projects_XP1": 2,
+    "Projects_XP2": 12,
+    "ProposalBlockers": 2,
+    "ProposalTypes": 5,
+    "PseudoYields": 54,
+    "Quests": 8,
+    "RLLReports": 10,
+    "RandomAgendaCivicTags": 2,
+    "RandomAgendaEraTags": 2,
+    "RandomAgendas": 34,
+    "RandomAgendasForCivic": 1,
+    "RandomAgendasInEra": 1,
+    "RandomAgendas_XP2": 34,
+    "RandomEvent_DamagedUnits": 0,
+    "RandomEvent_Damages": 184,
+    "RandomEvent_Features": 2,
+    "RandomEvent_Frequencies": 158,
+    "RandomEvent_Improvement_Placements": 1,
+    "RandomEvent_Notifications": 7,
+    "RandomEvent_PillagedBuildings": 0,
+    "RandomEvent_PillagedDistricts": 0,
+    "RandomEvent_PillagedImprovements": 18,
+    "RandomEvent_Presentation": 25,
+    "RandomEvent_Terrains": 38,
+    "RandomEvent_Yields": 60,
+    "RandomEvents": 37,
+    "RealismSettings": 5,
+    "Religions": 25,
+    "RequirementArguments": 2268,
+    "RequirementSetRequirements": 3490,
+    "RequirementSets": 2112,
+    "RequirementStrings": 1,
+    "Requirements": 2222,
+    "ResolutionEffects": 39,
+    "Resolutions": 17,
+    "ResourceCorporations": 0,
+    "ResourceIndustries": 0,
+    "Resource_Conditions": 0,
+    "Resource_Consumption": 7,
+    "Resource_Distribution": 8,
+    "Resource_Harvests": 11,
+    "Resource_SeaLuxuries": 4,
+    "Resource_SeaStrategics": 4,
+    "Resource_TradeRouteYields": 0,
+    "Resource_ValidFeatures": 60,
+    "Resource_ValidTerrains": 130,
+    "Resource_YieldChanges": 73,
+    "Resources": 62,
+    "Route_ResourceCosts": 1,
+    "Route_ValidBuildUnits": 5,
+    "Routes": 5,
+    "Routes_XP2": 5,
+    "SG_Civ_Assignments": 1,
+    "SavingTypes": 4,
+    "ScenarioSpecificCommand": 0,
+    "ScoringCategories": 13,
+    "ScoringLineItems": 11,
+    "Seasons": 4,
+    "SecretSocieties": 0,
+    "SettlementPreferences": 6,
+    "ShapeDefinitions": 5,
+    "StartBiasCustom": 5,
+    "StartBiasFeatures": 38,
+    "StartBiasNegatives": 8,
+    "StartBiasResources": 88,
+    "StartBiasRivers": 20,
+    "StartBiasTerrains": 85,
+    "StartEras": 8,
+    "StartEras_XP2": 4,
+    "StartPosition": 23,
+    "StartingBoostedCivics": 11,
+    "StartingBoostedTechnologies": 21,
+    "StartingBuildings": 24,
+    "StartingCivics": 1,
+    "StartingGovernments": 8,
+    "Strategies": 16,
+    "StrategyConditions": 58,
+    "Strategy_Priorities": 50,
+    "Strategy_YieldPriorities": 0,
+    "Tags": 207,
+    "TargetTypes": 19,
+    "Technologies": 77,
+    "Technologies_XP2": 9,
+    "TechnologyModifiers": 23,
+    "TechnologyPrereqs": 103,
+    "TechnologyQuotes": 147,
+    "TechnologyRandomCosts": 12,
+    "TerrainClass_Terrains": 17,
+    "TerrainClasses": 7,
+    "Terrain_YieldChanges": 15,
+    "Terrains": 17,
+    "TraitModifiers": 1540,
+    "Traits": 484,
+    "TreeData": 1341,
+    "TriggeredBehaviorTrees": 11,
+    "TurnPhases": 14,
+    "TurnSegments": 7,
+    "TurnTimers": 3,
+    "TypeProperties": 48,
+    "TypeTags": 1814,
+    "Types": 7585,
+    "UnitAbilities": 621,
+    "UnitAbilityModifiers": 738,
+    "UnitAiInfos": 532,
+    "UnitAiTypes": 23,
+    "UnitCaptures": 3,
+    "UnitCommands": 28,
+    "UnitFormationClasses": 5,
+    "UnitNames": 620,
+    "UnitOperations": 62,
+    "UnitOperations_XP2": 0,
+    "UnitPromotionClasses": 21,
+    "UnitPromotionModifiers": 358,
+    "UnitPromotionPrereqs": 120,
+    "UnitPromotions": 144,
+    "UnitReplaces": 59,
+    "UnitRetreats_XP1": 0,
+    "UnitUpgrades": 112,
+    "Unit_BuildingPrereqs": 20,
+    "Unit_RebellionTags": 5,
+    "Unit_RockbandResults_XP2": 6,
+    "Units": 158,
+    "UnitsToDelete": 0,
+    "Units_MODE": 0,
+    "Units_Presentation": 3,
+    "Units_XP2": 98,
+    "Victories": 8,
+    "Visibilities": 5,
+    "Visibilities_XP2": 5,
+    "Vocabularies": 6,
+    "VotingBlockers": 5,
+    "WMDs": 2,
+    "Wars": 15,
+    "WonderTerrainFeature_BBG": 53,
+    "Yields": 6
+  },
+  "labelCounts": {
+    "zh_Hans_CN": 15229,
+    "en_US": 15229
+  },
+  "adjacencyFingerprint": "525b56d5d75fda444277bb1cc96ae1d3cf8309573b9d241e9886062fb170fffa"
+}

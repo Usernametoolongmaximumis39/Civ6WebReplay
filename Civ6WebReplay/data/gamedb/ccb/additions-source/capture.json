@@ -1,0 +1,190 @@
+{
+  "format": 1,
+  "profile": "ccb",
+  "purpose": "additions audit only; runtime rules unchanged",
+  "capturedAt": "2026-10-12T21:35:39.247477+00:00",
+  "packages": [
+    {
+      "key": "LOC_AZTEC_MONTEZUMA_MOD_TITLE",
+      "name": "Aztec Montezuma"
+    },
+    {
+      "key": "LOC_TEDDY_ROOSEVELT_MOD_TITLE",
+      "name": "泰迪·罗斯福领袖包"
+    },
+    {
+      "key": "LOC_EXPANSION1_MOD_TITLE",
+      "name": "Expansion1"
+    },
+    {
+      "key": "LOC_ETHIOPIA_MOD_TITLE",
+      "name": "埃塞俄比亚包"
+    },
+    {
+      "key": "LOC_INDONESIA_KHMER_MOD_TITLE",
+      "name": "Indonesia Khmer"
+    },
+    {
+      "key": "LOC_GREAT_BUILDERS_MOD_TITLE",
+      "name": "Great Builders"
+    },
+    {
+      "key": "LOC_RULERS_OF_ENGLAND_MOD_TITLE",
+      "name": "Rulers Of England"
+    },
+    {
+      "key": "LOC_MOD_VIKINGSLANDMARKS_TITLE",
+      "name": "Mod Vikingslandmarks"
+    },
+    {
+      "key": "LOC_POLAND_JADWIGA_MOD_TITLE",
+      "name": "Poland Jadwiga"
+    },
+    {
+      "key": "LOC_EXPANSION2_MOD_TITLE",
+      "name": "Expansion2"
+    },
+    {
+      "key": "LOC_NUBIA_MOD_TITLE",
+      "name": "Nubia"
+    },
+    {
+      "key": "LOC_GREAT_NEGOTIATORS_MOD_TITLE",
+      "name": "Great Negotiators"
+    },
+    {
+      "key": "LOC_RULERS_OF_CHINA_MOD_TITLE",
+      "name": "Rulers Of China"
+    },
+    {
+      "key": "LOC_RULERS_OF_THE_SAHARA_MOD_TITLE",
+      "name": "Rulers Of The Sahara"
+    },
+    {
+      "key": "Advanced Cheat Menu (Light) Hotseat patch",
+      "name": "Advanced Cheat Menu (Light) Hotseat patch"
+    },
+    {
+      "key": "LOC_BABYLON_MOD_TITLE",
+      "name": "巴比伦包"
+    },
+    {
+      "key": "CCB 1.6",
+      "name": "CCB 1.6"
+    },
+    {
+      "key": "CCB 地图 1.2.0",
+      "name": "CCB 地图 1.2.0"
+    },
+    {
+      "key": "CCB MPH 多人游戏助手 1.13",
+      "name": "CCB MPH 多人游戏助手 1.13"
+    },
+    {
+      "key": "CCB 文明拓展 2.0",
+      "name": "CCB 文明拓展 2.0"
+    },
+    {
+      "key": "CCB [COLOR:ResCultureLabelCS]多河地图包[ENDCOLOR] 2.1",
+      "name": "CCB [COLOR:ResCultureLabelCS]多河地图包[ENDCOLOR] 2.1"
+    },
+    {
+      "key": "LOC_GRANCOLOMBIA_MAYA_MOD_TITLE",
+      "name": "玛雅和大哥伦比亚包"
+    },
+    {
+      "key": "LOC_JULIUS_CAESAR_MOD_TITLE",
+      "name": "Julius Caesar"
+    },
+    {
+      "key": "LOC_BYZANTIUM_GAUL_MOD_TITLE",
+      "name": "拜占庭和高卢包"
+    },
+    {
+      "key": "LOC_KUBLAIKHAN_VIETNAM_MOD_TITLE",
+      "name": "越南和忽必烈包"
+    },
+    {
+      "key": "LOC_CATHERINE_DE_MEDICI_MOD_TITLE",
+      "name": "凯瑟琳·德·美第奇领袖包"
+    },
+    {
+      "key": "LOC_MACEDONIA_PERSIA_MOD_TITLE",
+      "name": "Macedonia Persia"
+    },
+    {
+      "key": "LOC_AUSTRALIA_MOD_TITLE",
+      "name": "Australia"
+    },
+    {
+      "key": "LOC_GREAT_WARLORDS_MOD_TITLE",
+      "name": "Great Warlords"
+    },
+    {
+      "key": "LOC_PORTUGAL_MOD_TITLE",
+      "name": "葡萄牙包"
+    },
+    {
+      "key": "LOC_MPT_NAME",
+      "name": "[ENDCOLOR][ENDCOLOR][COLOR_LIGHTBLUE]Multiplayer Toolkits (UI)[ENDCOLOR]"
+    },
+    {
+      "key": "LOC_MOD_SCOUT_CAT_TITLE",
+      "name": "Mod Scout Cat"
+    },
+    {
+      "key": "[COLOR_LIGHTBLUE]Advanced Cheat Menu (Light)[ENDCOLOR]",
+      "name": "[COLOR_LIGHTBLUE]Advanced Cheat Menu (Light)[ENDCOLOR]"
+    }
+  ],
+  "sources": [
+    {
+      "id": "8af4fe8e-5406-7d72-d9d6-a8f5d1b66e00",
+      "name": "CCB 1.6",
+      "version": "1505",
+      "modinfoSha256": "b2d86e6fc47ed8214379148f4bc9f72164f838f25b5a1f621f77cb5bc2274159"
+    },
+    {
+      "id": "8af4fe8e-5406-7d72-d9d6-a8f5d1b66e10",
+      "name": "CCB 地图 1.2.0",
+      "version": "1200",
+      "modinfoSha256": "d53b664ea20b9a007f8e83da044d05f3b10e1855e7c826bb32c48be36679fd55"
+    },
+    {
+      "id": "8af4fe8e-5406-7d72-d9d6-a8f5d1b66e20",
+      "name": "CCB MPH 多人游戏助手 1.13",
+      "version": "113",
+      "modinfoSha256": "fbd35d79a8cad891f437fbcd75dc83e136f008a640553592ecd15eac3e9a1abd"
+    },
+    {
+      "id": "8af4fe8e-5406-7d72-d9d6-a8f5d1b66e30",
+      "name": "CCB 文明拓展 2.0",
+      "version": "2000",
+      "modinfoSha256": "9b7647e5f956ea7399fa41458eaa14a1c968cc7084a9865c0c6d0d1979857164"
+    },
+    {
+      "id": "8af4fe8e-5406-7d72-d9d6-a8f5d1b66e66",
+      "name": "CCB [COLOR:ResCultureLabelCS]多河地图包[ENDCOLOR] 2.1",
+      "version": "201",
+      "modinfoSha256": "a668ee1a72db6dd7d0f5c151185db9e4bc84eb1e7fc6f1baed288e508f1f70c0"
+    }
+  ],
+  "versions": [
+    {
+      "component": "CCB",
+      "role": "core",
+      "version": "1.6",
+      "installedVersion": "1505"
+    },
+    {
+      "component": "CCB拓展",
+      "role": "expansion",
+      "version": "2.0",
+      "installedVersion": "2000"
+    }
+  ],
+  "referenceSaveSha256": "6cb048104d15fe85b5cac00ed10f6f646b23be271d8674f2d8cb104255d9c6b0",
+  "files": {
+    "gameplay.sqlite": "c9849582ddf2e436b56e02a51034f966606628e08d5c38b0bdfbd71e4ef67f63"
+  }
+}
