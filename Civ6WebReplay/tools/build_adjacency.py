@@ -13,9 +13,13 @@ import os
 import re
 from pathlib import Path
 import sqlite3
+import sys
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+from civ6replay.database_versions import component_role
+from civ6replay.mod_identity import manifest_metadata
 DEFAULT_OUT = ROOT / "data" / "gamedb" / "vanilla" / "adjacency.json"
 TABLES = (
     "District_Adjacencies", "Adjacency_YieldChanges", "ExcludedAdjacencies",
@@ -92,15 +96,12 @@ def build(gameplay: Path, localization: Path, game_root: Path,
     payload = {"format": 1, "profile": profile, "tables": tables,
                "officialTitles": official_titles(localization.resolve(), game_root)}
     if profile != "official":
-        core = r"^CCB\s+\d" if profile == "ccb" else r"^Better\s+Balanced\s+Game\b|^BBG\s+\d"
-        if not packages or not any(re.search(core, p["name"], re.I) for p in packages):
+        if not packages or not any(component_role(p, profile) == "core" for p in packages):
             raise ValueError(f"需用当前 {profile.upper()} 存档核对启用的模组列表")
-        if profile == "bbg" and any(re.search(r"\bCCB\b|和而不同", p["name"], re.I) for p in packages):
+        if profile == "bbg" and any(component_role(p, "ccb") == "core" for p in packages):
             raise ValueError("BBG 存档同时含有 CCB，拒绝采集混合规则")
         payload["packages"] = packages
-        payload["modSources"] = [{"name": ET.parse(path).getroot().findtext("Properties/Name"),
-                                  "id": ET.parse(path).getroot().get("id"),
-                                  "version": ET.parse(path).getroot().get("version"),
+        payload["modSources"] = [{**manifest_metadata(ET.parse(path).getroot()),
                                   "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
                                  for path in mod_files or ()]
     fingerprint = hashlib.sha256(json.dumps(payload, sort_keys=True,

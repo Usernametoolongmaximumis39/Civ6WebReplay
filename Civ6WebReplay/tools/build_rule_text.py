@@ -19,6 +19,7 @@ import xml.etree.ElementTree as ET
 
 from build_loc import WORKSHOP_ROOTS, default_game_dir, _implied_language, _iter_base_text
 from audit_mod_additions import read_sql
+from localization_sources import apply_profile_text, finish_labels
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
@@ -102,8 +103,12 @@ def apply_text(db, path):
     doc = ET.fromstring(raw)
     implied = _implied_language(path)
     for table in doc.iter():
-        if table.tag not in ("LocalizedText", "BaseGameText"):
+        if table.tag not in ("LocalizedText", "BaseGameText", "EnglishText"):
             continue
+        # Expansions and DLC put their English strings in EnglishText, even
+        # when their translations use LocalizedText. It is the English base.
+        if table.tag == "EnglishText":
+            table.tag = "BaseGameText"
         fields = {"Tag", "Text", "Gender", "Plurality"}
         if table.tag == "LocalizedText":
             fields.add("Language")
@@ -135,20 +140,25 @@ def apply_text(db, path):
                                    f'WHERE {clause}', [*values.values(), *conditions.values()])
 
 
-def build(gameplay, game_root, *, profile, packages=(), mod_files=(), localization=None, official_text_files=None):
+def build(gameplay, game_root, *, profile, packages=(), mod_files=(), localization=None, official_text_files=None,
+          labels_out=None):
     game_root, gameplay = Path(game_root), Path(gameplay)
     titles = {p[k] for p in packages for k in ("key", "name")}
     official = [p for p in sorted((game_root / "DLC").rglob("*.modinfo"))
                 if ET.parse(p).getroot().findtext("Properties/Name") in titles]
     unavailable = []
     official_paths = text_actions(official, missing=unavailable) if official_text_files is None else official_text_files
+    mod_paths = set(text_actions(mod_files))
     paths = [*_iter_base_text(game_root), *official_paths, *text_actions(mod_files)]
     # Only policy/ability text and its referenced translations are needed.
     # Selected companion packages also ship unrelated menus, sometimes with
     # invalid SQL; those menus must not prevent a rule-text export.
     with closing(sqlite3.connect(gameplay.resolve().as_uri() + "?mode=ro", uri=True)) as db:
         tables = {r[0] for r in db.execute("SELECT name FROM sqlite_master WHERE type='table'")}
-        needed = {tag for table, _, _ in ENTITIES if table in tables
+        text_tables = [table for table, _, _ in ENTITIES]
+        if labels_out is not None:
+            text_tables.append("Governors")
+        needed = {tag for table in text_tables if table in tables
                   for field in ("Name", "Description")
                   if any(r[1] == field for r in db.execute(f"PRAGMA table_info({table})"))
                   for (tag,) in db.execute(f"SELECT {field} FROM {table}") if tag}
@@ -170,6 +180,7 @@ def build(gameplay, game_root, *, profile, packages=(), mod_files=(), localizati
     paths = [path for path, tags, dynamic in tagged if dynamic or tags & needed]
     sources = []
     with closing(text_db()) as text:
+        changes = {"zh": set(), "en": set()}
         if localization and Path(localization).is_file():
             with closing(sqlite3.connect(Path(localization).resolve().as_uri() + "?mode=ro", uri=True)) as loc:
                 text.executemany("INSERT OR REPLACE INTO LocalizedText(Language,Tag,Text) VALUES (?,?,?)",
@@ -177,19 +188,13 @@ def build(gameplay, game_root, *, profile, packages=(), mod_files=(), localizati
         for path in paths:
             digest = hashlib.sha256(path.read_bytes()).hexdigest()
             try:
-                apply_text(text, path)
+                apply_profile_text(text, path, apply_text, is_mod=path in mod_paths, changes=changes)
             except (sqlite3.Error, ET.ParseError) as exc:
                 raise ValueError(f"Cannot read selected text source {path}: {exc}") from exc
             if hashlib.sha256(path.read_bytes()).hexdigest() != digest:
                 raise ValueError(f"Text source changed during export: {path}")
             sources.append({"path": str(path), "sha256": digest})
-        labels = {}
-        for tag, value in text.execute("SELECT Tag,Text FROM BaseGameText"):
-            labels.setdefault(tag, {})["en"] = value
-        for lang, tag, value in text.execute("SELECT Language,Tag,Text FROM LocalizedText"):
-            key = {"zh_hans_cn": "zh", "zh_hans": "zh", "en_us": "en"}.get((lang or "").lower())
-            if key and value:
-                labels.setdefault(tag, {})[key] = value
+        labels, _ = finish_labels(text, changes)
     def localized(tag, lang):
         value = labels.get(tag, {}).get(lang, "")
         for _ in range(12):
@@ -200,6 +205,9 @@ def build(gameplay, game_root, *, profile, packages=(), mod_files=(), localizati
             value = updated
         # Never expose unresolved localization tags as user-facing descriptions.
         return "" if "{LOC_" in value or value.startswith("LOC_") else html.unescape(value).strip()
+    if labels_out is not None:
+        labels_out.update({locale: {tag: localized(tag, lang) for tag in labels}
+                           for locale, lang in (("zh_Hans_CN", "zh"), ("en_US", "en"))})
     entries, civilizations, leaders = {}, {}, {}
     with closing(sqlite3.connect(gameplay.resolve().as_uri() + "?mode=ro", uri=True)) as db:
         db.row_factory = sqlite3.Row

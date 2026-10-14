@@ -55,34 +55,34 @@ class Loc:
                 zh, en = self._pair(self.city, "LOC_CITY_" + tag)
         return zh, en
 
-    def name(self, tag: str) -> str:
+    def name(self, tag: str, lang: str = "zh") -> str:
         """Any snapshotted LOC tag -> display string (units / buildings / …)."""
         if not tag:
             return ""
         for section in (self.names, self.civ, self.city):
             zh, en = self._pair(section, tag)
             if zh or en:
-                return zh or en
+                return (en or zh) if lang == "en" else (zh or en)
         return ""
 
-    def civ_name(self, tag: str) -> str:
+    def civ_name(self, tag: str, lang: str = "zh") -> str:
         """Civilization display name for a LOC tag or a bare ``CIVILIZATION_X``."""
         if not tag:
             return ""
         if tag.startswith("LOC_"):
             zh, en = self._pair(self.civ, tag)
-            return zh or en
+            return (en or zh) if lang == "en" else (zh or en)
         # the gameplay XML is authoritative: a few legacy TYPEs point at another
         # name tag (``CIVILIZATION_JAKARTA`` -> Bandar Brunei / 斯里巴加湾)
         hint = self.civ_tag.get(tag)
         if hint:
             zh, en = self._pair(self.civ, hint)
             if zh or en:
-                return zh or en
+                return (en or zh) if lang == "en" else (zh or en)
         for suffix in ("_NAME", "_FRONTEND_NAME"):
             zh, en = self._pair(self.civ, "LOC_" + tag + suffix)
             if zh or en:
-                return zh or en
+                return (en or zh) if lang == "en" else (zh or en)
         return ""
 
 

@@ -22,9 +22,11 @@ from __future__ import annotations
 
 import json
 import re
+import struct
 from typing import Dict, List, Optional, Tuple
 
 from .hash import crc32_type
+from .mod_identity import component_role
 
 # 平衡 MOD 的城墙数值（远古城墙 / 中世纪城墙 / 文艺复兴城墙 三档同为 75，
 # 研了钢铁之后城市防御为 300）。快照只能存一套数值，MOD 局靠存档的 mod 列表切过来。
@@ -34,11 +36,10 @@ BALANCE_URBAN_DEFENSE = 300
 # 三档城墙的 TYPE（哈希是 TYPE 串的 crc32，与快照无关），顺序即档次
 WALL_TYPES = ("BUILDING_WALLS", "BUILDING_CASTLE", "BUILDING_STAR_FORT")
 
-# ``name`` 是显示用的短名；正则同时匹配 MOD 名与本地化 tag
-BALANCE_MODS = (
-    ("BBG", re.compile(r"\bbbg\b|better\s+balanced", re.I)),
-    ("CCB", re.compile(r"\bccb\b|和而不同", re.I)),
-)
+# Broad companion-family filter for the legacy standalone exporter only.
+# Main/expansion identity is decided by mod_identity.component_role.
+# Unicode word boundaries do not separate CCB from 正式版 in the 1.8 title.
+CCB_TITLE_RE = re.compile(r"\bccb(?:\b|(?=正式版|v?\d))|和而不同", re.I)
 
 # --- MOD 黑名单（v0.39） ----------------------------------------------------
 # 命中任一规则即整局判为「不支持」（前端在画布上画叉）。规则只按 MOD 标题匹配；
@@ -93,7 +94,7 @@ def _is_mod_title_key(key: str) -> bool:
         if key.endswith("_NAME"):
             return not key.startswith(SETUP_NAME_PREFIXES)
         return False
-    return not _TAGLIKE.match(key)
+    return not _TAGLIKE.match(key) or any(component_role(key, p) for p in ("bbg", "ccb"))
 
 
 def _locale_texts(node, out: Dict[str, str]) -> None:
@@ -169,7 +170,7 @@ def parse_mods(data: bytes) -> List[str]:
 
 
 def parse_mod_packages(data: bytes) -> List[dict]:
-    """Keep the stable title key as well as its localized display spelling."""
+    """Read titles and optional source IDs from the save itself."""
     text = data[:MOD_SCAN_BYTES].decode("utf-8", "replace")
     decoder = json.JSONDecoder()
     packages = {}
@@ -183,17 +184,42 @@ def parse_mod_packages(data: bytes) -> List[dict]:
         for key, value in obj.items():
             if _is_mod_title_key(key):
                 packages.setdefault(key, {"key": key, "name": _display_name(key, value)})
+    from .container import parse_all
+    from .binary import ParseError
+    structured = {}
+    def visit(packet):
+        raw = packet.get_str(0x3034E172)
+        identity = packet.get_str(0x04C45F54)
+        if isinstance(raw, bytes) and isinstance(identity, bytes):
+            try:
+                obj = json.loads(raw.rstrip(b"\0").decode("utf-8"))
+            except (ValueError, UnicodeError):
+                obj = {}
+            if isinstance(obj, dict):
+                for key, value in obj.items():
+                    if key in packages and isinstance(value, list):
+                        row = {**packages[key], "id": identity.rstrip(b"\0").decode("utf-8", "replace").lower()}
+                        workshop = packet.get_str(0x6DB0F592)
+                        if isinstance(workshop, bytes):
+                            row["workshopId"] = workshop.rstrip(b"\0").decode("utf-8", "replace")
+                        structured[(key, row["id"])] = row
+        for child in packet.packets.values():
+            visit(child)
+    try:
+        visit(parse_all(data)[0])
+    except (ParseError, IndexError, ValueError, OverflowError, RecursionError, struct.error):
+        pass  # Keep title-only parsing for incomplete/older containers.
+    if structured:
+        keys = {key for key, _ in structured}
+        return [*structured.values(), *(row for key, row in packages.items() if key not in keys)]
     return list(packages.values())
 
 
 def balance_mod(mods) -> str:
     """``"BBG"`` / ``"CCB"`` when such a MOD is enabled, else ``""``."""
-    joined = "\n".join(str(m) for m in (mods or []))
-    if not joined:
-        return ""
-    for name, pattern in BALANCE_MODS:
-        if pattern.search(joined):
-            return name
+    for family in ("bbg", "ccb"):
+        if any(component_role(m, family) == "core" for m in (mods or [])):
+            return family.upper()
     return ""
 
 

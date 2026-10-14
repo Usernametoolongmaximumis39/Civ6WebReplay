@@ -54,11 +54,11 @@ class GameDB:
         info = self.types.get(h & 0xFFFFFFFF)
         return info["category"] if info else None
 
-    def name(self, h: int) -> str:
+    def name(self, h: int, lang: str = "zh") -> str:
         hm = h & 0xFFFFFFFF
         n = self.names.get(hm)
         if n and (n["zh"] or n["en"]):
-            return n["zh"] or n["en"]
+            return (n["en"] or n["zh"]) if lang == "en" else (n["zh"] or n["en"])
         info = self.types.get(hm)
         if info:
             t = info["type"]

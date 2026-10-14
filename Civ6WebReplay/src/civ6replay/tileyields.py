@@ -16,8 +16,9 @@ from .adjacency import AdjacencyRules, neighbors, _wrap_map
 from .gamedb import get_gamedb
 from .hash import crc32_type as H
 from .hash import TYPE_CIV_CITY_STATE, TYPE_CIV_FREE_CITIES, TYPE_CIV_FULL
-from .model import NONE_U32
-from .mods import balance_mod, blacklisted_mods
+from .model import NONE_U32, governor_assigned_to
+from .mods import blacklisted_mods
+from .mod_identity import balance_profile
 
 ROOT = Path(__file__).resolve().parents[2] / "data/gamedb"
 PROFILES = ("vanilla", "bbg", "ccb")
@@ -198,7 +199,7 @@ def rules_token():
     values = [get_rules(p).fingerprint if get_rules(p) else "missing" for p in PROFILES]
     from .database_versions import metadata_token
     values.append(metadata_token())
-    return hashlib.sha256(("plot-engine-11|" + "|".join(values)).encode()).hexdigest()[:20]
+    return hashlib.sha256(("plot-engine-13|" + "|".join(values)).encode()).hexdigest()[:20]
 
 
 def result(yields=None, breakdown=None, missing=(), unavailable=False):
@@ -362,7 +363,7 @@ class TurnYields:
                 if owner is p and not pillaged:
                     add("building", typ, source_c=city)
         for g in p.governors if skills else ():
-            if g.city == c.id:
+            if governor_assigned_to(g, p.iPlayer, c.id):
                 for typ in g.promotions:
                     add("governor", self.name(typ), source_c=c, extra=("governor", g))
         # City-state trait roots attach to eligible players; retain the source
@@ -469,7 +470,7 @@ class TurnYields:
                 v = int(a.get("MinDistance", 0)) <= distance <= int(a.get("MaxDistance", 100000))
             missing.add("首都位置尚未解析")
         elif typ == "REQUIREMENT_CITY_HAS_SPECIFIC_GOVERNOR_PROMOTION_TYPE":
-            gs = [g for g in p.governors if c and g.city == c.id
+            gs = [g for g in p.governors if c and governor_assigned_to(g, p.iPlayer, c.id)
                   and H(a["GovernorPromotionType"]) in g.promotions] if self.has_skills(p) else []
             v = False if not gs else combine([(vars(g).get("established"), {"总督就任状态尚未解析"}) for g in gs], True)[0]
             missing.add("总督就任状态尚未解析")
@@ -920,8 +921,7 @@ def calculate_tile_yields(state, *, wrap_x=None, rules=None):
     # precedence over a BBG package name, without changing global MOD detection.
     titles = [*state.mods, *(str(m.get(field, "")) for m in state.modPackages
                             for field in ("key", "name"))]
-    is_ccb = any(re.search(r"\bccb\b|和而不同", str(title), re.I) for title in titles)
-    profile = "ccb" if is_ccb else (balance_mod(titles) or state.balanceMod or "vanilla").lower()
+    profile = balance_profile(state.modPackages or state.mods, default=(state.balanceMod or "vanilla").lower())
     rules = rules or get_rules(profile)
     reason = None
     if not rules or rules.profile != profile:

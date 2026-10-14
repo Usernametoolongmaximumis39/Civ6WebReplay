@@ -1,13 +1,14 @@
 /* Civ6 复盘工具 - application logic. */
 (function () {
   "use strict";
+  const L = value => window.Civ6I18n ? window.Civ6I18n.text(value) : value;
 
   const $ = (id) => document.getElementById(id);
   let YIELD_BY_NAME = {};
 
   // v0.25 (文档 C): the renderer owns the layer list (``HexMap.LAYERS``) so the
   // toggles can never drift out of order or miss a layer.
-  const LAYER_KEYS = HexMap.LAYERS.slice();
+  let LAYER_KEYS = HexMap.LAYERS.map(([key, label]) => [key, L(label)]);
   const LAYER_STORE = "civ6replay.layers.v1";
   const MAP_VIEW_STORE = "civ6replay.mapView.v1";
   let savedMapView = loadMapView();
@@ -15,15 +16,8 @@
   let mapViewReady = false;
 
   // v0.22 hard-coded small tables for the header meta line.
-  const MAPSIZE_ZH = {
-    MAPSIZE_DUEL: "决斗", MAPSIZE_TINY: "微小", MAPSIZE_SMALL: "小型",
-    MAPSIZE_STANDARD: "标准", MAPSIZE_LARGE: "大型", MAPSIZE_HUGE: "巨大",
-    MAPSIZE_ENORMOUS: "巨人", MAPSIZE_GIANT: "巨人",
-  };
-  const GAMESPEED_ZH = {
-    GAMESPEED_MARATHON: "马拉松", GAMESPEED_EPIC: "史诗", GAMESPEED_STANDARD: "标准",
-    GAMESPEED_QUICK: "快速", GAMESPEED_ONLINE: "联机",
-  };
+  let MAPSIZE_ZH;
+  let GAMESPEED_ZH;
 
   // v0.22 fixed icon-row paths (mirrors the in-game yield strip)
   const ICON_CITY = "/assets/icons/icon/settle.png";
@@ -65,16 +59,12 @@
   // 城墙上限 / 城市防御（钢铁）值都来自快照（static_info.wallDefense），见 cityWall()。
   // v0.25 (文档 C2): age state -> icon stem / Chinese label
   const AGE_ICON = { 0: "Dark", 1: "Normal", 2: "Golden", 3: "Heroic" };
-  const AGE_ZH = { 0: "黑暗时代", 1: "普通时代", 2: "黄金时代", 3: "英雄时代" };
+  let AGE_ZH;
   // v0.26 右栏文明卡排序（城邦页维持既有排序）
-  const CIV_SORT_OPTIONS = [
-    ["floor", "楼层"], ["team", "团队"], ["science", "科技"],
-    ["culture", "文化"], ["cities", "城市数"], ["production", "产能"],
-    ["military", "军力"], ["age", "所属时代"],
-  ];
+  let CIV_SORT_OPTIONS;
   const CITY_CENTER_HP = 200;
   // v0.23 city-state page order (mirrors state.CITY_STATE_FLAVOUR_ORDER)
-  const CS_FLAVOUR_ORDER = ["科技", "文化", "商业", "军事", "工业", "宗教"];
+  let CS_FLAVOUR_ORDER;
   const DIPLO_VICTORY_MAX = 20;
   // v0.28: 每个宗教最多 4 条信条（创立时 2 条，之后用使徒再补 2 条），
   // 用于宗教区里的「信条 N / 4」——一眼看出这个宗教还差没补满。
@@ -93,7 +83,7 @@
   let showType = localStorage.getItem("civ6replay.showType") === "1";
   // v0.25: unit coordinates are an optional, non-critical detail (off by default)
   let showCoord = localStorage.getItem("civ6replay.showCoord") === "1";
-  const CAT_ZH = { mil: "军事", civ: "平民", sup: "支援", trade: "商人", rel: "宗教" };
+  let CAT_ZH;
 
   // v0.22 state: slider load mask, expanded HUD rows
   // (v0.25 文档 C2: the per-turn diplomacy favours were dropped with the row)
@@ -156,22 +146,69 @@
     const n = Number(v) || 0;
     return Math.abs(n - Math.round(n)) < 1e-9 ? String(Math.round(n)) : n.toFixed(1);
   }
-  async function getJSON(url, options) { const r = await fetch(url, options); if (!r.ok) throw new Error(url + " " + r.status); return r.json(); }
+  let languageSeq = 0;
+  async function getJSON(url, options) {
+    const revision = languageSeq;
+    const r = await fetch(window.Civ6I18n.url(url), options);
+    const data = await r.json().catch(() => ({}));
+    if (revision !== languageSeq) throw new DOMException("Language changed", "AbortError");
+    if (!r.ok) throw new Error(data.detail || (url + " " + r.status));
+    return data;
+  }
   // Replay state is mutable; never reuse an HTTP response from a previous scan.
   function getReplayJSON(url) { return getJSON(url, { cache: "no-store" }); }
   async function postJSON(url, body) {
-    const r = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" },
+    const revision = languageSeq;
+    const r = await fetch(window.Civ6I18n.url(url), { method: "POST", headers: { "Content-Type": "application/json" },
                                  body: JSON.stringify(body || {}) });
     const data = await r.json().catch(() => ({}));
+    if (revision !== languageSeq) throw new DOMException("Language changed", "AbortError");
     if (!r.ok) throw new Error(data.detail || (url + " " + r.status));
     return data;
   }
 
+  function refreshLanguageTables() {
+    LAYER_KEYS = HexMap.LAYERS.map(([key, label]) => [key, L(label)]);
+    MAPSIZE_ZH = {
+    MAPSIZE_DUEL: L("决斗"), MAPSIZE_TINY: L("微小"), MAPSIZE_SMALL: L("小型"),
+    MAPSIZE_STANDARD: L("标准"), MAPSIZE_LARGE: L("大型"), MAPSIZE_HUGE: L("巨大"),
+    MAPSIZE_ENORMOUS: L("巨人"), MAPSIZE_GIANT: L("巨人"),
+  };
+    GAMESPEED_ZH = {
+    GAMESPEED_MARATHON: L("马拉松"), GAMESPEED_EPIC: L("史诗"), GAMESPEED_STANDARD: L("标准"),
+    GAMESPEED_QUICK: L("快速"), GAMESPEED_ONLINE: L("联机"),
+  };
+    AGE_ZH = { 0: L("黑暗时代"), 1: L("普通时代"), 2: L("黄金时代"), 3: L("英雄时代") };
+    CIV_SORT_OPTIONS = [
+    ["floor", L("楼层")], ["team", L("团队")], ["science", L("科技")],
+    ["culture", L("文化")], ["cities", L("城市数")], ["production", L("产能")],
+    ["military", L("军力")], ["age", L("所属时代")],
+  ];
+    CS_FLAVOUR_ORDER = [L("科技"), L("文化"), L("商业"), L("军事"), L("工业"), L("宗教")];
+    CAT_ZH = { mil: L("军事"), civ: L("平民"), sup: L("支援"), trade: L("商人"), rel: L("宗教") };
+    CITY_YIELD_CELLS = [
+    [L("食物"), ICON_FOOD], [L("产能"), ICON_PROD], [L("金币"), ICON_GOLD],
+    [L("科技"), ICON_SCI], [L("文化"), ICON_CUL], [L("信仰"), ICON_FAITH],
+  ];
+    LEDGER_RANGES = [["all", L("从第1t")], ["5", L("近5t")], ["10", L("近10t")], ["30", L("近30t")]];
+    CIV_ROW_LABELS = {
+    city: L("城市"), mil: L("军力"), food: L("粮食"), prod: L("产能"), sci: L("科技"),
+    cul: L("文化"), gold: L("金币"), faith: L("信仰"), diplo: L("外交"),
+  };
+    SHARE_KIND_ZH = { public: L("公网"), uu: L("UU 虚拟网"), lan: L("本机局域网"),
+                          manual: L("手填地址"), none: L("未选定") };
+    SHARE_SOURCE_ZH = { nic: L("本机网卡"), metadata: L("云元数据"), echo: L("外部回显"),
+                            manual: L("手填") };
+    SHARE_GROUPS = [["public", L("公网 IP")], ["uu", L("UU 虚拟网")], ["lan", L("其它本机 IP")]];
+  }
+
   async function init() {
+    refreshLanguageTables();
+    window.addEventListener("civ6-language-change", changeLanguage);
     wireTurnControls();
     if (compareMode) {
       document.documentElement.classList.add("compare-page");
-      document.title = "文明6 · 数据对比";
+      document.title = L("文明6 · 数据对比");
       hudTab = "compare";
       panels.city.hidden = true;
       panelEl("city").querySelector(".panel-close").onclick = () => closePanel("city");
@@ -319,7 +356,8 @@
   function restoreLayers() {
     let saved = null;
     try { saved = JSON.parse(localStorage.getItem(LAYER_STORE) || "null"); }
-    catch (e) { /* use the renderer's defaults */ }
+    catch (e) {
+      if (e.name === "AbortError") return; /* use the renderer's defaults */ }
     map.layers.fog = map.fog.enabled;
     for (const [key] of LAYER_KEYS) {
       if (saved && typeof saved[key] === "boolean") map.layers[key] = saved[key];
@@ -331,7 +369,8 @@
   function saveLayers() {
     const saved = Object.fromEntries(LAYER_KEYS.map(([key]) => [key, !!map.layers[key]]));
     try { localStorage.setItem(LAYER_STORE, JSON.stringify(saved)); }
-    catch (e) { /* storage may be unavailable */ }
+    catch (e) {
+      if (e.name === "AbortError") return; /* storage may be unavailable */ }
   }
 
   function buildLayerToggles() {
@@ -353,9 +392,9 @@
       if (key === "yield") {
         l.classList.add("yield-layer-toggle");
         const text = document.createElement("span");
-        text.appendChild(document.createTextNode("产出（"));
+        text.appendChild(document.createTextNode(L("产出（")));
         const beta = document.createElement("span"); beta.className = "yield-layer-beta";
-        beta.textContent = "测试版"; text.appendChild(beta);
+        beta.textContent = L("测试版"); text.appendChild(beta);
         text.appendChild(document.createTextNode("）")); l.appendChild(text);
       } else l.appendChild(document.createTextNode(label));
       box.insertBefore(l, fog);
@@ -378,7 +417,8 @@
     const out = defaultPanels();
     let doc = null;
     try { doc = JSON.parse(localStorage.getItem(PANEL_STORE) || "null"); }
-    catch (e) { doc = null; }
+    catch (e) {
+      if (e.name === "AbortError") return; doc = null; }
     if (!doc || typeof doc !== "object") return out;
     for (const kind of PANEL_KINDS) {
       const s = doc[kind];
@@ -400,7 +440,8 @@
 
   function savePanels() {
     try { localStorage.setItem(PANEL_STORE, JSON.stringify(panels)); }
-    catch (e) { /* storage may be unavailable */ }
+    catch (e) {
+      if (e.name === "AbortError") return; /* storage may be unavailable */ }
   }
 
   function stageSize() {
@@ -504,7 +545,7 @@
       placePanel(btn, { x: clamp(x, 0, size.w - width), y: clamp(y, 0, size.h - height), w: width, h: height });
       btn.dataset.edge = edge;
       btn.textContent = (edge === "left") === !st.hidden ? "‹" : "›";
-      const label = (st.hidden ? "展开" : "收起") + (kind === "left" ? "探索栏" : "数据栏");
+      const label = (st.hidden ? L("展开") : L("收起")) + (kind === "left" ? L("探索栏") : L("数据栏"));
       btn.title = label;
       btn.setAttribute("aria-label", label);
       btn.setAttribute("aria-expanded", String(!st.hidden));
@@ -588,8 +629,8 @@
         el = document.createElement("div");
         el.id = id; el.className = "dock-splitter"; el.tabIndex = 0;
         el.setAttribute("role", "separator");
-        el.setAttribute("aria-label", "调整面板占比");
-        el.title = "拖动调整面板占比（方向键也可调整）";
+        el.setAttribute("aria-label", L("调整面板占比"));
+        el.title = L("拖动调整面板占比（方向键也可调整）");
         el.addEventListener("pointerdown", ev => {
           if (ev.button !== 0) return;
           const current = el._split;
@@ -662,7 +703,8 @@
     try {
       const saved = JSON.parse(localStorage.getItem(MAP_VIEW_STORE) || "null");
       return saved && typeof saved === "object" ? saved : null;
-    } catch (e) { return null; }
+    } catch (e) {
+      if (e.name === "AbortError") return; return null; }
   }
 
   function restoreMapView() {
@@ -690,7 +732,8 @@
     savedMapView = view;
     savedMapViewJSON = serialized;
     try { localStorage.setItem(MAP_VIEW_STORE, serialized); }
-    catch (e) { /* Keep the in-page view even when browser storage is unavailable. */ }
+    catch (e) {
+      if (e.name === "AbortError") return; /* Keep the in-page view even when browser storage is unavailable. */ }
   }
 
   function openPanel(kind) {
@@ -799,7 +842,8 @@
       const grab = ev.clientX - el.getBoundingClientRect().left;
       let target = null;
       let moved = false;
-      try { head.setPointerCapture(ev.pointerId); } catch (e) { /* optional */ }
+      try { head.setPointerCapture(ev.pointerId); } catch (e) {
+      if (e.name === "AbortError") return; /* optional */ }
       document.body.classList.add("panel-dragging");
       const onMove = (e) => {
         const dx = e.clientX - startX, dy = e.clientY - startY;
@@ -847,7 +891,7 @@
   function setupDockResize(kind) {
     const el = panelEl(kind), grip = document.createElement("div");
     grip.className = "panel-dock-resize";
-    grip.title = "拖动调整吸附区域大小";
+    grip.title = L("拖动调整吸附区域大小");
     el.appendChild(grip);
     grip.addEventListener("pointerdown", ev => {
       const edge = panels[kind].dock;
@@ -891,7 +935,8 @@
       st.x = el.offsetLeft; st.y = el.offsetTop;
       const startX = ev.clientX, startY = ev.clientY;
       let moved = false;
-      try { grip.setPointerCapture(ev.pointerId); } catch (e) { /* optional */ }
+      try { grip.setPointerCapture(ev.pointerId); } catch (e) {
+      if (e.name === "AbortError") return; /* optional */ }
       document.body.classList.add("panel-dragging");
       const onMove = (e) => {
         const dx = e.clientX - startX, dy = e.clientY - startY;
@@ -923,8 +968,53 @@
     if (map) renderNav();
   }
 
+  async function changeLanguage() {
+    ++languageSeq;
+    const seq = ++replaySeq, selectedSeed = seed;
+    ++turnSeq;
+    refreshLanguageTables();
+    if (compareMode) document.title = L("文明6 · 数据对比");
+    else {
+      buildLayerToggles();
+      $("civ-sort").innerHTML = CIV_SORT_OPTIONS.map(([value, label]) =>
+        `<option value="${value}">${label}</option>`).join("");
+      $("civ-sort").value = civSort;
+      syncSidePanelToggles(stageSize());
+    }
+    $("tooltip").classList.add("hidden");
+    turnCache.clear(); names = {};
+    try {
+      if (selectedSeed == null) { await loadReplayList(); return; }
+      const [info, list] = await Promise.all([
+        getReplayJSON(`/api/replay/${selectedSeed}`), getReplayJSON("/api/replays")]);
+      if (seq !== replaySeq) return;
+      staticInfo = info;
+      YIELD_BY_NAME = {};
+      for (const [key, meta] of Object.entries(info.yieldMeta || {})) YIELD_BY_NAME[meta.name] = key;
+      const select = $("replay-select"); select.innerHTML = "";
+      for (const replay of list) {
+        const option = document.createElement("option"); option.value = replay.seed;
+        option.textContent = `${replay.mapName || "?"} · ${replay.turnMax}${L("回合 · ")}${replay.saveCount}${L("个存档")}` +
+          (replay.unsupported ? L(" · 不支持") : "");
+        select.appendChild(option);
+      }
+      select.value = String(selectedSeed);
+      if (info.unsupported) showUnsupportedReplay(info);
+      else {
+        renderReplayMeta(info); renderLayerErrors(info); fillFogPlayers(info.players);
+        await loadTurn(currentTurnIndex >= 0 ? currentTurnIndex : currentIndex(), seq);
+      }
+      if (!compareMode) {
+        const shareInfo = await getJSON("/api/share");
+        if (seq === replaySeq) { applyShareInfo(shareInfo); setShareLock(!!shareInfo.enabled); }
+      }
+    } catch (error) {
+      if (seq === replaySeq && error.name !== "AbortError") setBanner(L("存档加载失败：") + error.message, true);
+    }
+  }
+
   async function doRefresh() {
-    if (shareLockNote("刷新存档")) return;
+    if (shareLockNote(L("刷新存档"))) return;
     await fetch("/api/refresh", { method: "POST" });
     await loadReplayList();
   }
@@ -936,16 +1026,16 @@
       ++replaySeq;
       resetReplayState();
       seed = null;
-      sel.innerHTML = "<option>未找到存档</option>";
-      setBanner("未在默认目录找到 .Civ6Save 存档。可用 --save-dir 指定目录。", true);
+      sel.innerHTML = L("<option>未找到存档</option>");
+      setBanner(L("未在默认目录找到 .Civ6Save 存档。可用 --save-dir 指定目录。"), true);
       return;
     }
     for (const r of list) {
       const o = document.createElement("option");
       o.value = r.seed;
       // v0.39: 不支持的存档（黑名单 MOD / 结社 / 垄断）在列表里先标出来
-      o.textContent = `${r.mapName || "?"} · ${r.turnMax}回合 · ${r.saveCount}个存档`
-        + (r.unsupported ? " · 不支持" : "");
+      o.textContent = `${r.mapName || "?"} · ${r.turnMax}${L("回合 · ")}${r.saveCount}${L("个存档")}`
+        + (r.unsupported ? L(" · 不支持") : "");
       sel.appendChild(o);
     }
     // The URL follows the displayed replay/turn, including after a rescan.
@@ -980,7 +1070,7 @@
     slider.min = 0; slider.max = 0; slider.value = 0; slider.disabled = true;
     $("turn-label").textContent = "—";
     $("replay-meta").textContent =
-      `${info.mapName || "?"} · ${locMapSize(info.mapSize)} · 不支持`;
+      `${info.mapName || "?"} · ${locMapSize(info.mapSize)}${L(" · 不支持")}`;
     // v0.39: 不点名 —— 这里也不挂 MOD / DLC 列表（否则等于告诉大家是哪个 MOD 被拦了）
     $("replay-meta").title = "";
     fillFogPlayers([]);
@@ -990,7 +1080,7 @@
     $("search-results").innerHTML = "";
     renderLayerErrors(info);
     if (map) map.setUnsupported(un);
-    setBanner(un.message || un.title || "存档不支持", true);
+    setBanner(un.message || un.title || L("存档不支持"), true);
   }
 
   // Clear game-derived data before requesting the new replay. Late responses
@@ -1013,8 +1103,8 @@
     for (const id of ["civ-hud", "search-results", "search-count", "tile-body", "tile-tabs", "city-body"]) {
       $(id).innerHTML = "";
     }
-    $("tile-title").textContent = "格子";
-    $("city-title").textContent = "城市";
+    $("tile-title").textContent = L("格子");
+    $("city-title").textContent = L("城市");
     $("tooltip").classList.add("hidden");
     panels.tile.hidden = true;
     applyPanels();
@@ -1028,11 +1118,49 @@
     hideProgress();
   }
 
+  function renderReplayMeta(info) {
+      const versions = info.balanceVersions || {};
+      const channelLabel = (row) => ({beta: "Beta", wip: "WIP", alpha: "Alpha", rc: "RC",
+        conflict: L("渠道冲突")}[row?.channel] || "");
+      const componentLabel = (row) => [L(row.component), channelLabel(row)].filter(Boolean).join(" ");
+      let meta = `${info.mapName} · ${locMapSize(info.mapSize)} · ${locGameSpeed(info.gameSpeed)} · ${info.width}×${info.height}`;
+      if (info.wrapX) meta += L(" · 左右联通");
+      if (info.multiplayer) meta += L(" · 多人");
+      // v0.26.1: 平衡 MOD（BBG / CCB）会改写城墙数值，值得写在顶栏
+      if (info.balanceMod) {
+        const core = (versions.save || []).find(r => r.role === "core" && !r.absent);
+        const expansion = (versions.save || []).find(r => r.role === "expansion" && !r.absent);
+        meta += `${L(" · 平衡模组 ")}${core ? componentLabel(core) : info.balanceMod}`;
+        if (expansion && channelLabel(expansion)) meta += ` · ${componentLabel(expansion)}`;
+      }
+      $("replay-meta").textContent = meta;
+      $("replay-meta").title = (info.mods || []).length
+        ? "MOD / DLC：" + info.mods.join("、") : "";
+      if (info.balanceMod) {
+        const describe = (rows) => (rows || []).length ? rows.map((r) =>
+          `${r.absent ? L(r.component) : componentLabel(r)} ${r.absent ? L("未启用") : (r.version || (r.installedVersion ? `${L("安装版本 ")}${r.installedVersion}` : L("未记录")))}`
+        ).join("；") : L("未记录");
+        const help = document.createElement("span");
+        help.className = "balance-version-help";
+        help.textContent = "?";
+        help.title = "";
+        help.tabIndex = 0;
+        help.setAttribute("role", "note");
+        const message = `${L("数据库版本：")}${describe(versions.database)}${L("\n存档版本：")}${describe(versions.save)}`;
+        help.setAttribute("aria-label", message);
+        const tip = document.createElement("span");
+        tip.className = "balance-version-tip";
+        tip.textContent = message;
+        help.appendChild(tip);
+        $("replay-meta").appendChild(help);
+      }
+  }
+
   async function loadReplay(s, requestedTurn = "") {
     const seq = ++replaySeq;
     resetReplayState();
     seed = s;
-    setBanner("正在加载存档…");
+    setBanner(L("正在加载存档…"));
     try {
       const info = await getReplayJSON(`/api/replay/${s}`);
       if (seq !== replaySeq) return;
@@ -1046,37 +1174,11 @@
       // 画布中间画叉 + 提示（hexmap.js ``setUnsupported``）。
       if (info.unsupported) { showUnsupportedReplay(info); return; }
       $("turn-slider").disabled = false;
-      let meta = `${info.mapName} · ${locMapSize(info.mapSize)} · ${locGameSpeed(info.gameSpeed)} · ${info.width}×${info.height}`;
-      if (info.wrapX) meta += " · 左右联通";
-      if (info.multiplayer) meta += " · 多人";
-      // v0.26.1: 平衡 MOD（BBG / CCB）会改写城墙数值，值得写在顶栏
-      if (info.balanceMod) meta += ` · 平衡模组 ${info.balanceMod}`;
-      $("replay-meta").textContent = meta;
-      $("replay-meta").title = (info.mods || []).length
-        ? "MOD / DLC：" + info.mods.join("、") : "";
-      if (info.balanceMod) {
-        const versions = info.balanceVersions || {};
-        const describe = (rows) => (rows || []).length ? rows.map((r) =>
-          `${r.component} ${r.absent ? "未启用" : (r.version || (r.installedVersion ? `安装版本 ${r.installedVersion}` : "未记录"))}`
-        ).join("；") : "未记录";
-        const help = document.createElement("span");
-        help.className = "balance-version-help";
-        help.textContent = "?";
-        help.title = "";
-        help.tabIndex = 0;
-        help.setAttribute("role", "note");
-        const message = `数据库版本：${describe(versions.database)}\n存档版本：${describe(versions.save)}`;
-        help.setAttribute("aria-label", message);
-        const tip = document.createElement("span");
-        tip.className = "balance-version-tip";
-        tip.textContent = message;
-        help.appendChild(tip);
-        $("replay-meta").appendChild(help);
-      }
+      renderReplayMeta(info);
       fillFogPlayers(info.players);
       if (info.layerErrors && info.layerErrors.length) {
         const parts = info.layerErrors.map((e) => `${e.section}${e.offset != null ? "@0x" + e.offset.toString(16) : ""}`);
-        setBanner("部分解析层不可用（已降级）：" + parts.join("、"), false);
+        setBanner(L("部分解析层不可用（已降级）：") + parts.join("、"), false);
       } else { setBanner(""); }
       renderLayerErrors(info);
       const replayTurns = await getReplayJSON(`/api/replay/${s}/turns`);
@@ -1091,10 +1193,11 @@
       else await loadTurn(0, seq);
       if (seq !== replaySeq) return;
     } catch (e) {
+      if (e.name === "AbortError") return;
       if (seq === replaySeq) {
         ++replaySeq;
         resetReplayState();
-        setBanner("存档加载失败：" + e.message, true);
+        setBanner(L("存档加载失败：") + e.message, true);
       }
     }
   }
@@ -1123,8 +1226,8 @@
       const total = (loadstate && loadstate.loaded && loadstate.loaded.length) || turns.length;
       const done = loadstate && loadstate.loaded
         ? loadstate.loaded.filter(Boolean).length : 0;
-      showProgress(`正在解析存档：第 ${turns[idx].turn} 回合${loaded ? "就绪" : "等待中"} ` +
-                   `（已解析 ${done} / ${total}）`, total ? done / total : 0);
+      showProgress(window.Civ6I18n.format("正在解析存档：第 {turn} 回合{status}（已解析 {done} / {total}）",
+        {turn: turns[idx].turn, status: loaded ? L("就绪") : L("等待中"), done, total}), total ? done / total : 0);
       if (loaded) break;
       await new Promise((r) => setTimeout(r, 700));
     }
@@ -1184,7 +1287,8 @@
     if (seq !== replaySeq) return;
     let state = null;
     try { state = await getReplayJSON(`/api/replay/${seed}/loadstate`); }
-    catch (e) { /* The current replay can retry on the next poll. */ }
+    catch (e) {
+      if (e.name === "AbortError") return; /* The current replay can retry on the next poll. */ }
     if (seq !== replaySeq) return;
     loadstate = state;
     renderLoadOverlay();
@@ -1279,7 +1383,7 @@
     }
     const maxTurn = turns.length ? turns[turns.length - 1].turn : payload.turn;
     const curTurn = Math.max(0, payload.turn);
-    $("turn-label").textContent = `回合 ${curTurn} / ${maxTurn}`;
+    $("turn-label").textContent = `${L("回合 ")}${curTurn} / ${maxTurn}`;
     // v0.27: the search index is per turn, so it is rebuilt right after
     // ``setData``.
     if (map) runSearch();
@@ -1393,14 +1497,14 @@
 
   function leaderSkillsHTML(info, ip, prefix = "civ") {
     const key = ip + ":skills", open = !!expanded[key];
-    const groups = [["文明技能", "civilization"], ["领袖技能", "leader"]];
+    const groups = [[L("文明技能"), "civilization"], [L("领袖技能"), "leader"]];
     return `<div id="${prefix}-skills-${ip}" class="leader-skills${open ? "" : " hidden"}">` +
       groups.map(([label, kind]) => {
         const skills = (info.abilities || {})[kind] || [];
         return `<div class="zone-title">${label}</div>` + (skills.length ? skills.map(s =>
           `<div class="skill-name">${escapeText(s.name)}</div>` +
           `<div class="rule-description">${ruleTextHTML(s.description)}</div>`).join("") :
-          '<div class="muted">尚未采集当前规则集的技能文本。</div>');
+          L('<div class="muted">尚未采集当前规则集的技能文本。</div>'));
       }).join("") + `</div>`;
   }
 
@@ -1408,7 +1512,7 @@
     const open = !!expanded[ip + ":skills"];
     return `<button type="button" class="leader-trigger" data-skills="${ip}" ` +
       `aria-expanded="${open}" aria-controls="${prefix}-skills-${ip}" ` +
-      `title="查看文明和领袖技能" aria-label="${escapeText(info.leaderName || "领袖")}：文明和领袖技能">` +
+      `${L("title=\"查看文明和领袖技能\" aria-label=\"")}${escapeText(info.leaderName || L("领袖"))}${L("：文明和领袖技能\">")}` +
       `<img class="${prefix === "cmp" ? "cmp-portrait" : "leader-portrait"}" src="${portrait}" alt=""></button>`;
   }
 
@@ -1472,25 +1576,25 @@
     const items = govPromoList(c.governor, c.governorPromotionHashes);
     if (!items.length) {
       const n = c.governorPromotions || 0;
-      return nameOrDash(c.governor) + (n ? `（晋升 ${n}）` : "");
+      return nameOrDash(c.governor) + (n ? `${L("（晋升 ")}${n}）` : "");
     }
     const names = items.map((it) => it.name).join("、");
-    return `${nameOrDash(c.governor)}<div class="gov-promo">晋升：${names}</div>`;
+    return `${nameOrDash(c.governor)}${L("<div class=\"gov-promo\">晋升：")}${names}</div>`;
   }
 
   // v0.31: 核污染（`tiles.fallout`，每格一个「剩余回合数」，0 = 未受污染）。
   // 核装置炸出的污染从 10 回合起算，每回合减 1；热核装置是 20 回合起算。
   function falloutText(turns) {
     const n = Number(turns) || 0;
-    return n > 0 ? ("剩余 " + n + " 回合") : "无";
+    return n > 0 ? (L("剩余 ") + n + L(" 回合")) : L("无");
   }
 
   // ``tiles.road`` is the zero-based route index (0 = 远古时代道路 … 4 = 铁路),
   // 255 = no route at all; the display names come from ``staticInfo.routeNames``.
   function routeName(index) {
-    if (index == null || index === 255 || index < 0) return "无";
+    if (index == null || index === 255 || index < 0) return L("无");
     const table = (staticInfo && staticInfo.routeNames) || {};
-    return table[String(index)] || ("路线 " + index);
+    return table[String(index)] || (L("路线 ") + index);
   }
 
   // v0.25 (文档 C1): continent = the snapshot's CONTINENT_* name
@@ -1508,7 +1612,7 @@
 
   function continentLabel(hash) {
     if (!isContinent(hash)) return "—";
-    return continentName(hash) || "大陆";
+    return continentName(hash) || L("大陆");
   }
 
   // 城墙：``wall`` 是城墙等级（0 = 无），``wallDamage`` 是城墙已受伤害；
@@ -1565,17 +1669,17 @@
   // 否则显示「墙建筑名 剩余 / 上限」。
   function wallText(iPlayer, city, damage) {
     const w = cityWall(iPlayer, city);
-    if (!w) return "无";
+    if (!w) return L("无");
     if (!w.max) return "—";           // pre-v0.26 snapshot without caps
     const rem = Math.max(0, w.max - (Number(damage) || 0));
-    if (w.steel) return `城市防御 ${rem} / ${w.max}`;
+    if (w.steel) return `${L("城市防御 ")}${rem} / ${w.max}`;
     const name = w.hash ? nameOrDash(parseInt(w.hash, 10)) : "";
     return `${name ? name + " " : ""}${rem} / ${w.max}`;
   }
 
   // 城市中心以外的区域没有城墙（payload 里也只有市中心带 wall/wallDamage）
   function districtWallText(d, host, iPlayer) {
-    if ((d.type >>> 0) !== DISTRICT_CITY_CENTER || !host) return "无";
+    if ((d.type >>> 0) !== DISTRICT_CITY_CENTER || !host) return L("无");
     return wallText(iPlayer, host, d.wallDamage);
   }
 
@@ -1636,12 +1740,12 @@
             : "<span class='muted'>—</span>";
           return `<div class="rel-block">` +
             `<span class="chip">${ic ? `<img src="${ic}" alt="">` : ""}${name}</span>` +
-            `<div class="zone-title">信条 ${beliefs.length} / ${BELIEF_MAX}</div>` +
+            `${L("<div class=\"zone-title\">信条 ")}${beliefs.length} / ${BELIEF_MAX}</div>` +
             `${creed}</div>`;
         }).join("")
-      : "<span class='muted'>未创立宗教</span>";
-    return `<div class="zone-title">宗教</div>${rel}` +
-      `<div class="zone-title">万神殿</div>${pantheonHTML(p.pantheon)}`;
+      : L("<span class='muted'>未创立宗教</span>");
+    return `${L("<div class=\"zone-title\">宗教</div>")}${rel}` +
+      `${L("<div class=\"zone-title\">万神殿</div>")}${pantheonHTML(p.pantheon)}`;
   }
 
   function eraProgressHTML(p) {
@@ -1655,8 +1759,8 @@
     const label = AGE_ZH[targetAge];
     const remaining = Math.max(0, target - score);
     return `<span class="era-progress${reachedGolden ? " era-golden" : ""}" ` +
-      `title="时代分数 ${score}；普通阈值 ${normal}；黄金阈值 ${golden}；` +
-      `${reachedGolden ? "已达到黄金阈值" : `距${label}还差 ${remaining} 分`}">` +
+      `${L("title=\"时代分数 ")}${score}${L("；普通阈值 ")}${normal}${L("；黄金阈值 ")}${golden}；` +
+      `${reachedGolden ? L("已达到黄金阈值") : `${L("距")}${label}${L("还差 ")}${remaining}${L(" 分")}`}">` +
       `<span>${score}/${target}</span><img class="ci-icon" ` +
       `src="/assets/icons/icon/${AGE_ICON[targetAge]}_Age.png" alt="${label}"></span>`;
   }
@@ -1669,17 +1773,17 @@
     const dedications = (p.commemorations || []).map(chipHTML).join("");
     let lines = `<div class="ci-line">${ageIcon ? `<img class="ci-icon" src="${ageIcon}" alt="">` : ""}` +
       `<span>${AGE_ZH[age] || "—"}</span>${eraProgressHTML(p)}</div>`;
-    lines += `<div class="ci-line"><span class="ci-key">着力点</span>` +
+    lines += `${L("<div class=\"ci-line\"><span class=\"ci-key\">着力点</span>")}` +
       `<span class="ci-val">${dedications || "<span class='muted'>—</span>"}</span></div>`;
     if (info.pseudo) {
-      lines += `<div class="ci-line"><span class="ci-key">玩家</span>` +
+      lines += `${L("<div class=\"ci-line\"><span class=\"ci-key\">玩家</span>")}` +
         `<span class="ci-val">${info.pseudo}</span></div>`;
     }
     if (info.steamId) {
       lines += `<div class="ci-line"><span class="ci-key">SteamID</span><span class="ci-val">` +
         `<a href="https://steamcommunity.com/profiles/${info.steamId}" target="_blank" ` +
         `rel="noopener">${info.steamId}</a></span></div>`;
-      lines += `<div class="ci-line"><span class="ci-key">社区名</span>` +
+      lines += `${L("<div class=\"ci-line\"><span class=\"ci-key\">社区名</span>")}` +
         `<span class="ci-val steam-name" data-steamid="${info.steamId}">…</span></div>`;
     }
     const portrait = iconOf(info.leader);
@@ -1697,7 +1801,8 @@
     try {
       const cached = sessionStorage.getItem(key);
       if (cached) return cached;
-    } catch (e) { /* sessionStorage may be unavailable */ }
+    } catch (e) {
+      if (e.name === "AbortError") return; /* sessionStorage may be unavailable */ }
     let name = null;
     try {
       const ctrl = new AbortController();
@@ -1712,15 +1817,18 @@
           if (v) name = v;
         }
       } finally { clearTimeout(timer); }
-    } catch (e) { name = null; }
+    } catch (e) {
+      if (e.name === "AbortError") return; name = null; }
     if (!name) {
       try {
         const viaProxy = await getJSON(`/api/steam/name/${steamid}`);
         if (viaProxy && viaProxy.name) name = viaProxy.name;
-      } catch (e) { name = null; }
+      } catch (e) {
+      if (e.name === "AbortError") return; name = null; }
     }
-    const out = name || "查询失败";
-    try { sessionStorage.setItem(key, out); } catch (e) { /* ignore */ }
+    const out = name || L("查询失败");
+    try { sessionStorage.setItem(key, out); } catch (e) {
+      if (e.name === "AbortError") return; /* ignore */ }
     return out;
   }
 
@@ -1732,7 +1840,7 @@
     const errs = (info && info.layerErrors) || [];
     if (!errs.length) { box.innerHTML = ""; box.classList.add("hidden"); return; }
     box.classList.remove("hidden");
-    box.innerHTML = `<h3>解析降级</h3>` + errs.map((e) => {
+    box.innerHTML = `${L("<h3>解析降级</h3>")}` + errs.map((e) => {
       const off = (e.offset == null) ? "" : ` @0x${(e.offset >>> 0).toString(16)}`;
       return `<div class="layer-err"><b>${e.section}${off}</b>：${e.message || ""}</div>`;
     }).join("");
@@ -1741,10 +1849,7 @@
   // v0.24: yields as icons, three per row (食物 产能 金币 / 科技 文化 信仰);
   // v0.26 the tile panel's 基础产出 reuses the same grid.
   // v0.27: the tile panel drops the zero entries and puts the rest on one line.
-  const CITY_YIELD_CELLS = [
-    ["食物", ICON_FOOD], ["产能", ICON_PROD], ["金币", ICON_GOLD],
-    ["科技", ICON_SCI], ["文化", ICON_CUL], ["信仰", ICON_FAITH],
-  ];
+  let CITY_YIELD_CELLS;
 
   function yieldValue(yields, name) {
     return Number((yields || {})[YIELD_BY_NAME[name]]) || 0;
@@ -1785,19 +1890,19 @@
   }
 
   function districtAdjacencyHTML(d) {
-    if (d.adjacency == null) return '<span class="district-adjacency muted" title="相邻加成暂不可用">—</span>';
-    const label = d.built === 0 ? "预计相邻" : "基础相邻";
+    if (d.adjacency == null) return L('<span class="district-adjacency muted" title="相邻加成暂不可用">—</span>');
+    const label = d.built === 0 ? L("预计相邻") : L("基础相邻");
     return `<span class="district-adjacency" title="${label}">${adjacencyYieldHTML(d.adjacency)}</span>`;
   }
 
   function adjacencySourcePanel(d) {
     const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g,
       c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-    let html = '<div class="adjacency-section"><div class="kv"><div class="k">相邻加成</div>' +
-      `<div class="v">${d.adjacency == null ? '<span class="muted">暂不可用</span>' :
-        districtAdjacencyHTML(d) + (d.built === 0 ? '<span class="muted">（预计）</span>' : '')}</div></div>`;
+    let html = L('<div class="adjacency-section"><div class="kv"><div class="k">相邻加成</div>') +
+      `<div class="v">${d.adjacency == null ? L('<span class="muted">暂不可用</span>') :
+        districtAdjacencyHTML(d) + (d.built === 0 ? L('<span class="muted">（预计）</span>') : '')}</div></div>`;
     if (d.adjacency == null) return html + '</div>';
-    html += '<details class="adjacency-details"><summary>相邻加成来源</summary>';
+    html += L('<details class="adjacency-details"><summary>相邻加成来源</summary>');
     const groups = new Map();
     for (const row of (d.adjacencySources || [])) {
       const key = JSON.stringify([row.label, row.origin, row.required, row.rate]);
@@ -1811,7 +1916,7 @@
     for (const group of groups.values()) {
       const rate = `${Number(group.rate) >= 0 ? "+" : ""}${fmtNum(Number(group.rate))}`;
       const rule = group.required == null ? '' : group.tiles.size ?
-        `${group.count} 格，每 ${group.required} 格 ${rate}` : `单项 ${rate}`;
+        `${group.count}${L(" 格，每 ")}${group.required}${L(" 格 ")}${rate}` : `${L("单项 ")}${rate}`;
       const coordinates = showCoord ? Array.from(group.tiles)
         .filter(i => Number.isInteger(i) && i >= 0)
         .map(i => `<a href="#" class="adjacency-coordinate" data-jump-i="${i}">` +
@@ -1822,8 +1927,8 @@
         (coordinates.length ? `<div class="adjacency-source-note adjacency-coordinates">${coordinates.join("、")}</div>` : '') + '</div>';
     }
     if (!groups.size) html += `<div class="muted adjacency-source-note">${d.adjacencySources == null ?
-      '该回合尚无来源明细' : '无生效的相邻来源'}</div>`;
-    html += '<div class="adjacency-source-note">未建成的邻接区域不计入；不含政策倍率和普通建筑产出。</div>';
+      L('该回合尚无来源明细') : L('无生效的相邻来源')}</div>`;
+    html += L('<div class="adjacency-source-note">未建成的邻接区域不计入；不含政策倍率和普通建筑产出。</div>');
     return html + '</details></div>';
   }
 
@@ -1841,7 +1946,7 @@
     if (h.ratio >= 1) return "";
     const cls = h.ratio > 0.6 ? "ok" : (h.ratio > 0.3 ? "warn" : "bad");
     const pct = Math.max(0, Math.min(100, h.ratio * 100));
-    return `<span class="hp" title="血量 ${h.hp}/${h.hpMax}">` +
+    return `${L("<span class=\"hp\" title=\"血量 ")}${h.hp}/${h.hpMax}">` +
       `<i class="${cls}" style="width:${pct}%"></i></span>` +
       `<span class="hp-num">${h.hp}/${h.hpMax}</span>`;
   }
@@ -1864,7 +1969,7 @@
   function unitPromotionHTML(u) {
     const n = unitPromotionCount(u);
     if (n < 1) return "";
-    return `<span class="promo" title="晋升 ${n} 次"><img src="${ICON_PROMOTION}" alt="">` +
+    return `${L("<span class=\"promo\" title=\"晋升 ")}${n}${L(" 次\"><img src=\"")}${ICON_PROMOTION}" alt="">` +
       `<b>${n}</b></span>`;
   }
 
@@ -1964,16 +2069,16 @@
   // 悬停时把这一组逐文明流量也列出来（口径与游戏文化胜利面板的 tooltip 一致：
   // 「目前」= 本回合流量，「累积」= 存档里的累积值 ÷ 256），方便逐格核对。
   function tourismTitle(ip) {
-    const head = "旅游业绩 / 回合：游戏顶栏那个数。存档只存「对每个对手累积的" +
-      "旅游业绩」，这里用相邻两回合的逐文明增量反推（取能自洽的最大基准）";
+    const head = L("旅游业绩 / 回合：游戏顶栏那个数。存档只存「对每个对手累积的") +
+      L("旅游业绩」，这里用相邻两回合的逐文明增量反推（取能自洽的最大基准）");
     const info = tourismInfo(ip);
     if (!info) return head;
     const lines = info.rows
       .slice()
       .sort((a, b) => b.flow - a.flow)
       .map((r) => `　${(playerInfo(r.ip) || {}).civName || ("P" + r.ip)} ` +
-        `${fmtNum(Math.round(r.flow * 10) / 10)}（累积 ${fmtNum(Math.round(r.accum))}）`);
-    return head + "\n逐文明：本回合流量（累积 / 256）：\n" + lines.join("\n");
+        `${fmtNum(Math.round(r.flow * 10) / 10)}${L("（累积 ")}${fmtNum(Math.round(r.accum))}）`);
+    return head + L("\n逐文明：本回合流量（累积 / 256）：\n") + lines.join("\n");
   }
 
   // 文化胜利进度 = 国际游客 / 需要超过的对手国内游客。分母与游戏
@@ -1998,10 +2103,8 @@
   function cultureVictoryHTML(p) {
     const a = Number(p.externalTourist) || 0;
     const b = requiredTourists(p.iPlayer);
-    const hint = "国际游客 / 需要超过的对手国内游客" +
-      "（= 对手里最高的国内游客 + 1，和游戏「世界排名 → 文化」面板同一个进度）";
-    return `<div class="zone-title">文化胜利</div>` +
-      `<div class="cv-line" title="${hint}">${fmtNum(a)} / ${fmtNum(b)}</div>`;
+    return `${L("<div class=\"zone-title\">文化胜利</div>")}` +
+      `<div class="cv-line">${fmtNum(a)} / ${fmtNum(b)}</div>`;
   }
 
   // --- HUD ---------------------------------------------------------------
@@ -2053,7 +2156,7 @@
     if (!box.children.length) {
       const empty = document.createElement("div");
       empty.className = "loading";
-      empty.textContent = hudTab === "city_state" ? "本回合无可显示的城邦" : "本回合无可显示的文明";
+      empty.textContent = hudTab === "city_state" ? L("本回合无可显示的城邦") : L("本回合无可显示的文明");
       box.appendChild(empty);
     }
     syncLedgerControls();
@@ -2064,8 +2167,8 @@
 
   // ``army``: 0 / -1 = single unit, 1 = corps / fleet, 2 = army / armada
   function armyLabel(army, sea) {
-    if (army === 1) return sea ? "舰队" : "军团";
-    if (army === 2) return sea ? "无敌舰队" : "军队";
+    if (army === 1) return sea ? L("舰队") : L("军团");
+    if (army === 2) return sea ? L("无敌舰队") : L("军队");
     return "";
   }
   function armyStars(army) {
@@ -2115,10 +2218,10 @@
       const floor = order.has(p.iPlayer) ? order.get(p.iPlayer) : 999;
       switch (civSort) {
         case "team": return [Number(info.team) || 0, floor];
-        case "science": return [-yv(p, "科技"), floor];
-        case "culture": return [-yv(p, "文化"), floor];
+        case "science": return [-yv(p, L("科技")), floor];
+        case "culture": return [-yv(p, L("文化")), floor];
         case "cities": return [-(Number(p.cityCount) || 0), floor];
-        case "production": return [-yv(p, "产能"), floor];
+        case "production": return [-yv(p, L("产能")), floor];
         case "military": return [-(Number(p.militaryStrength) || 0), floor];
         case "age": return [-(Number(p.ageState) || 0), floor];
         default: return [floor, 0];
@@ -2151,11 +2254,11 @@
   function governmentHTML(p) {
     // Saved order: economic, military, diplomatic, wildcard (empty = NONE).
     const slots = p.policySlots || (p.policies || []).map(slot => slot.length);
-    return `<div class="zone-title">政体</div>${nameHTML(p.government)}` +
-      `<div class="policy-slots">` + [["军事", 1], ["经济", 0], ["外交", 2], ["通配", 3]].map(([label, i]) => {
+    return `${L("<div class=\"zone-title\">政体</div>")}${nameHTML(p.government)}` +
+      `<div class="policy-slots">` + [[L("军事"), 1], [L("经济"), 0], [L("外交"), 2], [L("通配"), 3]].map(([label, i]) => {
         const cards = ((p.policies || [])[i] || []).filter(h => (h >>> 0) !== 0xffffffff);
         return `<div class="policy-group policy-${i}" data-slot="${i}">` +
-          `<div class="zone-title">${label}卡槽 ${Number(slots[i]) || 0}</div>` +
+          `<div class="zone-title">${label}${L("卡槽 ")}${Number(slots[i]) || 0}</div>` +
           (cards.map(h => {
             const key = p.iPlayer + ":policy:" + hashStr(h), e = names[hashStr(h)] || {};
             return `<details class="policy-card" data-expand-key="${key}"${expanded[key] ? " open" : ""}>` +
@@ -2164,7 +2267,7 @@
               `<span class="policy-income" aria-hidden="true"></span><span class="policy-caret" aria-hidden="true"></span></summary>` +
               `<div class="rule-description policy-description">${ruleTextHTML(e.description)}</div></details>`;
           }).join("") ||
-            `<span class="muted">未挂政策卡</span>`) + `</div>`;
+            `${L("<span class=\"muted\">未挂政策卡</span>")}`) + `</div>`;
       }).join("") + `</div>`;
   }
 
@@ -2184,7 +2287,7 @@
     const col = cssColor(info.primary, 200);
     const team = Number(info.team);
     const leader = (info.leaderName || "");
-    const sub = [leader, Number.isFinite(team) ? `团队 ${team + 1}` : ""]
+    const sub = [leader, Number.isFinite(team) ? `${L("团队 ")}${team + 1}` : ""]
       .filter(Boolean).join(" · ");
     let html = `<div class="head"><span class="swatch" style="background:${col}"></span>
       <span class="name">${info.civName || ("P" + p.iPlayer)}</span>${typeTag(info.civStr)}
@@ -2193,14 +2296,14 @@
 
     const y = p.yields || {};
     const yv = (n) => Number(y[YIELD_BY_NAME[n]] || 0);
-    const food = yv("食物"), prod = yv("产能"), sci = yv("科技"),
-          cul = yv("文化"), faith = yv("信仰");
-    const gold = yv("金币"), maint = Number(p.maintenance) || 0;
+    const food = yv(L("食物")), prod = yv(L("产能")), sci = yv(L("科技")),
+          cul = yv(L("文化")), faith = yv(L("信仰"));
+    const gold = yv(L("金币")), maint = Number(p.maintenance) || 0;
 
-    const cityDetail = ownedResourcesHTML(p, "luxuryResources", "奢侈品资源", false) + ((p.cities || []).map((c) => {
+    const cityDetail = ownedResourcesHTML(p, "luxuryResources", L("奢侈品资源"), false) + ((p.cities || []).map((c) => {
       const i = c.y * payload.width + c.x;
       return `<a href="#" class="city-link" data-i="${i}" data-open-p="${p.iPlayer}" data-open-city="${c.id}">${c.name}<span class="pop">${c.population}</span></a>`;
-    }).join("") || "<span class='muted'>无城市</span>");
+    }).join("") || L("<span class='muted'>无城市</span>"));
     // military units: icon + name + formation (★ wording) + 血条 / 晋升 / (坐标)
     const milUnits = (payload.units || [])
       .filter((u) => u.iPlayer === p.iPlayer && (u.cat || "mil") === "mil")
@@ -2216,7 +2319,7 @@
         (label ? `<span class="stars">${armyStars(u.army)}</span>${label}` : "") +
         `<span class="sub">${unitHealthHTML(u)}${unitPromotionHTML(u)}` +
         `${unitCoordText(u)}</span></div>`;
-    }).join("") : "<span class='muted'>无军事单位</span>";
+    }).join("") : L("<span class='muted'>无军事单位</span>");
     // v0.31: 核武器库存 —— 与游戏顶栏同一个口径，只列真正拥有的种类，图标取自
     // 图标字体图集（ICON_Nuclear / ICON_ThermoNuclear，见 vendor_wmd_icons.py）。
     // v0.33: 没有库存就**整块不写**；有库存时并成**一行**（最多两种：核装置 /
@@ -2226,7 +2329,7 @@
       .filter((e) => e.n > 0)
       .sort((a, b) => b.n - a.n);
     const milWmd = wmdItems.length
-      ? `<div class="mil-line wmd-line"><b class="wmd-title">核武器</b>` +
+      ? `${L("<div class=\"mil-line wmd-line\"><b class=\"wmd-title\">核武器</b>")}` +
         wmdItems.map((e) => {
           const ic = iconOf(e.hash);
           return `<span class="wmd-item">${ic ? `<img src="${ic}" alt="">` : ""}` +
@@ -2240,7 +2343,7 @@
       const val = (c) => Number((c.yields || {})[key]) || 0;
       const list = (p.cities || []).slice().sort((a, b) =>
         (val(b) - val(a)) || cmpKey([a.name || ""], [b.name || ""]));
-      if (!list.length) return "<span class='muted'>无城市</span>";
+      if (!list.length) return L("<span class='muted'>无城市</span>");
       return list.map((c) => {
         const i = c.y * payload.width + c.x;
         return `<a href="#" class="city-link" data-i="${i}" data-open-p="${p.iPlayer}" data-open-city="${c.id}">${c.name}` +
@@ -2265,30 +2368,30 @@
         : "<span class='muted'>—</span>";
     };
 
-    const foodDetail = `<div class="zone-title">城市食物（每回合，降序）</div>${cityRank("食物")}`;
-    const prodDetail = `<div class="zone-title">城市产能（每回合，降序）</div>${cityRank("产能")}`;
+    const foodDetail = `${L("<div class=\"zone-title\">城市食物（每回合，降序）</div>")}${cityRank(L("食物"))}`;
+    const prodDetail = `${L("<div class=\"zone-title\">城市产能（每回合，降序）</div>")}${cityRank(L("产能"))}`;
     // v0.26: 科技 / 文化 / 金币 / 信仰 各自一行；「已研 N / 总数」这一行本身可以
     // 点击展开成 chips（同一张卡共用一份 expanded 状态）。
     const sciDetail =
-      `<div class="zone-title">当前研究</div>` +
-      `${chips(p.currentTech, p.techBoosted, ICON_EUREKA, "尤里卡已触发")}` +
-      researchedRowHTML("已研科技", p.techResearched, p.techTotal, "tech", p.iPlayer) +
-      `<div class="zone-title">城市科技（每回合，降序）</div>${cityRank("科技")}`;
+      `${L("<div class=\"zone-title\">当前研究</div>")}` +
+      `${chips(p.currentTech, p.techBoosted, ICON_EUREKA, L("尤里卡已触发"))}` +
+      researchedRowHTML(L("已研科技"), p.techResearched, p.techTotal, "tech", p.iPlayer) +
+      `${L("<div class=\"zone-title\">城市科技（每回合，降序）</div>")}${cityRank(L("科技"))}`;
     // v0.40: 「文化」行整行正中间 = 旅游业绩 / 回合（与「外交」行的剩余使者同一个
     // 位置）；展开后第一行是文化胜利进度（国际游客 / 需要超过的对手国内游客）。
     const culDetail =
       cultureVictoryHTML(p) +
-      `<div class="zone-title">当前市政</div>` +
-      `${chips(p.currentCivic, p.civicBoosted, ICON_INSPIRATION, "鼓舞已触发")}` +
+      `${L("<div class=\"zone-title\">当前市政</div>")}` +
+      `${chips(p.currentCivic, p.civicBoosted, ICON_INSPIRATION, L("鼓舞已触发"))}` +
       governmentHTML(p) +
-      researchedRowHTML("已研市政", p.civicResearched, p.civicTotal, "civic", p.iPlayer) +
-      `<div class="zone-title">城市文化（每回合，降序）</div>${cityRank("文化")}`;
+      researchedRowHTML(L("已研市政"), p.civicResearched, p.civicTotal, "civic", p.iPlayer) +
+      `${L("<div class=\"zone-title\">城市文化（每回合，降序）</div>")}${cityRank(L("文化"))}`;
     const goldDetail =
-      `<div class="zone-title">城市金币（每回合，降序）</div>${cityRank("金币")}` +
-      `<div class="zone-title">维护费 −${fmtNum(maint)}</div>` +
+      `${L("<div class=\"zone-title\">城市金币（每回合，降序）</div>")}${cityRank(L("金币"))}` +
+      `${L("<div class=\"zone-title\">维护费 −")}${fmtNum(maint)}</div>` +
       ledgerHTML(p.iPlayer);
     const faithDetail =
-      `<div class="zone-title">城市信仰（每回合，降序）</div>${cityRank("信仰")}` +
+      `${L("<div class=\"zone-title\">城市信仰（每回合，降序）</div>")}${cityRank(L("信仰"))}` +
       religionZoneHTML(p);
 
     // city states this civ is suzerain of (clickable when they still have cities)
@@ -2307,31 +2410,31 @@
       const i = s.city.y * payload.width + s.city.x;
       return `<a href="#" class="city-link" data-i="${i}" data-open-p="${s.iPlayer}" data-open-city="${s.city.id}">${s.name}` +
         `<span class="pop">${s.city.population}</span></a>`;
-    }).join("") : "<span class='muted'>无</span>";
+    }).join("") : L("<span class='muted'>无</span>");
     const diploDetail =
-      `<div class="zone-title">宗主城邦</div>${suzHtml}` +
-      `<div class="zone-title">外交胜利点数 ${Number(p.diploPoint) || 0} / ${DIPLO_VICTORY_MAX}</div>`;
+      `${L("<div class=\"zone-title\">宗主城邦</div>")}${suzHtml}` +
+      `${L("<div class=\"zone-title\">外交胜利点数 ")}${Number(p.diploPoint) || 0} / ${DIPLO_VICTORY_MAX}</div>`;
 
     // v0.32: 剩余使者（未派出的使者 = 游戏顶栏外交票旁那个 [ICON_Envoy] N）。
     // 写在「外交」行的折叠状态里、整行水平居中（展开箭头之前），和其它行的
     // 展开箭头互不干扰。
     const envoyTokens = Number(p.envoyTokens) || 0;
-    const envoyMid = `<img class="eicon" src="${ICON_ENVOY}" alt="使者">` +
+    const envoyMid = `<img class="eicon" src="${ICON_ENVOY}${L("\" alt=\"使者\">")}` +
       `<span class="etok">${fmtNum(envoyTokens)}</span>`;
     // v0.40: 旅游业绩（每回合）—— 和上面那一行同一个位置（整行正中间）
     // 存档不存这个数（只存「对每个对手累积的旅游业绩」），所以标题里写清楚它是
     // 「相邻两份存档的差」反推出来的，并把逐文明的流量一并列出来（见 tourismTitle）。
-    const tourismMid = `<img class="eicon" src="${ICON_TOURISM}" alt="旅游业绩" ` +
+    const tourismMid = `<img class="eicon" src="${ICON_TOURISM}${L("\" alt=\"旅游业绩\" ")}` +
       `title="${tourismTitle(p.iPlayer)}">` +
       `<span class="etok">${tourismText(p.iPlayer)}</span>`;
 
     const rows = [
       { key: "city", icon: ICON_CITY, value: p.cityCount, detail: cityDetail,
-        mid: `<img class="eicon" src="${ICON_POPULATION}" alt="人口" title="人口总数">` +
-          `<span class="etok" title="人口总数">${(p.cities || []).reduce((sum, c) =>
+        mid: `<img class="eicon" src="${ICON_POPULATION}${L("\" alt=\"人口\" title=\"人口总数\">")}` +
+          `${L("<span class=\"etok\" title=\"人口总数\">")}${(p.cities || []).reduce((sum, c) =>
             sum + (Number(c.population) || 0), 0)}</span>` },
       { key: "mil", icon: ICON_MIL, value: p.militaryStrength,
-        detail: ownedResourcesHTML(p, "strategicResources", "战略资源", true) + milWmd + milDetail },
+        detail: ownedResourcesHTML(p, "strategicResources", L("战略资源"), true) + milWmd + milDetail },
       { key: "food", icon: ICON_FOOD, value: fmtNum(food), detail: foodDetail },
       { key: "prod", icon: ICON_PROD, value: fmtNum(prod), detail: prodDetail },
       { key: "sci", icon: ICON_SCI, value: fmtNum(sci), detail: sciDetail },
@@ -2388,17 +2491,17 @@
     card.className = "civ-card spectator-card";
     let html = `<div class="head"><span class="name">` +
       `${info.civName || ("P" + p.iPlayer)}</span>${typeTag(info.civStr)}` +
-      `<span class="sub">观察者</span></div>`;
+      `${L("<span class=\"sub\">观察者</span></div>")}`;
     // 玩家 id：优先存档里的昵称，缺省退到槽位号
     const who = info.pseudo || ("P" + p.iPlayer);
     html += `<div class="civ-info spectator-info"><div class="civ-info-body">` +
-      `<div class="ci-line"><span class="ci-key">玩家 id</span>` +
+      `${L("<div class=\"ci-line\"><span class=\"ci-key\">玩家 id</span>")}` +
       `<span class="ci-val">${who}</span></div>`;
     if (info.steamId) {
       html += `<div class="ci-line"><span class="ci-key">SteamID</span><span class="ci-val">` +
         `<a href="https://steamcommunity.com/profiles/${info.steamId}" target="_blank" ` +
         `rel="noopener">${info.steamId}</a></span></div>` +
-        `<div class="ci-line"><span class="ci-key">社区名</span>` +
+        `${L("<div class=\"ci-line\"><span class=\"ci-key\">社区名</span>")}` +
         `<span class="ci-val steam-name" data-steamid="${info.steamId}">…</span></div>`;
     }
     html += `</div></div>`;
@@ -2417,20 +2520,22 @@
   // 一致（复利 1.036/回合）。窗口末回合跟随当前回合，范围有全期 / 近5t / 近10t /
   // 近30t 四档，两项偏好在 localStorage 里记忆。
   const LEDGER_STORE = "civ6replay.ledger";
-  const LEDGER_RANGES = [["all", "从第1t"], ["5", "近5t"], ["10", "近10t"], ["30", "近30t"]];
+  let LEDGER_RANGES;
   let ledgerRange = "all", ledgerWeighted = false;
   try {
     const saved = JSON.parse(localStorage.getItem(LEDGER_STORE) || "null") || {};
     if (LEDGER_RANGES.some((r) => r[0] === saved.range)) ledgerRange = saved.range;
     ledgerWeighted = !!saved.weighted;
-  } catch (e) { /* 坏数据就用默认值 */ }
+  } catch (e) {
+      if (e.name === "AbortError") return; /* 坏数据就用默认值 */ }
   let ledgerData = null, ledgerKey = "", ledgerSeq = 0;
 
   function saveLedgerPrefs() {
     try {
       localStorage.setItem(LEDGER_STORE,
         JSON.stringify({ range: ledgerRange, weighted: ledgerWeighted }));
-    } catch (e) { /* 隐私模式写不进去，忽略 */ }
+    } catch (e) {
+      if (e.name === "AbortError") return; /* 隐私模式写不进去，忽略 */ }
   }
 
   function ledgerHTML(ip) {
@@ -2439,11 +2544,11 @@
     // 标题 / 控件 / 表都包在 .ledger 里：核不过（没日志 / 对不上 / 隔夜）时整块隐藏，
     // 只剩一行 .ledger-off-note 提示
     return `<div class="ledger" data-ip="${ip}">` +
-      `<div class="zone-title">金币流水（打钱 / 吸钱 / 净金币交易）</div>` +
+      `${L("<div class=\"zone-title\">金币流水（打钱 / 吸钱 / 净金币交易）</div>")}` +
       `<div class="ledger-off-note muted"></div>` +
       `<div class="ledger-ctl">` +
       `<label><input type="checkbox" class="ledger-weight"` +
-      `${ledgerWeighted ? " checked" : ""}> 加权</label>` +
+      `${ledgerWeighted ? " checked" : ""}${L("> 加权</label>")}` +
       `<select class="ledger-range">${opts}</select>` +
       `<span class="ledger-hint"></span></div>` +
       `<div class="ledger-body"><span class="muted">…</span></div></div>`;
@@ -2485,8 +2590,9 @@
       data = await getJSON(`/api/gold?seed=${seed || 0}&range=${ledgerRange}`
         + `&weighted=${ledgerWeighted ? 1 : 0}` + (end ? `&end=${end}` : ""));
     } catch (e) {
+      if (e.name === "AbortError") return;
       if (seq === ledgerSeq) {
-        bodies.forEach((b) => { b.innerHTML = `<span class="muted">日志读取失败：${e.message}</span>`; });
+        bodies.forEach((b) => { b.innerHTML = `${L("<span class=\"muted\">日志读取失败：")}${e.message}</span>`; });
       }
       return;
     }
@@ -2513,11 +2619,11 @@
       const gave = p.from === ip;
       const other = gave ? p.to : p.from;
       return `<div class="${gave ? "pos" : "neg"}">` +
-        `${gave ? "给出" : "收到"} ${fmtNum(p.amount)} ` +
+        `${gave ? L("给出") : L("收到")} ${fmtNum(p.amount)} ` +
         `${gave ? "→" : "←"} ${ledgerName(other)}` +
-        `<span class="muted">（${p.periods} 期）</span></div>`;
+        `<span class="muted">（${p.periods}${L(" 期）</span></div>")}`;
     }).join("");
-    return `<div class="ledger-pairs">逐对手：${lines}</div>`;
+    return `${L("<div class=\"ledger-pairs\">逐对手：")}${lines}</div>`;
   }
 
   function paintLedgers() {
@@ -2525,7 +2631,7 @@
     const wraps = [...document.querySelectorAll(".ledger")];
     if (!ledgerData.ok) {
       // 核不过就整块隐藏（标题 / 开关 / 表都不显示），只留这一行
-      const tip = `只能在本局游戏刚跑完时查看金币流水（${ledgerData.reason || "没有日志"}）`;
+      const tip = `${L("只能在本局游戏刚跑完时查看金币流水（")}${ledgerData.reason || L("没有日志")}）`;
       const where = [ledgerData.logDir, ...(ledgerData.tried || []).slice(0, 3)]
         .filter(Boolean).join("\n");
       wraps.forEach((w) => {
@@ -2546,13 +2652,13 @@
         `<td>${fmtNum(r.sent)}</td><td>${fmtNum(r.received)}</td>` +
         `<td class="${cls}">${r.net > 0 ? "+" : ""}${fmtNum(r.net)}</td></tr>`;
     };
-    const head = `<tr><th>玩家</th><th>打钱</th><th>吸钱</th><th>净</th></tr>`;
+    const head = `${L("<tr><th>玩家</th><th>打钱</th><th>吸钱</th><th>净</th></tr>")}`;
     const win = ledgerData.range === "all"
-      ? `第 1t–第 ${ledgerData.endTurn}t`
-      : `第 ${ledgerData.startTurn}t–第 ${ledgerData.endTurn}t`;
-    const note = `窗口 ${win} · 日志第 ${ledgerData.logTurn}t · ${ledgerData.payments} 期` +
-      (ledgerData.weighted ? " · 已加权" : "") +
-      (ledgerData.endClamped ? ` · 日志只到第 ${ledgerData.logTurn}t` : "");
+      ? `${L("第 1t–第 ")}${ledgerData.endTurn}t`
+      : `${L("第 ")}${ledgerData.startTurn}${L("t–第 ")}${ledgerData.endTurn}t`;
+    const note = `${L("窗口 ")}${win}${L(" · 日志第 ")}${ledgerData.logTurn}t · ${ledgerData.payments}${L(" 期")}` +
+      (ledgerData.weighted ? L(" · 已加权") : "") +
+      (ledgerData.endClamped ? `${L(" · 日志只到第 ")}${ledgerData.logTurn}t` : "");
     for (const b of bodies) {
       const wrap = b.closest(".ledger");
       const ip = Number(wrap ? wrap.dataset.ip : NaN);
@@ -2566,10 +2672,7 @@
   // 横排所有玩家（一列一位），每行一项数据；表头可拖动排序（记忆在
   // ``civ6replay.civOrder``），点数据行展开该行的详细列，
   // 同一行的格子由 CSS grid 的行高自动对齐（短的对齐长的），便于横向比对。
-  const CIV_ROW_LABELS = {
-    city: "城市", mil: "军力", food: "粮食", prod: "产能", sci: "科技",
-    cul: "文化", gold: "金币", faith: "信仰", diplo: "外交",
-  };
+  let CIV_ROW_LABELS;
   const CMP_LABEL_W = 80, CMP_COMPACT_W = 80;
   const cmpCompact = readCmpCompact();
   let cmpExpanded = {};
@@ -2588,7 +2691,7 @@
     const box = $("civ-hud");
     if (!majors.length) {
       const empty = document.createElement("div");
-      empty.className = "loading"; empty.textContent = "本回合无可显示的文明";
+      empty.className = "loading"; empty.textContent = L("本回合无可显示的文明");
       box.appendChild(empty);
       return;
     }
@@ -2607,10 +2710,10 @@
     majors.forEach((m, c) => {
       const head = add("cmp-head compact", c + 1, 1);
       head.dataset.ip = String(m.p.iPlayer);
-      head.title = [m.info.civName, m.info.leaderName, isSpectator(m.info) ? "观察者" : ""].filter(Boolean).join(" · ");
+      head.title = [m.info.civName, m.info.leaderName, isSpectator(m.info) ? L("观察者") : ""].filter(Boolean).join(" · ");
       const portrait = iconOf(m.info.leader);
       head.innerHTML = `<span class="hrow">` +
-        (portrait ? `<img class="cmp-portrait" src="${portrait}" alt="${m.info.leaderName || "领袖头像"}">` : "") + `</span>`;
+        (portrait ? `<img class="cmp-portrait" src="${portrait}" alt="${m.info.leaderName || L("领袖头像")}">` : "") + `</span>`;
     });
     const icons = [ICON_CITY, ICON_MIL, ICON_FOOD, ICON_PROD, ICON_SCI, ICON_CUL, ICON_GOLD, ICON_FAITH, ICON_DIPLO];
     Object.keys(CIV_ROW_LABELS).forEach((key, ri) => {
@@ -2631,7 +2734,8 @@
     try {
       const saved = JSON.parse(localStorage.getItem("civ6replay.cmpCompact.v1") || "{}");
       return saved && typeof saved === "object" && !Array.isArray(saved) ? saved : {};
-    } catch (e) { return {}; }
+    } catch (e) {
+      if (e.name === "AbortError") return; return {}; }
   }
 
   function isCmpCompact(ip) {
@@ -2639,7 +2743,8 @@
   }
 
   function compareColumns(order) {
-    return [CMP_LABEL_W + "px"].concat(order.map(ip =>
+    const labelWidth = window.Civ6I18n.language === "en" ? 148 : CMP_LABEL_W;
+    return [labelWidth + "px"].concat(order.map(ip =>
       isCmpCompact(ip) ? CMP_COMPACT_W + "px" : "minmax(0, 1fr)")).join(" ");
   }
 
@@ -2648,7 +2753,8 @@
     if (compact.has(ip)) compact.delete(ip); else compact.add(ip);
     cmpCompact[seed] = [...compact];
     try { localStorage.setItem("civ6replay.cmpCompact.v1", JSON.stringify(cmpCompact)); }
-    catch (e) { /* keep the preference for this page */ }
+    catch (e) {
+      if (e.name === "AbortError") return; /* keep the preference for this page */ }
     const scroll = $("civ-hud").querySelector(".cmp-scroll");
     const x = scroll?.scrollLeft || 0, y = scroll?.scrollTop || 0;
     if (currentTurn) renderHUD(currentTurn);
@@ -2659,9 +2765,9 @@
   function cmpStockHTML(p, key) {
     const gold = key === "gold";
     const stock = Number(gold ? p.gold : p.faith) || 0;
-    const rate = (Number((p.yields || {})[YIELD_BY_NAME[gold ? "金币" : "信仰"]]) || 0) -
+    const rate = (Number((p.yields || {})[YIELD_BY_NAME[gold ? L("金币") : L("信仰")]]) || 0) -
       (gold ? Number(p.maintenance) || 0 : 0);
-    return `<span class="cmp-stock" title="库存 / 每回合${gold ? "净收入" : "产出"}">` +
+    return `${L("<span class=\"cmp-stock\" title=\"库存 / 每回合")}${gold ? L("净收入") : L("产出")}">` +
       `<span class="${stock < 0 ? "neg" : ""}">${fmtNum(stock)}</span>` +
       `<span class="pct${rate < 0 ? " neg" : ""}">(${rate >= 0 ? "+" : ""}${fmtNum(rate)})</span></span>`;
   }
@@ -2672,12 +2778,14 @@
     try {
       const raw = JSON.parse(localStorage.getItem("civ6replay.cmpRowOrder") || "[]");
       return Array.isArray(raw) ? raw.filter((v) => typeof v === "string") : [];
-    } catch (e) { return []; }
+    } catch (e) {
+      if (e.name === "AbortError") return; return []; }
   }
 
   function saveCmpRowOrder() {
     try { localStorage.setItem("civ6replay.cmpRowOrder", JSON.stringify(cmpRowOrder)); }
-    catch (e) { /* storage may be unavailable */ }
+    catch (e) {
+      if (e.name === "AbortError") return; /* storage may be unavailable */ }
   }
 
   function orderRows(natural, saved) {
@@ -2690,12 +2798,14 @@
     try {
       const raw = JSON.parse(localStorage.getItem("civ6replay.civOrder") || "[]");
       return Array.isArray(raw) ? raw.filter((v) => typeof v === "number") : [];
-    } catch (e) { return []; }
+    } catch (e) {
+      if (e.name === "AbortError") return; return []; }
   }
 
   function saveCivOrder() {
     try { localStorage.setItem("civ6replay.civOrder", JSON.stringify(civOrder)); }
-    catch (e) { /* storage may be unavailable */ }
+    catch (e) {
+      if (e.name === "AbortError") return; /* storage may be unavailable */ }
   }
 
   // 拖拽过的顺序优先，其余按 payload 顺序（＝楼层）
@@ -2715,7 +2825,7 @@
     if (!list.length) {
       const empty = document.createElement("div");
       empty.className = "loading";
-      empty.textContent = "本回合无可对比的文明";
+      empty.textContent = L("本回合无可对比的文明");
       box.appendChild(empty);
       return;
     }
@@ -2724,8 +2834,8 @@
     const tools = document.createElement("div");
     tools.className = "cmp-tools";
     tools.innerHTML =
-      `<span class="cmp-hint">点击领袖格：收缩 / 恢复该列；点击数据行：展开 / 收起详细列。上下拖行、左右拖列，松开前预览，Esc 取消；布局会记住。</span>` +
-      `<span class="cmp-note">窄列显示图标与基本数值；金币、信仰分两行：库存 / 每回合变化。</span>`;
+      `${L("<span class=\"cmp-hint\">点击领袖格：收缩 / 恢复该列；点击数据行：展开 / 收起详细列。上下拖行、左右拖列，松开前预览，Esc 取消；布局会记住。</span>")}` +
+      `${L("<span class=\"cmp-note\">窄列显示图标与基本数值；金币、信仰分两行：库存 / 每回合变化。</span>")}`;
     box.appendChild(tools);
     // 每位玩家一张隐藏卡片（复用文明页的 9 行渲染），再按行拆进网格
     const cards = list.map((m) => ({ m: m, card: majorCard(m.p, m.info, payload) }));
@@ -2737,7 +2847,7 @@
     grid.className = "cmp-grid";
     grid.style.gridTemplateColumns = compareColumns(cmpOrder);
     grid.innerHTML =
-      `<div class="cmp-label cmp-corner" style="grid-column:1;grid-row:1">文明 / 数据</div>`;
+      `${L("<div class=\"cmp-label cmp-corner\" style=\"grid-column:1;grid-row:1\">文明 / 数据</div>")}`;
     list.forEach((m, c) => {
       const col = c + 2;
       const team = Number(m.info.team);
@@ -2747,16 +2857,16 @@
       grid.innerHTML +=
         `<div class="cmp-head${compact ? " compact" : ""}" data-ip="${m.p.iPlayer}" style="grid-column:${col};grid-row:1" ` +
         `role="button" tabindex="0" aria-expanded="${!compact}" ` +
-        `title="点击${compact ? "恢复该列详情" : "收缩该列，显示图标与基本数值"}；左右拖动调整文明顺序">` +
+        `${L("title=\"点击")}${compact ? L("恢复该列详情") : L("收缩该列，显示图标与基本数值")}${L("；左右拖动调整文明顺序\">")}` +
         `<span class="hrow">` +
         (portrait ? (compact
           ? `<img class="cmp-portrait" src="${portrait}" alt="">`
           : leaderPortraitHTML(m.info, m.p.iPlayer, portrait, "cmp")) : "") +
         `<span class="n" style="color:${civCol}">${m.info.civName || ("P" + m.p.iPlayer)}</span>` +
         `</span>` +
-        `<span class="t">${[m.info.leaderName || "", Number.isFinite(team) ? `团队 ${team + 1}` : ""]
+        `<span class="t">${[m.info.leaderName || "", Number.isFinite(team) ? `${L("团队 ")}${team + 1}` : ""]
           .filter(Boolean).join(" · ")}</span>` +
-        `<span class="hint">${compact ? "点击恢复详情" : "点击收缩数据"}</span>` +
+        `<span class="hint">${compact ? L("点击恢复详情") : L("点击收缩数据")}</span>` +
         (compact ? "" : leaderSkillsHTML(m.info, m.p.iPlayer, "cmp")) + `</div>`;
     });
     rowKeys.forEach((key, ri) => {
@@ -2764,7 +2874,7 @@
       const first = cards[0].card.querySelector(`.hud-row[data-row="${key}"]`);
       const icon = first && first.querySelector("img.hicon");
       grid.innerHTML +=
-        `<div class="cmp-label" data-row="${key}" title="上下拖动调整顺序；点击展开 / 收起详细列（窄列保持基本数值）" style="grid-column:1;grid-row:${row}">` +
+        `<div class="cmp-label" data-row="${key}${L("\" title=\"上下拖动调整顺序；点击展开 / 收起详细列（窄列保持基本数值）\" style=\"grid-column:1;grid-row:")}${row}">` +
         (icon ? `<img src="${icon.getAttribute("src")}" alt="">` : "") +
         `<span>${CIV_ROW_LABELS[key] || key}</span>` +
         `<span class="caret">${cmpExpanded[key] ? "▾" : "▸"}</span></div>`;
@@ -2990,13 +3100,13 @@
     let html = `<div class="head${dead ? "" : " clickable"}" data-jump="1">` +
       `<span class="name tinted" style="color:${col}">${info.civName || ("P" + p.iPlayer)}</span>` +
       `${typeTag(info.civStr)}` +
-      (dead ? `<span class="dead">已灭亡</span>` : "") +
+      (dead ? `${L("<span class=\"dead\">已灭亡</span>")}` : "") +
       `<span class="sub cs-flavour" style="color:${sec}"><span class="ring"></span>${info.flavour || "—"}</span></div>`;
     // v0.28.3: 观察者的使者按 0 计 —— 不画它的行 / 进度条
     const em = emissariesOf(p);
     const entries = Object.keys(em).map((k) => [parseInt(k, 10), em[k]]).sort((a, b) => b[1] - a[1]);
     if (!entries.length) {
-      html += `<div class="emissaries"><div class="no-emissary">无使者</div></div>`;
+      html += `${L("<div class=\"emissaries\"><div class=\"no-emissary\">无使者</div></div>")}`;
     } else {
       // v0.23: flag the suzerain (unique highest envoy count >= 3)
       const suz = suzerainOf(em);
@@ -3006,7 +3116,7 @@
         const pinfo = playerInfo(ip) || {};
         const pc = cssColor(pinfo.primary, 160);
         const pct = Math.min(100, (cnt / max) * 100);
-        const mark = ip === suz ? `<span class="suz">（宗主国）</span>` : "";
+        const mark = ip === suz ? `${L("<span class=\"suz\">（宗主国）</span>")}` : "";
         // v0.33: 文明名回到默认文字色 —— 深色面板上，主色里的深蓝 / 紫
         // （美国、罗马…）几乎看不见；颜色只留给进度条。
         html += `<div class="emissary">
@@ -3121,7 +3231,8 @@
         const wpt = navToWorld(px, py);
         dragging = true; start = wpt;
         camStart = { x: map.camX, y: map.camY };
-        try { el.setPointerCapture(ev.pointerId); } catch (e) { /* optional */ }
+        try { el.setPointerCapture(ev.pointerId); } catch (e) {
+      if (e.name === "AbortError") return; /* optional */ }
         el.style.cursor = "grabbing";
       } else {
         // outside: jump so that point ends up in the middle of the map
@@ -3288,12 +3399,12 @@
     if (!box) return;
     box.innerHTML = "";
     if (cnt) {
-      if (!searchQuery) cnt.textContent = searchExclude ? "请先填写包含条件" : "";
+      if (!searchQuery) cnt.textContent = searchExclude ? L("请先填写包含条件") : "";
       else cnt.textContent = searchResult.total
-        ? `共 ${searchResult.total} 处` +
+        ? `${L("共 ")}${searchResult.total}${L(" 处")}` +
           (searchResult.total > searchResult.hits.length
-            ? `（显示前 ${searchResult.hits.length}）` : "")
-        : "无匹配";
+            ? `${L("（显示前 ")}${searchResult.hits.length}）` : "")
+        : L("无匹配");
     }
     const w = currentTurn ? currentTurn.width : 0;
     for (const h of searchResult.hits) {
@@ -3317,13 +3428,15 @@
     $("savedir-use-default").onclick = () => { $("savedir-input").value = savedirDefault; };
     // v0.26: the OS folder dialog (Windows only; a 501 keeps the manual box)
     $("savedir-pick").onclick = async () => {
+      const revision = languageSeq;
       const btn = $("savedir-pick");
       btn.disabled = true;
       try {
-        const resp = await fetch("/api/savedir/pick", { method: "POST" });
+        const resp = await fetch(window.Civ6I18n.url("/api/savedir/pick"), { method: "POST" });
         const body = await resp.json().catch(() => ({}));
+        if (revision !== languageSeq) return;
         if (!resp.ok) {
-          showSaveDirError(body.detail || ("无法打开目录选择框（HTTP " + resp.status + "）"));
+          showSaveDirError(body.detail || (L("无法打开目录选择框（HTTP ") + resp.status + "）"));
           return;
         }
         if (body.path) {
@@ -3331,7 +3444,8 @@
           $("savedir-error").classList.add("hidden");
         }
       } catch (e) {
-        showSaveDirError("无法打开目录选择框：" + e.message);
+      if (e.name === "AbortError") return;
+        showSaveDirError(L("无法打开目录选择框：") + e.message);
       } finally {
         btn.disabled = false;
       }
@@ -3339,7 +3453,7 @@
     $("savedir-parent").onclick = () => {
       if (!savedirParent) return;
       $("savedir-input").value = savedirParent;
-      loadSaveDirTree(savedirParent).catch((e) => showSaveDirError("无法读取目录：" + e.message));
+      loadSaveDirTree(savedirParent).catch((e) => showSaveDirError(L("无法读取目录：") + e.message));
     };
     $("savedir-modal").addEventListener("click", (e) => {
       if (e.target === $("savedir-modal")) $("savedir-modal").classList.add("hidden");
@@ -3353,7 +3467,7 @@
   }
 
   async function openSaveDirModal() {
-    if (shareLockNote("存档目录")) return;
+    if (shareLockNote(L("存档目录"))) return;
     $("savedir-modal").classList.remove("hidden");
     $("savedir-error").classList.add("hidden");
     $("savedir-tree").innerHTML = "";
@@ -3365,7 +3479,8 @@
       $("savedir-input").value = cur.current || "";
       await loadSaveDirTree(cur.current);
     } catch (e) {
-      showSaveDirError("无法读取目录信息：" + e.message);
+      if (e.name === "AbortError") return;
+      showSaveDirError(L("无法读取目录信息：") + e.message);
     }
   }
 
@@ -3377,7 +3492,8 @@
     box.innerHTML = "";
     const title = document.createElement("div");
     title.className = "dir-title";
-    title.textContent = res.path || "本机盘符";
+    title.textContent = res.path || L("本机盘符");
+    if (!res.path) title.dataset.i18n = "本机盘符";
     box.appendChild(title);
     for (const d of res.dirs) box.appendChild(saveDirNode(d, 0));
   }
@@ -3398,7 +3514,8 @@
     if (dir.hasSaves) {
       const flag = document.createElement("span");
       flag.className = "dir-flag";
-      flag.textContent = "含存档";
+      flag.textContent = L("含存档");
+      flag.dataset.i18n = "含存档";
       row.appendChild(flag);
     }
     name.onclick = () => { $("savedir-input").value = dir.path; };
@@ -3419,7 +3536,7 @@
         kids.classList.remove("hidden");
         caret.textContent = "▾";
       } catch (err) {
-        showSaveDirError("无法读取目录：" + err.message);
+        showSaveDirError(L("无法读取目录：") + err.message);
       }
     };
     node.appendChild(row); node.appendChild(kids);
@@ -3427,33 +3544,34 @@
   }
 
   async function confirmSaveDir() {
+    const revision = languageSeq;
     const path = $("savedir-input").value.trim();
-    if (!path) { showSaveDirError("请输入或从目录树选择路径"); return; }
+    if (!path) { showSaveDirError(L("请输入或从目录树选择路径")); return; }
     try {
-      const resp = await fetch("/api/savedir", {
+      const resp = await fetch(window.Civ6I18n.url("/api/savedir"), {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ path: path }),
       });
       const body = await resp.json().catch(() => ({}));
+      if (revision !== languageSeq) return;
       if (!resp.ok) {
-        showSaveDirError(body.detail || ("切换失败（HTTP " + resp.status + "）"));
+        showSaveDirError(body.detail || (L("切换失败（HTTP ") + resp.status + "）"));
         return;
       }
       $("savedir-modal").classList.add("hidden");
       await loadReplayList();
     } catch (e) {
-      showSaveDirError("切换失败：" + e.message);
+      if (e.name === "AbortError") return;
+      showSaveDirError(L("切换失败：") + e.message);
     }
   }
 
   // --- v0.38 共享 -----------------------------------------------------------
   // 共享由后端真正另起一个对外监听器（见 civ6replay/share.py）；前端只负责挑选
   // 写进链接的地址、拼分享文案，并把「刷新存档 / 存档目录」锁掉。
-  const SHARE_KIND_ZH = { public: "公网", uu: "UU 虚拟网", lan: "本机局域网",
-                          manual: "手填地址", none: "未选定" };
-  const SHARE_SOURCE_ZH = { nic: "本机网卡", metadata: "云元数据", echo: "外部回显",
-                            manual: "手填" };
-  const SHARE_GROUPS = [["public", "公网 IP"], ["uu", "UU 虚拟网"], ["lan", "其它本机 IP"]];
+  let SHARE_KIND_ZH;
+  let SHARE_SOURCE_ZH;
+  let SHARE_GROUPS;
 
   let shareState = null, shareHost = null, sharePort = null, shareBusy = false;
   // 当前页面是不是从本机（127.0.0.1 / ::1）打开的 —— 不是的话这是「被共享的那一页」：
@@ -3486,7 +3604,8 @@
   // 刷新页面后恢复按钮与锁定态；非本机访客的共享按钮置灰
   async function initShare() {
     let info = null;
-    try { info = await getJSON("/api/share"); } catch (e) { return; }
+    try { info = await getJSON("/api/share"); } catch (e) {
+      if (e.name === "AbortError") return; return; }
     shareLocal = !!info.isLocal;
     if (!shareLocal) {
       // 访客页（被共享的那一页）：刷新存档 / 存档目录整条删掉 —— 那是主机上的操作
@@ -3503,23 +3622,23 @@
   // 共享中：顶上那两个按钮变灰但**仍然可点**，点一下说明为什么按不动
   function shareLockNote(what) {
     if (!shareState || !shareState.enabled) return false;
-    const where = shareState.base ? `（${shareState.base} 正在被别人看着）` : "";
-    setBanner(`共享中已锁定「${what}」${where}：`
-              + "主机一改，别人看到的就不是同一局了。先点顶栏「停止共享」再操作。", true);
+    const where = shareState.base ? `（${shareState.base}${L(" 正在被别人看着）")}` : "";
+    setBanner(`${L("共享中已锁定「")}${what}」${where}：`
+              + L("主机一改，别人看到的就不是同一局了。先点顶栏「停止共享」再操作。"), true);
     return true;
   }
 
   function setShareLock(on) {
     const btn = $("btn-share");
     // 访客页的共享按钮是「复制链接」（复制当前回合，方便刷新回同一个局面）
-    btn.textContent = !shareLocal ? "复制链接" : (on ? "停止共享" : "共享");
+    btn.textContent = !shareLocal ? L("复制链接") : (on ? L("停止共享") : L("共享"));
     btn.classList.toggle("active", on && shareLocal);
-    btn.title = !shareLocal ? "复制当前回合的复盘链接"
-               : (on ? "停止共享（点击即关闭对外监听并解锁）" : "共享复盘");
+    btn.title = !shareLocal ? L("复制当前回合的复盘链接")
+               : (on ? L("停止共享（点击即关闭对外监听并解锁）") : L("共享复盘"));
     // 锁定用的是「变灰但仍可点」，不能用 disabled —— 那样点上去一点反馈都没有
     for (const id of ["btn-refresh", "btn-savedir"]) $(id).classList.toggle("btn-blocked", on);
-    $("btn-refresh").title = on ? "共享中已锁定（点击看原因）" : "重新扫描存档";
-    $("btn-savedir").title = on ? "共享中已锁定（点击看原因）" : "选择存档目录";
+    $("btn-refresh").title = on ? L("共享中已锁定（点击看原因）") : L("重新扫描存档");
+    $("btn-savedir").title = on ? L("共享中已锁定（点击看原因）") : L("选择存档目录");
     // 访客页面没有共享开关，自然也不给「链接」入口
     $("btn-share-link").classList.toggle("hidden", !on || !shareLocal);
     if (on) $("savedir-modal").classList.add("hidden");
@@ -3529,15 +3648,16 @@
     if (shareBusy) return;
     shareBusy = true;
     $("share-modal").classList.remove("hidden");
-    $("share-state").textContent = "正在启动共享监听…";
-    $("share-reach").textContent = "正在检测…";
+    $("share-state").textContent = L("正在启动共享监听…");
+    $("share-reach").textContent = L("正在检测…");
     let info = null;
     try {
       info = await postJSON("/api/share/start", {});
       applyShareInfo(info);
       setShareLock(true);
     } catch (e) {
-      $("share-state").textContent = "启动失败：" + e.message;
+      if (e.name === "AbortError") return;
+      $("share-state").textContent = L("启动失败：") + e.message;
     } finally {
       shareBusy = false;
     }
@@ -3548,7 +3668,8 @@
   async function stopShare() {
     if (shareBusy) return;
     shareBusy = true;
-    try { await postJSON("/api/share/stop", {}); } catch (e) { /* 后端已停 */ }
+    try { await postJSON("/api/share/stop", {}); } catch (e) {
+      if (e.name === "AbortError") return; /* 后端已停 */ }
     shareState = null; shareHost = null; sharePort = null;
     setShareLock(false);
     $("share-modal").classList.add("hidden");
@@ -3566,18 +3687,19 @@
     if (rawPort) {
       const n = parseInt(rawPort, 10);
       if (!Number.isFinite(n) || n < 1 || n > 65535) {
-        $("share-state").textContent = "端口要是 1-65535 的数字。";
+        $("share-state").textContent = L("端口要是 1-65535 的数字。");
         return;
       }
       body.port = n;
     }
     shareBusy = true;
-    $("share-state").textContent = "正在应用…";
+    $("share-state").textContent = L("正在应用…");
     try {
       applyShareInfo(await postJSON("/api/share/start", body));
       setShareLock(true);
     } catch (e) {
-      $("share-state").textContent = "应用失败：" + e.message;
+      if (e.name === "AbortError") return;
+      $("share-state").textContent = L("应用失败：") + e.message;
     } finally {
       shareBusy = false;
     }
@@ -3586,7 +3708,7 @@
   async function refreshShareProbe({ remote }) {
     if (shareBusy) return;
     shareBusy = true;
-    if (remote) $("share-reach").textContent = "正在检测本机地址（含云元数据 / 外部回显）…";
+    if (remote) $("share-reach").textContent = L("正在检测本机地址（含云元数据 / 外部回显）…");
     try {
       const q = new URLSearchParams();
       if (shareHost) q.set("host", shareHost);
@@ -3596,7 +3718,8 @@
       applyShareInfo(info);
       setShareLock(!!info.enabled);
     } catch (e) {
-      $("share-reach").textContent = "检测失败：" + e.message;
+      if (e.name === "AbortError") return;
+      $("share-reach").textContent = L("检测失败：") + e.message;
     } finally {
       shareBusy = false;
     }
@@ -3610,15 +3733,15 @@
     const kind = SHARE_KIND_ZH[info.kind] || info.kind;
     const src = SHARE_SOURCE_ZH[info.source] || info.source;
     $("share-state").textContent = info.base
-      ? `${info.enabled ? "共享中" : "未共享"} · ${info.base}（${kind}，${src}）`
-      : `${info.enabled ? "共享中" : "未共享"} · ${kind}`;
+      ? `${info.enabled ? L("共享中") : L("未共享")} · ${info.base}（${kind}，${src}）`
+      : `${info.enabled ? L("共享中") : L("未共享")} · ${kind}`;
     $("share-reach").textContent = (info.reach && info.reach.detail) || "—";
     $("share-note").textContent = info.note || "";
     renderShareHosts(info.candidates || []);
     if (document.activeElement !== $("share-port-input")) {
       $("share-port-input").value = info.port || "";
     }
-    $("share-port-input").placeholder = String(info.port || "端口");
+    $("share-port-input").placeholder = String(info.port || L("端口"));
     $("share-text").value = composeShareText(info);
     $("share-stop").disabled = !info.enabled;
   }
@@ -3646,21 +3769,21 @@
       const opt = document.createElement("option");
       opt.value = keep;
       opt.textContent = keep + " · " +
-        (SHARE_KIND_ZH[(shareState && shareState.kind) || ""] || "当前");
+        (SHARE_KIND_ZH[(shareState && shareState.kind) || ""] || L("当前"));
       sel.appendChild(opt);
     }
     if (keep) sel.value = keep;
   }
 
   function composeShareText(info) {
-    if (!info || !info.base) return "尚未检测到可用地址：请从上面选一个，或手填 ip:端口。";
+    if (!info || !info.base) return L("尚未检测到可用地址：请从上面选一个，或手填 ip:端口。");
     const q = [];
     if (seed != null) q.push("seed=" + seed);
     if (currentTurn && currentTurn.turn != null) {
       q.push("turn=" + Math.max(0, currentTurn.turn));
     }
     const url = info.base + "/" + (q.length ? "?" + q.join("&") : "");
-    let text = `复盘链接 ${url}，可在浏览器中查看`;
+    let text = `${L("复盘链接 ")}${url}${L("，可在浏览器中查看")}`;
     if (info.hint) text += "\n" + info.hint;      // UU 场景的额外提醒
     return text;
   }
@@ -3677,7 +3800,8 @@
   async function copyText(text) {
     const value = text || "";
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      try { await navigator.clipboard.writeText(value); return true; } catch (e) { /* 走退路 */ }
+      try { await navigator.clipboard.writeText(value); return true; } catch (e) {
+      if (e.name === "AbortError") return; /* 走退路 */ }
     }
     const box = document.createElement("textarea");
     box.value = value;
@@ -3686,7 +3810,8 @@
     box.style.left = "-9999px";
     document.body.appendChild(box);
     let ok = false;
-    try { box.select(); ok = document.execCommand("copy"); } catch (e) { ok = false; }
+    try { box.select(); ok = document.execCommand("copy"); } catch (e) {
+      if (e.name === "AbortError") return; ok = false; }
     document.body.removeChild(box);
     window.getSelection().removeAllRanges();
     return ok;
@@ -3694,7 +3819,7 @@
 
   async function copyShareText() {
     const ok = await copyText($("share-text").value);
-    $("share-copied").textContent = ok ? "已复制" : "复制失败，请手动选中复制";
+    $("share-copied").textContent = ok ? L("已复制") : L("复制失败，请手动选中复制");
     setTimeout(() => { $("share-copied").textContent = ""; }, 2000);
   }
 
@@ -3709,11 +3834,11 @@
     const url = location.origin + location.pathname + (q.length ? "?" + q.join("&") : "");
     const btn = $("btn-share");
     const ok = await copyText(url);
-    btn.textContent = ok ? "已复制" : "复制失败";
-    btn.title = ok ? url : "复制失败，请手动从地址栏复制";
+    btn.textContent = ok ? L("已复制") : L("复制失败");
+    btn.title = ok ? url : L("复制失败，请手动从地址栏复制");
     setTimeout(() => {
-      btn.textContent = "复制链接";
-      btn.title = "复制当前回合的复盘链接";
+      btn.textContent = L("复制链接");
+      btn.title = L("复制当前回合的复盘链接");
     }, 1600);
   }
 
@@ -3733,8 +3858,8 @@
   }
   function districtTypeName(dh) {
     const h = dh >>> 0;
-    if (h === DISTRICT_CITY_CENTER) return "市中心";
-    if (h === DISTRICT_WONDER) return "奇观";
+    if (h === DISTRICT_CITY_CENTER) return L("市中心");
+    if (h === DISTRICT_WONDER) return L("奇观");
     return nameOf(h);
   }
   // v0.25 (文档 C1): the district on a tile, by its *type* (``tiles.district``
@@ -3768,15 +3893,15 @@
     const hash = tt.wonder[i];
     if (hash == null || (hash >>> 0) === 0xFFFFFFFF) return "";
     const host = (found && cityById(found.iPlayer, found.d.cityId)) || cityById(tt.owner[i], tt.city[i]);
-    if (host) return (host.built || {})[hashStr(hash)] === i ? "已建成" : "建造中";
-    return found && found.d.built === 0 ? "建造中" : "";
+    if (host) return (host.built || {})[hashStr(hash)] === i ? L("已建成") : L("建造中");
+    return found && found.d.built === 0 ? L("建造中") : "";
   }
 
   function tileWonderHTML(i, tt, found) {
     const hash = tt.wonder[i];
     if (hash == null || (hash >>> 0) === 0xFFFFFFFF) return "";
     const status = tileWonderStatus(i, tt, found);
-    return nameHTML(hash) + (status ? `<span class="dstat${status === "建造中" ? " wip" : ""}">（${status}）</span>` : "");
+    return nameHTML(hash) + (status ? `<span class="dstat${status === L("建造中") ? " wip" : ""}">（${status}）</span>` : "");
   }
   // v0.30: the game pillages a district layer by layer - the topmost building
   // first, the district itself last - so a district can be intact while some of
@@ -3802,11 +3927,11 @@
     if (!ev || ev.i < 0 || !currentTurn) { tip.classList.add("hidden"); return; }
     const tt = currentTurn.tiles;
     const lines = [nameOf(tt.terrain[ev.i])];
-    if ((tt.feature[ev.i] >>> 0) !== 0xFFFFFFFF) lines.push("地貌: " + nameOf(tt.feature[ev.i]));
-    if ((tt.resource[ev.i] >>> 0) !== 0xFFFFFFFF) lines.push("资源: " + nameOf(tt.resource[ev.i]));
+    if ((tt.feature[ev.i] >>> 0) !== 0xFFFFFFFF) lines.push(L("地貌: ") + nameOf(tt.feature[ev.i]));
+    if ((tt.resource[ev.i] >>> 0) !== 0xFFFFFFFF) lines.push(L("资源: ") + nameOf(tt.resource[ev.i]));
     if ((tt.improvement[ev.i] >>> 0) !== 0xFFFFFFFF) {
-      let s = "改良: " + nameOf(tt.improvement[ev.i]);
-      if ((tt.flags[ev.i] & 2)) s += "（被掠夺）";
+      let s = L("改良: ") + nameOf(tt.improvement[ev.i]);
+      if ((tt.flags[ev.i] & 2)) s += L("（被掠夺）");
       lines.push(s);
     }
     const dist = districtAt(ev.i);
@@ -3814,15 +3939,15 @@
       const d = dist.d;
       if ((d.type >>> 0) !== DISTRICT_WONDER) {
         const host = cityById(dist.iPlayer, d.cityId);
-        const st = d.built === 0 ? "建设中" : (d.pillage === 1 ? "被掠夺" : "已建成");
-        let s = "区域: " + nameOf(d.type) + "（" + st + "）";
+        const st = d.built === 0 ? L("建设中") : (d.pillage === 1 ? L("被掠夺") : L("已建成"));
+        let s = L("区域: ") + nameOf(d.type) + "（" + st + "）";
         // v0.25 (文档 C1): 血量 (max − damage), same wording as the city panel
-        if (districtHPMax(d)) s += " 血量 " + districtHPText(d);
-        if (d.wall) s += " 城墙 " + districtWallText(d, host, dist.iPlayer);
+        if (districtHPMax(d)) s += L(" 血量 ") + districtHPText(d);
+        if (d.wall) s += L(" 城墙 ") + districtWallText(d, host, dist.iPlayer);
         lines.push(s);
         if (d.adjacency != null) {
           const positive = Object.entries(d.adjacency).filter(([, v]) => v > 0);
-          const label = d.built === 0 ? "预计相邻" : "基础相邻";
+          const label = d.built === 0 ? L("预计相邻") : L("基础相邻");
           lines.push(label + ": " + (positive.length ? positive.map(([yh, v]) =>
             (((staticInfo.yieldMeta || {})[yh] || {}).name || nameOf(Number(yh))) +
               " +" + v).join("、") : "0"));
@@ -3831,17 +3956,17 @@
         if (bl.length) {
           // v0.30: mark the buildings that are pillaged *individually* (the
           // district flag alone would mislabel an intact-but-stripped district)
-          lines.push("建筑: " + bl.map((bh) => nameOf(bh) +
-                     (isBuildingPillaged(host, bh, d) ? "（被掠夺）" : ""))
+          lines.push(L("建筑: ") + bl.map((bh) => nameOf(bh) +
+                     (isBuildingPillaged(host, bh, d) ? L("（被掠夺）") : ""))
                      .join("、"));
         }
       }
     }
     if ((tt.wonder[ev.i] >>> 0) !== 0xFFFFFFFF) {
       const status = tileWonderStatus(ev.i, tt, dist);
-      lines.push("奇观: " + nameOf(tt.wonder[ev.i]) + (status ? `（${status}）` : ""));
+      lines.push(L("奇观: ") + nameOf(tt.wonder[ev.i]) + (status ? `（${status}）` : ""));
     }
-    if (tt.owner[ev.i] >= 0) lines.push("归属: " + playerName(tt.owner[ev.i]));
+    if (tt.owner[ev.i] >= 0) lines.push(L("归属: ") + playerName(tt.owner[ev.i]));
     tip.innerHTML = lines.join("<br>");
     tip.style.left = (ev.x + 14) + "px"; tip.style.top = (ev.y + 14) + "px";
     tip.classList.remove("hidden");
@@ -3854,15 +3979,15 @@
     const p = (currentTurn.players || []).find((x) => x.iPlayer === ev.city.iPlayer);
     const c = p && (p.cities || []).find((x) => x.id === ev.city.cityId);
     if (!c) { tip.classList.add("hidden"); return; }
-    const lines = [`<b>${c.name || "?"}</b>`, "人口 " + c.population];
+    const lines = [`<b>${c.name || "?"}</b>`, L("人口 ") + c.population];
     if (cityWall(ev.city.iPlayer, c)) {
-      lines.push("城墙 " + wallText(ev.city.iPlayer, c, c.wallDamage));
+      lines.push(L("城墙 ") + wallText(ev.city.iPlayer, c, c.wallDamage));
     }
     if (c.religion != null && (c.religion >>> 0) !== 0xFFFFFFFF) {
-      lines.push("主流宗教: " + religionName(c.religion));
+      lines.push(L("主流宗教: ") + religionName(c.religion));
     }
     const prod = (c.currentProds || [])[0];
-    if (prod != null) lines.push("当前生产: " + nameOf(prod));
+    if (prod != null) lines.push(L("当前生产: ") + nameOf(prod));
     tip.innerHTML = lines.join("<br>");
     tip.style.left = (ev.x + 14) + "px"; tip.style.top = (ev.y + 14) + "px";
     tip.classList.remove("hidden");
@@ -3901,8 +4026,8 @@
       activeTab = "terrain";
     }
     if (!keepHidden) openPanel("tile");
-    $("tile-title").textContent = `格子 #${i}  (${i % currentTurn.width}, ${(i / currentTurn.width) | 0})`;
-    const tabs = [["信息", "terrain"], ["产出", "yields"], ["区域", "district"], ["单位", "units"]];
+    $("tile-title").textContent = `${L("格子 #")}${i}  (${i % currentTurn.width}, ${(i / currentTurn.width) | 0})`;
+    const tabs = [[L("信息"), "terrain"], [L("产出"), "yields"], [L("区域"), "district"], [L("单位"), "units"]];
     const keys = tabs.map((t) => t[1]);
     if (keys.indexOf(activeTab) < 0) activeTab = "terrain";
     const tabsBox = $("tile-tabs"); tabsBox.innerHTML = "";
@@ -3979,7 +4104,7 @@
 
   function continentLuxuryHTML(hash) {
     const types = map.continentLuxuryResources(hash).slice(0, 4);
-    if (!types.length) return '<span class="muted">无陆地奢侈品</span>';
+    if (!types.length) return L('<span class="muted">无陆地奢侈品</span>');
     return types.map((h) => {
       const icon = iconOf(h);
       return `<span class="continent-luxury">${icon ? `<img src="${icon}" alt="" width="18" height="18">` : ""}${nameHTML(h)}</span>`;
@@ -3989,20 +4114,20 @@
   async function renderTab(key, i, tt) {
     if (key === "terrain") {
       const rows = [
-        ["地形", terrainNameHTML(tt.terrain[i], tt.continent[i])],
-        ["地貌", fmtName(tt.feature[i])],
-        ["资源", fmtName(tt.resource[i])],
-        ["改良", fmtName(tt.improvement[i]) + (((tt.improvement[i] >>> 0) !== 0xFFFFFFFF && (tt.flags[i] & 2)) ? " <span class='muted'>（被掠夺）</span>" : "")],
-        ["道路", routeName(tt.road[i])],
-        ["魅力", String(tt.appeal[i])],
+        [L("地形"), terrainNameHTML(tt.terrain[i], tt.continent[i])],
+        [L("地貌"), fmtName(tt.feature[i])],
+        [L("资源"), fmtName(tt.resource[i])],
+        [L("改良"), fmtName(tt.improvement[i]) + (((tt.improvement[i] >>> 0) !== 0xFFFFFFFF && (tt.flags[i] & 2)) ? L(" <span class='muted'>（被掠夺）</span>") : "")],
+        [L("道路"), routeName(tt.road[i])],
+        [L("魅力"), String(tt.appeal[i])],
         // v0.31: 核污染 —— 剩余回合数（0 = 未受污染，显示「无」）
-        ["污染", falloutText(tt.fallout ? tt.fallout[i] : 0)],
-        ["河流", (tt.riverBits[i] & 0xFF) ? ((tt.riverBits[i] & 0xFF) + " 边") : "无"],
-        ["悬崖", tt.cliffBits[i] ? "有" : "无"],
-        ["归属", tt.owner[i] >= 0 ? playerName(tt.owner[i]) : "—"],
-        ["所属城市", cityLinkHTML(tt.owner[i], tt.city[i])],
-        ["区域", districtTypeAt(i) || "—"],
-        ["大陆", continentHTML(tt.continent[i])],
+        [L("污染"), falloutText(tt.fallout ? tt.fallout[i] : 0)],
+        [L("河流"), (tt.riverBits[i] & 0xFF) ? ((tt.riverBits[i] & 0xFF) + L(" 边")) : L("无")],
+        [L("悬崖"), tt.cliffBits[i] ? L("有") : L("无")],
+        [L("归属"), tt.owner[i] >= 0 ? playerName(tt.owner[i]) : "—"],
+        [L("所属城市"), cityLinkHTML(tt.owner[i], tt.city[i])],
+        [L("区域"), districtTypeAt(i) || "—"],
+        [L("大陆"), continentHTML(tt.continent[i])],
       ];
       let html = '<div class="kv">';
       for (const [k, v] of rows) html += `<div class="k">${k}</div><div class="v">${v}</div>`;
@@ -4012,14 +4137,14 @@
     if (key === "yields") return tileYieldPanel((currentTurn.tileYields || [])[i]);
     if (key === "units") {
       const list = (currentTurn.units || []).filter((u) => (u.y * currentTurn.width + u.x) === i);
-      if (!list.length) return "<div class='loading'>无单位</div>";
+      if (!list.length) return L("<div class='loading'>无单位</div>");
       return list.map((u) => {
         const ic = iconOf(u.type);
-        const cat = CAT_ZH[u.cat] || "军事";
+        const cat = CAT_ZH[u.cat] || L("军事");
         const label = armyLabel(u.army, u.sea);
         const details = [playerName(u.iPlayer), unitHealthHTML(u) + unitPromotionHTML(u),
           label ? `<span class="stars">${armyStars(u.army)}</span>${label}` : "",
-          isMilitaryUnit(u) && u.fortified ? "驻守" : "",
+          isMilitaryUnit(u) && u.fortified ? L("驻守") : "",
           showCoord ? `(${u.x},${u.y})` : ""].filter(Boolean).join(" · ");
         return `<div class="unit-line"><span class="swatch" style="background:${playerPrimary(u.iPlayer)}"></span>${ic ? `<img src="${ic}" width="18" height="18">` : ""}
           <span><b>${nameHTML(u.type)}</b><span class="cat">${cat}</span></span>
@@ -4029,36 +4154,36 @@
     if (key === "district") {
       const found = districtAt(i);
       const wonder = tileWonderHTML(i, tt, found);
-      const wonderRow = wonder ? `<div class="kv"><div class="k">奇观</div><div class="v">${wonder}</div></div>` : "";
+      const wonderRow = wonder ? `${L("<div class=\"kv\"><div class=\"k\">奇观</div><div class=\"v\">")}${wonder}</div></div>` : "";
       if (!found) return wonderRow;
       const d = found.d;
       const isWonderMarker = (d.type >>> 0) === DISTRICT_WONDER;
       if (isWonderMarker) return wonderRow;
-      const status = d.built === 0 ? "建设中" : (d.pillage === 1 ? "被掠夺" : "已建成");
+      const status = d.built === 0 ? L("建设中") : (d.pillage === 1 ? L("被掠夺") : L("已建成"));
       const host = cityById(found.iPlayer, d.cityId);
       const rows = [
-        ["区域", nameHTML(d.type)],
-        ["状态", status],
-        ["所属城市", host ? host.name : ("#" + d.cityId)],
-        ["归属", playerName(found.iPlayer)],
+        [L("区域"), nameHTML(d.type)],
+        [L("状态"), status],
+        [L("所属城市"), host ? host.name : ("#" + d.cityId)],
+        [L("归属"), playerName(found.iPlayer)],
       ];
       if (districtHPMax(d)) {
-        rows.push(["血量", districtHPText(d)], ["城墙", districtWallText(d, host, found.iPlayer)]);
+        rows.push([L("血量"), districtHPText(d)], [L("城墙"), districtWallText(d, host, found.iPlayer)]);
       }
       let html = '<div class="kv">';
       for (const [k, v] of rows) html += `<div class="k">${k}</div><div class="v">${v}</div>`;
       html += "</div>";
       const bl = host ? builtAt(host, i) : [];
       html += adjacencySourcePanel(d);
-      html += `<div style="margin-top:8px">建筑：`;
-      if (!bl.length) html += "<span class='muted'>无</span>";
+      html += `${L("<div style=\"margin-top:8px\">建筑：")}`;
+      if (!bl.length) html += L("<span class='muted'>无</span>");
       else {
         html += bl.map((bh) => {
           const ic = iconOf(bh);
           // v0.30: per-building pillage state instead of "every building of a
           // pillaged district"
           const mark = isBuildingPillaged(host, bh, d)
-            ? `<span class="bld-pillaged">（被掠夺）</span>` : "";
+            ? `${L("<span class=\"bld-pillaged\">（被掠夺）</span>")}` : "";
           return `<span class="chip">${ic ? `<img src="${ic}">` : ""}${nameHTML(bh)}${mark}</span>`;
         }).join("");
       }
@@ -4078,7 +4203,7 @@
   function terrainNameHTML(h, continent) {
     const info = names[hashStr(h)];
     if (!info || info.type !== "TERRAIN_COAST") return fmtName(h);
-    const label = isContinent(continent) ? "湖泊" : "海岸";
+    const label = isContinent(continent) ? L("湖泊") : L("海岸");
     return label + typeTag(info.type);
   }
 
@@ -4105,17 +4230,17 @@
   function tileYieldPanel(record) {
     const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g,
       (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-    record = record || { status: "unavailable", missing: ["该回合尚无产出计算结果"], breakdown: [] };
+    record = record || { status: "unavailable", missing: [L("该回合尚无产出计算结果")], breakdown: [] };
     const partial = record.status === "partial";
-    let html = `<div class="sec-title">${partial ? "已计算产出" : "单元格产出"}` +
-      `<span class="note">（未计灾害额外产出）</span></div>`;
+    let html = `<div class="sec-title">${partial ? L("已计算产出") : L("单元格产出")}` +
+      `${L("<span class=\"note\">（未计灾害额外产出）</span></div>")}`;
     if (record.status !== "unavailable") html += tileYieldGrid(record.yields);
     if ((record.missing || []).length) {
-      html += `<div class="tile-yield-note">${record.status === "unavailable" ? "暂不可用：" : "尚未完整计算："}` +
+      html += `<div class="tile-yield-note">${record.status === "unavailable" ? L("暂不可用：") : L("尚未完整计算：")}` +
         record.missing.map(esc).join("；") + "</div>";
     }
     if ((record.breakdown || []).length) {
-      html += `<div class="tile-yield-details"><div class="sec-title">产出来源</div>`;
+      html += `${L("<div class=\"tile-yield-details\"><div class=\"sec-title\">产出来源</div>")}`;
       const sources = new Map();
       for (const row of record.breakdown) {
         const key = JSON.stringify([row.source, row.sourceType || row.type || row.name || ""]);
@@ -4127,7 +4252,7 @@
         if (row.note) group.notes.add(row.note);
       }
       const excluded = (group) => !Object.values(group.yields).some((amount) => amount !== 0) &&
-        ([...group.notes].some((note) => note.includes("不计入")) || group.source.includes("不计入"));
+        ([...group.notes].some((note) => note.includes(L("不计入"))) || group.source.includes(L("不计入")));
       const groups = [...sources.values()].sort((a, b) => Number(excluded(a)) - Number(excluded(b)));
       for (const group of groups) {
         const numeric = Object.keys(group.yields).length ? tileYieldGrid(group.yields) : "";
@@ -4192,7 +4317,7 @@
     if (panels.city.hidden) return;
     const found = cityTarget && findCity(cityTarget.iPlayer, cityTarget.cityId);
     if (!found) {
-      $("city-title").textContent = "城市";
+      $("city-title").textContent = L("城市");
       $("city-body").innerHTML = "";
       if (map) map.setCityHighlight(null, null);
       return;
@@ -4207,34 +4332,27 @@
     const gov = governorCellHTML(c);
     // v0.24: ``damage`` is damage *taken* (0 = untouched), so show what is left
     const hp = Math.max(0, 200 - (Number(c.damage) || 0));
-    let html = `<div class="kv">
-      <div class="k">城市</div><div class="v">${c.name}</div>
-      <div class="k">归属</div><div class="v">${playerName(p.iPlayer)}</div>
-      <div class="k">人口</div><div class="v">${c.population}</div>
-      <div class="k">总督</div><div class="v">${gov}</div>
-      <div class="k">血量</div><div class="v">${hp} / 200</div>
-      <div class="k">城墙</div><div class="v">${wallText(p.iPlayer, c, c.wallDamage)}</div>
-      <div class="k">宗教</div><div class="v">${religionCellHTML(c.religion)}</div>
+    let html = `${L("<div class=\"kv\">\n      <div class=\"k\">城市</div><div class=\"v\">")}${c.name}${L("</div>\n      <div class=\"k\">归属</div><div class=\"v\">")}${playerName(p.iPlayer)}${L("</div>\n      <div class=\"k\">人口</div><div class=\"v\">")}${c.population}${L("</div>\n      <div class=\"k\">总督</div><div class=\"v\">")}${gov}${L("</div>\n      <div class=\"k\">血量</div><div class=\"v\">")}${hp}${L(" / 200</div>\n      <div class=\"k\">城墙</div><div class=\"v\">")}${wallText(p.iPlayer, c, c.wallDamage)}${L("</div>\n      <div class=\"k\">宗教</div><div class=\"v\">")}${religionCellHTML(c.religion)}</div>
     </div>`;
-    html += ownedResourcesHTML(p, "luxuryResources", "玩家拥有的奢侈品资源", false);
-    html += `<div class="sec-title">产出</div>${yieldGrid(c.yields)}`;
-    html += `<div class="sec-title">生产队列</div>`;
+    html += ownedResourcesHTML(p, "luxuryResources", L("玩家拥有的奢侈品资源"), false);
+    html += `${L("<div class=\"sec-title\">产出</div>")}${yieldGrid(c.yields)}`;
+    html += `${L("<div class=\"sec-title\">生产队列</div>")}`;
     const prods = (c.currentProds || []);
     html += prods.length ? prods.map((ph) => {
       const ic = iconOf(ph);
       return `<span class="chip">${ic ? `<img src="${ic}">` : ""}${nameHTML(ph)}</span>`;
-    }).join("") : "<span class='muted'>无</span>";
+    }).join("") : L("<span class='muted'>无</span>");
     // v0.24: districts the city owns (including unfinished / specialized ones
     // such as the aqueduct) with their buildings nested, then its wonders.
-    html += `<div class="sec-title">拥有区域</div>${cityDistrictsHTML(p, c)}`;
-    html += `<div class="sec-title">拥有奇观</div>${cityWondersHTML(p, c)}`;
+    html += `${L("<div class=\"sec-title\">拥有区域</div>")}${cityDistrictsHTML(p, c)}`;
+    html += `${L("<div class=\"sec-title\">拥有奇观</div>")}${cityWondersHTML(p, c)}`;
     return html;
   }
 
   // 城市主流宗教（``city.religion`` 与 ``religions[].symbol`` 同一哈希空间）
   function religionCellHTML(hash) {
     if (hash == null || (hash >>> 0) === 0xFFFFFFFF) {
-      return "<span class='muted'>无主流宗教</span>";
+      return L("<span class='muted'>无主流宗教</span>");
     }
     const ic = iconOf(hash);
     return `<span class="chip">${ic ? `<img src="${ic}" alt="">` : ""}` +
@@ -4243,20 +4361,20 @@
 
   // "type（状态）" chip suffix used by the district / wonder groups
   function districtStatus(d) {
-    if (d.built === 0) return `<span class="dstat wip">（建设中）</span>`;
-    if (d.pillage === 1) return `<span class="dstat bad">（被掠夺）</span>`;
-    return `<span class="dstat">（已建成）</span>`;
+    if (d.built === 0) return `${L("<span class=\"dstat wip\">（建设中）</span>")}`;
+    if (d.pillage === 1) return `${L("<span class=\"dstat bad\">（被掠夺）</span>")}`;
+    return `${L("<span class=\"dstat\">（已建成）</span>")}`;
   }
 
   // v0.30: ``pillaged`` is the host city's set of pillaged building hashes; a
   // chip is marked when that building is pillaged even if the district is not
   // (the game pillages one layer at a time - buildings first, district last).
   function buildingChips(list, pillaged) {
-    if (!list.length) return "<span class='muted'>无建筑</span>";
+    if (!list.length) return L("<span class='muted'>无建筑</span>");
     return list.map((bh) => {
       const ic = iconOf(bh);
       const mark = (pillaged && pillaged.has(bh >>> 0))
-        ? `<span class="bld-pillaged">（被掠夺）</span>` : "";
+        ? `${L("<span class=\"bld-pillaged\">（被掠夺）</span>")}` : "";
       return `<span class="chip">${ic ? `<img src="${ic}">` : ""}${nameHTML(bh)}${mark}</span>`;
     }).join("");
   }
@@ -4270,7 +4388,7 @@
         const bc = (b.type >>> 0) === DISTRICT_CITY_CENTER ? 0 : 1;
         return (ac - bc) || cmpKey([nameOf(a.type)], [nameOf(b.type)]);
       });
-    if (!list.length) return "<span class='muted'>无</span>";
+    if (!list.length) return L("<span class='muted'>无</span>");
     const pillaged = pillagedBuildingSet(c);
     return list.map((d) => {
       const ic = iconOf(d.type);
@@ -4280,7 +4398,7 @@
         (bh) => (currentTurn.tiles.wonder[i] >>> 0) !== (bh >>> 0));
       // v0.25: 每条区域都能点开对应格子（跳转 + 选中）
       return `<div class="bld-group jumpable" data-jump-i="${i}" ` +
-        `title="跳转到 (${d.x},${d.y})"><div class="bld-dist">` +
+        `${L("title=\"跳转到 (")}${d.x},${d.y})"><div class="bld-dist">` +
         `${ic ? `<img src="${ic}">` : ""}${nameHTML(d.type)}${districtStatus(d)}` +
         districtAdjacencyHTML(d) +
         `</div>` +
@@ -4299,16 +4417,18 @@
       if (owner[i] !== p.iPlayer || cityCol[i] !== c.id) continue;
       rows.push({ h: h, done: built[hashStr(h)] !== undefined, i: i });
     }
-    if (!rows.length) return "<span class='muted'>无</span>";
+    if (!rows.length) return L("<span class='muted'>无</span>");
     return rows.map(({ h, done, i }) => {
       const ic = iconOf(h);
       const x = i % currentTurn.width, y = Math.floor(i / currentTurn.width);
       return `<div class="bld-group jumpable" data-jump-i="${i}" ` +
-        `title="跳转到 (${x},${y})"><div class="bld-dist">${ic ? `<img src="${ic}">` : ""}` +
-        `${nameHTML(h)}<span class="dstat${done ? "" : " wip"}">（${done ? "已建成" : "建造中"}）</span>` +
+        `${L("title=\"跳转到 (")}${x},${y})"><div class="bld-dist">${ic ? `<img src="${ic}">` : ""}` +
+        `${nameHTML(h)}<span class="dstat${done ? "" : " wip"}">（${done ? L("已建成") : L("建造中")}）</span>` +
         `</div></div>`;
     }).join("");
   }
 
-  window.addEventListener("DOMContentLoaded", init);
+  window.addEventListener("DOMContentLoaded", () => init().catch(error => {
+    if (error.name !== "AbortError") setBanner(L("存档加载失败：") + error.message, true);
+  }));
 })();

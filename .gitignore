@@ -2,6 +2,7 @@
 /*
 !/.gitignore
 !/README.md
+!/README.en.md
 !/LICENSE
 !/THIRD_PARTY_NOTICES.md
 !/Civ6WebReplay/
@@ -29,6 +30,7 @@ _scratch/
 # local one-click process cleanup
 /Civ6WebReplay/stop.bat
 /Civ6WebReplay/stop.ps1
+/Civ6WebReplay/clean_scratch.ps1
 
 # Development tests, documentation, and audit outputs stay available locally.
 /Civ6WebReplay/tests/

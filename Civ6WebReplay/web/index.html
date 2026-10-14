@@ -7,6 +7,8 @@
 <!-- 页签图标 = 游戏自身的应用图标（tools/vendor_favicon.py 从 CivilizationVI.exe 取） -->
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <link rel="stylesheet" href="/css/style.css" />
+<script src="/js/ui-text.js"></script>
+<script src="/js/i18n.js"></script>
 <script>if (new URLSearchParams(location.search).get("compare") === "1") document.documentElement.classList.add("compare-page");</script>
 </head>
 <body>
@@ -14,7 +16,7 @@
 <!-- v0.26.2: 独立对比页（?compare=1）的加载进度条 -->
 <div id="progress" class="progress hidden"><i></i><span id="progress-text"></span></div>
 <header class="topbar">
-<div class="title">Civ6 WebReplay <span class="ver">v0.41</span></div>
+<div class="title">Civ6 WebReplay <span class="ver">v0.42</span></div>
   <div class="picker">
     <label>对局</label>
     <select id="replay-select"></select>
@@ -23,7 +25,17 @@
     <button id="btn-share" title="共享复盘">共享</button>
     <button id="btn-share-link" class="hidden" title="查看分享链接">链接</button>
   </div>
-  <label class="type-toggle"><input type="checkbox" id="type-toggle" /> TYPE</label>
+  <label class="type-toggle"><input type="checkbox" id="type-toggle" /> <span data-i18n="TYPE标签">TYPE标签</span></label>
+  <span class="language-select-wrap">
+    <svg class="language-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <circle cx="12" cy="12" r="9"></circle>
+      <ellipse cx="12" cy="12" rx="4" ry="9"></ellipse>
+      <path d="M3 12h18M5.5 6.5h13M5.5 17.5h13"></path>
+    </svg>
+    <select id="language-select" class="language-select" title="语言" aria-label="语言">
+      <option value="auto">自动</option><option value="zh">中文</option><option value="en">English</option>
+    </select>
+  </span>
   <label class="type-toggle"><input type="checkbox" id="coord-toggle" /> 坐标</label>
   <div class="layout-controls">
     <button id="layout-btn" title="面板显示 / 布局" aria-expanded="false" aria-controls="layout-pop">☰ 调整 UI</button>
@@ -87,9 +99,9 @@
           <input type="text" id="search-exclude" placeholder="排除：命中的格子被剔除（同语法）" />
         </div>
         <div class="search-help">
-          <div>连接符：<b>或</b> = <code>或</code> <code>|</code> <code>||</code> <code>or</code>，
-            <b>与</b> = <code>且</code> <code>与</code> <code>&amp;</code> <code>&amp;&amp;</code> <code>and</code>，
-            <b>非</b> = <code>!</code> <code>not</code>（前缀，只否定紧随其后的词）</div>
+          <div>连接符：<b>OR</b> = <code>或</code> <code>|</code> <code>||</code> <code>or</code>，
+            <b>AND</b> = <code>且</code> <code>与</code> <code>&amp;</code> <code>&amp;&amp;</code> <code>and</code>，
+            <b>NOT</b> = <code>!</code> <code>not</code>（前缀，只否定紧随其后的词）</div>
           <div>组内肯定词要全中、否定词要全不中才算命中，组间取「或」；排除框语法相同，命中任一组的格子会被剔除。</div>
           <div>例：<code>平原 且 罗马</code>、<code>马 且 !平原</code>、<code>威尼斯 或 努纳</code>、
             大陆名（如<code>劳伦古陆</code>）整体匹配，词里带空格也当作一个词。</div>
@@ -212,6 +224,7 @@
   </div>
 </div>
 
+<script>window.Civ6I18nInit();</script>
 <script src="/js/hexmap.js"></script>
 <script src="/js/panel-layout.js"></script>
 <script src="/js/rule-text-icons.js"></script>

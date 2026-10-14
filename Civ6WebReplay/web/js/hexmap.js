@@ -1,6 +1,7 @@
 /* Civ6 hex map renderer (Canvas 2D, no dependencies). */
 (function (global) {
   "use strict";
+  const L = value => window.Civ6I18n ? window.Civ6I18n.text(value) : value;
 
   const R = 0.5 / Math.cos(Math.PI / 6); // ~0.57735 (hex radius / width)
   const SQRT = R;
@@ -558,7 +559,7 @@
     ctx.font = `600 ${titleSize}px ${font}`;
     ctx.fillStyle = "#f2f4f8";
     let y = cy + r + titleSize;
-    for (const line of wrapText(ctx, info.title || "存档不支持", maxWidth)) {
+    for (const line of wrapText(ctx, info.title || L("存档不支持"), maxWidth)) {
       ctx.fillText(line, cx, y);
       y += titleSize + 8;
     }
@@ -769,7 +770,7 @@
     for (const region of regions) {
       const selected = region.hash === this.continentHighlight;
       const info = this.nameInfo(region.hash);
-      const text = ((info && info.name && !info.name.startsWith("0x")) ? info.name : "大陆") + (selected ? "（已选）" : "");
+      const text = ((info && info.name && !info.name.startsWith("0x")) ? info.name : L("大陆")) + (selected ? L("（已选）") : "");
       ctx.font = `${selected ? 700 : 600} ${size}px "Microsoft YaHei", sans-serif`;
       const labelWidth = ctx.measureText(text).width + 12, labelHeight = size + 10;
       // Place names on visible continent tiles, rather than a bounding-box

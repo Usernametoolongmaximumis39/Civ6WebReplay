@@ -23,7 +23,8 @@ from .tileyields import calculate_tile_yields, rules_token
 from .bcy import parse_bcy
 from .binary import Cursor, LayerError, read_int
 from .hash import crc32_type
-from .model import GameState, NONE_U32, Player, PlayerInfo, Religion
+from .model import (GameState, NONE_U32, Player, PlayerInfo, Religion,
+                    governor_assigned_to)
 
 TURN_OFFSET = 377
 
@@ -245,6 +246,7 @@ def parse_save(data: bytes, *, want_visibility: bool = True) -> GameState:
     state.bcy = parse_bcy(packets)
     info = header.game_info(packets)
     state.map_name = info["map_name"]
+    state.map_name_en = info["map_name_en"]
     state.map_key = info["map_key"]
     state.map_size = info["map_size"]
     state.game_speed = info["game_speed"]
@@ -369,8 +371,15 @@ def _finalize_players(state: GameState) -> None:
         for u in p.units:
             u.iPlayer = p.iPlayer
             ui = p.unitsInfo.get(_mask(u.type))
-            if ui is not None and getattr(ui, "health", 0):
-                p.militaryStrength += (ui.attack * (ui.health - u.damage)) // ui.health
+            if ui is not None and getattr(ui, "health", 0) > 0:
+                # Strength uses the saved type value, then the formation bonus
+                # and one point per full 10% of maximum health lost. Civilian
+                # and support types with no combat strength contribute nothing.
+                if ui.attack > 0:
+                    formation_bonus = {1: 10, 2: 17}.get(u.army, 0)
+                    damage = min(ui.health, max(0, u.damage))
+                    damage_penalty = (damage * 10) // ui.health
+                    p.militaryStrength += max(0, ui.attack + formation_bonus - damage_penalty)
                 p.unitCount += 1
 
 
@@ -388,11 +397,12 @@ def summarize_player(p: Player) -> dict:
     for d in p.districts:
         if _mask(getattr(d, "type", NONE_U32)) == CITY_CENTER:
             center_by_city[int(getattr(d, "cityId", 0xFFFF))] = d
-    # v0.22: governor assigned to each city (city id -> governor type hash)
+    # Show only this player's governors assigned to this player's own cities.
+    # Foreign capitals and city-states reuse the same local city IDs.
     gov_by_city = {}
     for g in p.governors:
         city = getattr(g, "city", 0xFFFF)
-        if city not in (0xFFFF, None):
+        if governor_assigned_to(g, p.iPlayer, city):
             gov_by_city[city] = {
                 "type": _mask(getattr(g, "type", NONE_U32)),
                 "promotions": len(getattr(g, "promotions", []) or []),

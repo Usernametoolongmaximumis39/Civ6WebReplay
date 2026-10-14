@@ -41,7 +41,7 @@ UU_ADAPTER_KEY = "uulanplay"
 FETCH_TIMEOUT_METADATA = 0.4
 FETCH_TIMEOUT_ECHO = 2.0
 REACH_TIMEOUT = 3.0
-SHARE_UA = "civ6replay-share/0.41"
+SHARE_UA = "civ6replay-share/0.42"
 
 
 # --- 地址分类 ---------------------------------------------------------------

@@ -102,10 +102,19 @@ class Governor:
     id: int = 0
     type: int = NONE_U32
     city: int = 0
+    cityOwner: int = 0xFFFF  # owner of the assigned city, not the governor
     turn: int = 0
     promotions: List[int] = field(default_factory=list)
     # Read from the serialized activity flag; unknown formats retain None.
     established: Optional[bool] = None
+
+
+def governor_assigned_to(governor, city_owner: int, city_id: int) -> bool:
+    """Match the complete saved city identity; missing targets never match."""
+    return (city_owner not in (None, -1, 0xFFFF)
+            and city_id not in (None, -1, 0xFFFF)
+            and vars(governor).get("cityOwner") == city_owner
+            and vars(governor).get("city") == city_id)
 
 
 @dataclass
@@ -203,6 +212,7 @@ class GameState:
     height: int = 0
     timestamp: int = 0
     map_name: str = ""
+    map_name_en: str = ""
     map_key: str = ""
     map_size: str = ""
     game_speed: str = ""

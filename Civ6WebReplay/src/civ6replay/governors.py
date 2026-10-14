@@ -44,6 +44,7 @@ class GovernorPromotions:
         doc = json.loads(self.path.read_text(encoding="utf-8"))
         for key, block in (doc.get("mods") or {}).items():
             names: Dict[int, str] = {}
+            english: Dict[int, str] = {}
             order: Dict[int, List[int]] = {}
             for gov in block.get("governors") or []:
                 gov_hash = crc32_type(gov["type"])
@@ -54,11 +55,13 @@ class GovernorPromotions:
                     label = promo.get("name_zh") or promo.get("name_en") or ""
                     if label and h not in names:      # 同一类型只归一次
                         names[h] = label
+                        english[h] = promo.get("name_en") or label
                 order[gov_hash] = seq
             self.tables[key] = {
                 "label": block.get("label") or key,
                 "verified": block.get("verified_in_game"),
                 "names": names,
+                "english": english,
                 "order": order,
             }
 
@@ -78,9 +81,10 @@ class GovernorPromotions:
             return FALLBACK_KEY
         return next(iter(self.tables), "")
 
-    def table(self, mods: Optional[Iterable[str]] = None) -> dict:
-        return self.tables.get(
+    def table(self, mods: Optional[Iterable[str]] = None, lang: str = "zh") -> dict:
+        table = self.tables.get(
             self.key_for(mods), {"label": "", "verified": None, "names": {}, "order": {}})
+        return {**table, "names": table.get("english", table["names"])} if lang == "en" else table
 
     def name(self, h, mods: Optional[Iterable[str]] = None) -> str:
         return self.table(mods)["names"].get(int(h) & 0xFFFFFFFF, "")

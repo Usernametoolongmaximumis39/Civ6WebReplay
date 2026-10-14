@@ -1073,7 +1073,7 @@ def parse_players(data, players, religions, warnings=None):
             it.advance(4)
             g.type = read_int(it)
             read_string(it)
-            read_int(it, 2)
+            g.cityOwner = read_int(it, 2)
             it.advance(2)
             g.city = read_int(it, 2)
             it.advance(2)
@@ -1484,7 +1484,7 @@ def parse_players(data, players, religions, warnings=None):
             _check(peek_u32(it) == 0x04, it)
             it.advance(4)
             type = read_int(it)
-            ui = p.unitsInfo[type]
+            ui = p.unitsInfo[type & 0xFFFFFFFF]
             ui.health = read_int(it)
             it.advance(7)
             read_int(it)

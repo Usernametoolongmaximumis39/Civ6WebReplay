@@ -1773,7 +1773,7 @@
       },
       "en": {
         "name": "Raid",
-        "description": ""
+        "description": "Yields gained from pillaging and coastal raids are +50%."
       }
     },
     "579679860": {
@@ -1789,7 +1789,7 @@
       },
       "en": {
         "name": "Veterancy",
-        "description": ""
+        "description": "+30% [ICON_Production] Production toward Encampment districts, Harbor districts, and buildings for these districts."
       }
     },
     "1395307863": {
@@ -1949,7 +1949,7 @@
       },
       "en": {
         "name": "Professional Army",
-        "description": ""
+        "description": "50% [ICON_Gold] Gold discount on all unit upgrades."
       }
     },
     "917240675": {
@@ -2125,7 +2125,7 @@
       },
       "en": {
         "name": "Colonial Offices",
-        "description": "+15% faster growth for cities not on your original [ICON_Capital] Capital's continent."
+        "description": "+15% faster growth and 3 Loyalty per turn for cities not on your original [ICON_Capital] Capital's continent."
       }
     },
     "1946138571": {
@@ -2141,7 +2141,7 @@
       },
       "en": {
         "name": "Invention",
-        "description": ""
+        "description": "+4 [ICON_GreatEngineer] Great Engineer points per turn. +2 [ICON_GreatEngineer] Great Engineer points per turn for every Workshop."
       }
     },
     "1789934023": {
@@ -2157,7 +2157,7 @@
       },
       "en": {
         "name": "Frescoes",
-        "description": ""
+        "description": "+2 [ICON_GreatArtist] Great Artist points per turn. +2 [ICON_GreatArtist] Great Artist points per turn for every Art Museum."
       }
     },
     "2789004300": {
@@ -2221,7 +2221,7 @@
       },
       "en": {
         "name": "Simultaneum",
-        "description": "Doubles [ICON_Faith] Faith yield from Holy Site district buildings."
+        "description": "Extra [ICON_Faith] Faith from buildings in Holy Sites: +50% if city [ICON_CITIZEN] population is 15 or higher, +50% if district has at least +4 adjacency bonus."
       }
     },
     "342545917": {
@@ -2269,7 +2269,7 @@
       },
       "en": {
         "name": "Rationalism",
-        "description": "+100% [ICON_Science] Science from Campus district buildings."
+        "description": "Extra [ICON_Science] Science from buildings in Campuses: +50% if city [ICON_CITIZEN] population is 15 or higher, +50% if district has at least +4 adjacency bonus."
       }
     },
     "3600571565": {
@@ -2285,7 +2285,7 @@
       },
       "en": {
         "name": "Free Market",
-        "description": "+100% [ICON_Gold] Gold yield from Commercial Hub district buildings."
+        "description": "Extra [ICON_Gold] Gold from buildings in Commercial Hubs: +50% if city [ICON_CITIZEN] population is 15 or higher, +50% if district has at least +4 adjacency bonus."
       }
     },
     "1849326192": {
@@ -2333,7 +2333,7 @@
       },
       "en": {
         "name": "Colonial Taxes",
-        "description": "+25% [ICON_Gold] Gold in cities not on your original [ICON_Capital] Capital's continent."
+        "description": "+25% [ICON_Gold] Gold and +10% [ICON_PRODUCTION] Production in cities not on your original [ICON_Capital] Capital's continent."
       }
     },
     "874110087": {
@@ -2349,7 +2349,7 @@
       },
       "en": {
         "name": "Raj",
-        "description": ""
+        "description": "+2 [ICON_Science] Science, [ICON_Culture] Culture, [ICON_Faith] Faith, and [ICON_Gold] Gold from each city-state you are Suzerain of. [ICON_TradeRoute] Trade Routes to City-States receive +2 [ICON_GOLD] Gold."
       }
     },
     "2654220460": {
@@ -2429,7 +2429,7 @@
       },
       "en": {
         "name": "Grand Opera",
-        "description": "+100% [ICON_Culture] Culture yield from Theater Square district buildings."
+        "description": "Extra [ICON_Culture] Culture from buildings in Theater Squares: +50% if city [ICON_CITIZEN] population is 15 or higher, +50% if district has at least +4 adjacency bonus."
       }
     },
     "2843384834": {
@@ -2445,7 +2445,7 @@
       },
       "en": {
         "name": "Symphonies",
-        "description": ""
+        "description": "+4 [ICON_GreatMusician] Great Musician points per turn. +4 [ICON_GreatMusician] Great Musician points per turn for every Broadcast Center."
       }
     },
     "63139362": {
@@ -2461,7 +2461,7 @@
       },
       "en": {
         "name": "Public Transport",
-        "description": ""
+        "description": "Neighborhoods with Charming appeal receive +3 Food [ICON_Food] and +1 Production [ICON_Production], Breathtaking Neighborhoods are granted an additional +1 of each yield. All Neighborhoods receive +1 [ICON_Gold] Gold."
       }
     },
     "3744426646": {
@@ -2477,7 +2477,7 @@
       },
       "en": {
         "name": "Total War",
-        "description": ""
+        "description": "Yields gained from pillaging, coastal raids, and plundering [ICON_TradeRoute] Trade Routes are +50%."
       }
     },
     "275598069": {
@@ -2509,7 +2509,7 @@
       },
       "en": {
         "name": "Military Organization",
-        "description": ""
+        "description": "+2 [ICON_GreatGeneral] Great General points per turn for every Armory and +4 [ICON_GreatGeneral] Great General points per turn for every Military Academy. Great Generals receive +2 Movement."
       }
     },
     "3976469175": {
@@ -2525,7 +2525,7 @@
       },
       "en": {
         "name": "Military Research",
-        "description": ""
+        "description": "Military Academies, Seaports, and Renaissance Walls generate +2 [ICON_Science] Science."
       }
     },
     "770774775": {
@@ -2541,7 +2541,7 @@
       },
       "en": {
         "name": "Resource Management",
-        "description": ""
+        "description": "All improved [ICON_RESOURCE_ALUMINUM] Aluminum and [ICON_RESOURCE_OIL] Oil resources yield 1 additional resource per turn."
       }
     },
     "583852658": {
@@ -2589,7 +2589,7 @@
       },
       "en": {
         "name": "Laissez-Faire",
-        "description": ""
+        "description": "+2 [ICON_GreatMerchant] Great Merchant points per turn for every Bank and +4 [ICON_GreatMerchant] Great Merchant points per turn for every Stock Exchange. +2 [ICON_GreatAdmiral] Great Admiral points per turn for every Shipyard and +4 [ICON_GreatAdmiral] Great Admiral points per turn for every Seaport."
       }
     },
     "475170526": {
@@ -2620,8 +2620,8 @@
         "description": "每有一所大学，每回合的 [ICON_GreatScientist] 大科学家点数便+2；每有一所研究实验室，每回合的 [ICON_GreatScientist] 大科学家点数便+4。每有一座工厂，每回合的 [ICON_GreatEngineer] 大工程师点数便+2；每有一座发电厂，每回合的 [ICON_GreatEngineer] 大工程师点数便+4。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Science Foundations",
+        "description": "+2 [ICON_GreatScientist] Great Scientist points per turn for every University and +4 [ICON_GreatScientist] Great Scientist points per turn for every Research Lab. +2 [ICON_GreatEngineer] Great Engineer points per turn for every Factory and +4 [ICON_GreatEngineer] Great Engineer points per turn for every Power Plant"
       }
     },
     "1069479951": {
@@ -2669,7 +2669,7 @@
       },
       "en": {
         "name": "Their Finest Hour",
-        "description": ""
+        "description": "All units +5 [ICON_Strength] Combat Strength when fighting in or adjacent to their home territory."
       }
     },
     "3924212541": {
@@ -2685,7 +2685,7 @@
       },
       "en": {
         "name": "New Deal",
-        "description": ""
+        "description": "+4 [ICON_Housing] Housing and +2 [ICON_Amenities] Amenities to all cities with at least 3 specialty districts."
       }
     },
     "1563769459": {
@@ -2717,7 +2717,7 @@
       },
       "en": {
         "name": "Third Alternative",
-        "description": ""
+        "description": "+2 [ICON_Culture] Culture and +4 [ICON_Gold] Gold from each Research Lab, Military Academy, Coal Power Plant, Oil Power Plant, and Nuclear Power Plant."
       }
     },
     "3230140631": {
@@ -2733,7 +2733,7 @@
       },
       "en": {
         "name": "Martial Law",
-        "description": ""
+        "description": "Accumulate 25% less war weariness than usual. Cities with a garrisoned unit get +4 Loyalty per turn."
       }
     },
     "1935829389": {
@@ -2781,7 +2781,7 @@
       },
       "en": {
         "name": "Collectivization",
-        "description": ""
+        "description": "+2 [ICON_Production] Production and +4 [ICON_Food] Food from domestic [ICON_TradeRoute] Trade Routes."
       }
     },
     "2941188177": {
@@ -2797,7 +2797,7 @@
       },
       "en": {
         "name": "Defense of the Motherland",
-        "description": ""
+        "description": "No war weariness from combat in your territory. +100% [ICON_Production] Production for Modern, Atomic, and Information era support units."
       }
     },
     "1995147729": {
@@ -2957,7 +2957,7 @@
       },
       "en": {
         "name": "Ecommerce",
-        "description": ""
+        "description": "+2 [ICON_Production] Production and +5 [ICON_Gold] Gold from all [ICON_TradeRoute] Trade Routes."
       }
     },
     "3507831236": {
@@ -3020,8 +3020,8 @@
         "description": "城市中的每个政体建筑和宫殿将使所有产量+1。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Autocratic Legacy",
+        "description": "+1 to all yields for each government building and palace in a city."
       }
     },
     "2236874260": {
@@ -3036,8 +3036,8 @@
         "description": "所有陆地近战、抗骑兵和海军近战类单位 [ICON_Strength] 战斗力+4。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Oligarchic Legacy",
+        "description": "All land melee, anti-cavalry, and naval melee class units gain +4 [ICON_Strength] Combat Strength."
       }
     },
     "1593082438": {
@@ -3052,8 +3052,8 @@
         "description": "拥有区域的所有城市+1 [ICON_Housing] 住房、+1 [ICON_Amenities] 宜居度。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Republican Legacy",
+        "description": "All cities with a district receive +1 [ICON_Housing] Housing and +1 [ICON_Amenities] Amenity."
       }
     },
     "21683452": {
@@ -3068,8 +3068,8 @@
         "description": "城墙每拥有一个等级，则+1 [ICON_Housing] 住房。每有一座文艺复兴城墙，则+2 [ICON_Favor] 外交支持。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Monarchic Legacy",
+        "description": "+1 [ICON_Housing] Housing per level of Walls. +2 [ICON_Favor] Diplomatic Favor for every Renaissance Wall."
       }
     },
     "2664405662": {
@@ -3084,8 +3084,8 @@
         "description": "神学战争中+5 [ICON_Religion] 宗教战斗力。[NEWLINE][ICON_Governor] 总督就职的城市中每位 [ICON_Citizen] 公民将+0.5点 [ICON_Faith] 信仰值。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Theocratic Legacy",
+        "description": "+5 [ICON_Religion] Religious Strength in Theological Combat.[NEWLINE]+0.5 [ICON_Faith] Faith per [ICON_Citizen] Citizen in cities with [ICON_Governor] Governors."
       }
     },
     "3076560143": {
@@ -3100,8 +3100,8 @@
         "description": "所有 [ICON_Governor] 总督就职城市产出的 [ICON_GOLD] 金币+10%。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Mercantile Legacy",
+        "description": "+10% [ICON_GOLD] Gold in all cities with an established  [ICON_Governor] Governor."
       }
     },
     "2969763429": {
@@ -3116,8 +3116,8 @@
         "description": "所有单位+5 [ICON_Strength] 战斗力。厌战情绪降低15%。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Fascist Legacy",
+        "description": "All units gain +5 [ICON_Strength] Combat Strength.  War Weariness reduced by 15%."
       }
     },
     "2313703106": {
@@ -3132,8 +3132,8 @@
         "description": "拥有 [ICON_Governor] 总督的城市中每位 [ICON_Citizen] 公民将提供0.6点 [ICON_Production] 生产力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Communist Legacy",
+        "description": "+0.6 [ICON_Production] Production per [ICON_Citizen] Citizen in cities with [ICON_Governor] Governors."
       }
     },
     "2598732633": {
@@ -3148,8 +3148,8 @@
         "description": "您通往盟友或宗主国城市的 [ICON_TradeRoute] 贸易路线为双边城市+4 [ICON_Food] 食物、+4 [ICON_Production] 生产力。所有盟友的同盟点数每回合额外增加0.25点。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Democratic Legacy",
+        "description": "Your [ICON_TradeRoute] Trade Routes to an Ally or Suzerain's city provide +4 [ICON_Food] Food and +4 [ICON_Production] Production for both cities. Alliance Points with all allies increase by an additional .25 per turn."
       }
     },
     "233156848": {
@@ -3164,8 +3164,8 @@
         "description": "拥有驻军单位的城市每回合的忠诚度+2。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Limitanei",
+        "description": "+2 Loyalty per turn for cities with a garrisoned unit."
       }
     },
     "2085034511": {
@@ -3180,8 +3180,8 @@
         "description": "[ICON_Governor] 总督为其所在城市每回合忠诚度+2。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Praetorium",
+        "description": "[ICON_Governor] Governors provide +2 Loyalty per turn to their city."
       }
     },
     "1966563684": {
@@ -3196,8 +3196,8 @@
         "description": "拥有至少2项升级的 [ICON_GOVERNOR] 总督就职后将提供+1 [ICON_Amenities] 宜居度、+2 [ICON_Housing] 住房。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Civil Prestige",
+        "description": "Established [ICON_GOVERNOR] Governors with at least 2 Promotions provide +1 [ICON_Amenities] Amenity and +2 [ICON_Housing] Housing."
       }
     },
     "1385447509": {
@@ -3212,8 +3212,8 @@
         "description": "您通往盟友城市或旗下城邦的 [ICON_TradeRoute] 贸易路线为双边城市+2 [ICON_Food] 食物、+2 [ICON_Production] 生产力。所有盟友的同盟点数每回合额外增加0.25点。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Wisselbanken",
+        "description": "Your [ICON_TradeRoute] Trade Routes to an Ally's city or vassal city-state provide +2 [ICON_Food] Food and +2 [ICON_Production] Production for both cities. Alliance Points with all allies increase by an additional .25 per turn."
       }
     },
     "1430589561": {
@@ -3228,8 +3228,8 @@
         "description": "核装置每回合的 [ICON_Gold] 维护费降低50%。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Second Strike Capability",
+        "description": "Nuclear Device maintenance reduced by 50% [ICON_Gold] Gold per turn."
       }
     },
     "3480562841": {
@@ -3244,8 +3244,8 @@
         "description": "所有单位的战斗经验值+25%。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "After Action Reports",
+        "description": "All units gain +25% combat experience."
       }
     },
     "408350029": {
@@ -3260,8 +3260,8 @@
         "description": "[ICON_Governor] 总督每拥有一次升级，其所在城市每回合忠诚度+1。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Communications Office",
+        "description": "[ICON_Governor] Governors provide +1 Loyalty per turn to their city, per Promotion the [ICON_Governor] Governor has."
       }
     },
     "1630128883": {
@@ -3276,8 +3276,8 @@
         "description": "拥有圣地的城市 [ICON_Science] 科技值+75%。[NEWLINE]但所有城市的 [ICON_Culture] 文化值-25%。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Monasticism",
+        "description": "+75% [ICON_Science] Science in cities with a Holy Site.[NEWLINE]BUT: -25% [ICON_Culture] Culture in all cities."
       }
     },
     "1248228320": {
@@ -3292,8 +3292,8 @@
         "description": "所有近战攻击单位+5 [ICON_Strength] 战斗力。[NEWLINE]但无法在本国领土外进行治疗。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Twilight Valor",
+        "description": "+5 [ICON_Strength] Combat Strength for all melee attack units.[NEWLINE]BUT: Cannot heal outside your territory."
       }
     },
     "3651268807": {
@@ -3308,8 +3308,8 @@
         "description": "消耗1次使徒使用次数开始宗教审讯。友方领土中的所有宗教单位+15 [ICON_Religion] 宗教战斗力。[NEWLINE]但所有城市的 [ICON_Science] 科技值-25%。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Inquisition",
+        "description": "Start Inquisition with 1 Apostle charge. All Religious units +15 [ICON_Religion] Religious Combat Strength in friendly territory.[NEWLINE]BUT: -25% [ICON_Science] Science in all cities."
       }
     },
     "915844300": {
@@ -3324,8 +3324,8 @@
         "description": "国内贸易路线提供+2 [ICON_Food] 食物、+2 [ICON_Production] 生产力。[NEWLINE]但无法生产或购买开拓者，也无法建立新城市。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Isolationism",
+        "description": "Domestic routes provide +2 [ICON_Food] Food, +2 [ICON_Production] Production.[NEWLINE]BUT: Can't train or buy Settlers nor settle new cities."
       }
     },
     "816055902": {
@@ -3340,8 +3340,8 @@
         "description": "生产海军袭击者：+100% [ICON_Production] 生产力、+2 [ICON_Movement] 移动力。掠夺贸易路线的收益加倍。[NEWLINE]但 [ICON_TradeRoute] 贸易路线产量-50%。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Letters of Marque",
+        "description": "Naval Raiders: +100% [ICON_Production] Production, +2 [ICON_Movement] Movement. Yields doubled from plundering Trade Routes.[NEWLINE]BUT: [ICON_TradeRoute] Trade Route yields -50%."
       }
     },
     "4149047536": {
@@ -3356,8 +3356,8 @@
         "description": "拥有证券交易所的城市+50% [ICON_Gold] 金币。拥有工厂的城市+25% [ICON_Production] 生产力。[NEWLINE]但所有城市-2 [ICON_Amenities] 宜居度。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Robber Barons",
+        "description": "+50% [ICON_Gold] Gold in cities with a Stock Exchange. +25% [ICON_Production] Production in cities with a Factory.[NEWLINE]BUT: -2 [ICON_Amenities] Amenities in all cities."
       }
     },
     "2453687550": {
@@ -3372,8 +3372,8 @@
         "description": "所有单位的战斗经验值+100%。[NEWLINE]但每个战斗和间谍单位的维护费用+2 [ICON_Gold] 金币。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Elite Forces",
+        "description": "+100% combat experience for all units.[NEWLINE]BUT: +2 [ICON_Gold] Gold to maintain each combat and spy unit."
       }
     },
     "283942541": {
@@ -3388,8 +3388,8 @@
         "description": "农场+1 [ICON_Food] 食物。所有城市+2 [ICON_Housing] 住房。工业区相邻加成+100%。[NEWLINE]但 [ICON_GreatPerson] 伟人点数的获取速度减缓50%。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Collectivism",
+        "description": "Farms +1 [ICON_Food] Food. All cities +2 [ICON_Housing] Housing. +100% Industrial Zone adjacency bonuses.[NEWLINE]BUT: [ICON_GreatPerson] Great People Points earned 50% slower."
       }
     },
     "3467347211": {
@@ -3404,8 +3404,8 @@
         "description": "核计划项目和核装置的 [ICON_Production] 生产力+50%。[NEWLINE]但无法通过影响力获得新的 [ICON_Envoy] 使者。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Rogue State",
+        "description": "+50% [ICON_Production] Production to nuclear program projects and Nuclear Devices.[NEWLINE]BUT: Earn no influence toward new [ICON_Envoy] Envoys."
       }
     },
     "4251449741": {
@@ -3420,8 +3420,8 @@
         "description": "拥有宇航中心的城市每回合+3点 [ICON_RESOURCE_ALUMINUM] 铝；同时+3点 [ICON_Power] 电力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Aerospace Contractors",
+        "description": "Cities with a Spaceport gain +3 [ICON_RESOURCE_ALUMINUM] Aluminum per turn and +3 [ICON_Power] Power."
       }
     },
     "2613249509": {
@@ -3436,8 +3436,8 @@
         "description": "其他文明对您的 [ICON_Tourism] 旅游业绩减少20%。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Space Tourism",
+        "description": "[ICON_Tourism] Tourism from other players is reduced by 20% versus your civilization."
       }
     },
     "752440526": {
@@ -3452,8 +3452,8 @@
         "description": "您的摇滚乐队可以选择任何可用升级。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Hallyu",
+        "description": "Your Rock Band units can choose from any possible promotion."
       }
     },
     "1249749158": {
@@ -3468,8 +3468,8 @@
         "description": "您的间谍可以选择任何可用升级。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Non-State Actors",
+        "description": "Your Spy units can choose from any possible promotion."
       }
     },
     "2487402914": {
@@ -3484,8 +3484,8 @@
         "description": "如果在敌方领土开始回合，则移动力+1。生产末日机甲时 [ICON_Production] 生产力+50%。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Integrated Attack Logistics",
+        "description": "+1 Movement if starting turn in enemy territory. +50% [ICON_Production] Production for Giant Death Robots."
       }
     },
     "1836776893": {
@@ -3500,8 +3500,8 @@
         "description": "在世界议会中降低另一文明的外交胜利点数后，可取回所花费 [ICON_Favor] 外交支持的50%。每回合+1 [ICON_Favor] 外交支持。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Rabblerousing",
+        "description": "When you reduce a player's Diplomatic Victory points in the World Congress, get 50% of your spent [ICON_Favor] Diplomatic Favor back. +1 [ICON_Favor] Diplomatic Favor per turn."
       }
     },
     "127975780": {
@@ -3516,8 +3516,8 @@
         "description": "每回合+4点 [ICON_Favor] 外交支持。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Diplomatic Capital",
+        "description": "+4 [ICON_Favor] Diplomatic Favor per turn."
       }
     },
     "4271439227": {
@@ -3532,8 +3532,8 @@
         "description": "位于友方领土中的单位+7 [ICON_Strength] 战斗力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Global Coalition",
+        "description": "+7 [ICON_Strength] Combat Strength for units in friendly territory."
       }
     },
     "2512693479": {
@@ -3548,8 +3548,8 @@
         "description": "所有改良的 [ICON_RESOURCE_HORSES] 马与 [ICON_RESOURCE_IRON] 铁每回合额外产出1点资源。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Equestrian Orders",
+        "description": "All improved [ICON_RESOURCE_HORSES] Horses and [ICON_RESOURCE_IRON] Iron resources yield 1 additional resource per turn."
       }
     },
     "715976241": {
@@ -3564,8 +3564,8 @@
         "description": "所有改良的 [ICON_RESOURCE_NITER] 硝石与 [ICON_RESOURCE_COAL] 煤每回合额外产出1点资源。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Drill Manuals",
+        "description": "All improved [ICON_RESOURCE_NITER] Niter and [ICON_RESOURCE_COAL] Coal resources yield 1 additional resource per turn."
       }
     },
     "825820208": {
@@ -3580,8 +3580,8 @@
         "description": "所有单位升级的资源花费减少50%。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Retinues",
+        "description": "50% resource discount on all unit upgrades."
       }
     },
     "3029031865": {
@@ -3596,8 +3596,8 @@
         "description": "所有单位升级所需的 [ICON_Gold] 金币与资源减少50%。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Force Modernization",
+        "description": "50% [ICON_Gold] Gold and resource discount on all unit upgrades."
       }
     },
     "1443238059": {
@@ -3612,8 +3612,8 @@
         "description": "来自其他文明的摇滚乐队无法进入您的领土。您拥有10点或以上 [ICON_Citizen] 人口的所有城市-1 [ICON_Amenities] 宜居度。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Music Censorship",
+        "description": "Rock Bands from other players may not enter your territory. -1 [ICON_Amenities] Amenity in all of your cities with 10 or more [ICON_Citizen] Population."
       }
     },
     "3098039348": {
@@ -3628,8 +3628,8 @@
         "description": "在当前未交战的文明中举办音乐会获得的 [ICON_TOURISM] 旅游业绩+100%。[NEWLINE]减益：生产摇滚乐队之外的所有单位时生产力-100%、购买时则费用+100%。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Flower Power",
+        "description": "All Civilizations not currently at war receive +100% of the [ICON_TOURISM] Tourism from your Concerts.[NEWLINE]BUT: The cost of producing is decreased by 100% and purchasing is +100% for units other than Rock Bands.."
       }
     },
     "2583474934": {
@@ -3644,8 +3644,8 @@
         "description": "信息和未来时代的单位+10 [ICON_Strength] 战斗力。[NEWLINE]减益：对您的 [ICON_STAT_GRIEVANCE] 不满不会下降。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Cyber Warfare",
+        "description": "+10 [ICON_Strength] Combat Strength against units from the Information and Future Eras.[NEWLINE]BUT: [ICON_STAT_GRIEVANCE] Grievances against you do not decay."
       }
     },
     "2085509116": {
@@ -3660,8 +3660,8 @@
         "description": "进行城市项目时，您城市的 [ICON_Production] 生产力+20%。[NEWLINE]减益：城市每回合-1 [ICON_Amenities] 宜居度、-5忠诚度。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Automated Workforce",
+        "description": "Your cities get +20% [ICON_Production] Production towards city projects.[NEWLINE]BUT: -1 [ICON_Amenities] Amenity and -5 Loyalty per turn in your cities."
       }
     },
     "3089199535": {
@@ -3676,8 +3676,8 @@
         "description": "每拥有1个广播中心，每回合获得的 [ICON_Favor] 外交支持便+3。[NEWLINE]减益：所有城市中的 [ICON_SCIENCE] 科技值和 [ICON_Culture] 文化值-10%。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Disinformation Campaign",
+        "description": "+3 [ICON_Favor] Diplomatic Favor per turn for each Broadcast Center.[NEWLINE]BUT: -10% [ICON_SCIENCE] Science and [ICON_Culture] Culture in all cities."
       }
     },
     "1928642623": {
@@ -4429,7 +4429,7 @@
       },
       "en": {
         "name": "Founding Fathers",
-        "description": ""
+        "description": "All Diplomatic policy slots in the current government are converted to Wildcard slots. +1 [ICON_FAVOR] Diplomatic Favor per turn for every Wildcard slot in their government."
       }
     },
     "2476397918": {
@@ -4509,7 +4509,7 @@
       },
       "en": {
         "name": "Dynastic Cycle",
-        "description": ""
+        "description": "[ICON_TechBoosted] Eurekas and [ICON_CivicBoosted] Inspirations provide 50% of civics and technologies instead of 40%. When completing a wonder receive a random [ICON_TechBoosted] Eureka and [ICON_CivicBoosted] Inspiration from the era of the wonder, if available."
       }
     },
     "3587261402": {
@@ -4541,7 +4541,7 @@
       },
       "en": {
         "name": "Iteru",
-        "description": ""
+        "description": "+15% [ICON_Production] Production towards districts and wonders if placed next to a River. Does not receive damage from Floods."
       }
     },
     "1561619321": {
@@ -4717,7 +4717,7 @@
       },
       "en": {
         "name": "Dharma",
-        "description": ""
+        "description": "Receives Follower Belief bonuses in a city from each Religion that has at least 1 Follower. Cities gain an [ICON_Amenities] Amenity for every Religion with at least 1 Follower. Missionaries have +2 spreads. +100% Religious pressure from your [ICON_TradeRoute] Trade Routes."
       }
     },
     "469090497": {
@@ -4925,7 +4925,7 @@
       },
       "en": {
         "name": "Mother Russia",
-        "description": ""
+        "description": "Extra territory upon founding cities. +1 [ICON_Faith] Faith and +1 [ICON_Production] Production from Tundra. Units do not receive damage from Blizzards. Civilizations that are at war with Russia receive +100% unit damage from Blizzards in Russian territory."
       }
     },
     "1344296544": {
@@ -5037,7 +5037,7 @@
       },
       "en": {
         "name": "Treasure Fleet",
-        "description": ""
+        "description": "May form Fleets and Armadas with Mercantilism, instead of Nationalism and Mobilization. [ICON_TradeRoute] Trade Routes receive +3 [ICON_Gold] Gold, +2 [ICON_Faith] Faith, and +1 [ICON_Production] Production. [ICON_TradeRoute] Trade Routes between multiple continents receive triple these numbers. Cities not on your original Capital’s continent receive +25% [ICON_Production] Production towards districts and a builder when founded."
       }
     },
     "2358769663": {
@@ -5485,7 +5485,7 @@
       },
       "en": {
         "name": "Adventures of Enkidu",
-        "description": ""
+        "description": "When at war with a common foe, they and their allies share pillage rewards and share combat experience gains if within 5 tiles. Their Alliances gain Alliance Points for being at war with a common foe. +5 [ICON_Strength] Combat Strength against units of players at war with you and your ally."
       }
     },
     "2185753658": {
@@ -5501,7 +5501,7 @@
       },
       "en": {
         "name": "Mediterranean's Bride",
-        "description": ""
+        "description": "Your [ICON_TradeRoute] Trade Routes to other civilizations provide +4 [ICON_Gold] Gold for Egypt. Other civilizations' [ICON_TradeRoute] Trade Routes to Egypt provide +2 [ICON_Food] Food for them and +2 [ICON_Gold] Gold for Egypt. Trading with Allies earns twice as many bonus Alliance Points."
       }
     },
     "1236953139": {
@@ -5517,7 +5517,7 @@
       },
       "en": {
         "name": "Divine Wind",
-        "description": ""
+        "description": "Land units receive +5 [ICON_Strength] Combat Strength in land tiles adjacent to Coast; naval units receive +5 [ICON_Strength] Combat Strength in shallow water tiles. Builds Encampment, Holy Site and Theater Square districts in half the time. Units do not receive damage from Hurricanes. Civilizations that are at war with Japan receive +100% unit damage from Hurricanes in Japanese territory."
       }
     },
     "2604413693": {
@@ -5533,7 +5533,7 @@
       },
       "en": {
         "name": "El Escorial",
-        "description": ""
+        "description": "Inquisitors can Remove Heresy one extra time. Inquisitors eliminate 100% of the presence of other Religions. Combat and Religious units have a bonus of +5 [ICON_Strength] Combat Strength against players following other Religions."
       }
     },
     "4005151623": {
@@ -5597,7 +5597,7 @@
       },
       "en": {
         "name": "Pax Britannica",
-        "description": ""
+        "description": "Each time you found your first city on a continent other than your home continent receive a free melee unit and a [ICON_TradeRoute] Trade Route capacity. Constructing any Royal Navy Dockyard grants you a copy of the strongest naval unit you can build. Gain the Redcoat unique unit when the Military Science technology is researched."
       }
     },
     "1432883523": {
@@ -5645,7 +5645,7 @@
       },
       "en": {
         "name": "Roosevelt Corollary",
-        "description": ""
+        "description": "Units receive +5 [ICON_Strength] Combat Strength on their home continent. Envoys sent to City-States you have a [ICON_TradeRoute] Trade Route to count as two [ICON_Envoy] Envoys. Gain the Rough Rider unique unit with Rifling."
       }
     },
     "1619859426": {
@@ -5693,7 +5693,7 @@
       },
       "en": {
         "name": "Thunderbolt of the North",
-        "description": ""
+        "description": "Allows coastal raiding for all naval melee units and +50% [ICON_PRODUCTION] Production toward all naval melee units. Receive [ICON_SCIENCE] Science from pillaging and coastal raiding Mines in addition to [ICON_GOLD] Gold. Pillaging or coastal raiding Quarries, Pastures, Plantations, and Camps provide [ICON_CULTURE] Culture in addition to [ICON_FAITH] Faith. Gain the Viking Longship unique unit with Sailing."
       }
     },
     "2866943480": {
@@ -5725,7 +5725,7 @@
       },
       "en": {
         "name": "The First Emperor",
-        "description": ""
+        "description": "When building Ancient and Classical wonders you may spend Builder charges to complete 15% of the original wonder cost. Builders receive an additional charge. Canals are unlocked with the Masonry technology."
       }
     },
     "4079226902": {
@@ -5885,7 +5885,7 @@
       },
       "en": {
         "name": "Scientific City-State",
-        "description": "1 [ICON_Envoy] Envoy: +2 [ICON_Science] Science in your [ICON_Capital] Capital.[NEWLINE]3 [ICON_Envoy] Envoys: +2 [ICON_Science] Science in every Campus district.[NEWLINE]6 [ICON_Envoy] Envoys: Additional +2 [ICON_Science] Science in every Campus district."
+        "description": "1 [ICON_Envoy] Envoy: +1 [ICON_Science] Science in the [ICON_Capital] Capital and in every Library building.[NEWLINE]3 [ICON_Envoy] Envoys: +2 [ICON_Science] Science in every Library building.[NEWLINE]6 [ICON_Envoy] Envoys: +2 [ICON_Science] Science in every University building."
       }
     },
     "919030189": {
@@ -5901,7 +5901,7 @@
       },
       "en": {
         "name": "Religious City-State",
-        "description": "1 [ICON_Envoy] Envoy: +2 [ICON_Faith] Faith in the [ICON_Capital] Capital.[NEWLINE]3 [ICON_Envoy] Envoys: +2 [ICON_Faith] Faith in every Holy Site district.[NEWLINE]6 [ICON_Envoy] Envoys: Additional +2 [ICON_Faith] Faith in every Holy Site district."
+        "description": "1 [ICON_Envoy] Envoy: +1 [ICON_Faith] Faith in the [ICON_Capital] Capital and in every Shrine building.[NEWLINE]3 [ICON_Envoy] Envoys: +2 [ICON_Faith] Faith in every Shrine building.[NEWLINE]6 [ICON_Envoy] Envoys: +2 [ICON_Faith] Faith in every Temple building."
       }
     },
     "3680012030": {
@@ -5917,7 +5917,7 @@
       },
       "en": {
         "name": "Trade City-State",
-        "description": "1 [ICON_Envoy] Envoy: +4 [ICON_Gold] Gold in the [ICON_Capital] Capital.[NEWLINE]3 [ICON_Envoy] Envoys: +4 [ICON_Gold] Gold in every Commercial Hub district.[NEWLINE]6 [ICON_Envoy] Envoys: Additional +4 [ICON_Gold] Gold in every Commercial Hub district."
+        "description": "1 [ICON_Envoy] Envoy: +2 [ICON_Gold] Gold in the [ICON_Capital] Capital and in every Market or Lighthouse building.[NEWLINE]3 [ICON_Envoy] Envoys: +2 [ICON_Gold] Gold in every Market and Lighthouse building.[NEWLINE]6 [ICON_Envoy] Envoys: +2 [ICON_Gold] Gold in every Bank and Shipyard building."
       }
     },
     "2485107434": {
@@ -5933,7 +5933,7 @@
       },
       "en": {
         "name": "Cultural City-State",
-        "description": "1 [ICON_Envoy] Envoy: +2 [ICON_Culture] Culture in the [ICON_Capital] Capital.[NEWLINE]3 [ICON_Envoy] Envoys: +2 [ICON_Culture] Culture in every Theater Square district.[NEWLINE]6 [ICON_Envoy] Envoys: Additional +2 [ICON_Culture] Culture in every Theater Square district."
+        "description": "1 [ICON_Envoy] Envoy: +1 [ICON_Culture] Culture in the [ICON_Capital] Capital and in every Amphitheater building.[NEWLINE]3 [ICON_Envoy] Envoys: +2 [ICON_Culture] Culture in every Amphitheater building.[NEWLINE]6 [ICON_Envoy] Envoys: +2 [ICON_Culture] Culture in every Art Museum and Archeological Museum building."
       }
     },
     "3526642096": {
@@ -5949,7 +5949,7 @@
       },
       "en": {
         "name": "Militaristic City-State",
-        "description": "1 [ICON_Envoy] Envoy: +2 [ICON_Production] Production in the [ICON_Capital] Capital when producing units.[NEWLINE]3 [ICON_Envoy] Envoys: +2 [ICON_Production] Production in every Encampment district when producing units.[NEWLINE]6 [ICON_Envoy] Envoys: Additional +2 [ICON_Production] Production in every Encampment district when producing units."
+        "description": "1 [ICON_Envoy] Envoy: +1 [ICON_Production] Production in the [ICON_Capital] Capital and in every city with a Barracks or Stable when producing units.[NEWLINE]3 [ICON_Envoy] Envoys: +2 [ICON_Production] Production in every city with a Barracks or Stable building when producing units.[NEWLINE]6 [ICON_Envoy] Envoys: +2 [ICON_Production] Production in every city with an Armory building when producing units."
       }
     },
     "2006952954": {
@@ -5965,7 +5965,7 @@
       },
       "en": {
         "name": "Industrial City-State",
-        "description": "1 [ICON_Envoy] Envoy: +2 [ICON_Production] Production in the [ICON_Capital] Capital when producing wonders, buildings, and districts.[NEWLINE]3 [ICON_Envoy] Envoys: +2 [ICON_Production] Production in every Industrial Zone district when producing wonders, buildings, and districts.[NEWLINE]6 [ICON_Envoy] Envoys: Additional +2 [ICON_Production] Production in every Industrial Zone district when producing wonders, buildings and districts."
+        "description": "1 [ICON_Envoy] Envoy: +1 [ICON_Production] Production in the [ICON_Capital] Capital and in every city with a Workshop building when producing wonders, buildings, and districts.[NEWLINE]3 [ICON_Envoy] Envoys: +2 [ICON_Production] Production in every city with a Workshop building when producing wonders, buildings, and districts.[NEWLINE]6 [ICON_Envoy] Envoys: +2 [ICON_Production] Production in every city with a Factory building when producing wonders, buildings, and districts."
       }
     },
     "2603005969": {
@@ -6045,7 +6045,7 @@
       },
       "en": {
         "name": "Hattusa Suzerain Bonus",
-        "description": ""
+        "description": "Provides you with 2 of each Strategic resource per turn that you have revealed but have not improved."
       }
     },
     "3966793513": {
@@ -6141,7 +6141,7 @@
       },
       "en": {
         "name": "La Venta Suzerain Bonus",
-        "description": ""
+        "description": "Your Builders can now make Colossal Head improvements.[NEWLINE][NEWLINE]Colossal Heads provide +2 [ICON_Faith] Faith. +1 [ICON_Faith] Faith for every 2 adjacent Rainforest or for every adjacent Rainforest once Humanism is discovered. +1 [ICON_Faith] Faith for every 2 adjacent Woods or for every adjacent Woods once Humanism is discovered. [ICON_TOURISM] Tourism from [ICON_FAITH] Faith once Flight is discovered. Cannot be built on Snow or Snow Hills."
       }
     },
     "3882330534": {
@@ -6412,8 +6412,8 @@
         "description": "[ICON_TechBoosted] 尤里卡提供科技的所有 [ICON_SCIENCE] 科技值。每回合的 [ICON_SCIENCE] 科技值-50%。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Enuma Anu Enlil",
+        "description": "[ICON_TechBoosted] Eurekas provide all of the [ICON_SCIENCE] Science for technologies. -50% [ICON_SCIENCE] Science per turn."
       }
     },
     "2511684268": {
@@ -6428,7 +6428,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Palgum",
         "description": ""
       }
     },
@@ -6444,7 +6444,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Sabum Kibittum",
         "description": ""
       }
     },
@@ -6460,8 +6460,8 @@
         "description": "首次建造出一种特色区域（市政广场除外）时，获得当前可在该区域中建造的、所需 [ICON_PRODUCTION] 生产力最低的建筑。首次建造任意其他区域时，获得1名 [ICON_ENVOY] 使者。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Ninu Ilu Sirum",
+        "description": "When each specialty district type except the Government Plaza is constructed for the first time receive the lowest [ICON_PRODUCTION] Production cost building that can currently be constructed in that district. Receive an [ICON_ENVOY] Envoy when any other district is constructed for the first time."
       }
     },
     "3044005776": {
@@ -6492,8 +6492,8 @@
         "description": "建筑建成时，获得等同于建筑花费10%的 [ICON_CULTURE] 文化值。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Ayutthaya Suzerain Bonus",
+        "description": "Gain [ICON_CULTURE] Culture equal to 10% of the construction cost when finishing buildings."
       }
     },
     "1978436122": {
@@ -6508,8 +6508,8 @@
         "description": "此城中每有1位您所创建（或主流）宗教的信徒，国际与国内 [ICON_TradeRoute] 贸易路线提供的 [ICON_FAITH] 信仰值便+1。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Chinguetti Suzerain Bonus",
+        "description": "International and domestic [ICON_TradeRoute] Trade Routes receive +1 [ICON_FAITH] Faith for every follower in this city, of your founded or majority religion."
       }
     },
     "573778137": {
@@ -6524,8 +6524,8 @@
         "description": "每拥有1种类型的改良资源，城市便+1 [ICON_Production] 生产力。研究“工业化”之后提升为+2 [ICON_Production] 生产力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Johannesburg Suzerain Bonus",
+        "description": "Cities receive +1 [ICON_Production] Production for every improved resource type. After researching Industrialization it becomes +2 [ICON_PRODUCTION] Production."
       }
     },
     "70488972": {
@@ -6540,8 +6540,8 @@
         "description": "您的建造者现在可以建造大寺改良设施。[NEWLINE][NEWLINE]+2 [ICON_SCIENCE] 科技值、+1 [Icon_Housing] 住房。每与1座圣地区域相邻，则+1 [ICON_Faith] 信仰值；每与1座学院区域相邻，则+1 [ICON_Science] 科技值。研究完“科学理论”之后，每与1座学院相邻则额外+1 [Icon_Science] 科技值。玩家首次建成大寺时将随机获得一项科技。必须建在平坦地貌上，不能与其他大寺相邻。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Nalanda Suzerain Bonus",
+        "description": "Your Builders can now make Mahavihara improvements.[NEWLINE][NEWLINE]+2 [ICON_SCIENCE] Science and +1 [Icon_Housing] Housing. +1 [ICON_Faith] Faith for every adjacent Holy Site district and +1 [ICON_Science] Science for every adjacent Campus district. After researching Scientific Theory receive an additional +1 [Icon_Science] Science for every adjacent Campus. When a player constructs their first Mahavihara receive a random technology. Must be built on flat terrain not adjacent to another Mahavihara."
       }
     },
     "3711196734": {
@@ -6556,8 +6556,8 @@
         "description": "您的建造者现在能够建造圆顶市集改良设施。[NEWLINE][NEWLINE]+2 [ICON_GOLD] 金币。每与一个奢侈品资源相邻则+1 [ICON_Gold] 金币。起源城市每有一座圆顶市集，对外国际贸易 [ICON_TradeRoute] 路线提供的 [ICON_GOLD] 金币便+1。无法建在另一座圆顶市集旁。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Samarkand Suzerain Bonus",
+        "description": "Your Builders can now make Trading Dome improvements.[NEWLINE][NEWLINE]+2 [ICON_GOLD] Gold. +1 [ICON_Gold] Gold for every adjacent Luxury resource. Your outgoing international [ICON_TradeRoute] Trade Routes grant +1 [ICON_GOLD] Gold per Trading Dome at the origin. Cannot be built next to another Trading Dome."
       }
     },
     "4171713755": {
@@ -6572,8 +6572,8 @@
         "description": "陆地单位击杀主要和小型文明的单位时，将获得 [ICON_GreatGeneral] 大将军点数，而海军单位完成击杀将获得 [ICON_GreatAdmiral] 海军统帅点数，获得量等同于对方单位战斗力的25%（标准速度下）。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Wolin Suzerain Bonus",
+        "description": "Receive [ICON_GreatGeneral] Great General points when a land unit defeats a major or minor civilization's unit and receive [ICON_GreatAdmiral] Great Admiral points when a naval unit defeats a major or minor civilization's unit equal to 25% of the opposing unit's strength (Standard Speed)."
       }
     },
     "3079710318": {
@@ -6588,8 +6588,8 @@
         "description": "每有1座圣城皈依拜占庭的宗教（也包括拜占庭的圣城），单位便获得+3 [ICON_Strength] 战斗力或 [ICON_Religion] 宗教战斗力。击杀敌方文明或城邦的单位时，拜占庭的宗教将传播到附近的城市。如城市拥有圣地区域，其提供的 [ICON_GreatProphet] 大预言家点数+1。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Taxis",
+        "description": "Units receive +3 [ICON_Strength] Combat Strength or [ICON_Religion] Religious Strength for each Holy City converted to Byzantium's Religion (including Byzantium's Holy City). Byzantium's Religion is spread to nearby cities when defeating a unit belonging to an enemy civilization or city-state. +1 [ICON_GreatProphet] Great Prophet point from cities with a Holy Site district."
       }
     },
     "3636146225": {
@@ -6604,7 +6604,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Hippodrome",
         "description": ""
       }
     },
@@ -6620,7 +6620,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Dromon",
         "description": ""
       }
     },
@@ -6636,8 +6636,8 @@
         "description": "矿山为所有区域提供少量相邻加成、对无主领土施放文化炸弹，并+1 [ICON_CULTURE] 文化值。特色区域与其他区域相邻时不会获得少量相邻加成；特色区域也无法建在市中心旁。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Hallstatt Culture",
+        "description": "Mines provide a minor adjacency bonus for all districts, a Culture Bomb of unowned territory, and receive +1 [ICON_CULTURE] Culture. Specialty districts do not receive a minor adjacency for being adjacent to another district and these districts cannot be built adjacent to the City Center."
       }
     },
     "3752163084": {
@@ -6652,7 +6652,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Oppidum",
         "description": ""
       }
     },
@@ -6668,7 +6668,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Gaesatae",
         "description": ""
       }
     },
@@ -6684,8 +6684,8 @@
         "description": "生产出一个非平民单位时，您的文明将获得等同于该单位成本20%的 [ICON_CULTURE] 文化值。每与1个单位相邻，近战、抗骑兵和远程单位便+2 [ICON_Strength] 战斗力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "King of the Eburones",
+        "description": "Your civilization gains [ICON_CULTURE] Culture equal to 20% of the unit’s cost when a non-civilian is trained. Melee, Anti-Cavalry, and Ranged Units receive +2 [ICON_Strength] Combat Strength for every adjacent unit."
       }
     },
     "3433343018": {
@@ -6700,8 +6700,8 @@
         "description": "对所信仰宗教与拜占庭相同的城市发起进攻时，轻重骑兵将输出全额伤害。解锁“王权神授”市政后将获得特色单位“甲胄骑兵”。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Porphyrogénnētos",
+        "description": "Heavy and Light Cavalry units do full damage against cities following the same religion as Byzantium. Gain the Tagma unique unit when the Divine Right civic is discovered."
       }
     },
     "2640421256": {
@@ -6716,7 +6716,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Tagma",
         "description": ""
       }
     },
@@ -6764,8 +6764,8 @@
         "description": "与剧院广场区域或法国特色城堡相邻的改良奢侈品资源提供的 [ICON_CULTURE] 文化值+2。可在拥有剧院广场区域的任意城市中开展“宫廷盛会”项目。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Catherine’s Magnificences",
+        "description": "Improved Luxury resources adjacent to Theater Square districts or Châteaux receive +2 [ICON_CULTURE] Culture. May initiate the Court Festival project in any city with a Theater Square district."
       }
     },
     "1918703353": {
@@ -6796,8 +6796,8 @@
         "description": "埃塞俄比亚的国际贸易路线起点处每拥有一种资源，其提供的 [ICON_Faith] 信仰值便+0.5。城市每拥有一种重复的改良资源，其提供的 [ICON_Faith] 信仰值便+1。可用信仰值购买考古博物馆和考古学家。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Aksumite Legacy",
+        "description": "Ethiopia’s International Trade Routes grant +0.5 [ICON_Faith] Faith per resource at the origin. Improved resources provide +1 [ICON_Faith] Faith for each copy the city owns. Can purchase Archaeological Museums and Archaeologists with [ICON_Faith] Faith."
       }
     },
     "2431201930": {
@@ -6844,8 +6844,8 @@
         "description": "获得等同于建在丘陵上的城市所产生 [ICON_FAITH] 信仰值15%的 [ICON_SCIENCE] 科技值和 [ICON_CULTURE] 文化值。单位在丘陵上时+4 [ICON_STRENGTH] 战斗力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Council of Ministers",
+        "description": "Receive [ICON_SCIENCE] Science and [ICON_CULTURE] Culture equal to 15% of your [ICON_FAITH] Faith generation in cities founded on Hills. Units receive +4 [ICON_STRENGTH] Combat Strength on Hills."
       }
     },
     "4159234454": {
@@ -7020,8 +7020,8 @@
         "description": "+1 [ICON_TradeRoute] 贸易路线容量，拥有制陶术科技后获得1个免费商人。商人首次进入克里城市3个单元格内的无主单元格后，这些单元格将划入克里领土中。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Nîhithaw",
+        "description": "+1 [ICON_TradeRoute] Trade Route capacity and a free Trader with the Pottery technology. Unclaimed tiles within 3 tiles of a Cree city come under Cree control when a Trader first moves into them."
       }
     },
     "680910682": {
@@ -7036,8 +7036,8 @@
         "description": "与河流相邻时，学院、剧院广场和工业区将获得大量加成。建成港口后可对相邻单元格施放文化炸弹。建造堤坝区域和拦洪坝建筑时 [ICON_Production] 生产力+50%。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Grote Rivieren",
+        "description": "Major adjacency bonus for Campuses, Theater Squares, and Industrial Zones if next to a river. Culture Bomb adjacent tiles when completing a Harbor. +50% [ICON_Production] Production toward the Dam district and Flood Barrier building."
       }
     },
     "1628819554": {
@@ -7052,8 +7052,8 @@
         "description": "创建 [ICON_TradeRoute] 贸易路线后，目的地城市中将立即出现1座 [ICON_TradingPost] 贸易站。在一个文明的任意城市中拥有1座 [ICON_TradingPost] 贸易站后，[ICON_VisLimited] 外交能见度则上升1级。只要拥有比敌方更高的 [ICON_VisLimited] 外交能见度，所有蒙古单位基础 [ICON_Strength] 战斗力加成则翻1倍。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Örtöö",
+        "description": "Starting a [ICON_TradeRoute] Trade Route immediately creates a [ICON_TradingPost] Trading Post in the destination city. Receive an extra level of [ICON_VisLimited] Diplomatic Visibility for possessing a [ICON_TradingPost] Trading Post in any city of a civilization. All Mongolian units double the usual [ICON_Strength] Combat Bonus for having a higher level of [ICON_VisLimited] Diplomatic Visibility than their opponent."
       }
     },
     "3843994458": {
@@ -7068,8 +7068,8 @@
         "description": "幸福度为快乐的城市额外+5% [ICON_SCIENCE] 科技值、+5% [ICON_PRODUCTION] 生产力。快乐的城市中每个学院+1 [ICON_GreatScientist] 大科学家点数、每个工业区+1 [ICON_GreatEngineer] 大工程师点数。欣喜若狂的城市获得的加成将加倍。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Scottish Enlightenment",
+        "description": "Happy cities receive an additional +5%  [ICON_SCIENCE] Science and +5%  [ICON_PRODUCTION] Production. Happy cities generate +1  [ICON_GreatScientist] Great Scientist point per Campus and +1 [ICON_GreatEngineer] Great Engineer point per Industrial Zone. Ecstatic cities double all these amounts."
       }
     },
     "2448505898": {
@@ -7100,8 +7100,8 @@
         "description": "每与一座书院区域相邻，矿山则+1 [ICON_SCIENCE] 科技值。每与一座书院区域相邻，农场则+1 [ICON_FOOD] 食物。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Three Kingdoms",
+        "description": "Mines receive +1 [ICON_SCIENCE] Science for every adjacent Seowon district. Farms receive +1 [ICON_FOOD] Food for every adjacent Seowon district."
       }
     },
     "1815247296": {
@@ -7116,8 +7116,8 @@
         "description": "在黄金或英雄时代初期设置着力点时，除原有加成外还将获得提高时代得分的普通时代加成。建造防御性建筑时+50% [ICON_Production] 生产力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Strength in Unity",
+        "description": "When making Dedications at the beginning of a Golden Age or Heroic Age, receive the Normal Age bonus towards improving Era Score in addition to the other bonus. +50% [ICON_Production] Production towards defensive buildings."
       }
     },
     "637141883": {
@@ -7196,7 +7196,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Chemamull",
         "description": ""
       }
     },
@@ -7212,7 +7212,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Polder",
         "description": ""
       }
     },
@@ -7228,7 +7228,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Golf Course",
         "description": ""
       }
     },
@@ -7244,7 +7244,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Mekewap",
         "description": ""
       }
     },
@@ -7372,8 +7372,8 @@
         "description": "[ICON_Governor] 总督就职城市提供的 [ICON_CULTURE] 文化值+5%、[ICON_Production] 生产力+5%，此城市中生产的所有单位的战斗经验值+10%。在非马普切建立的城市中，这些数值将乘以三倍。[ICON_Governor] 总督就职城市9单元格范围内的所有城市每回合对本方文明的忠诚度+4。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Toqui",
+        "description": "Cities with an Established [ICON_Governor] Governor provide +5% [ICON_CULTURE] Culture, +5% [ICON_Production] Production, and +10% experience in combat towards all units trained in this city. These numbers are tripled in cities not founded by the Mapuche. All cities within 9 tiles of a city with your  [ICON_Governor] Governor gain +4 Loyalty per turn towards your civilization."
       }
     },
     "679973856": {
@@ -7388,8 +7388,8 @@
         "description": "拥有驻军单位的城市每回合忠诚度+3；如驻扎有军团或军队，则+5。如已解锁相关市政，用单位占领城市则可将其升级为军团或军队。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Isibongo",
+        "description": "Cities with a garrisoned unit get +3 Loyalty per turn, or +5 if it is a Corps or Army. Conquering a city with a unit will upgrade it into a Corps or Army, if the proper Civics are unlocked."
       }
     },
     "1782147721": {
@@ -7404,8 +7404,8 @@
         "description": "可更早组建军团（需雇佣兵市政）和军队（需民族主义市政）。使军团和军队的 [ICON_STRENGTH] 基础战斗力额外+5。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Amabutho",
+        "description": "May form Corps (Mercenaries Civic) and Armies (Nationalism Civic) earlier. An additional +5 [ICON_STRENGTH] Base Combat Strength to both Corps and Armies."
       }
     },
     "2791871818": {
@@ -7420,8 +7420,8 @@
         "description": "解锁军事训练市政后可宣布领土扩张战争。宣布领土扩张战争后的10回合内+2 [ICON_Movement] 移动力、+5 [ICON_Strength] 战斗力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Arthashastra",
+        "description": "Can declare a War of Territorial Expansion after gaining the Military Training Civic.  +2 [ICON_Movement] Movement and +5 [ICON_Strength] Combat Strength for the first 10 turns after declaring a War of Territorial Expansion."
       }
     },
     "1041406949": {
@@ -7436,8 +7436,8 @@
         "description": "解锁防御战术市政后即可宣布解放战争。宣布解放战争后的10回合内+100% [ICON_Production] 生产力、+2 [ICON_Movement] 移动力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Bannockburn",
+        "description": "Can declare a War of Liberation after gaining the Defensive Tactics Civic.  +100% [ICON_Production] Production and +2 [ICON_Movement] Movement for the first 10 turns after declaring a War of Liberation."
       }
     },
     "3577455625": {
@@ -7452,8 +7452,8 @@
         "description": "[ICON_Governor] 总督在城市中就职后，每次升级（包括首次升级）都将提供+3% [ICON_Culture] 文化值和 [ICON_Science] 科技值。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Hwarang",
+        "description": "[ICON_Governor] Governors established in a city provide +3% [ICON_Culture] Culture and [ICON_Science] Science for each Promotion they have earned, including their first."
       }
     },
     "3501816381": {
@@ -7468,8 +7468,8 @@
         "description": "战斗胜利后，获得等同于被击杀单位战斗力50%的 [ICON_FAITH] 信仰值（标准速度下）。如城邦的主流宗教与本方相同，则派遣至其处的每名 [ICON_ENVOY] 使者将视为2名（必须拥有1个主流宗教）。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Glory of the World, Kingdom and Faith",
+        "description": "Combat victories provide [ICON_FAITH] Faith equal to 50% of the Combat Strength of the defeated unit (on Standard Speed). Each [ICON_ENVOY] Envoy you send to a city-state of your majority Religion counts as two [ICON_ENVOY] Envoys. (Must have a majority Religion)."
       }
     },
     "3949679924": {
@@ -7484,8 +7484,8 @@
         "description": "所有同盟类型均可形成共享视野。[NEWLINE]输出的[ICON_TradeRoute] 贸易路线目的地城市中的每座营地或牧场可为庞德梅克提供+1 [ICON_Food] 食物。[NEWLINE]输入的国外 [ICON_TradeRoute] 贸易路线目的地城市中的每座营地或牧场可为庞德梅克提供+1 [ICON_Gold] 金币。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Favorable Terms",
+        "description": "All Alliance types provide Shared Visibility.[NEWLINE]Your outgoing [ICON_TradeRoute] Trade Routes grant +1 [ICON_Food] Food to Poundmaker per Camp or Pasture at the destination. [ICON_TradeRoute] Trade Routes sent to your cities grant +1 [ICON_Gold] Gold to Poundmaker per Camp or Pasture at the destination."
       }
     },
     "1528625676": {
@@ -7500,8 +7500,8 @@
         "description": "通向本方城市的本方 [ICON_TradeRoute] 贸易路线每回合可为起源城市+2忠诚度。通往外国城市或起源于外国城市的 [ICON_TradeRoute] 贸易路线+2 [ICON_Culture] 文化值。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Radio Oranje",
+        "description": "Your [ICON_TradeRoute] Trade Routes to your own cities provide +2 Loyalty per turn for the starting city. [ICON_TradeRoute] Trade Routes to foreign cities or from foreign cities provide +2 [ICON_Culture] Culture to you."
       }
     },
     "2435218760": {
@@ -7516,8 +7516,8 @@
         "description": "与自由城市或处在黄金/英雄时代中的文明作战时+10 [ICON_Strength] 战斗力。在敌方城市边界中击杀敌方单位后，将使此城损失20点忠诚度（如此文明正处在黄金/英雄时代中，则损失40点忠诚度）。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Swift Hawk",
+        "description": "+10 [ICON_Strength] Combat Strength when fighting Free Cities or civilizations that are in a Golden or Heroic Age. Defeating an enemy unit within the borders of an enemy city causes that city to lose 20 Loyalty and 40 loyalty if that civilization is in a Golden or Heroic Age."
       }
     },
     "114536451": {
@@ -7532,8 +7532,8 @@
         "description": "所有骑兵类单位 [ICON_Strength] 战斗力+3，击败敌方骑兵类单位后有几率将其俘获。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Mongol Horde",
+        "description": "All cavalry class units gain +3 [ICON_Strength] Combat Strength and a chance to capture defeated enemy cavalry class units."
       }
     },
     "3898824023": {
@@ -7660,8 +7660,8 @@
         "description": "您通往海外城市的 [ICON_TradeRoute] 贸易路线可从目的地的每个奢侈品资源+1 [ICON_Gold] 金币。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Venice Suzerain Bonus",
+        "description": "Your [ICON_TradeRoute] Trade Routes to foreign cities earn +1 [ICON_Gold] Gold for each Luxury resource at the destination."
       }
     },
     "2102559828": {
@@ -7676,8 +7676,8 @@
         "description": "每本 [ICON_GreatWork_WRITING] 著作巨作+2 [ICON_SCIENCE] 科技值。每件 [ICON_GreatWork_RELIC] 遗物和 [ICON_GreatWork_Artifact] 文物+1 [ICON_SCIENCE] 科技值。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Anshan Suzerain Bonus",
+        "description": "+2 [ICON_SCIENCE] Science from each [ICON_GreatWork_WRITING] Great Work of Writing. +1 [ICON_SCIENCE] Science from each [ICON_GreatWork_RELIC] Relic and [ICON_GreatWork_Artifact] Artifact."
       }
     },
     "291664124": {
@@ -7693,7 +7693,7 @@
       },
       "en": {
         "name": "Carthage Suzerain Bonus",
-        "description": "Your Encampment districts provide +1 [ICON_TradeRoute] Trade Route capacity each."
+        "description": "Land combat units are 20% cheaper to purchase with [ICON_GOLD] Gold for each Encampment district building in that city."
       }
     },
     "2247101874": {
@@ -7709,7 +7709,7 @@
       },
       "en": {
         "name": "Jerusalem Suzerain Bonus",
-        "description": ""
+        "description": "Your cities with Holy Sites exert pressure as if they were Holy Cities (4x Religion pressure on all cities within 10 tiles)."
       }
     },
     "2905468184": {
@@ -7725,7 +7725,7 @@
       },
       "en": {
         "name": "Preslav Suzerain Bonus",
-        "description": "Your light and heavy cavalry units have +5 [ICON_Strength] Strength when fighting on hill tiles."
+        "description": "You receive +2 Loyalty per turn in cities for each Encampment district building."
       }
     },
     "2461138842": {
@@ -7741,7 +7741,7 @@
       },
       "en": {
         "name": "Stockholm Suzerain Bonus",
-        "description": "Your districts provide +1 [ICON_GreatPerson] Great Person point of their type ([ICON_GreatWriter] Great Writer, [ICON_GreatArtist] Great Artist, and [ICON_GreatMusician] Great Musician for Theater Square districts)."
+        "description": "Your districts with a building provide +1 [ICON_GreatPerson] Great Person point of their type ([ICON_GreatWriter] Great Writer, [ICON_GreatArtist] Great Artist, and [ICON_GreatMusician] Great Musician for Theater Square districts with a building)."
       }
     },
     "956373715": {
@@ -7757,7 +7757,7 @@
       },
       "en": {
         "name": "Vilnius Suzerain Bonus",
-        "description": "When you enter a new era, earn 1 random [ICON_CivicBoosted] Inspiration from that era."
+        "description": "For the highest active Alliance Level, all your Theater Square districts receive +50% adjacency bonus."
       }
     },
     "2615300403": {
@@ -7948,8 +7948,8 @@
         "description": "每回合收集的铁与煤额外增加2点。生产军事工程师时+100% [ICON_PRODUCTION] 生产力。军事工程师+2建造次数。拥有电力供给时，建筑的额外产出+4。建造工业区建筑时+20% [ICON_PRODUCTION] 生产力。港口使战略资源储备+10（标准速度下）。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Workshop of the World",
+        "description": "Iron and Coal Mines accumulate 2 more resources per turn. +100% [ICON_PRODUCTION] Production towards Military Engineers. Military Engineers receive +2 charges. Buildings that provide additional yields when [ICON_POWER] Powered receive +4 of that yield. +20% [ICON_PRODUCTION] Production towards Industrial Zone buildings. Harbor buildings increase Strategic Resource Stockpiles by +10 (on Standard Speed)."
       }
     },
     "2767964955": {
@@ -7964,8 +7964,8 @@
         "description": "近战与抗骑兵单位的攻击可对城墙造成全额伤害。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Akkad Suzerain Bonus",
+        "description": "Melee and anti-cavalry unit's attacks do full damage to the city's Walls."
       }
     },
     "1410491209": {
@@ -7980,8 +7980,8 @@
         "description": "拥有建筑的区域使相应类型的 [ICON_GreatPerson] 伟人点数+1（拥有建筑的剧院广场区域提供 [ICON_GreatWriter] 大作家、[ICON_GreatArtist] 大艺术家和 [ICON_GreatMusician] 大音乐家点数）。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Bologna Suzerain Bonus",
+        "description": "Your districts with a building provide +1 [ICON_GreatPerson] Great Person point of their type ([ICON_GreatWriter] Great Writer, [ICON_GreatArtist] Great Artist, and [ICON_GreatMusician] Great Musician for Theater Square districts with a building)."
       }
     },
     "1016979549": {
@@ -7996,8 +7996,8 @@
         "description": "建造者可以建造卡霍基亚土墩改良设施。[NEWLINE][NEWLINE]+3 [ICON_GOLD] 金币。城市建造首座卡霍基亚土墩改良设施可提供+1点 [ICON_AMENITIES] 宜居度。发现“自然历史”后，城市建造的第二座卡霍基亚土墩改良设施可提供+1点 [ICON_AMENITIES] 宜居度。解锁“封建主义”后，每2个相邻区域+1 [ICON_FOOD] 食物；或研究“零件规格化”后，每个相邻区域+1 [ICON_FOOD] 食物。提供+1 [ICON_HOUSING] 住房；发现“文化遗产”后，可额外获得1点 [ICON_HOUSING] 住房。无法建造在另一个卡霍基亚土墩旁。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Cahokia Suzerain Bonus",
+        "description": "Your Builders can now make Cahokia Mounds improvements.[NEWLINE][NEWLINE]Cahokia Mounds provide +3 [ICON_GOLD] Gold. Cities receive +1 [ICON_AMENITIES] Amenity from their first Cahokia Mound improvement. Upon discovering Natural History, cities receive +1 [ICON_AMENITIES] Amenity from their second Cahokia Mound improvement. +1 [ICON_FOOD] Food for every 2 adjacent Districts once Feudalism is discovered or for every adjacent District once Replaceable Parts is researched. Provides +1 [ICON_HOUSING] Housing. Receive an additional [ICON_HOUSING] Housing once Cultural Heritage is discovered. Cannot be built adjacent to other Cahokia Mounds."
       }
     },
     "3126166337": {
@@ -8012,8 +8012,8 @@
         "description": "每个港口内建筑向城市提供2点 [ICON_Power] 电力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Cardiff Suzerain Bonus",
+        "description": "Cities receive +2 [ICON_Power] Power for every Harbor building."
       }
     },
     "2773429357": {
@@ -8028,8 +8028,8 @@
         "description": "利用宗教单位使城市首次改变信仰时，该城市每拥有1点 [ICON_Citizen] 人口，则提供20点 [ICON_SCIENCE] 科技值（标准速度下）。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Fez Suzerain Bonus",
+        "description": "When you use a religious unit to convert a city for the first time earn 20 [ICON_SCIENCE] Science per [ICON_Citizen] Population of that city (on Standard Speed)."
       }
     },
     "1629735216": {
@@ -8044,8 +8044,8 @@
         "description": "来自工业区、水上乐园和娱乐设施的区域效果范围增加3个单元格。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Mexico City Suzerain Bonus",
+        "description": "Regional effects from your Industrial Zone, Water Park, and Entertainment Complex districts reach 3 tiles farther."
       }
     },
     "2340934140": {
@@ -8060,8 +8060,8 @@
         "description": "建造者可以建造纳斯卡巨画改良设施。[NEWLINE][NEWLINE]纳斯卡巨画向相邻单元格提供+1 [ICON_Faith] 信仰值；拥有资源的相邻单元格+1 [ICON_Faith] 信仰值。发现“行政部门”后，相邻的沙漠、沙漠丘陵单元格+1 [ICON_FOOD] 食物。研究“大量生产”后，相邻的平原单元格+1 [ICON_PRODUCTION] 生产力；同时+1魅力。仅能建在沙漠平原中。此单元格无法派遣人口工作。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Nazca Suzerain Bonus",
+        "description": "Your Builders can now make Nazca Line improvements.[NEWLINE][NEWLINE]Nazca Lines provide +1 [ICON_Faith] Faith to adjacent tiles. +1 [ICON_Faith] Faith to adjacent tiles with a resource. +1 [ICON_FOOD] Food to adjacent Desert and Desert Hill tiles after discovering Civil Service. +1 [ICON_PRODUCTION] Production to adjacent flat tiles after researching Mass Production. +1 Appeal. Can only be built on flat Desert. This tile cannot be worked."
       }
     },
     "2296865406": {
@@ -8076,8 +8076,8 @@
         "description": "城市中每拥有1个“军营”内建筑，购买陆地战斗或支援单位所需的 [ICON_GOLD] 金币便减少20%。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Ngazargamu Suzerain Bonus",
+        "description": "Land combat or Support units are 20% cheaper to purchase with [ICON_GOLD] Gold for each Encampment district building in that city."
       }
     },
     "984634002": {
@@ -8092,8 +8092,8 @@
         "description": "建造者可以建造摩艾石像改良设施。[NEWLINE][NEWLINE]摩艾石像提供+1 [ICON_Culture] 文化值。每2个相邻的摩艾石像+1 [ICON_Culture] 文化值。在火山土单元格之上或与其相邻时，+2 [ICON_Culture] 文化值。与海岸或湖泊单元格相邻时，+1 [ICON_Culture] 文化值。随着市政与科技树的发展，可获得额外的 [ICON_Culture] 文化值与 [ICON_Tourism] 旅游业绩。可建在平原、平原丘陵、草原、草原丘陵或火山土之上。无法建在相邻树林或雨林的单元格上。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Rapa Nui Suzerain Bonus",
+        "description": "Your Builders can now make Moai improvements.[NEWLINE][NEWLINE]Moai provide +1 [ICON_Culture] Culture. +1 [ICON_Culture] Culture for every 2 adjacent Moai. +2 [ICON_Culture] Culture if on or adjacent to a Volcanic Soil tile. +1 [ICON_Culture] Culture if adjacent to a Coast or Lake tile . Additional [ICON_Culture] Culture and [ICON_Tourism] Tourism as you advance through the Civics and Technology Tree. Can be built on Plains, Plains Hills, Grassland, Grassland Hills, or Volcanic Soil. Cannot be placed adjacent to a Woods or Rainforest tile."
       }
     },
     "1521205630": {
@@ -8252,8 +8252,8 @@
         "description": "无法对城邦宣战或发动突袭战争。无法对加拿大发动突袭战争。每回合每获得100点 [ICON_TOURISM] 旅游业绩，即可每回合获得1点 [ICON_Favor] 外交支持。成功完成紧急状况或积分竞赛后+100% [ICON_Favor] 外交支持。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Four Faces of Peace",
+        "description": "Cannot declare war on City-States or surprise wars. Surprise wars cannot be declared on Canada. For every 100 [ICON_TOURISM] Tourism per turn earn 1 [ICON_Favor] Diplomatic Favor per turn. Receive +100% [ICON_Favor] Diplomatic Favor from successfully completing an Emergency or Scored Competition."
       }
     },
     "3352484030": {
@@ -8268,7 +8268,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Ice Hockey Rink",
         "description": ""
       }
     },
@@ -8284,7 +8284,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Mountie",
         "description": ""
       }
     },
@@ -8316,8 +8316,8 @@
         "description": "在市中心河对岸修建区域与建筑时+50% [ICON_PRODUCTION] 生产力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Pearl of the Danube",
+        "description": "+50% [ICON_PRODUCTION] Production to Districts and Buildings constructed across a river from a City Center."
       }
     },
     "2844054358": {
@@ -8332,7 +8332,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Huszár",
         "description": ""
       }
     },
@@ -8348,8 +8348,8 @@
         "description": "公民可改良山脉单元格。山脉单元格提供+2 [ICON_PRODUCTION] 生产力，游戏进入工业时代后额外+1 [ICON_PRODUCTION] 生产力。每与一个梯田农场相邻，山脉单元格则+1 [ICON_FOOD] 食物。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Mit’a",
+        "description": "Citizens may work Mountain tiles. Mountain tiles provide +2 [ICON_PRODUCTION] Production and an additional +1 [Icon_production] Production when the game reaches the Industrial Era. +1 [ICON_FOOD] Food to Mountain tiles for every adjacent Terrace Farm."
       }
     },
     "3659059269": {
@@ -8364,7 +8364,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Terrace Farm",
         "description": ""
       }
     },
@@ -8396,8 +8396,8 @@
         "description": "每个相邻沙漠或沙漠丘陵单元格为市中心提供+1 [ICON_FAITH] 信仰值与+1 [ICON_FOOD] 食物。矿山-1 [ICON_PRODUCTION] 生产力，但+4 [ICON_GOLD] 金币。可用 [ICON_Faith] 信仰值购买商业中心区域建筑。建造建筑或生产单位时-30% [ICON_PRODUCTION] 生产力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Songs of the Jeli",
+        "description": "City Centers gain +1 [ICON_FAITH] Faith and +1 [ICON_FOOD] Food for every adjacent Desert and Desert Hills tiles. Mines receive -1 [ICON_PRODUCTION] Production and +4 [ICON_GOLD] Gold. May purchase Commercial Hub district buildings with [ICON_Faith] Faith. -30% [ICON_PRODUCTION] Production toward constructing buildings or training units."
       }
     },
     "3978216632": {
@@ -8412,7 +8412,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Suguba",
         "description": ""
       }
     },
@@ -8428,7 +8428,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Mandekalu Cavalry",
         "description": ""
       }
     },
@@ -8460,8 +8460,8 @@
         "description": "游戏初始便解锁“航海术”与“造船术”科技，同时拥有进入海洋单元格的能力。水运单位+2 [ICON_Movement] 移动力。未改良的树林与雨林提供+1 [ICON_PRODUCTION] 生产力。“重商主义”额外提供+1 [ICON_PRODUCTION] 生产力、“保护地球”额外+2 [ICON_PRODUCTION] 生产力。渔船提供+1 [ICON_FOOD] 食物，并向相邻单元格投放文化炸弹。无法收获资源；无法获得 [ICON_GreatWriter] 大作家。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Mana",
+        "description": "Begin the game with the Sailing and Shipbuilding technologies unlocked and with the ability to enter Ocean tiles. Embarked units gain +2 [ICON_Movement] Movement. Unimproved Woods and Rainforest are +1 [ICON_PRODUCTION] Production. Additional +1 [ICON_PRODUCTION] Production from Mercantilism and +2 [ICON_PRODUCTION] Production from Conservation. Fishing Boats provide +1 [ICON_FOOD] Food and a Culture Bomb to adjacent tiles. Resources cannot be harvested. [ICON_GreatWriter] Great Writers cannot be earned."
       }
     },
     "2781349725": {
@@ -8476,7 +8476,7 @@
         "description": "一种特色改良设施"
       },
       "en": {
-        "name": "",
+        "name": "Pā",
         "description": ""
       }
     },
@@ -8492,7 +8492,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Toa",
         "description": ""
       }
     },
@@ -8524,8 +8524,8 @@
         "description": "生产攻城单位时 [ICON_Production] 生产力+50%。攻击区域防御时，所有攻城单位+5 [ICON_Strength] 战斗力。征服城市不会造成 [ICON_Citizen] 人口损失。非奥斯曼建立的城市每回合+1 [ICON_AMENITIES] 宜居度和+4忠诚度。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Great Turkish Bombard",
+        "description": "+50% [ICON_Production] Production toward siege units. All siege units gain +5 [ICON_Strength] Combat Strength against district defenses. Conquered cities do not lose [ICON_Citizen] Population. Cities not founded by the Ottomans gain +1 [ICON_AMENITIES] Amenity and +4 Loyalty per turn."
       }
     },
     "4131639724": {
@@ -8540,7 +8540,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Barbary Corsair",
         "description": ""
       }
     },
@@ -8556,8 +8556,8 @@
         "description": "游戏开始便激活“写作”科技 [ICON_TechBoosted] 尤里卡。腓尼基建造的海岸城市若与 [ICON_Capital] 首都在同一大陆，则其忠诚度为100%。开拓者上船后，[ICON_Movement] 移动力与视野范围各+2。开拓者上船和下船无需额外花费 [ICON_Movement] 移动力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Mediterranean Colonies",
+        "description": "Begin the game with the Writing technology [ICON_TechBoosted] Eureka. Coastal cities founded by Phoenicia and located on the same continent as the Phoenician [ICON_Capital] Capital are 100% Loyal. Settlers gain +2 [ICON_Movement] Movement and +2 sight range while embarked. Settlers ignore additional [ICON_Movement] Movement costs from embarking and disembarking."
       }
     },
     "3084640910": {
@@ -8588,7 +8588,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Bireme",
         "description": ""
       }
     },
@@ -8604,8 +8604,8 @@
         "description": "瑞典招募伟人时可获得50点 [ICON_Favor] 外交支持（标准速度下）。工厂与大学分别提供瑞典+1 [ICON_GreatEngineer] 大工程师点数与+1 [ICON_GreatScientist] 大科学家点数。如瑞典在游戏中，进入工业时代后将增添3项特色世界议会竞赛。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Nobel Prize",
+        "description": "Sweden gains 50 [ICON_Favor] Diplomatic Favor when earning a Great Person (on Standard Speed). Sweden receives +1 [ICON_GreatEngineer] Great Engineer point from Factories and +1 [ICON_GreatScientist] Great Scientist point from Universities. Having Sweden in the game adds three unique World Congress competitions starting in the Industrial Era."
       }
     },
     "3878854159": {
@@ -8620,7 +8620,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Open-Air Museum",
         "description": ""
       }
     },
@@ -8636,7 +8636,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Mountie",
         "description": ""
       }
     },
@@ -8652,8 +8652,8 @@
         "description": "在城市中完成特色项目后，可将原始 [ICON_Capital] 首都迁至任意拥有U型港的城市（必须为本方建立）。每个市政广场建筑与市政广场区域+1 [ICON_TradeRoute] 贸易路线容量。在拥有市政广场的城市中建造区域时+50% [ICON_Production] 生产力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Founder of Carthage",
+        "description": "Can move their original [ICON_Capital] Capital to any city with a Cothon they founded by completing a unique project in that city. +1 [ICON_TradeRoute] Trade Route capacity for each Government Plaza building and the Government Plaza district. +50% [ICON_Production] Production toward districts in the city with the Government Plaza."
       }
     },
     "624788056": {
@@ -8668,8 +8668,8 @@
         "description": "埃莉诺的城市中每个巨作可使9个单元格内的外国城市每回合减少1点忠诚度。城市因失去忠诚度而离开另一文明后，如其每回合对埃莉诺的忠诚度最高，则会跳过成为自由城市阶段直接加入埃莉诺的文明。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Court of Love",
+        "description": "Great Works in Eleanor’s cities each cause -1 Loyalty per turn in foreign cities within 9 tiles. A city that leaves another civilization due to a loss of Loyalty and is currently receiving the most Loyalty per turn from Eleanor's civilization skips the Free City step to join this civilization."
       }
     },
     "2818492365": {
@@ -8684,7 +8684,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Queen's Bibliotheque",
         "description": ""
       }
     },
@@ -8700,8 +8700,8 @@
         "description": "全部槽位填满时，拥有3个或以上巨作槽位的建筑和2个或以上巨作槽位的奇观可自动获得主题。可在市政广场中建造女王图书馆。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Minerva of the North",
+        "description": "Buildings with at least three Great Work slots and wonders with at least two Great Work slots are automatically themed when they have all their slots filled. She may construct the Queen's Bibliotheque in the Government Plaza."
       }
     },
     "2811891167": {
@@ -8716,8 +8716,8 @@
         "description": "游戏开始时位于海洋单元格中。免费获得1名建造者，建立首座城市时+1 [ICON_Citizen] 人口。宫殿获得+3 [ICON_HOUSING] 住房与+1 [ICON_AMENITIES] 宜居度。建立首座城市前每回合获得+2 [ICON_SCIENCE] 科技值与+2 [ICON_CULTURE] 文化值。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Kupe's Voyage",
+        "description": "Begin the game in an Ocean tile. Gain a free Builder and +1 [ICON_Citizen] Population when settling your first city. The Palace receives +3 [ICON_HOUSING] Housing and +1 [ICON_AMENITIES] Amenity. +2 [ICON_SCIENCE] Science and +2 [ICON_CULTURE] Culture per turn before you settle your first city."
       }
     },
     "2864373378": {
@@ -8732,8 +8732,8 @@
         "description": "允许在冻土地貌上建造农场。解锁“土木工程”后，即可在冻土丘陵上建造农场。在雪地、冻土、雪地丘陵和冻土丘陵上的所有矿山提供的 [ICON_PRODUCTION] 生产力+2、伐木场提供的 [ICON_PRODUCTION] 生产力+2、营地提供的 [ICON_FOOD] 食物+2、农场提供的 [ICON_FOOD] 食物+2，战略资源积累速度+100%。这些地貌上的单元格购买费用降低50%。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "The Last Best West",
+        "description": "Allows Farms to be built on Tundra terrain. After Civil Engineering is unlocked Farms can be built on Tundra Hills. In Snow, Tundra, Snow Hills, and Tundra Hills all Mines provide +2 [ICON_PRODUCTION] Production, Lumber Mills provide +2 [ICON_PRODUCTION] Production, Camps provide +2 [ICON_FOOD] Food, Farms provide +2 [ICON_FOOD] Food, and strategic resource accumulation rate is +100%. Reduces the purchase cost of tiles in these terrain types by 50%."
       }
     },
     "1357490323": {
@@ -8748,8 +8748,8 @@
         "description": "征集单位+2 [ICON_Movement] 移动力、+5 [ICON_Strength] 战斗力。升级征集单位所花费的 [ICON_GOLD] 金币和资源减少75%。征集城邦军队时可在该城邦增加2名 [ICON_ENVOY] 使者。研究“城堡”科技后获得特色单位“黑军”。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Raven King",
+        "description": "Levied units gain an ability giving them +2 [ICON_Movement] Movement and +5 [ICON_Strength] Combat Strength. It costs 75% less [ICON_GOLD] Gold and resources to upgrade Levied units. If you Levy troops from a City-State receive 2 [ICON_ENVOY] Envoys with that City-State. Gain the Black Army unique unit when the Castles technology is researched."
       }
     },
     "4044964335": {
@@ -8764,7 +8764,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Black Army",
         "description": ""
       }
     },
@@ -8780,8 +8780,8 @@
         "description": "起始城市中的每个沙漠平原单元格为国际 [ICON_TradeRoute] 贸易路线提供+1 [ICON_GOLD] 金币。文明进入黄金时代后可获得+1 [ICON_TradeRoute] 贸易路线容量。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Sahel Merchants",
+        "description": "International [ICON_TradeRoute] Trade Routes gain +1 [ICON_GOLD] Gold for every flat Desert tile in the origin city. Receive +1 [ICON_TradeRoute] Trade Capacity every time you enter a Golden Age."
       }
     },
     "1688442690": {
@@ -8796,7 +8796,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Qhapaq Ñan",
         "description": ""
       }
     },
@@ -8812,8 +8812,8 @@
         "description": "起始城市中的每座山脉单元格为国内 [ICON_TradeRoute] 贸易路线提供+1 [ICON_Food] 食物。解锁“对外贸易”市政后可获得印加路网改良设施。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Qhapaq Ñan",
+        "description": "Domestic [ICON_TradeRoute] Trade Routes gain +1 [ICON_Food] Food for every Mountain tile in the origin city. Gain the Qhapaq Ñan improvement when Foreign Trade civic is discovered."
       }
     },
     "3114264881": {
@@ -8828,7 +8828,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Janissary",
         "description": ""
       }
     },
@@ -8844,8 +8844,8 @@
         "description": "拥有军事与外交能力的专属特色总督。研究完“火药”科技后获得特色单位“苏丹亲兵”及1个 [Icon_Governor] 总督头衔。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Grand Vizier",
+        "description": "Exclusive unique Governor with military and diplomatic abilities. Gain the Janissary unique unit and a [Icon_Governor] Governor Title when the Gunpowder technology is researched."
       }
     },
     "2581345523": {
@@ -8860,8 +8860,8 @@
         "description": "所有单位+1 [ICON_Movement] 移动力。升级单位不会结束其回合。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Ejército Patriota",
+        "description": "+1 [ICON_Movement] Movement to all units. Promoting a unit does not end that unit’s turn."
       }
     },
     "4098281083": {
@@ -8876,7 +8876,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Hacienda",
         "description": ""
       }
     },
@@ -8892,7 +8892,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Comandante General",
         "description": ""
       }
     },
@@ -8924,8 +8924,8 @@
         "description": "在淡水和海岸旁定居时不提供额外 [ICON_HOUSING] 住房；但每座农场额外+1 [ICON_HOUSING] 住房、每与一座天文台相邻则+1 [ICON_Production] 生产力、+1 [ICON_GOLD] 金币。每有一种奢侈品与市中心相邻，则+1 [ICON_AMENITIES] 宜居度。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Mayab",
+        "description": "Settling adjacent to Fresh Water and Coast does not provide extra [ICON_HOUSING] Housing, instead each Farm provides an additional +1 [ICON_HOUSING] Housing, +1  [ICON_PRODuction]  Production for every adjacent Observatory, and +1 [ICON_GOLD] Gold. +1 [ICON_AMENITIES] Amenity for every Luxury adjacent to the City Center."
       }
     },
     "1911852046": {
@@ -8940,7 +8940,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Observatory",
         "description": ""
       }
     },
@@ -8956,7 +8956,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Hul'che",
         "description": ""
       }
     },
@@ -8972,8 +8972,8 @@
         "description": "游戏进入新时代后获得1名总指挥。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Campaña Admirable",
+        "description": "Earn a Comandante General when the game enters a new era."
       }
     },
     "1545167806": {
@@ -8988,8 +8988,8 @@
         "description": "[ICON_Capital] 首都6单元格范围内的非首都城市所有产出+10%，且建成时将获得1名建造者。其他非首都城市的所有产出-15%。[ICON_Capital] 首都6单元格范围内的单位+5 [ICON_Strength] 战斗力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Ix Mutal Ajaw",
+        "description": "Non capital cities within 6 tiles of the [ICON_Capital] Capital gain +10% to all yields and when founded receive a builder. Other non capital cities receive -15% to all yields. +5 [ICON_Strength] Combat Strength to units within 6 tiles of the [ICON_Capital] Capital."
       }
     },
     "165437": {
@@ -9004,8 +9004,8 @@
         "description": "您的建造者现在可以建造改良设施巴特依。[NEWLINE][NEWLINE]+1 [ICON_Culture] 文化值。每与1座加成资源和娱乐设施相邻，则+1 [ICON_Culture] 文化值（拥有“探索”市政后+2 [Icon_Culture] 文化值）。研究完“飞行”后将产出 [Icon_Tourism] 旅游业绩。无法建造在另一座巴特依旁。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Caguana Suzerain Bonus",
+        "description": "Your Builders can now make Batey improvements.[NEWLINE][NEWLINE]+1 [ICON_Culture] Culture. +1 [ICON_Culture] Culture for every adjacent Bonus resource and Entertainment Complex (increased to +2 [Icon_Culture] Culture when Exploration is discovered). Provides [Icon_Tourism] Tourism after researching Flight. Cannot be built adjacent to another Batey."
       }
     },
     "3752788816": {
@@ -9020,8 +9020,8 @@
         "description": "您的 [ICON_TradeRoute] 贸易路线每经过5个单元格，其提供的 [ICON_Gold] 金币便+1。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Hunza Suzerain Bonus",
+        "description": "Your [ICON_TradeRoute] Trade Routes generate +1 [ICON_Gold] Gold for every 5 tiles they travel."
       }
     },
     "470743216": {
@@ -9036,8 +9036,8 @@
         "description": "您的城市现在可以生产尼杭战士。[NEWLINE][NEWLINE]这种单位拥有独特的升级树，可以通过 [ICON_Faith] 信仰值购买。首次建造出兵营、兵工厂和军事学院时，其 [ICON_Strength] 战斗力将得到提升。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Lahore Suzerain Bonus",
+        "description": "Your cities can now train Nihang units.[NEWLINE][NEWLINE]A unit with a unique Promotion tree that can be purchased with [ICON_Faith] Faith. [ICON_Strength] Combat Strength is increased when Barracks, Armory, and Military Academy buildings are first constructed."
       }
     },
     "291612081": {
@@ -9052,8 +9052,8 @@
         "description": "您城市的 [ICON_TradeRoute] 贸易路线每连接到1个外国文明，便+2 [ICON_Production] 生产力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Singapore Suzerain Bonus",
+        "description": "Your cities receive +2 [ICON_Production] Production for each foreign civilization they have a [ICON_TradeRoute] Trade Route to."
       }
     },
     "1434385467": {
@@ -9068,8 +9068,8 @@
         "description": "所有城市每拥有一种不同的改良战略资源，便+5% [ICON_SCIENCE] 科技值。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Taruga Suzerain Bonus",
+        "description": "+5% [ICON_SCIENCE] Science in all cities for each different improved Strategic resource they have."
       }
     },
     "1618703204": {
@@ -9084,8 +9084,8 @@
         "description": "当您激活一位 [ICON_GreatPerson] 伟人时，其会将您所创立宗教（或您主流宗教）的400点宗教压力传播到10单元格内的城市。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Vatican City Suzerain Bonus",
+        "description": "When you activate a [ICON_GreatPerson] Great Person they spread 400 Religious pressure of your founded (or majority) religion to cities within 10 tiles."
       }
     },
     "2378356872": {
@@ -9132,8 +9132,8 @@
         "description": "奇观（即使未建成）从每个相邻区域处获得+2 [ICON_CULTURE] 文化值。这个 [ICON_CULTURE] 文化值显示在城市产出中。解锁“城堡”之后，所有文化 [ICON_CULTURE] 相邻加成将提供 [ICON_TOURISM] 旅游业绩。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Swan King",
+        "description": "Wonders, even if not finished, receive +2 [ICON_CULTURE] Culture for every adjacent District. This [ICON_CULTURE]Culture is displayed in the City Yields. All  [ICON_CULTURE] Culture adjacencies provide [ICON_TOURISM] Tourism after discovering Castles."
       }
     },
     "2423136444": {
@@ -9164,8 +9164,8 @@
         "description": "圣地提供等于其相邻加成的 [ICON_CULTURE] 文化值。农场可以为跑马场和圣地提供+1的信仰 [ICON_FAITH] 相邻加成。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Metanoia",
+        "description": "Holy Sites provide [ICON_CULTURE] Culture equal to their adjacency bonus. Farms provide a [ICON_FAITH] Faith adjacency to Hippodromes and Holy Sites."
       }
     },
     "3891674361": {
@@ -9196,8 +9196,8 @@
         "description": "解锁新时代的首项科技时，获得两倍于每回合 [ICON_SCIENCE] 科技值收益的 [ICON_CULTURE] 文化值。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Hangul",
+        "description": "When you complete your first Technology from a new Era, receive double your [ICON_SCIENCE] Science per turn as [ICON_CULTURE] Culture."
       }
     },
     "4241291191": {
@@ -9228,8 +9228,8 @@
         "description": "工业区每回合提供的[ICON_Amenities] 宜居度 +2、忠诚度+3 ，但种植园每回合提供的忠诚度-2。建造工业区和其建筑后获得1个免费近战单位。免费单位的生成或维护不需要资源，并且+5 [ICON_Strength] 战斗力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Emancipation Proclamation",
+        "description": "Industrial Zones give +2 [ICON_Amenities] Amenities and +3 Loyalty per turn but your Plantations give -2 Loyalty per turn. Receive a free Melee unit after constructing Industrial Zones and their buildings. The free unit does not require resources when created or to maintain and receives +5 [ICON_Strength] Combat Strength."
       }
     },
     "2141782167": {
@@ -9260,8 +9260,8 @@
         "description": "为所有战斗和宗教单位+100%夹击和支援加成。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "The Victorious",
+        "description": "+100% Flanking and Support Bonus to all Combat and Religious units."
       }
     },
     "1467012883": {
@@ -9292,8 +9292,8 @@
         "description": "和你的 [ICON_Capital] 首都处于同一大陆的城市+10%产出（其中包括 [ICON_Capital] 首都）；如果出在不同大陆，则-15%产出。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Queen of Ndongo and Matamba",
+        "description": "Cities receive +10% Yields if on the same continent as your [ICON_Capital] Capital (Including your  [ICON_Capital] Capital), -15% if on another continent."
       }
     },
     "1331482008": {
@@ -9324,8 +9324,8 @@
         "description": "国际 [ICON_TradeRoute] 贸易路线的产出和 [ICON_Tourism] 旅游业绩-25%；目的地城市中每有一个特色区域，国内 [ICON_TradeRoute] 贸易路线便提供+1 [ICON_Culture] 文化值、+1 [ICON_Science] 科技值和+2 [ICON_Gold] 金币。在日本 [ICON_Capital] 首都6单元格内的城市为100%忠诚；研究完“飞行”后，每有一个区域则+1 [ICON_Tourism] 旅游业绩。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Bakuhan",
+        "description": "International [ICON_TradeRoute] Trade Routes receive -25% Yield and [ICON_Tourism] Tourism, but Domestic [ICON_TradeRoute] Trade Routes provide +1 [ICON_Culture] Culture, +1 [ICON_Science] Science, and +2 [ICON_Gold] Gold for every Specialty District at the Destination. Cities within 6 tiles of Japan's [ICON_Capital] Capital are 100% loyal and after researching Flight receive +1 [ICON_Tourism] Tourism for every District."
       }
     },
     "1061073695": {
@@ -9356,8 +9356,8 @@
         "description": "攻击生命值全满的单位时+5 [ICON_Strength] 战斗力。非纳迪尔沙阿建造的城市从国内 [ICON_TradeRoute] 贸易路线获得+2 [Icon_Faith] 信仰值和 +3 [Icon_Gold] 金币。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Sword of Persia",
+        "description": "+5 [ICON_Strength] Combat Strength when attacking full Health Units. Cities not founded by Nader Shah receive +2 [Icon_Faith] Faith and +3 [Icon_Gold] Gold on Domestic [ICON_TradeRoute] Trade Routes."
       }
     },
     "377288462": {
@@ -9388,8 +9388,8 @@
         "description": "处于 [ICON_GLORY_GOLDEN_AGE] 黄金时代或英雄时代时，+15% [Icon_Science] 科技值和 [Icon_Culture] 文化值。未处于 [ICON_GLORY_GOLDEN_AGE] 黄金时代或英雄时代时，和同样未处于 [ICON_GLORY_GOLDEN_AGE] 黄金时代或英雄时代的文明作战将+4 [ICON_Strength] 战斗力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "The Magnificent",
+        "description": "+15% [Icon_Science] Science and [Icon_Culture] Culture when in a [ICON_GLORY_GOLDEN_AGE] Golden Age or Heroic Age. +4 [ICON_Strength] Combat Strength when not in a [ICON_GLORY_GOLDEN_AGE] Golden Age or Heroic Age against Civilizations who are also not in a [ICON_GLORY_GOLDEN_AGE] Golden Age or Heroic Age."
       }
     },
     "3030213748": {
@@ -9404,7 +9404,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Indonesian unique improvement: Kampung",
         "description": ""
       }
     },
@@ -9420,8 +9420,8 @@
         "description": "海岸和湖泊单元格可为圣地、学院、工业区和剧院广场提供少量相邻加成。如与海岸或湖泊单元格相邻，娱乐设施+1 [ICON_AMENITIES] 宜居度。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Great Nusantara",
+        "description": "Coast and Lake tiles provide a minor adjacency bonus for Holy Site, Campus, Industrial Zone, and Theater Square districts. +1 [ICON_AMENITIES] Amenity from entertainment to each Entertainment Complex adjacent to a Coast or Lake tile."
       }
     },
     "985844151": {
@@ -9436,7 +9436,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Indonesian unique unit: Jong",
         "description": ""
       }
     },
@@ -9452,8 +9452,8 @@
         "description": "可用 [ICON_FAITH] 信仰值购买海军单位。宗教单位上船下船时无移动力消耗。与海岸或湖泊单元格相邻的市中心+2 [ICON_FAITH] 信仰值。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Exalted Goddess of the Three Worlds",
+        "description": "Naval units can be purchased with [ICON_FAITH] Faith. Religious units pay no movement to embark or disembark. +2[ICON_FAITH] Faith to City Centers that are adjacent to Coast or Lake tiles."
       }
     },
     "3618465728": {
@@ -9468,8 +9468,8 @@
         "description": "喜欢不在小型陆块上定居或征服城市的文明。讨厌在岛屿地形上拥有大量城市的文明。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Archipelagic State",
+        "description": "Likes civilizations who avoid settling or conquering cities on small landmasses.  Hates anyone with numerous cities on such islands."
       }
     },
     "383349699": {
@@ -9484,8 +9484,8 @@
         "description": "拥有“水渠”的城市从娱乐设施获得的 [ICON_AMENITIES] 宜居度+1；每有1点 [ICON_CITIZEN] 人口，则+1 [ICON_FAITH] 信仰值。农场与水渠相邻时，提供的 [ICON_FOOD] 食物+2；与圣地相邻时，提供的 [ICON_FAITH] 信仰值+1。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Grand Barays",
+        "description": "Cities with an Aqueduct receive +1  [ICON_AMENITIES] Amenity from entertainment and +1 [ICON_FAITH] Faith for every [ICON_CITIZEN] population. Farms provide +2 [ICON_FOOD] Food if adjacent to an Aqueduct and +1 [ICON_FAITH] Faith if adjacent to a Holy Site."
       }
     },
     "292881178": {
@@ -9500,7 +9500,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Khmer unique building: Prasat",
         "description": ""
       }
     },
@@ -9516,7 +9516,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Khmer unique unit: Domrey",
         "description": ""
       }
     },
@@ -9532,8 +9532,8 @@
         "description": "圣地将拥有以下效果：与河流相邻时将获得大量相邻加成、可施放1次文化炸弹、将提供等同于其相邻加成的 [ICON_FOOD] 食物、处于河流之上时+2 [ICON_Housing] 住房。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Monasteries of the King",
+        "description": "Holy Sites are granted a Major adjacency with Rivers, a Culture Bomb, [ICON_FOOD] Food equal to its adjacency bonus, and +2  [ICON_Housing] Housing if on a River."
       }
     },
     "2962898625": {
@@ -9548,8 +9548,8 @@
         "description": "喜欢拥有大量圣地和城市平均 [ICON_Citizen] 人口较高的文明。不喜欢在这些方面有所欠缺的文明。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "An End to Suffering",
+        "description": "Likes civilizations with many Holy Sites and with a high average city [ICON_Citizen] Population. Dislikes civs lacking in either of these areas."
       }
     },
     "1143201451": {
@@ -9564,8 +9564,8 @@
         "description": "首次征服一座城市或从蛮族哨站获得[ICON_GOLD] 金币时 +300 [ICON_GOLD] 金币。研究完“金属铸造”之后，两者提供的 [ICON_GOLD] 金币数量变为500，研究完“钢铁”之后，变为700（标准速度下）。当目标为蛮族时，获得+5[ICON_Strength] 战斗力且总是获得正常经验值。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Veni, Vidi, Vici",
+        "description": "+300 [ICON_GOLD] Gold whenever you conquer a city for the first time or when you earn [ICON_GOLD] Gold from a Barbarian Outpost. The [ICON_GOLD] Gold becomes 500 after researching Metal Casting and 700 after Steel (on Standard Speed). When targeting Barbarians receive +5 [ICON_Strength] Combat Strength and always earn normal XP."
       }
     },
     "3399719203": {
@@ -9596,8 +9596,8 @@
         "description": "所有陆地特色区域只能建造在雨林、沼泽或树林上。建在这些地貌上的建筑将获得以下收益：建在树林上提供+1 [ICON_CULTURE] 文化值、建在雨林上提供+1 [ICON_SCIENCE] 科技值、建在沼泽上提供+1 [ICON_PRODUCTION] 生产力。拥有“中世纪集市”市政后即可栽种树林。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Nine Dragon River Delta",
+        "description": "All land specialty districts can only be built on Rainforest, Marsh, or Woods. Receive the following yields for every building on these features: +1 [ICON_CULTURE] Culture in Woods, +1 [ICON_SCIENCE] Science in Rainforest and +1 [ICON_PRODUCTION] Production in Marsh. Woods can be planted with the Medieval Faires civic."
       }
     },
     "4219114917": {
@@ -9612,7 +9612,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Thành",
         "description": ""
       }
     },
@@ -9628,7 +9628,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Voi Chiến",
         "description": ""
       }
     },
@@ -9644,8 +9644,8 @@
         "description": "任意政体中额外增加一个经济政策槽位。首次在另一个文明的城市中建立 [ICON_TradingPost] 贸易站时随机获得一项 [ICON_TechBoosted] 尤里卡和 [ICON_CivicBoosted] 鼓舞。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Gerege",
+        "description": "One extra Economic policy slot in any government. Receive a random [ICON_TechBoosted] Eureka and [ICON_CivicBoosted] Inspiration when establishing a [ICON_TradingPost] Trading Post in another Civilization's city for the first time."
       }
     },
     "3100111635": {
@@ -9660,8 +9660,8 @@
         "description": "在雨林、沼泽或树林单元格中战斗的单位+5 [ICON_Strength] 战斗力。如果单位在回合开始时处于这些地貌中，则+1 [ICON_Movement] 移动力。而如果这些地貌单元格是您的领土，则以上加成均加倍。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Drive Out The Aggressors",
+        "description": "+5 [ICON_Strength] Combat Strength for units fighting in Rainforest, Marsh, or Woods tiles. +1 [ICON_Movement] Movement if they begin their turn there. Both these bonuses are doubled if the tile is your territory."
       }
     },
     "2763533620": {
@@ -9708,8 +9708,8 @@
         "description": "征服城市后将获得提升：征服城市中每个军营或学院都会启动 [ICON_TechBoosted] 尤里卡、每个圣地和剧院广场都带来 [ICON_CivicBoosted] 鼓舞。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Hellenistic Fusion",
+        "description": "Receive boosts upon city conquest: a [ICON_TechBoosted] Eureka for each Encampment or Campus in the conquered city and an [ICON_CivicBoosted] Inspiration for each Holy Site or Theater Square."
       }
     },
     "3909745420": {
@@ -9724,8 +9724,8 @@
         "description": "马其顿特色建筑。该城中训练的陆地近战、远程单位和伙友骑兵+25%战斗经验值。非平民单位在此城中创建时，获得等同于单位花费25%的 [ICON_SCIENCE] 科技值。[NEWLINE][NEWLINE]无法建造在已拥有马厩的军营区域中。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Basilikoi Paides",
+        "description": "A building unique to Macedon.+25% combat experience for all melee, ranged land units, and Hetairoi trained in this city. Gain [ICON_SCIENCE] Science equal to 25% of the unit's cost when a non civilian unit is created in this city.[NEWLINE][NEWLINE]May not be built in an Encampment district that already has a Stable."
       }
     },
     "2600827929": {
@@ -9740,7 +9740,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Macedonian unique unit: Hypaspist",
         "description": ""
       }
     },
@@ -9772,8 +9772,8 @@
         "description": "城市不会产生厌战情绪。此玩家占领拥有世界奇观的城市时，所有军事单位的体力值将完全恢复。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "To World's End",
+        "description": "Cities do not incur war weariness. All military units heal completely when this player captures a city with a world wonder."
       }
     },
     "1102430291": {
@@ -9788,8 +9788,8 @@
         "description": "喜欢与马其顿之外其他国家交战的文明；鄙视处于和平的文明。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Short Life of Glory",
+        "description": "Likes civilizations at war with major powers other than Macedon. Has disdain for civilizations at peace."
       }
     },
     "3422027294": {
@@ -9804,8 +9804,8 @@
         "description": "拥有“政治哲学”市政后，[ICON_TradeRoute] 贸易路线容量+1。本国城市之间的路线+2 [ICON_Gold] 金币，+1 [ICON_Culture] 文化值。本国领土中的道路提升一个等级。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Satrapies",
+        "description": "+1 [ICON_TradeRoute] Trade Route capacity with Political Philosophy civic. Receive +2 [ICON_Gold] Gold and +1 [ICON_Culture] Culture for routes between your own cities. Roads built in your territory are one level more advanced than usual."
       }
     },
     "1012787904": {
@@ -9820,8 +9820,8 @@
         "description": "解锁建造者建造波斯特色建筑波斯庭院的能力。[NEWLINE][NEWLINE]+1 [ICON_CULTURE] 文化值、+2 [ICON_GOLD] 金币。+1魅力。每与一座圣地和剧院广场相邻则+1 [ICON_CULTURE] 文化值。每与一座商业中心和市中心相邻则+1 [ICON_GOLD] 金币。解锁更多科技和市政后可提供更多 [ICON_Culture] 文化值和 [ICON_Tourism] 旅游业绩。无法建在雪地、冻土、雪地丘陵或冻土丘陵上，也无法建在另一座波斯庭院旁。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Pairidaeza",
+        "description": "Unlocks the Builder ability to construct a Pairidaeza, unique to Persia.[NEWLINE][NEWLINE]+1 [ICON_CULTURE] Culture and +2 [ICON_GOLD] Gold. +1 Appeal. +1 [ICON_CULTURE] Culture for each adjacent Holy Site and Theater Square. +1 [ICON_GOLD] Gold for each adjacent Commercial Hub and City Center. Additional [ICON_Culture] Culture and [ICON_Tourism] Tourism as you advance through the Technology and Civics Tree. Cannot be built on Snow, Tundra, Snow Hills, or Tundra Hills or adjacent to another Pairidaeza."
       }
     },
     "3298424503": {
@@ -9836,8 +9836,8 @@
         "description": "波斯特色近战单位，替代剑客。此近战单位可进行远程攻击，[ICON_Range] 范围为2。防御力强。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Immortal",
+        "description": "Persian unique melee unit that replaces the Swordsman. Melee class unit with a ranged attack, [ICON_Range] Range 2. Strong defense strength."
       }
     },
     "1444786757": {
@@ -9852,8 +9852,8 @@
         "description": "对主要文明宣布突袭战争后的10回合内+2 [ICON_Movement] 移动力。拥有驻扎单位的占领城市每回合的忠诚度+5。宣布突袭战争的好战性和厌战情绪与正式战争相同。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Fall of Babylon",
+        "description": "+2 [ICON_Movement] Movement for the first 10 turns after declaring a Surprise War on a major civilization. +5 Loyalty per turn in occupied cities with a garrisoned unit. Declaring a Surprise War only counts as a Formal War for the purpose of warmongering and war weariness."
       }
     },
     "2065729053": {
@@ -9868,8 +9868,8 @@
         "description": "喜欢宣布突袭战争的领袖。讨厌不宣布突袭战争的领袖。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Opportunist",
+        "description": "Likes leaders who have declared a Surprise War. Dismisses leaders who do not use Surprise War declarations."
       }
     },
     "764700717": {
@@ -10044,8 +10044,8 @@
         "description": "国际 [ICON_TradeRoute] 贸易路线必须起源于海岸城市，并只能通往处于海岸上或拥有港口的城市，但所有产出+50%。商人单位在水域中的行动范围+50%，且解锁之后可立即在水域中行动。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Casa da Índia",
+        "description": "International [ICON_TradeRoute] Trade Routes must originate from a coastal city and can only reach cities on the coast or with a Harbor, but receive +50% towards all yields. Trader units have +50% range over water, and can embark as soon as they are unlocked."
       }
     },
     "2443506546": {
@@ -10060,7 +10060,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Navigation School",
         "description": ""
       }
     },
@@ -10076,7 +10076,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Feitoria",
         "description": ""
       }
     },
@@ -10092,7 +10092,7 @@
         "description": ""
       },
       "en": {
-        "name": "",
+        "name": "Nau",
         "description": ""
       }
     },
@@ -10108,8 +10108,8 @@
         "description": "所有单位+1视野。与1个文明相遇便+1 [ICON_TradeRoute] 贸易路线容量。对所有城邦开放边界。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Porta do Cerco",
+        "description": "All units receive +1 sight. +1 [ICON_TradeRoute] Trade Route capacity when a civilization is met. Open Borders with all city-states."
       }
     },
     "2953799115": {
@@ -10140,8 +10140,8 @@
         "description": "近战单位获得“蛮族归顺”操作。此操作能将蛮族单位转化为你的单位，但会移除近战单位。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Thirty-Six Stratagems",
+        "description": "Melee units receive the Convert Barbarians action. This action converts Barbarian units into your units, but it removes the melee unit."
       }
     },
     "1019877607": {
@@ -10172,8 +10172,8 @@
         "description": "所有城市都可进行“里甲”项目，专注于以每回合的城市生产力来转换为 [Icon_Food] 食物（50%）、[Icon_Faith] 信仰值（50%）或者 [Icon_GOLD] 金币（100%）。10个人口或以上的大型城市，每一个人口便提供+2 [Icon_Gold] 金币、+1 [Icon_Science] 科技值以及+1 [Icon_Culture] 文化值。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Lijia",
+        "description": "All Cities receive Projects where they can convert 50% of their [Icon_Production] Production into [Icon_Food] Food,  [Icon_Faith] Faith, or 100% if it is [Icon_GOLD] Gold. Cities with 10 or more Population receive +2 [Icon_Gold] Gold, +1 [Icon_Science] Science, and +1 [Icon_Culture] Culture per turn for each Population in the city."
       }
     },
     "2566860243": {
@@ -10204,8 +10204,8 @@
         "description": "进攻性间谍的行动效果提升1级。进攻性间谍任务成功时，获得目标城市该回合[ICON_Faith] 信仰值、[ICON_Culture] 文化值和 [ICON_SCIENCE] 科技值的100%。解锁“防御战术”后获得1名免费间谍（和一个额外的间谍容量）。可以使用[ICON_Faith] 信仰值购买间谍。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Manual of Entrapment",
+        "description": "All offensive Spies operate at 1 level higher. Whenever an offensive spy mission is successful, you also gain 100% of the [ICON_Faith] Faith, [ICON_Culture] Culture, and [ICON_SCIENCE] Science that the targeted city earned that turn. Receive a free spy (and extra spy capacity) after discovering Defensive Tactics. Can purchase Spies with [ICON_Faith] Faith."
       }
     },
     "1393195373": {
@@ -10236,8 +10236,8 @@
         "description": "获得首位 [ICON_GreatAdmiral] 海军统帅后，英国的 [ICON_TradeRoute] 贸易路线容量+2。起源城市中每有一个特色区域，[ICON_TradeRoute] 通往任意城邦的贸易路线便+3 [ICON_GOLD] 金币。用海军单位掠夺 [ICON_TradeRoute] 贸易路线的收益+100%。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Drake's Legacy",
+        "description": "England's  [ICON_TradeRoute] Trade Route Capacity is increased by 2 after acquiring your first [ICON_GreatAdmiral] Great Admiral.  [ICON_TradeRoute] Trade Routes to any city-state provide +3  [ICON_GOLD]  Gold for every specialty district in the origin city. +100% Yields from Plundering  [ICON_TradeRoute] Trade Routes with Naval Units."
       }
     },
     "630524092": {
@@ -10268,8 +10268,8 @@
         "description": "所有单位金币维护花费-2 [ICON_GOLD]。征集单位的花费-75%，征集单位完成击杀时获得等同于对手[ICON_STRENGTH] 战斗力50%的[ICON_CULTURE] 文化值、[ICON_FAITH] 信仰值和 [ICON_SCIENCE] 科技值。木板教堂每回合+1影响力点数。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Varangian Guard",
+        "description": "All units pay 2 less [ICON_GOLD] Gold maintenance. 75% Discount on Levying units and levied units receive [ICON_CULTURE] Culture, [ICON_FAITH] Faith and [ICON_SCIENCE] Science from kills equal to 50% of the opponents' [ICON_STRENGTH] Combat Strength. +1 Influence Points per turn from the Stave Church."
       }
     },
     "1081572122": {
@@ -10300,8 +10300,8 @@
         "description": "城市中每有一座工业区建筑，其便+10% [ICON_PRODUCTION] 生产力。所有战略资源+2 [ICON_PRODUCTION] 生产力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Age of Steam",
+        "description": "+10% [ICON_PRODUCTION] Production in Cities for every Industrial Zone building in that city. +2  [ICON_PRODUCTION] Production to all Strategic Resources."
       }
     },
     "590547536": {
@@ -10332,8 +10332,8 @@
         "description": "建筑建成时，获得等同于建筑花费15%的 [ICON_CULTURE] 文化值；奇观建成时则获得30%。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Abu Simbel",
+        "description": "Gain [ICON_CULTURE] Culture equal to 15% of the construction cost when finishing Buildings and 30% when completing Wonders."
       }
     },
     "3409320155": {
@@ -10364,8 +10364,8 @@
         "description": "沿泛滥平原的资源+1 [ICON_FOOD] 食物、+1 [ICON_CULTURE] 文化值。已拥有的泛滥平原单元格为相邻单元格提供的魅力+1，而非通常的-1。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Arrival of Hapi",
+        "description": "Resources along Floodplains receive +1 [ICON_FOOD] Food and +1 [ICON_CULTURE] Culture. Owned Floodplains tiles grant +1 Appeal to adjacent tiles instead of usual -1."
       }
     },
     "758814578": {
@@ -10396,8 +10396,8 @@
         "description": "招募伟人所花费的 [ICON_GOLD] 金币-20%，马里所建城市的市场获得2个 [ICON_GreatWork_WRITING] 著作巨作槽位。[ICON_GreatWork_WRITING] 著作巨作+4 [ICON_GOLD] 黄金、+2 [ICON_PRODUCTION] 生产力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Sogolon",
+        "description": "It costs 20% less [ICON_GOLD] Gold to recruit Great People and the Market gains 2 [ICON_GreatWork_WRITING] Great Writing slots in Cities founded by Mali. [ICON_GreatWork_WRITING] Great Works of Writing receive +4 [ICON_GOLD] Gold and +2 [ICON_PRODUCTION] Production."
       }
     },
     "1393302356": {
@@ -10444,8 +10444,8 @@
         "description": "与自然奇观或山脉相邻时，魅力值为“惊艳”的单元格+2 [ICON_SCIENCE] 科技值。与自然奇观或树林相邻时，魅力值为“惊艳”的单元格+2 [ICON_CULTURE] 文化值。如拥有国家公园，城市的所有单元格+1魅力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Antiquities and Parks",
+        "description": "Breathtaking tiles adjacent to either a Natural Wonder or a Mountain receive +2 [ICON_SCIENCE] Science. Breathtaking tiles adjacent to either a Wonder or Woods receive +2 [ICON_CULTURE] Culture. All tiles in a city with a National Park are +1 Appeal."
       }
     },
     "2664585574": {
@@ -10460,8 +10460,8 @@
         "description": "玩家拥有的浅水域单元格提供1点 [ICON_Production] 生产力。到达工业时代后生产力额外+1。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Auckland Suzerain Bonus",
+        "description": "Shallow water tiles you own provide +1 [ICON_Production] Production. Additional +1 when you reach the Industrial era."
       }
     },
     "1673527683": {
@@ -10476,8 +10476,8 @@
         "description": "您的文明每获得1位伟人，[ICON_Culture] 文化值便+2%（上限为+30%）。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Antananarivo Suzerain Bonus",
+        "description": "Your Civilization gains +2% [ICON_Culture] Culture for each Great Person it has ever earned, up to a total of +30%."
       }
     },
     "1153452246": {
@@ -10492,8 +10492,8 @@
         "description": "建造者现在能够建造修道院改良设施。[NEWLINE][NEWLINE]修道院提供+2 [ICON_Faith] 信仰值。此单元格上的友方宗教单位生命值恢复+15（前提是其当前回合未发动攻击）。每2个相邻的区域使其+1 [ICON_FAITH] 信仰值。提供+1 [ICON_HOUSING] 住房。解锁“殖民主义”市政后获得额外1点 [ICON_HOUSING] 住房。无法建在另一座修道院旁。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Armagh Suzerain Bonus",
+        "description": "Your Builders can now make Monastery improvements.[NEWLINE][NEWLINE]Monasteries provide +2 [ICON_Faith] Faith. +15 HP healing for friendly religious unit on this tile that has not attacked this turn. +1 [ICON_FAITH] Faith for every 2 adjacent Districts. Provides +1 [ICON_HOUSING] Housing. Receive an additional [ICON_HOUSING] Housing once Colonialism is discovered. Cannot be built next to another Monastery."
       }
     },
     "486965043": {
@@ -10508,8 +10508,8 @@
         "description": "建造者现在能够建造阿卡萨城堡改良设施。[NEWLINE][NEWLINE]阿卡萨城堡提供+2 [ICON_Culture] 文化值。提供等于单元格魅力50%的 [ICON_SCIENCE] 科技值。占领单位 [ICON_Strength] 防御力+4，并自动获得2回合防御工事。研究“飞行”科技后可提供 [ICON_TOURISM] 旅游业绩。无法建在另一座阿卡萨城堡旁。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Granada Suzerain Bonus",
+        "description": "Your Builders can now make Alcázar improvements.[NEWLINE][NEWLINE]Alcázars provide +2 [ICON_Culture] Culture. Provides [ICON_SCIENCE] Science equal to 50% of the tile's Appeal. Occupying unit receives +4 [ICON_Strength] Defense Strength, and automatically gains 2 turns of fortification. Provides [ICON_TOURISM] Tourism after researching Flight. Cannot be built next to another Alcázar."
       }
     },
     "426866228": {
@@ -10524,8 +10524,8 @@
         "description": "拥有商业中心区域的城市 [ICON_Amenities] 宜居度+1。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Muscat Suzerain Bonus",
+        "description": "+1 [ICON_Amenities] Amenity in cities with a Commercial Hub district."
       }
     },
     "513820866": {
@@ -10540,8 +10540,8 @@
         "description": "拥有学院区域的城市增长率将提升15%。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Mitla Suzerain Bonus",
+        "description": "City growth rate is 15% higher in cities with a Campus district."
       }
     },
     "3825759601": {
@@ -12093,7 +12093,7 @@
       },
       "en": {
         "name": "",
-        "description": ""
+        "description": "+25% Earned experience from combat. (Himerios)"
       }
     },
     "37461823": {
@@ -12108,8 +12108,8 @@
         "description": "陆地单位击杀主要和小型文明的单位时，获得等同于对方单位战斗力25%的 [ICON_GreatGeneral] 大将军点数（标准速度下）。（沃林城邦）"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Great General Points",
+        "description": "Receive [ICON_GreatGeneral] Great General points when a land unit defeats a major or minor civilization's unit equal to 25% of the opposing unit's strength (Standard Speed). (Wolin City-State)"
       }
     },
     "1701305563": {
@@ -12125,7 +12125,7 @@
       },
       "en": {
         "name": "",
-        "description": ""
+        "description": "Receive [ICON_GreatAdmiral] Great Admiral points when a naval unit defeats a major or minor civilization's unit equal to 25% of the opposing unit's strength (Standard Speed). (Wolin City-State)"
       }
     },
     "4021064738": {
@@ -12140,8 +12140,8 @@
         "description": "与轻重骑兵升级类单位作战时+17 [ICON_Strength] 战斗力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Sabum Kibittum",
+        "description": "+17 [ICON_Strength] Combat Strength against Heavy and Light Cavalry promotion class units."
       }
     },
     "1721680832": {
@@ -12156,8 +12156,8 @@
         "description": "每有一座圣城皈依您的宗教，便+3 [ICON_Strength] 战斗力；主要文明的单位被击杀后，拜占庭的宗教将传播到附近的城市（天授规矩）"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Holy City Combat",
+        "description": "Receive +3 [ICON_Strength] Combat Strength for each Holy City converted to your Religion and Byzantium's Religion is spread to nearby cities when a major civilization's unit is defeated (Taxis)"
       }
     },
     "1814780190": {
@@ -12172,8 +12172,8 @@
         "description": "每有一座圣城皈依您的宗教，便+3 [ICON_RELIGION] 宗教战斗力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Holy City Religious Strength",
+        "description": "Receive +3 [ICON_RELIGION] Religious Strength for each Holy City converted to your Religion."
       }
     },
     "3286048211": {
@@ -12188,8 +12188,8 @@
         "description": "每个相邻的单位提供+2 [ICON_Strength] 战斗力（厄勃隆尼斯之王）"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Ambiorix",
+        "description": "Receive +2 [ICON_Strength] Combat Strength for each adjacent unit (King of the Eburones)"
       }
     },
     "1989527739": {
@@ -12204,8 +12204,8 @@
         "description": "进攻所信仰宗教与拜占庭相同之城市时输出全额伤害（生于紫室）"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Porphyrogénnētos",
+        "description": "Does full damage against cities following the same religion as Byzantium (Porphyrogénnētos)"
       }
     },
     "133448385": {
@@ -12220,8 +12220,8 @@
         "description": "与单位作战时+10 [ICON_Strength] 战斗力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Greek Fire",
+        "description": "Receive +10 [ICON_Strength] Combat Strength against units."
       }
     },
     "1382140678": {
@@ -12236,8 +12236,8 @@
         "description": "甲胄骑兵周围1单元格内的陆地单位+4 [ICON_Strength] 战斗力或 [ICON_RELIGION] 宗教战斗力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Tagma",
+        "description": "Land units within 1 tile of the Tagma receive +4 [ICON_Strength] Combat Strength or [ICON_RELIGION] Religious Strength."
       }
     },
     "2774386037": {
@@ -12252,8 +12252,8 @@
         "description": "位于甲胄骑兵周围1单元格内时+4 [ICON_RELIGION] 宗教战斗力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Tagma Religious Strength",
+        "description": "+4 [ICON_RELIGION] Religious Strength when within 1 tile of the Tagma."
       }
     },
     "3560961041": {
@@ -12268,8 +12268,8 @@
         "description": "位于甲胄骑兵周围1单元格内时+4 [ICON_Strength] 战斗力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Tagma Combat Strength",
+        "description": "+4 [ICON_Strength] Combat Strength when within 1 tile of the Tagma."
       }
     },
     "4068200636": {
@@ -12284,8 +12284,8 @@
         "description": "与拥有更高基础战斗力的单位作战时+10 [ICON_Strength] 战斗力。与区域作战时+5 [ICON_Strength] 战斗力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Gaesatae",
+        "description": "Receive +10 [ICON_Strength] Combat Strength against units with a higher base Combat Strength. +5 [ICON_Strength] Combat Strength vs. district defenses."
       }
     },
     "2501577773": {
@@ -12300,8 +12300,8 @@
         "description": "此单位每回合不消耗来自跑马场区域的战略资源。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Hippodrome",
+        "description": "This unit does not cost Strategic Resources per turn from the Hippodrome district."
       }
     },
     "864105864": {
@@ -12316,8 +12316,8 @@
         "description": "在丘陵上+4 [ICON_Strength] 战斗力（内阁会议）"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Ethiopian Highlands",
+        "description": "+4 [ICON_Strength] Combat Strength on Hills (Council of Ministers)"
       }
     },
     "1391298339": {
@@ -12332,8 +12332,8 @@
         "description": "在丘陵中移动时无移动力减益。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Oromo Cavalry",
+        "description": "Receives no movement penalty from moving in Hills."
       }
     },
     "2775121956": {
@@ -12348,8 +12348,8 @@
         "description": "高山训练：在丘陵地貌战斗时+3 [ICON_Strength] 战斗力；在丘陵地貌时不遭受移动力减益。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Alpine Training",
+        "description": "Alpine Training: +3 [ICON_Strength] Combat Strength when fighting in Hills and no Movement penalty in Hill terrain."
       }
     },
     "3299973288": {
@@ -12365,7 +12365,7 @@
       },
       "en": {
         "name": "",
-        "description": ""
+        "description": "+25% combat experience from Ordu"
       }
     },
     "3495917440": {
@@ -12380,8 +12380,8 @@
         "description": "[ICON_Movement] 移动力+1"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Mongol Steppe",
+        "description": "+1 [ICON_Movement] Movement"
       }
     },
     "1246108385": {
@@ -12445,7 +12445,7 @@
       },
       "en": {
         "name": "",
-        "description": ""
+        "description": "Can Paradrop from friendly tile to location 7 tiles away (12 if starting from Aerodrome or Airstrip)."
       }
     },
     "3019356199": {
@@ -12477,7 +12477,7 @@
       },
       "en": {
         "name": "",
-        "description": ""
+        "description": "+5 [ICON_Strength] Combat Strength bonus in Hills and Forest"
       }
     },
     "2596713566": {
@@ -12493,7 +12493,7 @@
       },
       "en": {
         "name": "",
-        "description": ""
+        "description": "Can escort moving civilian and support units at their higher [ICON_Movement] Movement speed."
       }
     },
     "358088140": {
@@ -12509,7 +12509,7 @@
       },
       "en": {
         "name": "",
-        "description": ""
+        "description": "+7 [ICON_Strength] Combat Strength when attacking defensible districts."
       }
     },
     "2779856669": {
@@ -12525,7 +12525,7 @@
       },
       "en": {
         "name": "",
-        "description": ""
+        "description": "+7 [ICON_Strength] Combat Strength bonus when fighting in Hill terrain.[NEWLINE][ICON_Bullet]No [ICON_Movement] Movement penalty in Hill terrain."
       }
     },
     "2343922741": {
@@ -12541,7 +12541,7 @@
       },
       "en": {
         "name": "",
-        "description": ""
+        "description": "+5 [ICON_Strength] Combat Strength bonus within 4 hexes of friendly territory.[NEWLINE][ICON_Bullet]Pillaging costs 1 [ICON_Movement] Movement."
       }
     },
     "2872012908": {
@@ -12557,7 +12557,7 @@
       },
       "en": {
         "name": "",
-        "description": ""
+        "description": "Starts with 1 free Promotion."
       }
     },
     "1754724523": {
@@ -12573,7 +12573,7 @@
       },
       "en": {
         "name": "",
-        "description": ""
+        "description": "+100% Flanking bonus.[NEWLINE][ICON_Bullet]Earns experience 25% faster."
       }
     },
     "2988279360": {
@@ -12637,7 +12637,7 @@
       },
       "en": {
         "name": "",
-        "description": ""
+        "description": "Grants +1 [ICON_Movement] Movement to units starting their move up to 1 hex away."
       }
     },
     "3168875600": {
@@ -12653,7 +12653,7 @@
       },
       "en": {
         "name": "",
-        "description": ""
+        "description": "+10% Earned experience from combat (Toqui)"
       }
     },
     "228712807": {
@@ -12669,7 +12669,7 @@
       },
       "en": {
         "name": "",
-        "description": ""
+        "description": "+30% Earned experience from combat (Toqui)"
       }
     },
     "1900874197": {
@@ -12701,7 +12701,7 @@
       },
       "en": {
         "name": "",
-        "description": ""
+        "description": "+25% Earned experience from combat (Timur)"
       }
     },
     "1089286443": {
@@ -12717,7 +12717,7 @@
       },
       "en": {
         "name": "",
-        "description": ""
+        "description": "Grants +5 [ICON_Bombard] Bombard Strength to Siege class units within 1 hex."
       }
     },
     "2276254636": {
@@ -12733,7 +12733,7 @@
       },
       "en": {
         "name": "",
-        "description": ""
+        "description": "+3 [ICON_Strength] Combat Strength (Genghis Khan)."
       }
     },
     "744043403": {
@@ -12749,7 +12749,7 @@
       },
       "en": {
         "name": "",
-        "description": ""
+        "description": "Ability to capture defeated cavalry units (Genghis Khan)."
       }
     },
     "4125435053": {
@@ -13292,8 +13292,8 @@
         "description": "所有单位+1 [ICON_Movement] 移动力（爱国军）"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Ejército Patriota",
+        "description": "+1 [ICON_Movement] Movement to all units (Ejército Patriota)"
       }
     },
     "3623445395": {
@@ -13308,8 +13308,8 @@
         "description": "谜之暗流：+1 [ICON_Movement] 移动力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Mysterious Currents",
+        "description": "Mysterious Currents: +1 [ICON_Movement] Movement."
       }
     },
     "3595643681": {
@@ -13324,8 +13324,8 @@
         "description": "生命之水：在任意领土中治疗时+10生命值。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Water of Life",
+        "description": "Water of Life: +10 HP when healing in any territory."
       }
     },
     "3860004692": {
@@ -13340,8 +13340,8 @@
         "description": "总指挥提供+1 [ICON_Movement] 移动力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Comandante General Logistics",
+        "description": "+1 [ICON_Movement] Movement from Comandante General."
       }
     },
     "3296103291": {
@@ -13356,8 +13356,8 @@
         "description": "总指挥提供+5 [ICON_Strength] 战斗力加成。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Comandante General Leadership",
+        "description": "+5 [ICON_Strength] Combat Bonus from Comandante General."
       }
     },
     "3164150849": {
@@ -13373,7 +13373,7 @@
       },
       "en": {
         "name": "",
-        "description": ""
+        "description": "+4 [ICON_Strength] Combat Strength (José Antonio Páez)"
       }
     },
     "4238504619": {
@@ -13389,7 +13389,7 @@
       },
       "en": {
         "name": "",
-        "description": ""
+        "description": "+4 [ICON_Strength] Combat Strength (Santiago Mariño)"
       }
     },
     "3440363423": {
@@ -13405,7 +13405,7 @@
       },
       "en": {
         "name": "",
-        "description": ""
+        "description": "+7 [ICON_Strength] Combat Strength (Manuel Piar)"
       }
     },
     "1169666476": {
@@ -13421,7 +13421,7 @@
       },
       "en": {
         "name": "",
-        "description": ""
+        "description": "+4 [ICON_Strength] Combat Strength when attacking districts (Mariano Montilla)"
       }
     },
     "1487948789": {
@@ -13436,8 +13436,8 @@
         "description": "[ICON_Capital] 首都6个单元格内的单位+5 [ICON_Strength] 战斗力（穆塔尔忠烈之女）"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Mutal",
+        "description": "+5 [ICON_Strength] Combat Strength to units within 6 tiles of the [ICON_Capital] Capital (Ix Mutal Ajaw)"
       }
     },
     "44995329": {
@@ -13453,7 +13453,7 @@
       },
       "en": {
         "name": "",
-        "description": ""
+        "description": "+5 [ICON_Strength] Combat Strength when fighting a wounded opponent."
       }
     },
     "4163089404": {
@@ -13469,7 +13469,7 @@
       },
       "en": {
         "name": "",
-        "description": ""
+        "description": "+15 [ICON_Strength] Combat Strength from Barracks."
       }
     },
     "1211587380": {
@@ -13485,7 +13485,7 @@
       },
       "en": {
         "name": "",
-        "description": ""
+        "description": "+15 [ICON_Strength] Combat Strength from Armory."
       }
     },
     "1641177315": {
@@ -13501,7 +13501,7 @@
       },
       "en": {
         "name": "",
-        "description": ""
+        "description": "+15 [ICON_Strength] Combat Strength from Military Academy."
       }
     },
     "3942787576": {
@@ -13517,7 +13517,7 @@
       },
       "en": {
         "name": "",
-        "description": ""
+        "description": "+2 [ICON_Strength] Combat Strength from each adjacent Llanero unit."
       }
     },
     "1565384095": {
@@ -13532,8 +13532,8 @@
         "description": "+5 [ICON_Strength] 战斗力，此单位创建和维护时不需要资源。（亚伯拉罕·林肯）"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Emancipation Proclamation",
+        "description": "+5 [ICON_Strength] Combat Strength and this unit does not require resources when created or to maintain. (Abraham Lincoln)"
       }
     },
     "875786347": {
@@ -13548,8 +13548,8 @@
         "description": "+100%夹击和支援加成。（萨拉丁：苏丹）"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "The Victorious",
+        "description": "+100% Flanking and Support Bonus. (Saladin (Sultan))"
       }
     },
     "152640486": {
@@ -13564,8 +13564,8 @@
         "description": "攻击生命值全满的单位时+5 [ICON_Strength] 战斗力。（纳迪尔沙阿）"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Sword of Persia",
+        "description": "+5 [ICON_Strength] Combat Strength attacking full Health Units. (Nader Shah)"
       }
     },
     "2815587956": {
@@ -13580,8 +13580,8 @@
         "description": "未处于 [ICON_GLORY_GOLDEN_AGE] 黄金时代中时，和同样未处于 [ICON_GLORY_GOLDEN_AGE] 黄金时代的单位作战时+4 [ICON_Strength] 战斗力。（苏莱曼一世）"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "The Magnificent",
+        "description": "+4 [ICON_Strength] Combat Strength when not in a [ICON_GLORY_GOLDEN_AGE] Golden Age against units who are also not in a [ICON_GLORY_GOLDEN_AGE] Golden Age. (Suleiman)"
       }
     },
     "2187751171": {
@@ -13597,7 +13597,7 @@
       },
       "en": {
         "name": "",
-        "description": ""
+        "description": "+5 [ICON_Strength] Combat Strength bonus when in a formation.[NEWLINE][ICON_Bullet]Units in formation inherit the Jong's movement."
       }
     },
     "3198550142": {
@@ -13613,7 +13613,7 @@
       },
       "en": {
         "name": "Martyr",
-        "description": ""
+        "description": "A [ICON_GreatWork_Relic] Relic is created if this unit dies in Theological Combat."
       }
     },
     "46594860": {
@@ -13629,7 +13629,7 @@
       },
       "en": {
         "name": "",
-        "description": ""
+        "description": "No movement cost to embark or disembark. (Gitarja)"
       }
     },
     "4245750794": {
@@ -13644,8 +13644,8 @@
         "description": "在雨林、沼泽或树林单元格中战斗的单位+5 [ICON_Strength] 战斗力。如果单位在回合开始时处于这些地貌中，则+1 [ICON_Movement] 移动力。而如果这些地貌单元格是您的领土，则以上加成均加倍。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Drive Out The Aggressors",
+        "description": "+5 [ICON_Strength] Combat Strength for units fighting in Rainforest, Marsh, or Woods tiles. +1 [ICON_Movement] Movement if they begin their turn there. Both these bonuses are doubled if the tile is your territory."
       }
     },
     "588180496": {
@@ -13660,8 +13660,8 @@
         "description": "攻击后可移动。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Voi Chiến",
+        "description": "Can move after attacking."
       }
     },
     "586503158": {
@@ -13677,7 +13677,7 @@
       },
       "en": {
         "name": "",
-        "description": ""
+        "description": "+5 [ICON_Strength] Combat Strength when besieging districts.[NEWLINE][ICON_Bullet] +50% Support Bonus."
       }
     },
     "1538442791": {
@@ -13693,7 +13693,7 @@
       },
       "en": {
         "name": "",
-        "description": ""
+        "description": "+5 [ICON_Strength] Combat Strength when adjacent to a Great General.[NEWLINE][ICON_Bullet] +5 Great General points when killing an enemy unit."
       }
     },
     "1656297221": {
@@ -13709,7 +13709,7 @@
       },
       "en": {
         "name": "",
-        "description": ""
+        "description": "+25% experience in Combat from Basilikoi Paides."
       }
     },
     "2523717033": {
@@ -13740,8 +13740,8 @@
         "description": "关闸特质+1视野。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Porta do Cerco",
+        "description": "+1 Sight from the Porta do Cerco trait."
       }
     },
     "2104790703": {
@@ -13756,8 +13756,8 @@
         "description": "初始便拥有1次免费升级。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Nau",
+        "description": "Starts with 1 free promotion."
       }
     },
     "3767578622": {
@@ -13772,8 +13772,8 @@
         "description": "此单位可以使用一次行动将相邻的蛮族转变为友方，但会移除此单位。（秦始皇：大一统）"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Thirty-Six Stratagems",
+        "description": "This unit can use an action to convert adjacent Barbarians to your side, but it removes this unit. (Qin (Unifier))"
       }
     },
     "2579378205": {
@@ -13788,8 +13788,8 @@
         "description": "掠夺贸易路线时+100%收益。（伊丽莎白一世）"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Drake's Legacy",
+        "description": "+100% Rewards for plundering trade routes. (Elizabeth I)"
       }
     },
     "2625646584": {
@@ -13804,8 +13804,8 @@
         "description": "击杀时获得等同于对手 [ICON_STRENGTH] 战斗力50%的 [ICON_CULTURE] 文化值、[ICON_FAITH] 信仰值和 [ICON_SCIENCE] 科技值。（哈拉尔德·哈德拉达：瓦良格）"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Varangian Guard",
+        "description": "Receive [ICON_CULTURE] Culture, [ICON_FAITH] Faith and [ICON_SCIENCE] Science From Kills equal to 50% of the opponents [ICON_STRENGTH] Combat Strength. (Harald Hardrada (Varangian))"
       }
     },
     "739767634": {
@@ -13820,8 +13820,8 @@
         "description": "巨人之矛：+5战斗力"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Spear of Fionn",
+        "description": "Spear of Fionn: +5 Combat Strength"
       }
     },
     "850416499": {
@@ -15724,8 +15724,8 @@
         "description": "2级捏造丑闻能力，有更高机率成功捏造丑闻。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Smear Campaign",
+        "description": "Fabricate Scandal as if 2 levels more experienced."
       }
     },
     "2070365198": {
@@ -15740,8 +15740,8 @@
         "description": "2级煽动骚乱能力，有更高机率成功煽动骚乱。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Covert Action",
+        "description": "Foment Unrest as if 2 levels more experienced."
       }
     },
     "1912362587": {
@@ -15756,8 +15756,8 @@
         "description": "2级陷害总督能力，有更高机率成功陷害总督。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "License to Kill",
+        "description": "Neutralize Governor as if 2 levels more experienced."
       }
     },
     "3764232561": {
@@ -16076,8 +16076,8 @@
         "description": "遭夹击时+7 [ICON_Strength] 战斗力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Tegh",
+        "description": "+7 [ICON_Strength] Combat Strength when flanked."
       }
     },
     "1857280629": {
@@ -16092,8 +16092,8 @@
         "description": "击杀敌方单位后，获得等同于该单位基础 [ICON_Strength] 战斗力50%的 [ICON_Faith] 信仰值（标准速度下）。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Trehsool Mukh",
+        "description": "When defeating an enemy unit, gain [ICON_Faith] Faith equal to 50% that unit's base [ICON_Strength] Combat Strength. (on Standard Speed)"
       }
     },
     "3441835691": {
@@ -16108,8 +16108,8 @@
         "description": "+1 [ICON_Movement] 移动力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Jangi Mojeh",
+        "description": "+1 [ICON_Movement] Movement."
       }
     },
     "3073434926": {
@@ -16124,8 +16124,8 @@
         "description": "受伤不减战斗力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Sanjo",
+        "description": "No combat penalty when damaged."
       }
     },
     "1445778439": {
@@ -16140,8 +16140,8 @@
         "description": "作为拉合尔的宗主国时+10 [ICON_Strength] 战斗力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Jangi Kara",
+        "description": "+10 [ICON_Strength] Combat Strength while Suzerain of Lahore."
       }
     },
     "3628436529": {
@@ -16156,8 +16156,8 @@
         "description": "城市驻军 [ICON_Strength] 战斗力+5。就职需要3回合。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Redoubt",
+        "description": "Increases city garrison [ICON_Strength] Combat Strength by +5. Establishes in 3 turns."
       }
     },
     "2496565376": {
@@ -16172,8 +16172,8 @@
         "description": "城市领土内的单位防御时可+5 [ICON_Strength] 战斗力。您在9个单元格内的其他城市每回合获得对您文明的4点忠诚度。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Garrison Commander",
+        "description": "Units defending within the city's territory get +5 [ICON_Strength] Combat Strength. Your other cities within 9 tiles gain +4 Loyalty per turn towards your civilization."
       }
     },
     "3682604933": {
@@ -16188,8 +16188,8 @@
         "description": "就职城市无法被围攻。城市中储存的战略资源每回合额外增加1点。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Defense Logistics",
+        "description": "City cannot be put under siege. Accumulating Strategic resources in the city gain an additional +1 per turn."
       }
     },
     "397664712": {
@@ -16204,8 +16204,8 @@
         "description": "城市每回合获得一次额外的 [ICON_Ranged] 远程攻击机会。此城中生产的所有军事单位若初始未拥有免费升级，则其初始可获得一项免费升级。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Embrasure",
+        "description": "City gains an additional [ICON_Ranged] Ranged Strike per turn. Military units trained in this city start with a free promotion that do not already start with a free promotion."
       }
     },
     "4221006248": {
@@ -16220,8 +16220,8 @@
         "description": "防御飞机和洲际弹道导弹的攻击时，位于城市领土中的防空支援单位+25 [ICON_Strength] 战斗力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Air Defense Initiative",
+        "description": "+25 [ICON_Strength] Combat Strength to anti-air support units within the city's territory when defending against aircraft and ICBMs."
       }
     },
     "273628191": {
@@ -16236,8 +16236,8 @@
         "description": "在城市中进行核武器项目时+30% [ICON_Production] 生产力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Arms Race Proponent",
+        "description": "30% [ICON_Production] Production increase to all nuclear armament projects in the city."
       }
     },
     "110858044": {
@@ -16252,8 +16252,8 @@
         "description": "可派遣至城邦，效力等同于2名 [ICON_Envoy] 使者。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Messenger",
+        "description": "Can be assigned to a city-state, where she acts as 2 [ICON_Envoy] Envoys."
       }
     },
     "854041117": {
@@ -16268,8 +16268,8 @@
         "description": "9个单元格内其他文明的城市每回合将失去2点忠诚度。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Emissary",
+        "description": "Other cities within 9 tiles and not owned by you lose 2 Loyalty per turn."
       }
     },
     "3305075105": {
@@ -16284,8 +16284,8 @@
         "description": "派遣到城邦后将获得该城邦的奢侈品资源。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Affluence",
+        "description": "While established in a city-state, provides a copy of its Luxury resources to you."
       }
     },
     "308274133": {
@@ -16300,8 +16300,8 @@
         "description": "敌方间谍在此城中的行动等级减3。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Local Informants",
+        "description": "Enemy Spies operate at 3 levels below normal in this city."
       }
     },
     "867509429": {
@@ -16316,8 +16316,8 @@
         "description": "在城邦中就职后将储备该城邦的战略资源。成为宗主国后，获得的战略资源储备将加倍。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Foreign Investor",
+        "description": "While established in a city-state, accumulate its Strategic resources. When suzerain receive double the amount of accumulated strategic resources."
       }
     },
     "2901610647": {
@@ -16332,8 +16332,8 @@
         "description": "派遣到城邦后使当地的 [ICON_Envoy] 使者数量加倍。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Puppeteer",
+        "description": "While established in a city-state, doubles the number of [ICON_Envoy] Envoys you have there."
       }
     },
     "1046772354": {
@@ -16348,8 +16348,8 @@
         "description": "此城市对相邻城市释放的宗教压力强度加倍。此城市中每有一座特色区域，则+2 [ICON_Faith] 信仰值。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Bishop",
+        "description": "Religious pressure to adjacent cities is 100% stronger from this city. +2 [ICON_Faith] Faith for every specialty district in this city."
       }
     },
     "3125522059": {
@@ -16364,8 +16364,8 @@
         "description": "在此城的单元格中进行神学战斗时+10 [ICON_Religion] 宗教战斗力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Grand Inquisitor",
+        "description": "+10 [ICON_Religion] Religious Strength in theological combat in tiles of this city."
       }
     },
     "329352432": {
@@ -16380,8 +16380,8 @@
         "description": "[ICON_Governor] 总督的所有单位在此城的单元格中1回合即可完全恢复体力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Laying On Of Hands",
+        "description": "All [ICON_Governor] Governor's units heal fully in one turn in tiles of this city."
       }
     },
     "988185986": {
@@ -16396,8 +16396,8 @@
         "description": "城市将不会受到来自非 [ICON_Governor] 总督所属文明宗教的压力。建筑修建完成时可获得等同修建所耗生产力25%的 [ICON_FAITH] 信仰值。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Citadel of God",
+        "description": "City ignores religious pressure from Religions not founded by the [ICON_Governor] Governor's player. Gain [ICON_FAITH] Faith equal to 25% of the construction cost when finishing buildings."
       }
     },
     "283914776": {
@@ -16412,8 +16412,8 @@
         "description": "此城中生产的使徒和武僧首次升级时将额外获得1次升级。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Patron Saint",
+        "description": "Apostles and Warrior Monks trained in the city receive 1 extra promotion when receiving their first promotion."
       }
     },
     "3048384449": {
@@ -16428,8 +16428,8 @@
         "description": "城市可使用 [ICON_FAITH] 信仰值购买区域。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Divine Architect",
+        "description": "Allows city to purchase districts with [ICON_FAITH] Faith."
       }
     },
     "1522989637": {
@@ -16444,8 +16444,8 @@
         "description": "城市中格位收获和移除地貌的产出+50%。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Groundbreaker",
+        "description": "+50% yields from plot harvests and feature removals in city."
       }
     },
     "3971400261": {
@@ -16460,8 +16460,8 @@
         "description": "城市的 [ICON_Food] 增长+20%。以此处为终点的 [ICON_TradeRoute] 贸易路线（属于玩家）为起源城市+2 [ICON_Food] 食物。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Surplus Logistics",
+        "description": "+20% [ICON_Food] Growth in the city. Your [ICON_TradeRoute] Trade Routes ending here provide +2 [ICON_Food] Food to their starting city."
       }
     },
     "201364422": {
@@ -16476,8 +16476,8 @@
         "description": "城市中生产的开拓者不计入 [ICON_Citizen] 人口。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Provision",
+        "description": "Settlers trained in the city do not consume a [ICON_Citizen] Population."
       }
     },
     "1417515462": {
@@ -16492,8 +16492,8 @@
         "description": "燃煤发电厂、燃油发电厂与核电站中的每项资源所产生的 [ICON_POWER] 电力+1， [ICON_Production] 生产力+2。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Industrialist",
+        "description": "Increases the [ICON_POWER] Power provided by each resource of the Coal Power Plant, Oil Power Plant, and Nuclear Power Plant by 1 and the [ICON_Production] Production by +2."
       }
     },
     "2448062427": {
@@ -16508,8 +16508,8 @@
         "description": "生产单位所需战略资源花费减少80%。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Black Marketeer",
+        "description": "Strategic resource costs for units are discounted 80%."
       }
     },
     "3171701209": {
@@ -16524,8 +16524,8 @@
         "description": "此城市可从附近所有拥有区域加成的工业区处获得 [ICON_Production] 生产力，而不仅是从首个建成的工业区处获得。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Vertical Integration",
+        "description": "This city receives [ICON_Production] Production from all nearby Industrial Zone buildings with regional bonuses, not just the first."
       }
     },
     "633913796": {
@@ -16540,8 +16540,8 @@
         "description": "此城市中生产的所有建造者将+1建造次数。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Guildmaster",
+        "description": "All Builders trained in this city will get +1 build charge."
       }
     },
     "2860817891": {
@@ -16556,8 +16556,8 @@
         "description": "在城市中修建区域时+20% [ICON_Production] 生产力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Zoning Commissioner",
+        "description": "+20% [ICON_Production] Production towards constructing districts in the city."
       }
     },
     "4172341805": {
@@ -16572,8 +16572,8 @@
         "description": "可建造渔场改良设施。若与海洋资源相邻，则+1 [ICON_Food] 食物、+0.5 [ICON_Housing] 住房。总督“梁”在该城就职时+1 [ICON_PRODUCTION] 生产力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Aquaculture",
+        "description": "Can construct the Fishery improvement. +1 [ICON_Food] Food, +0.5 [ICON_Housing] Housing, +1 [ICON_Food] Food if adjacent to a sea resource. +1 [ICON_PRODUCTION] Production if Liang is in the city."
       }
     },
     "1298004032": {
@@ -16588,8 +16588,8 @@
         "description": "环境效应无法对此城市的改良设施、建筑与区域造成伤害。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Reinforced Materials",
+        "description": "This city’s improvements, buildings, and districts cannot be damaged by Environmental Effects."
       }
     },
     "2431500073": {
@@ -16604,8 +16604,8 @@
         "description": "此城市的每个社区与水渠区域+2 [ICON_HOUSING] 住房。此城市的每个运河与堤坝+1 [ICON_AMENITIES] 宜居度。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Water Works",
+        "description": "+2 [ICON_HOUSING] Housing for every Neighborhood and Aqueduct district in this city. +1 [ICON_AMENITIES] Amenity for every Canal and Dam district in this city."
       }
     },
     "1630405030": {
@@ -16620,8 +16620,8 @@
         "description": "能够在该城市中建造市立公园。+1 [ICON_Culture] 文化值与+2魅力。若与水域相邻，+1 [ICON_Amenities] 宜居度。若总督“梁”在此城就职，市立公园提供+3 [ICON_CULTURE] 文化值。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Parks and Recreation",
+        "description": "Can construct the City Park improvement in this city. +1 [ICON_Culture] Culture and +2 Appeal. +1 [ICON_Amenities] Amenity if adjacent to water. City Parks provide +3 [ICON_CULTURE] Culture if Liang is in the city."
       }
     },
     "4034265585": {
@@ -16636,8 +16636,8 @@
         "description": "城市每回合产出的 [ICON_Science] 科技值和 [ICON_Culture] 文化值+15%。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Librarian",
+        "description": "15% increase in [ICON_Science] Science and [ICON_Culture] Culture generated by the city."
       }
     },
     "2398399735": {
@@ -16652,8 +16652,8 @@
         "description": "城市中每位 [ICON_Citizen] 公民每回合可带来+1 [ICON_CULTURE] 文化值。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Connoisseur",
+        "description": "+1 [ICON_CULTURE] Culture per turn for each [ICON_Citizen] Citizen in the city."
       }
     },
     "25974729": {
@@ -16668,8 +16668,8 @@
         "description": "城市中每位 [ICON_Citizen] 公民每回合可带来+1 [ICON_SCIENCE] 科技值。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Researcher",
+        "description": "+1 [ICON_SCIENCE] Science per turn for each [ICON_Citizen] Citizen in the city."
       }
     },
     "859138435": {
@@ -16684,8 +16684,8 @@
         "description": "城市每回合产出的 [ICON_GreatPerson] 伟人点数+100%。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Grants",
+        "description": "+100% [ICON_GreatPerson] Great People points generated per turn in the city."
       }
     },
     "4027370770": {
@@ -16700,8 +16700,8 @@
         "description": "城市中艺术、音乐和著作巨作提供的 [ICON_Tourism] 旅游业绩+100%。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Curator",
+        "description": "+100% [ICON_Tourism] Tourism from Great Works of Art, Music, and Writing in the city."
       }
     },
     "3763297342": {
@@ -16716,8 +16716,8 @@
         "description": "在城市中进行太空计划项目时+30% [ICON_Production] 生产力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Space Initiative",
+        "description": "30% [ICON_Production] Production increase to all space-program projects in the city."
       }
     },
     "3768018013": {
@@ -16732,8 +16732,8 @@
         "description": "城市获得新单元格的速度加快。经过城市的每条外国 [ICON_TradeRoute] 贸易路线每回合产出的 [ICON_Gold] 金币+3。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Land Acquisition",
+        "description": "Acquire new tiles in city faster. +3 [ICON_Gold] Gold per turn from each foreign [ICON_TradeRoute] Trade Route passing through the city."
       }
     },
     "3745282334": {
@@ -16748,8 +16748,8 @@
         "description": "城市中商业中心和港口的相邻加成加倍。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Harbormaster",
+        "description": "Double adjacency bonuses from Commercial Hubs and Harbors in the city."
       }
     },
     "3406678088": {
@@ -16764,8 +16764,8 @@
         "description": "每个未改良的地貌可向该城市提供+2 [ICON_Gold] 金币。该城市中与未改良地貌相邻的单元格可获得+1魅力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Forestry Management",
+        "description": "This city receives +2 [ICON_Gold] Gold from each unimproved feature. Tiles adjacent to unimproved features receive +1 Appeal in this city."
       }
     },
     "3128040420": {
@@ -16780,8 +16780,8 @@
         "description": "城市中每位 [ICON_Citizen] 公民每回合可带来2 [ICON_Gold] 金币的收入。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Tax Collector",
+        "description": "+2 [ICON_Gold] Gold per turn for each [ICON_Citizen] Citizen in the city."
       }
     },
     "1470186972": {
@@ -16796,8 +16796,8 @@
         "description": "城市可使用 [ICON_Gold] 金币购买区域。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Contractor",
+        "description": "Allows city to purchase districts with [ICON_Gold] Gold."
       }
     },
     "1767865989": {
@@ -16812,8 +16812,8 @@
         "description": "该城市的所有离岸风力发电厂、太阳能农场、风力发电厂、地热发电厂、水电站坝获得+2点 [ICON_POWER] 电力与+2 [ICON_Gold] 金币。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Renewable Subsidizer",
+        "description": "All Offshore Wind Farms, Solar Farms, Wind Farms, Geothermal Plants, and Hydroelectric Dams in this city receive +2 [ICON_POWER] Power and +2 [ICON_Gold] Gold."
       }
     },
     "2894955677": {
@@ -16828,8 +16828,8 @@
         "description": "城市建造任意军事单位时+20%  [ICON_Production] 生产力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Pasha",
+        "description": "+20% [ICON_Production] Production to all military units in the city."
       }
     },
     "1641836271": {
@@ -16844,8 +16844,8 @@
         "description": "在城市领土中战斗的所有友方单位+5 [ICON_Strength] 战斗力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Head Falconer",
+        "description": "All friendly units fighting within the city's territory gain +5 [ICON_Strength] Combat Strength."
       }
     },
     "185953620": {
@@ -16860,8 +16860,8 @@
         "description": "攻击防御性区域时，市中心周围10个单元格内的所有单位+10 [ICON_Strength] 战斗力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Serasker",
+        "description": "Grants all units within 10 tiles of the City Center +10 [ICON_Strength] Combat Strength when attacking defensible districts."
       }
     },
     "2413042649": {
@@ -16876,8 +16876,8 @@
         "description": "在外国盟友的 [ICON_Capital] 首都就职时，此盟友的同盟点数每回合额外增加0.5。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Khass-Oda-Bashi",
+        "description": "When established in an allied foreign [ICON_Capital] Capital, your Alliance Points with the owner increase an extra .5 per turn."
       }
     },
     "1782690556": {
@@ -16892,8 +16892,8 @@
         "description": "在外国 [ICON_Capital] 首都就职时，此文明对您的 [ICON_STAT_GRIEVANCE] 不满每回合多降低1点。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Capou Agha",
+        "description": "When established in a foreign [ICON_Capital] Capital, [ICON_STAT_GRIEVANCE] Grievances from the city owner against you are reduced by 1 more per turn."
       }
     },
     "3874604601": {
@@ -16908,8 +16908,8 @@
         "description": "在外国 [ICON_Capital] 首都就职时，此文明的任何城市皆无法对您的城市施加忠诚度压力。"
       },
       "en": {
-        "name": "",
-        "description": ""
+        "name": "Grand Vizier",
+        "description": "When established in a foreign [ICON_Capital] Capital, none of the owner's cities exert Loyalty pressure on your cities."
       }
     }
   },

@@ -81,6 +81,7 @@ def game_info(packets: List[Packet]) -> dict:
     blob = parse_loc_json(p0.get_str(M_MAPFILE))
     return {
         "map_name": loc_text(blob) or _decode(p0.get_str(M_MAPFILE)),
+        "map_name_en": loc_text(blob, ("en_US", "zh_Hans_CN")) or _decode(p0.get_str(M_MAPFILE)),
         "map_key": next(iter(blob.keys()), ""),
         "map_size": _decode(p0.get_str(M_MAPSIZE)),
         "game_speed": _decode(p0.get_str(M_GAMESPEED)),

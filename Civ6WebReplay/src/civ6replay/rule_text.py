@@ -12,22 +12,28 @@ class RuleText:
     def __init__(self, doc=None):
         self.doc = doc or {}
         self.entries = self.doc.get("entries", {})
+        self.labels = {}
+        for row in self.entries.values():
+            for field, tag_key in (("name", "nameTag"), ("description", "descriptionTag")):
+                if row.get(tag_key):
+                    self.labels[row[tag_key]] = {lang: row.get(lang, {}).get(field, "") for lang in ("zh", "en")}
 
-    def entry(self, h):
+    def entry(self, h, lang="zh"):
         row = self.entries.get(str(int(h) & 0xFFFFFFFF))
         if not row:
             return None
         zh, en = row.get("zh", {}), row.get("en", {})
+        primary, fallback = (en, zh) if lang == "en" else (zh, en)
         return {"type": row["type"], "kind": row["kind"],
-                "name": zh.get("name") or en.get("name") or "",
-                "description": zh.get("description") or en.get("description") or ""}
+                "name": primary.get("name") or fallback.get("name") or "",
+                "description": primary.get("description") or fallback.get("description") or ""}
 
-    def abilities(self, civilization, leader):
+    def abilities(self, civilization, leader, lang="zh"):
         def skills(hashes):
             out = []
             for h in dict.fromkeys(hashes):
                 row = self.entries.get(str(h), {})
-                entry = self.entry(h)
+                entry = self.entry(h, lang)
                 # Internal traits and unique-content gates have no player-facing
                 # skill description. Keep named skills even if their text is missing.
                 tag = row.get("descriptionTag") or ""

@@ -74,11 +74,16 @@ class Identities:
         e = self.entry(h, profile)
         return e.get("en", "") if e else ""
 
-    def name(self, h, profile: str = "") -> str:
+    def name(self, h, profile: str = "", lang: str = "zh") -> str:
         e = self.entry(h, profile)
         if not e:
             return ""
-        return e.get("zh") or e.get("en") or ""
+        if lang == "en":
+            base = self.entries.get(h & 0xFFFFFFFF, {})
+            override = base.get("profiles", {}).get(profile.lower(), {})
+            if override.get("zh") and override.get("zh") != base.get("zh") and not override.get("en"):
+                return override["zh"]
+        return (e.get(lang) or e.get("zh") or e.get("en") or "")
 
     def type_str(self, h) -> str:
         e = self.entry(h)

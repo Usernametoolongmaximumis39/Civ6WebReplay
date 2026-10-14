@@ -37,7 +37,11 @@ DEFAULT_CACHE = ROOT / "cache" / "replay.sqlite"
 # reparse turns whose display names were cached as untranslated tokens.
 # Player resource inventory and actual policy-slot capacities.
 # Era score and saved normal/golden age thresholds, including saved shifts.
-SCHEMA_VERSION = 22
+# Language-neutral adjacency display references for localized API views.
+# Governor assignments now retain the target city owner; discard city-ID-only views.
+# Unit type keys are unsigned; military strength includes formation/damage offsets.
+# Structured package IDs and independent balance MOD release channels.
+SCHEMA_VERSION = 26
 
 
 class ReplayCache:
@@ -70,6 +74,9 @@ class ReplayCache:
                 """
             )
             # migrate caches written before v0.21 (no `ver` column); old rows keep 0
+            metadata_cols = [r[1] for r in self.conn.execute("PRAGMA table_info(save_meta)")]
+            if "map_name_en" not in metadata_cols:
+                self.conn.execute("alter table save_meta add column map_name_en text")
             cols = [r[1] for r in self.conn.execute("PRAGMA table_info(turn_state)")]
             if "ver" not in cols:
                 self.conn.execute(

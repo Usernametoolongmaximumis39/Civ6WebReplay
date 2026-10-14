@@ -16,7 +16,7 @@ from typing import Dict, List, Optional, Literal
 
 import httpx
 from fastapi import FastAPI, HTTPException, Query, Request
-from fastapi.responses import Response
+from fastapi.responses import Response, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
 from . import share as share_mod
@@ -32,7 +32,10 @@ from .identities import get_identities
 from .rule_text import get_rule_text, rule_text_token
 from .goldledger import build_report as build_gold_report
 from .loc import get_loc
+from .localization import (ui, localize_replays, localize_static,
+                           localize_turn, localize_share, display_token)
 from .mods import wall_defense_override
+from .mod_identity import balance_profile
 from .database_versions import version_info
 from .replay import (SaveInfo, default_save_dir, discover, group_by_seed,
                      latest_save_for_seed)
@@ -99,6 +102,18 @@ def _load_mapwrap() -> Dict[str, bool]:
         out[str(k)] = bool(v)
     return out
 
+
+def _save_map_english(save: SaveInfo) -> str:
+    """Read only the header when an older metadata cache lacks English names."""
+    if not save.map_name_en:
+        from .container import parse_all
+        from .header import game_info
+        try:
+            save.map_name_en = game_info(parse_all(Path(save.path).read_bytes()))["map_name_en"]
+        except Exception:
+            save.map_name_en = save.map_name
+    return save.map_name_en
+
 # playersInfo.typeCiv -> public player kind
 _CIV_KIND = {
     TYPE_CIV_FULL: "major",
@@ -108,32 +123,32 @@ _CIV_KIND = {
 }
 
 
-def _name_of(h, profile: str = "") -> str:
+def _name_of(h, profile: str = "", lang: str = "zh") -> str:
     """Profile policy text -> identities -> gamedb (empty when unknown)."""
     if not h:
         return ""
     hm = int(h) & 0xFFFFFFFF
-    text = get_rule_text(profile).entry(hm)
-    if text and text["kind"] == "policy" and text["name"]:
+    text = get_rule_text(profile).entry(hm, lang)
+    if text and (text["kind"] == "policy" or lang == "en") and text["name"]:
         # Keep the user's chosen wording for Autocratic Legacy.
-        if text["type"] == "POLICY_GOV_AUTOCRACY":
+        if text["type"] == "POLICY_GOV_AUTOCRACY" and lang == "zh":
             return "独裁传承"
         return text["name"]
-    name = get_identities().name(hm, profile)
+    name = get_identities().name(hm, profile, lang)
     if name:
         return name
-    name = get_gamedb().name(hm)
+    name = get_gamedb().name(hm, lang)
     return "" if name.startswith("0x") else name
 
 
-def _resolve(h, profile: str = "") -> dict:
+def _resolve(h, profile: str = "", lang: str = "zh") -> dict:
     """Resolve profile-aware names, icons and separately captured descriptions."""
     hm = int(h) & 0xFFFFFFFF
     ident = get_identities()
     db = get_gamedb()
-    text = get_rule_text(profile).entry(hm)
+    text = get_rule_text(profile).entry(hm, lang)
     return {
-        "name": _name_of(hm, profile) or f"0x{hm:08X}",
+        "name": _name_of(hm, profile, lang) or f"0x{hm:08X}",
         "type": ident.type_str(hm) or db.type_str(hm),
         "category": db.category(hm) or (ident.kind(hm) or None),
         "icon": ident.icon(hm, profile) or db.icon(hm),
@@ -218,7 +233,7 @@ def fetch_steam_name(steamid: str, *, timeout: float = STEAM_TIMEOUT) -> str:
     url = f"https://steamcommunity.com/profiles/{steamid}?xml=1"
     with httpx.Client(timeout=timeout, follow_redirects=True,
                       verify=_steam_ssl_context(),
-                     headers={"User-Agent": "civ6replay/0.41"}) as client:
+                     headers={"User-Agent": "civ6replay/0.42"}) as client:
         resp = client.get(url)
     if resp.status_code != 200:
         raise RuntimeError(f"HTTP {resp.status_code}")
@@ -775,9 +790,7 @@ class ReplayManager:
                 return {**info, "turns": sorted(self.turn_map(seed))}
         state = self.load_state(save)
         db = get_gamedb()
-        profile = ("ccb" if any(re.search(r"\bccb\b|和而不同", p.get("name", ""), re.I)
-                                 for p in (state.modPackages or [{"name": m} for m in state.mods]))
-                   else (state.balanceMod or "vanilla").lower())
+        profile = balance_profile(state.modPackages or state.mods, default=(state.balanceMod or "vanilla").lower())
         identities = [get_identities().entry(h, profile) for h in get_identities().entries]
         def identity_map(field):
             return {str(e["hash"]): e[field] for e in identities if field in e}
@@ -817,6 +830,8 @@ class ReplayManager:
             # the turn URL (``?v=``) so a schema bump can never reuse a cached body.
             "schema": SCHEMA_VERSION,
             "mapName": state.map_name,
+            "mapNameEn": state.map_name_en,
+            "mapKey": state.map_key,
             "mapSize": state.map_size,
             "gameSpeed": state.game_speed,
             "multiplayer": state.multiplayer,
@@ -835,16 +850,11 @@ class ReplayManager:
             # v0.26.1: a balance MOD (BBG / CCB) in this save's mod list switches
             # the numbers to its ruleset (75 / 300) - one snapshot cannot hold both.
             "wallDefense": wall_defense_override(db.wall_defense(), state.mods),
-            "districtHitPoints": district_hit_points(
-                "ccb" if any(re.search(r"\bccb\b|和而不同", p.get("name", ""), re.I)
-                              for p in (state.modPackages or [{"name": m} for m in state.mods]))
-                else (state.balanceMod or "official").lower()),
+            "districtHitPoints": district_hit_points("official" if profile == "vanilla" else profile),
             "mods": list(state.mods),
-            "balanceMod": state.balanceMod,
+            "balanceMod": profile.upper() if profile in ("bbg", "ccb") else "",
             "identityProfile": profile,
-            "balanceVersions": version_info(
-                ("ccb" if any(re.search(r"\bccb\b|和而不同", p.get("name", ""), re.I)
-                              for p in state.modPackages) else state.balanceMod.lower()),
+            "balanceVersions": version_info(profile,
                 state.modPackages or [{"key": m, "name": m} for m in state.mods]),
             # v0.39: 启用的不支持玩法（``modes.parse_game_modes``）与「整局不支持」
             # 的判定 —— 命中时前端不画地图，只在画布中间画叉 + 提示。
@@ -887,6 +897,8 @@ class ReplayManager:
             out.append({
                 "seed": seed,
                 "mapName": latest.map_name,
+                "mapNameEn": _save_map_english(latest),
+                "mapKey": latest.map_key,
                 "mapSize": latest.map_size,
                 "gameSpeed": latest.game_speed,
                 "multiplayer": latest.multiplayer,
@@ -912,7 +924,23 @@ def create_app(save_dir: Optional[str] = None, *, host: str = "127.0.0.1",
 
     ``share_bind`` / ``share_port`` 供测试替换共享监听器的绑定与默认端口。
     """
-    app = FastAPI(title="Civ6 WebReplay", version="0.41")
+    app = FastAPI(title="Civ6 WebReplay", version="0.42")
+    @app.exception_handler(HTTPException)
+    async def localized_error(request: Request, exc: HTTPException):
+        detail = exc.detail
+        if request.query_params.get("lang") == "en" and isinstance(detail, str):
+            # Preserve user-entered paths/hosts following a developer prefix.
+            from .localization import catalogs
+            strings = catalogs()[0]
+            if detail in strings:
+                detail = strings[detail]
+            else:
+                prefix = next((p for p in strings if p.endswith("：") and detail.startswith(p)), None)
+                if prefix:
+                    detail = strings[prefix] + detail[len(prefix):]
+                else:
+                    detail = ui(detail, "en")
+        return JSONResponse({"detail": detail}, status_code=exc.status_code, headers=exc.headers)
     manager = ReplayManager(save_dir)
     app.state.manager = manager
     # v0.38: 共享 —— 主进程本来就绑 0.0.0.0 时不再另起监听器，直接复用主端口。
@@ -958,10 +986,10 @@ def create_app(save_dir: Optional[str] = None, *, host: str = "127.0.0.1",
             raise HTTPException(409, "共享中已锁定：请先停止共享。")
 
     def _share_idle(request: Request) -> dict:
-        return {"enabled": False, "isLocal": _is_local(request), "host": None,
+        return localize_share({"enabled": False, "isLocal": _is_local(request), "host": None,
                 "port": None, "base": None, "kind": "none", "source": "nic",
                 "hint": "", "note": "", "candidates": [],
-                "reach": share_mod.idle_reach("none")}
+                "reach": share_mod.idle_reach("none")}, request.query_params.get("lang", "zh"))
 
     def _share_view(request: Request, *, host: Optional[str] = None,
                     port: Optional[int] = None, remote: bool = False,
@@ -983,7 +1011,7 @@ def create_app(save_dir: Optional[str] = None, *, host: str = "127.0.0.1",
             reach = share_mod.check_reachable(host, resolved)
         else:
             reach = share_mod.idle_reach(kind)
-        return {
+        return localize_share({
             "enabled": share.enabled,
             "isLocal": _is_local(request),
             "host": host,
@@ -995,11 +1023,11 @@ def create_app(save_dir: Optional[str] = None, *, host: str = "127.0.0.1",
             "note": share_mod.note_for(kind, source),
             "candidates": candidates,
             "reach": reach,
-        }
+        }, request.query_params.get("lang", "zh"))
 
     @app.get("/api/replays")
-    def api_replays():
-        return manager.replays()
+    def api_replays(lang: Literal["zh", "en"] = Query("zh")):
+        return localize_replays(manager.replays(), lang)
 
     @app.post("/api/refresh")
     def api_refresh():
@@ -1009,9 +1037,9 @@ def create_app(save_dir: Optional[str] = None, *, host: str = "127.0.0.1",
         return {"ok": True, "saves": len(manager.infos)}
 
     @app.get("/api/replay/{seed}")
-    def api_replay(seed: int):
+    def api_replay(seed: int, lang: Literal["zh", "en"] = Query("zh")):
         try:
-            return manager.static_info(seed)
+            return localize_static(manager.static_info(seed), lang)
         except KeyError:
             raise HTTPException(404, f"seed {seed} not found")
 
@@ -1058,7 +1086,8 @@ def create_app(save_dir: Optional[str] = None, *, host: str = "127.0.0.1",
     # --- v0.28: 金币流水账（右栏文明卡「金币」明细里的三指标） --------------
     @app.get("/api/gold")
     def api_gold(seed: int = Query(0), range_key: str = Query("all", alias="range"),
-                 weighted: int = Query(0), end: int = Query(0), legacy: int = Query(0)):
+                 weighted: int = Query(0), end: int = Query(0), legacy: int = Query(0),
+                 lang: Literal["zh", "en"] = Query("zh")):
         """打钱 / 吸钱 / 净金币交易。
 
         只读**默认日志目录**（存档目录同级的 ``Logs``，或 ``%LOCALAPPDATA%\\Firaxis
@@ -1078,10 +1107,13 @@ def create_app(save_dir: Optional[str] = None, *, host: str = "127.0.0.1",
             if static:
                 save_players = {int(p["iPlayer"]): str(p.get("civStr") or "")
                                 for p in static.get("players", [])}
-        return build_gold_report(save_dir=manager.effective_save_dir, seed=seed or None,
+        report = build_gold_report(save_dir=manager.effective_save_dir, seed=seed or None,
                                  save_players=save_players, range_key=range_key,
                                  weighted=bool(weighted),
                                  end_turn=end or None, legacy=bool(legacy))
+        if "reason" in report:
+            report["reason"] = ui(report["reason"], lang)
+        return report
 
     # --- v0.25: save directory selection (session scope) ------------------
     @app.get("/api/savedir")
@@ -1175,7 +1207,8 @@ def create_app(save_dir: Optional[str] = None, *, host: str = "127.0.0.1",
         return _share_idle(request)
 
     @app.get("/api/replay/{seed}/turn/{n}")
-    def api_turn(request: Request, seed: int, n: int, gz: int = Query(1)):
+    def api_turn(request: Request, seed: int, n: int, gz: int = Query(1),
+                 lang: Literal["zh", "en"] = Query("zh")):
         save = manager.turn_map(seed).get(n)
         if save is None:
             raise HTTPException(404, f"turn {n} not found for seed {seed}")
@@ -1187,7 +1220,7 @@ def create_app(save_dir: Optional[str] = None, *, host: str = "127.0.0.1",
         # revalidate every time: unchanged payload = one cheap 304, changed payload
         # = new body, never a stale mix.
         etag = (f'W/"{seed}-{n}-{save.mtime!r}-{save.size}-'
-                f'{SCHEMA_VERSION}-{rules_token()}-gz{int(bool(gz))}"')
+                f'{SCHEMA_VERSION}-{rules_token()}-{display_token()}-{lang}-gz{int(bool(gz))}"')
         headers = {"ETag": etag, "Cache-Control": "no-cache"}
         if request.headers.get("if-none-match") == etag:
             return Response(status_code=304, headers=headers)
@@ -1195,6 +1228,8 @@ def create_app(save_dir: Optional[str] = None, *, host: str = "127.0.0.1",
             payload = manager.load_payload(seed, n)
         except KeyError:
             raise HTTPException(404, f"turn {n} not found for seed {seed}")
+        profile = manager.static_info(seed).get("identityProfile", "vanilla") if lang == "en" else "vanilla"
+        payload = localize_turn(payload, profile, lang)
         body = json.dumps(payload, separators=(",", ":")).encode("utf-8")
         if gz:
             body = gzip.compress(body)
@@ -1202,7 +1237,8 @@ def create_app(save_dir: Optional[str] = None, *, host: str = "127.0.0.1",
         return Response(content=body, media_type="application/json", headers=headers)
 
     @app.get("/api/gamedb/names")
-    def api_names(hashes: str = Query(""), profile: Literal["", "vanilla", "bbg", "ccb"] = Query("")):
+    def api_names(hashes: str = Query(""), profile: Literal["", "vanilla", "bbg", "ccb"] = Query(""),
+                  lang: Literal["zh", "en"] = Query("zh")):
         out = {}
         for token in hashes.split(","):
             token = token.strip()
@@ -1212,16 +1248,17 @@ def create_app(save_dir: Optional[str] = None, *, host: str = "127.0.0.1",
                 h = int(token, 0) & 0xFFFFFFFF
             except ValueError:
                 continue
-            out[str(h)] = _resolve(h, profile)
+            out[str(h)] = _resolve(h, profile, lang)
         return out
 
     @app.get("/api/gamedb/type/{hash_value}")
-    def api_type(hash_value: str, profile: Literal["", "vanilla", "bbg", "ccb"] = Query("")):
+    def api_type(hash_value: str, profile: Literal["", "vanilla", "bbg", "ccb"] = Query(""),
+                 lang: Literal["zh", "en"] = Query("zh")):
         try:
             h = int(hash_value, 0) & 0xFFFFFFFF
         except ValueError:
             raise HTTPException(400, "bad hash")
-        resolved = _resolve(h, profile)
+        resolved = _resolve(h, profile, lang)
         resolved["hash"] = h
         return resolved
 

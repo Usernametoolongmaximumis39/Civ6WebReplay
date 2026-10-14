@@ -1,7 +1,7 @@
 @echo off
 chcp 65001 >nul
 setlocal enabledelayedexpansion
-title Civ6 WebReplay v0.41
+title Civ6 WebReplay v0.42
 cd /d "%~dp0"
 
 REM --- 选择 Python ---------------------------------------------------------

@@ -15,6 +15,7 @@ import sys
 import tempfile
 import time
 import xml.etree.ElementTree as ET
+from uuid import UUID
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
@@ -26,6 +27,7 @@ from civ6replay.database_maintenance import (check_profile, create_backup, data_
 from civ6replay.database_versions import (CORE_IDS, EXPANSION_IDS, clean_title,
     component_role, component_versions, format_versions)
 from civ6replay.mods import blacklisted_mods, parse_mod_packages
+from civ6replay.mod_identity import manifest_metadata
 from civ6replay.modes import parse_game_modes
 from civ6replay.tileyields import YieldRules
 from civ6replay.unsupported import verdict
@@ -109,22 +111,44 @@ def validate_packages(profile, packages, titles, found):
     if len(cores) > 1 or cores != {profile}:
         raise ValueError("BBG 与 CCB 混装，或当前存档与所选规则集不符")
     allowed = {CORE_IDS[profile], EXPANSION_IDS[profile], *COMPANIONS[profile]}
+    allowed.update(identity for identity, (_, doc, _) in found.items()
+                   if doc is not None and component_role(manifest_metadata(doc), profile))
     selected = {}
+    selected_roles = []
     for package in packages:
         if _official_package(package["key"], official) or _official_package(package["name"], official):
             continue
         aliases = {clean_title(package["key"]), clean_title(package["name"])}
-        matches = [(identity, value) for identity, value in found.items() if aliases.intersection(value[2])]
+        matches = [(identity, value) for identity, value in found.items()
+                   if aliases.intersection(value[2]) and
+                   (not package.get("id") or package["id"].lower() == identity)]
         if len(matches) != 1 or matches[0][0] not in allowed:
             raise ValueError("加载了未识别或不支持的 MOD：" + package["name"])
-        selected[matches[0][0]] = matches[0][1]
-    if CORE_IDS[profile] not in selected:
+        identity, value = matches[0]
+        try:
+            UUID(identity)
+        except ValueError:
+            raise ValueError("MOD 来源标识无效：" + package["name"])
+        role = component_role(package, profile)
+        if role:
+            source = manifest_metadata(value[1]) if value[1] is not None else {}
+            # Legacy test/metadata records may omit the name. An actual source
+            # name, when present, must agree with the save's family and role.
+            if source.get("name") and component_role(source, profile) != role:
+                raise ValueError("MOD 来源身份与存档不符：" + package["name"])
+            if role in selected_roles:
+                raise ValueError("同一主模组或拓展启用了多个版本：" + package["name"])
+            selected_roles.append(role)
+        elif identity not in COMPANIONS[profile]:
+            raise ValueError("加载了未识别或不支持的 MOD：" + package["name"])
+        selected[identity] = value
+    if "core" not in selected_roles:
         raise ValueError("无法确认已启用核心 MOD 的版本来源")
-    # Known selected companions must not quietly omit their required core/extension.
     for value in selected.values():
         for entry in value[1].findall("Dependencies/Mod"):
             dependency = (entry.get("id") or "").lower()
-            if dependency in allowed and dependency not in selected:
+            dependency_role = component_role({"id": dependency, "name": entry.get("title", "")}, profile)
+            if (dependency in allowed or dependency_role) and dependency not in selected:
                 raise ValueError("缺少 MOD 必要依赖：" + dependency)
     return selected
 
@@ -142,9 +166,12 @@ def snapshot(source, output):
     os.utime(output, ns=(before[0][0], before[0][0]))
 
 
-def governor_section(gameplay, localization, profile):
-    with closing(sqlite3.connect(localization.resolve().as_uri() + "?mode=ro", uri=True)) as loc:
-        labels = {(tag, lang): text for tag, lang, text in loc.execute("select Tag,Language,Text from LocalizedText")}
+def governor_section(gameplay, localization, profile, *, labels=None):
+    if labels is None:
+        with closing(sqlite3.connect(localization.resolve().as_uri() + "?mode=ro", uri=True)) as loc:
+            labels = {(tag, lang): text for tag, lang, text in loc.execute("select Tag,Language,Text from LocalizedText")}
+    else:
+        labels = {(tag, lang): text for lang, rows in labels.items() for tag, text in rows.items()}
     with closing(sqlite3.connect(gameplay.resolve().as_uri() + "?mode=ro", uri=True)) as con:
         con.row_factory = sqlite3.Row
         governors = []
@@ -197,9 +224,17 @@ def capture(profile, save, cache, game_root, *, root=ROOT, mod_roots=(), since=N
     staging_parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(dir=staging_parent, prefix=profile + "-") as temporary:
         out = Path(temporary)
+        # The icon/identity audit is an independent source archive, not an
+        # active rule snapshot. Keep it when replacing captured runtime data.
+        for name in ("additions-source", "additions-audit.json"):
+            audit = backup / "profile" / name
+            if audit.is_dir():
+                shutil.copytree(audit, out / name)
+            elif audit.is_file():
+                shutil.copyfile(audit, out / name)
         snapshot(gameplay, out / "gameplay.sqlite")
         snapshot(localization, out / "localization.sqlite")
-        sources, source_hashes = [], {}
+        sources, source_hashes, missing_scripts, warnings = [], {}, [], []
         for identity, (info, doc, aliases) in selected.items():
             dest = out / "scripts" / identity
             dest.mkdir(parents=True)
@@ -209,8 +244,18 @@ def capture(profile, save, cache, game_root, *, root=ROOT, mod_roots=(), since=N
             for entry in doc.findall("InGameActions/AddGameplayScripts/File"):
                 relative = Path(entry.text or "")
                 file = info.parent / relative
-                if relative.is_absolute() or not file.resolve().is_relative_to(info.parent.resolve()) or not file.is_file():
-                    raise ValueError("MOD 脚本缺失或路径无效：" + str(relative))
+                if relative.is_absolute() or not file.resolve().is_relative_to(info.parent.resolve()):
+                    raise ValueError("MOD 脚本路径无效：" + str(relative))
+                if not file.exists():
+                    # Some shipped manifests retain deleted scripts (CCB Maps:
+                    # Data/BBS_D.lua). Preserve that fact alongside the actual
+                    # database instead of claiming the script was captured.
+                    scripts.append({"path": relative.as_posix(), "missing": True})
+                    missing_scripts.append(file)
+                    warnings.append(f"MOD 声明的脚本不存在，已记录缺项：{info.name} / {relative.as_posix()}")
+                    continue
+                if not file.is_file():
+                    raise ValueError("MOD 脚本路径不是文件：" + str(relative))
                 target = dest / relative
                 target.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copyfile(file, target)
@@ -219,7 +264,7 @@ def capture(profile, save, cache, game_root, *, root=ROOT, mod_roots=(), since=N
                 scripts.append({"path": relative.as_posix(), "sha256": digest})
             name = next((p["name"] for p in packages if clean_title(p["key"]) in aliases or clean_title(p["name"]) in aliases),
                         doc.findtext("Properties/Name", ""))
-            sources.append({"id": identity, "name": name, "version": doc.findtext("Properties/Version") or doc.get("version"),
+            sources.append({**manifest_metadata(doc), "id": identity, "name": name,
                             "modinfoSha256": source_hashes[info], "scripts": scripts})
         build_adjacency(out / "gameplay.sqlite", out / "localization.sqlite", game_root, out / "adjacency.json",
                         profile=profile, packages=packages, mod_files=[v[0] for v in selected.values()])
@@ -227,19 +272,17 @@ def capture(profile, save, cache, game_root, *, root=ROOT, mod_roots=(), since=N
                         profile=profile, save=save, sources=sources, mod_files=[v[0] for v in selected.values()])
         AdjacencyRules(read_json(out / "adjacency.json"))
         YieldRules(read_json(out / "tileyields.json"))
-        section = governor_section(out / "gameplay.sqlite", out / "localization.sqlite", profile)
-        with closing(sqlite3.connect((out / "localization.sqlite").resolve().as_uri() + "?mode=ro", uri=True)) as con:
-            labels = {lang: {tag: text for tag, text in con.execute("select Tag,Text from LocalizedText where Language=?", (lang,))}
-                      for lang in ("zh_Hans_CN", "en_US")}
-        write_json(out / "labels.json", labels)
+        labels = {}
         text_doc = build_rule_text(
             out / "gameplay.sqlite", game_root, profile=profile, packages=packages,
-            mod_files=[v[0] for v in selected.values()], localization=out / "localization.sqlite")
+            mod_files=[v[0] for v in selected.values()], localization=out / "localization.sqlite", labels_out=labels)
+        section = governor_section(out / "gameplay.sqlite", out / "localization.sqlite", profile, labels=labels)
+        write_json(out / "labels.json", labels)
         write_json(out / "rule-text.json", text_doc)
         source_hashes.update({Path(s["path"]): s["sha256"] for s in text_doc["sources"]})
         versions = component_versions(profile, packages, sources)
         manifest = {"format": 1, "profile": profile, "capturedAt": datetime.now(timezone.utc).isoformat(),
-                    "packages": packages, "sources": sources, "versions": versions,
+                    "packages": packages, "sources": sources, "versions": versions, "warnings": warnings,
                     "referenceSaveSha256": hashlib.sha256(raw).hexdigest(),
                     "files": {p.relative_to(out).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
                               for p in out.rglob("*") if p.is_file()}}
@@ -247,10 +290,11 @@ def capture(profile, save, cache, game_root, *, root=ROOT, mod_roots=(), since=N
         if (any(database_signature(p) != stamp for p, stamp in observed.items())
                 or signature(save) != observed_save or save.read_bytes() != raw):
             raise ValueError("存档或游戏数据库发生变化，未替换数据，请重新保存后重试")
-        if any(hashlib.sha256(p.read_bytes()).hexdigest() != digest for p, digest in source_hashes.items()):
+        if (any(hashlib.sha256(p.read_bytes()).hexdigest() != digest for p, digest in source_hashes.items())
+                or any(p.exists() for p in missing_scripts)):
             raise ValueError("MOD 文件在采集期间更新，未替换数据，请重新进入游戏后重试")
         replace_data(profile, out, {"present": True, "section": section}, backup, root)
-    return {"profile": profile, "versions": versions, "backup": backup.name}
+    return {"profile": profile, "versions": versions, "backup": backup.name, "warnings": warnings}
 
 
 def _path(prompt, fallback):
@@ -313,6 +357,8 @@ def interactive(args, profile):
     else:
         save = _path("未找到新单人存档，请输入刚保存的存档路径", "")
     result = capture(profile, save, cache, game_root, root=args.root, mod_roots=args.mod_root, since=since)
+    for warning in result["warnings"]:
+        print("[提示] " + warning)
     print("采集成功：" + format_versions(result["versions"]))
     print("旧数据备份：" + result["backup"] + "；请重新启动复盘工具。")
 

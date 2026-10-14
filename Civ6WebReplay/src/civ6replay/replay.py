@@ -35,6 +35,8 @@ class SaveInfo:
     map_size: str = ""
     game_speed: str = ""
     multiplayer: bool = False
+    map_key: str = ""
+    map_name_en: str = ""
 
 
 def read_meta(data: bytes) -> dict:
@@ -74,6 +76,8 @@ def discover(save_dir: Path | str | None = None,
             map_name=meta.get("map_name", ""), map_size=meta.get("map_size", ""),
             game_speed=meta.get("game_speed", ""),
             multiplayer=bool(meta.get("multiplayer", False)),
+            map_key=meta.get("map_key", ""),
+            map_name_en=meta.get("map_name_en") or "",
         ))
     return infos
 

@@ -22,6 +22,10 @@ from build_loc import WORKSHOP_ROOTS
 from build_loc import _harvest, _iter_base_text, _iter_dlc_text, _iter_mod_text
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+from civ6replay.database_versions import component_role
+from civ6replay.mods import CCB_TITLE_RE
+from civ6replay.mod_identity import manifest_metadata
 TABLES = tuple(dict.fromkeys((*ADJACENCY_TABLES,
     "Terrain_YieldChanges", "Feature_YieldChanges", "Resource_YieldChanges",
     "Improvement_YieldChanges", "Improvement_BonusYieldChanges",
@@ -158,11 +162,11 @@ def validate_profile(profile, tables, packages):
     titles = [clean_title(p["name"]) for p in packages]
     if profile == "vanilla" and balanced:
         raise ValueError("请先运行原版游戏；当前数据库含平衡模组规则")
-    if profile == "ccb" and (not ccb or not any(re.search(r"\bCCB\b|和而不同", t, re.I) for t in titles)):
+    if profile == "ccb" and (not ccb or not any(component_role(p, "ccb") == "core" for p in packages)):
         raise ValueError("当前数据库与存档未同时确认 CCB，拒绝采集")
     if profile == "bbg" and (not balanced or ccb
-            or not any(re.search(r"better\s+balanced\s+game|\bBBG\b", t, re.I) for t in titles)
-            or any(re.search(r"\bCCB\b|和而不同", t, re.I) for t in titles)):
+            or not any(component_role(p, "bbg") == "core" for p in packages)
+            or any(component_role(p, "ccb") == "core" for p in packages)):
         raise ValueError("当前数据库与存档未同时确认独立 BBG，或混入 CCB，拒绝采集")
     if profile not in ("vanilla", "ccb", "bbg"):
         raise ValueError("未知产出规则集")
@@ -193,8 +197,7 @@ def mod_sources(packages, localization):
                     if file.exists():
                         scripts.append({"path": entry.text,
                                         "sha256": hashlib.sha256(file.read_bytes()).hexdigest()})
-            sources.append({"id": doc.get("id"), "name": localized.get(title, title),
-                            "version": doc.findtext("Properties/Version") or doc.get("version"),
+            sources.append({**manifest_metadata(doc), "name": localized.get(title, title),
                             "scripts": scripts})
     return sources
 
@@ -250,18 +253,17 @@ def build(gameplay, localization, game_root, out=None, *, profile="vanilla", sav
         gameplay_packages = [p for p in packages if not (
             _official_package(p["key"], official) or _official_package(p["name"], official))]
         def expected_package(p):
+            if component_role(p, profile):
+                return True
             if profile == "ccb":
-                return bool(re.search(r"\bCCB\b|和而不同", clean_title(p["name"]), re.I))
+                return bool(CCB_TITLE_RE.search(clean_title(p["name"])))
             return bool(re.search(r"better\s+balanced\s+game|\bBBG\b", clean_title(p["name"]), re.I)
                         or p["key"] in ("LOC_BBM_TITLE", "LOC_MPH_TITLE"))
         if any(not expected_package(p) for p in gameplay_packages):
             raise ValueError("存档包含额外且未核验的游戏模组，拒绝覆盖规则快照")
         document["enabledPackages"] = gameplay_packages
         document["sources"] = sources if sources is not None else mod_sources(packages, localization)
-        core = r"(?:CCB|和而不同)\s+v?\d" if profile == "ccb" else r"(?:Better Balanced Game|BBG)\s+v?\d"
-        from civ6replay.database_versions import CORE_IDS
-        if not any(re.match(core, s["name"]) or s.get("id", "").lower() == CORE_IDS[profile]
-                   for s in document["sources"]):
+        if not any(component_role(s, profile) == "core" for s in document["sources"]):
             raise ValueError(f"未找到已启用 {profile.upper()} 核心的版本来源")
     document["fingerprint"] = hashlib.sha256(json.dumps(
         document, sort_keys=True, ensure_ascii=False).encode()).hexdigest()

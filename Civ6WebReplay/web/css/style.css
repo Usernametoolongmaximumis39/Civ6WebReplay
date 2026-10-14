@@ -503,7 +503,7 @@ body.panel-dragging { cursor: grabbing; }
 .progress span { color: var(--muted); }
 
 /* Standalone comparison: only the data grid and turn navigation are visible. */
-.compare-page .topbar > :not(.turn-controls),
+.compare-page .topbar > :not(.turn-controls):not(.language-select-wrap),
 .compare-page #map, .compare-page #tooltip, .compare-page #left-panel,
 .compare-page #tile-panel,
 .compare-page #right-panel > .panel-head, .compare-page #hud-tabs, .compare-page #hud-sort,
@@ -517,6 +517,16 @@ body.panel-dragging { cursor: grabbing; }
   bottom: 18px; width: min(380px, calc(100% - 36px)) !important; height: auto !important;
   z-index: 55; border: 1px solid var(--border); border-radius: 6px; box-shadow: 0 12px 30px #0008; }
 .compare-page #city-panel .panel-head { cursor: default; }
+html[lang="en"] .picker { flex-wrap: wrap; }
+html[lang="en"] .layers { gap: 6px; }
+html[lang="en"] .layers label { min-width: 0; overflow-wrap: anywhere; }
+html[lang="en"] .kv .k { overflow-wrap: anywhere; }
+html[lang="en"] .cmp-label { overflow-wrap: anywhere; }
+html[lang="en"] .cmp-label > span:first-of-type { flex: 1; min-width: 0; white-space: normal; }
+.language-select-wrap { display: inline-flex; align-items: center; gap: 5px; color: var(--muted); }
+.language-icon { width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor;
+  stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.language-select { max-width: 110px; }
 .compare-page .mil-line[data-i] { cursor: default; }
 
 /* --- v0.27 --- */

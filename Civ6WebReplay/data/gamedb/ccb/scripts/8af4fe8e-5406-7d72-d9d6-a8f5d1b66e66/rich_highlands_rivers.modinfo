@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- <Mod id="0000fe8e-5406-7d72-d9d6-a8f5d1b66e66" version="107"> -->
+<Mod id="8af4fe8e-5406-7d72-d9d6-a8f5d1b66e66" version="201">
+    <Properties>
+        <!-- <Name>CCB [COLOR:ResCultureLabelCS]多河地图包[ENDCOLOR] WIP</Name> -->
+        <Name>CCB [COLOR:ResCultureLabelCS]多河地图包[ENDCOLOR] 2.1</Name>
+        <Description>
+为 CCB Map 增加了 2 张新地图：多河高地、破碎太初
+[NEWLINE][ICON_BULLET] 多河高地：在富饶高地的基础上，增加了更加分散的湖泊，减小海洋面积，增加河流密集度，降低了山脉密度；
+[NEWLINE][ICON_BULLET] 破碎太初：在联通轴线的基础上，采用了更富饶的产出和更破碎的大陆。
+        </Description>
+        <Created>1</Created>
+        <Authors>Vanadium, Opencode</Authors>
+        <SpecialThanks>BBM</SpecialThanks>
+        <CompatibleVersions>1.2,2.0</CompatibleVersions>
+    </Properties>
+
+	
+	<Dependencies>
+        <Mod id="8af4fe8e-5406-7d72-d9d6-a8f5d1b66e10" title="CCB Map"/>
+		<Mod id="1B28771A-C749-434B-9053-D1380C553DE9" title="Expansion: Rise and Fall"/>
+		<Mod id="4873eb62-8ccc-4574-b784-dda455e74e68" title="Expansion: Gathering Storm" />
+	</Dependencies>
+
+	
+	<References>
+        <Mod id="8af4fe8e-5406-7d72-d9d6-a8f5d1b66e30" title="CCB Expanded Release"/>
+        <Mod id="8af4fe8e-5406-7d72-d9d6-a8f5d1b66e34" title="CCB Expanded WIP"/>
+        <Mod id="8af4fe8e-5406-7d72-d9d6-a8f5d1b66e38" title="CCB Expanded beta"/>
+        <Mod id="8af4fe8e-5406-7d72-d9d6-a8f5d1b66e00" title="CCB"/>
+        <Mod id="8af4fe8e-5406-7d72-d9d6-a8f5d1b66e05" title="CCB beta"/>
+        <Mod id="8af4fe8e-5406-7d72-d9d6-a8f5d1b66e08" title="CCB WIP"/>
+	</References>
+
+    
+
+	<ActionCriteria>
+		<Criteria id="ccbv_no_tundra">
+			<ConfigurationValueMatches>
+				<Group>Map</Group>
+				<ConfigurationId>CCBV_TUNDRA_SETTINGS_ARGS</ConfigurationId>
+				<Value>2</Value>
+			</ConfigurationValueMatches>
+		</Criteria>
+
+		<Criteria id="ccbv_all_coast_bias">
+			<ConfigurationValueMatches>
+				<Group>Game</Group>
+				<ConfigurationId>CCBV_ALL_COAST_BIAS_ARGS</ConfigurationId>
+				<Value>1</Value>
+			</ConfigurationValueMatches>
+		</Criteria>
+	</ActionCriteria>
+
+    <FrontEndActions>
+        <UpdateDatabase id="BBS_SETTINGS">
+            <File>config/config.xml</File>
+        </UpdateDatabase>
+        <UpdateText id="BBS_SETTINGS_TEXTS">
+            <File>config/text.xml</File>
+        </UpdateText>
+    </FrontEndActions>
+
+    <InGameActions>
+        <ImportFiles id="Map_BBS">
+            <Properties>
+                <LoadOrder>1000</LoadOrder>
+            </Properties>
+            <File>script/rich_highlands_rivers.lua</File>
+            <File>script/broken_primordial.lua</File>
+        </ImportFiles>
+
+        <UpdateText id="BBS_Gameplay_test">
+            <File>config/text.xml</File>
+        </UpdateText>
+
+        <UpdateDatabase>
+            <Properties>
+                <LoadOrder>100000000</LoadOrder>
+            </Properties>
+			<Criteria>ccbv_no_tundra</Criteria>
+            <File>sql/bias.sql</File>
+        </UpdateDatabase>
+
+        <UpdateDatabase>
+            <Properties>
+                <LoadOrder>100000000</LoadOrder>
+            </Properties>
+			<Criteria>ccbv_all_coast_bias</Criteria>
+            <File>sql/bias_all_coast.sql</File>
+        </UpdateDatabase>
+    </InGameActions>
+
+
+    <Files>
+            <File>script/rich_highlands_rivers.lua</File>
+            <File>script/broken_primordial.lua</File>
+            <File>config/text.xml</File>
+            <File>config/config.xml</File>
+            <File>sql/bias.sql</File>
+            <File>sql/bias_all_coast.sql</File>
+    </Files>
+</Mod>

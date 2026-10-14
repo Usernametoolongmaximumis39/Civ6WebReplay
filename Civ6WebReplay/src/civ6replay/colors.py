@@ -4,9 +4,9 @@ from __future__ import annotations
 from functools import lru_cache
 import json
 from pathlib import Path
-import re
 
 from .hash import crc32_type
+from .mod_identity import balance_profile
 
 PLAYER_COLORS_JSON = Path(__file__).resolve().parents[2] / "data/shared/player-colors.json"
 
@@ -23,12 +23,7 @@ def _shared_colors():
 
 def player_color_profile(mods=()) -> str:
     """CCB takes precedence when its save also lists a BBG dependency."""
-    titles = "\n".join(str(title) for title in mods)
-    if re.search(r"\bccb\b|和而不同", titles, re.I):
-        return "ccb"
-    if re.search(r"\bbbg\b|better\s+balanced", titles, re.I):
-        return "bbg"
-    return "shared"
+    return balance_profile(mods, default="shared", include_expansions=True)
 
 
 def leader_color_pair(leader: int, color_index: int = 0, *, profile: str = "shared"):

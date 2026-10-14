@@ -14,8 +14,9 @@ import re
 from pathlib import Path
 
 from .hash import crc32_type as H, TYPE_CIV_CITY_STATE
-from .model import NONE_U32
-from .mods import balance_mod
+from .model import NONE_U32, governor_assigned_to
+from .mod_identity import balance_profile
+from .database_versions import component_role
 from .gamedb import get_gamedb
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -412,7 +413,7 @@ class _Turn:
                        for city_id, bt in self.player_buildings[p.iPlayer]
                        for mid in rules.building_mods.get(bt, ())]
         for g in p.governors:
-            if g.city == c.id:
+            if governor_assigned_to(g, p.iPlayer, c.id):
                 mids = list(rules.governor_mods.get(self.name(g.type), ()))
                 mids += [mid for promo in g.promotions
                          for mid in rules.governor_promotion_mods.get(self.name(promo), ())]
@@ -459,6 +460,9 @@ class _Turn:
                 yields[yh] += amount
                 if count:
                     sources.append({"rule": row["ID"], "label": self.source_label(row),
+                                    "labelType": next((row[field] for field in
+                                        ("AdjacentTerrain", "AdjacentFeature", "AdjacentImprovement", "AdjacentDistrict")
+                                        if row.get(field)), None),
                                     "origin": row.get("origin", "区域规则"), "yield": yh,
                                     "amount": amount, "count": count, "required": required,
                                     "rate": rate, "tiles": matches})
@@ -502,14 +506,11 @@ def calculate_adjacencies(state, *, wrap_x=None, rules=None, include_sources=Fal
     unavailable = {id(d): None for d in records}
     packages = state.modPackages or [{"key": m, "name": m} for m in state.mods]
     # CCB's merged database takes precedence if a dependency also names BBG.
-    is_ccb = any(re.search(r"\bCCB\b|和而不同", p["name"], re.I) for p in packages)
-    mode = "CCB" if is_ccb else balance_mod(state.mods) or state.balanceMod
-    profile = {"CCB": "ccb", "BBG": "bbg"}.get(mode, "official")
+    profile = balance_profile(packages, default=(state.balanceMod or "official").lower())
     rules = rules or (get_rules(profile) if profile != "official" else get_rules())
     if (not rules or state.unsupported
             or rules.profile != profile
-            or (profile == "ccb" and not any(re.match(r"^CCB\s+\d", m["name"]) for m in packages))
-            or (profile == "bbg" and not any(re.search(r"^Better\s+Balanced\s+Game\b|^BBG\s+\d", m["name"], re.I) for m in packages))
+            or (profile in ("ccb", "bbg") and not any(component_role(m, profile) == "core" for m in packages))
             or any(not _profile_package(m, rules) for m in packages)
             or any(getattr(e, "section", "") in ("map", "players_info", "links") for e in state.layerErrors)
             or state.width <= 0 or state.height <= 0 or len(state.tiles) != state.width * state.height):
