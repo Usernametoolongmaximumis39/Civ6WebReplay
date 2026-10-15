@@ -571,6 +571,10 @@ html[lang="en"] .cmp-label > span:first-of-type { flex: 1; min-width: 0; white-s
 button.active { border-color: var(--accent); color: var(--accent); }
 /* 共享期间的「刷新存档 / 存档目录」：变灰但**不 disabled** —— 点一下会在顶部横幅里
    说明为什么按不动（disabled 的按钮点上去一点反馈都没有，最难排查） */
+.save-import-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+#save-drop-overlay { position: fixed; inset: 10px; z-index: 200; pointer-events: none;
+  display: flex; align-items: center; justify-content: center; border: 3px dashed var(--accent);
+  border-radius: 12px; background: rgba(14,19,27,.94); color: var(--accent); font-size: 22px; }
 button.btn-blocked { opacity: .5; }
 button.btn-blocked:hover { border-color: var(--border); }
 .share-text { width: 100%; margin-top: 8px; resize: vertical; min-height: 58px;

@@ -13,9 +13,11 @@ The index is built from two sources:
 
 Usage::
 
-    python tools/vendor_icons.py [--source CivVIReplay_v6.0/image]
+    python -B data/tools/vendor_icons.py [--source CivVIReplay_v6.0/image]
 """
 from __future__ import annotations
+
+from tool_paths import ROOT, DEV, WORKSPACE
 
 import argparse
 import json
@@ -23,7 +25,7 @@ import shutil
 import sqlite3
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+
 DEFAULT_SOURCE = ROOT.parent / "CivVIReplay_v6.0" / "image"
 OUT = ROOT / "assets" / "icons"
 GAMEDB = ROOT / "data" / "gamedb" / "vanilla" / "gamedb.sqlite"

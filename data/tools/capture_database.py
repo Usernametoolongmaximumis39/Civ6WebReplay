@@ -1,6 +1,8 @@
 """BBG / CCB capture and restore; the BAT is the deliberately separate UI."""
 from __future__ import annotations
 
+from tool_paths import ROOT, DEV, WORKSPACE
+
 import argparse
 from contextlib import closing
 from datetime import datetime, timedelta, timezone
@@ -17,12 +19,12 @@ import time
 import xml.etree.ElementTree as ET
 from uuid import UUID
 
-ROOT = Path(__file__).resolve().parents[1]
+
 sys.path.insert(0, str(ROOT / "src"))
 from civ6replay import container, header
 from civ6replay.binary import ParseError
 from civ6replay.adjacency import AdjacencyRules, _official_package
-from civ6replay.database_maintenance import (check_profile, create_backup, data_lock,
+from database_maintenance import (check_profile, create_backup, data_lock,
     delete_backup, list_backups, recover, replace_data, restore, write_json)
 from civ6replay.database_versions import (CORE_IDS, EXPANSION_IDS, clean_title,
     component_role, component_versions, format_versions)
@@ -410,4 +412,4 @@ def main(argv=None):
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit("数据库采集已停用；本文件仅作开发归档，等待重做。")

@@ -1,6 +1,8 @@
 """Exclusive maintenance, versioned backups and recoverable data replacement."""
 from __future__ import annotations
 
+from tool_paths import ROOT, DEV, WORKSPACE
+
 from contextlib import contextmanager
 from datetime import datetime, timezone
 import hashlib
@@ -10,7 +12,7 @@ from pathlib import Path
 import shutil
 import uuid
 
-from .database_versions import ROOT, database_versions
+from civ6replay.database_versions import ROOT, database_versions
 
 
 def check_profile(profile):

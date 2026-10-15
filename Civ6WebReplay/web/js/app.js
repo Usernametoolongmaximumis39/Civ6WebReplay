@@ -127,9 +127,9 @@
       right: { x: 0, y: 0, w: 416, h: 0, dock: "right", hidden: false },
       // x: null = "top-right of the uncovered map"; the city panel starts right
       // under the tile panel
-      tile: { x: null, y: PANEL_EDGE, w: 340, h: tileH, dock: null, hidden: true },
+      tile: { x: null, y: PANEL_EDGE, w: 340, h: tileH, dock: null, hidden: false },
       city: { x: null, y: PANEL_EDGE + tileH + PANEL_EDGE, w: 340, h: tileH,
-              dock: null, hidden: true },
+              dock: null, hidden: false },
     };
   }
 
@@ -324,10 +324,7 @@
     $("civ-hud-minimize").onclick = () => setCivHudMinimized(true);
     $("civ-hud-restore").onclick = () => setCivHudMinimized(false);
     syncHudTabs();
-    // a fresh page has no selected tile / city yet, so the two content panels
-    // always start closed (their size / dock are still restored)
-    panels.tile.hidden = true;
-    panels.city.hidden = true;
+    // Keep layout visibility even before a tile / city is selected.
     applyPanels();
     await loadReplayList();
     await initShare();
@@ -1019,7 +1016,7 @@
     await loadReplayList();
   }
 
-  async function loadReplayList() {
+  async function loadReplayList(selection = null) {
     const list = await getReplayJSON("/api/replays");
     const sel = $("replay-select"); sel.innerHTML = "";
     if (!list.length) {
@@ -1027,7 +1024,7 @@
       resetReplayState();
       seed = null;
       sel.innerHTML = L("<option>未找到存档</option>");
-      setBanner(L("未在默认目录找到 .Civ6Save 存档。可用 --save-dir 指定目录。"), true);
+      setBanner(L("未找到 .Civ6Save 存档。点击「打开存档」或拖入存档文件、文件夹。"), true);
       return;
     }
     for (const r of list) {
@@ -1040,11 +1037,12 @@
     }
     // The URL follows the displayed replay/turn, including after a rescan.
     const params = new URLSearchParams(location.search);
-    const wantSeed = parseInt(params.get("seed") || "", 10);
+    const wantSeed = selection ? selection.seed : parseInt(params.get("seed") || "", 10);
     const wanted = list.find((r) => r.seed === wantSeed);
     if (wanted) sel.value = String(wanted.seed);
-    const requestedTurn = wanted || !params.has("seed") ? params.get("turn") || "" : "";
-    loadReplay(wanted ? wanted.seed : list[0].seed, requestedTurn);
+    const requestedTurn = selection ? String(selection.turn)
+      : wanted || !params.has("seed") ? params.get("turn") || "" : "";
+    return loadReplay(wanted ? wanted.seed : list[0].seed, requestedTurn);
   }
 
   function setBanner(msg, err) {
@@ -1106,7 +1104,6 @@
     $("tile-title").textContent = L("格子");
     $("city-title").textContent = L("城市");
     $("tooltip").classList.add("hidden");
-    panels.tile.hidden = true;
     applyPanels();
     fillFogPlayers([]);
     const slider = $("turn-slider");
@@ -1465,6 +1462,15 @@
       if (seq !== replaySeq) return;
       Object.assign(names, res);
     }
+    // Replay-local aliases also feed the map's city religion icons. Reapply
+    // after name requests so raw unknown hashes cannot overwrite the aliases.
+    for (const [h, fallback] of Object.entries((staticInfo && staticInfo.religionFallbacks) || {})) {
+      names[h] = {name: unknownReligionName(fallback.number), type: "", icon: fallback.icon};
+    }
+  }
+
+  function unknownReligionName(number) {
+    return (document.documentElement.lang === "en" ? "Unknown Religion " : "未知宗教") + number;
   }
 
   function nameOf(hash) {
@@ -1733,7 +1739,7 @@
     const rel = founded.length
       ? founded.map((r) => {
           const ic = iconOf(r.symbol);
-          const name = r.name || nameOrDash(r.symbol);
+          const name = religionName(r.symbol);
           const beliefs = r.beliefs || [];
           const creed = beliefs.length
             ? beliefs.map((h) => `<span class="chip">${nameOrDash(h)}</span>`).join("")
@@ -2516,15 +2522,16 @@
   // --- v0.28 金币流水账（右栏文明卡「金币」明细） ---------------------------
   // 三个指标：打钱总数（付出去）/ 吸钱总数（收进来）/ 净金币交易（两者之差）。
   // 数据来自 /api/gold —— 它读的是**游戏日志**（DiplomacyDeals.log /
-  // GameCore.log / Player_Stats.csv），不是存档；口径与 elaphantguys_gold_script
-  // 一致（复利 1.036/回合）。窗口末回合跟随当前回合，范围有全期 / 近5t / 近10t /
+  // GameCore.log / Player_Stats.csv），不是存档；指标沿用 elaphantguys_gold_script
+  // 的复利 1.036/回合。窗口末回合跟随当前回合，范围有全期 / 近5t / 近10t /
   // 近30t 四档，两项偏好在 localStorage 里记忆。
   const LEDGER_STORE = "civ6replay.ledger";
   let LEDGER_RANGES;
   let ledgerRange = "all", ledgerWeighted = false;
   try {
     const saved = JSON.parse(localStorage.getItem(LEDGER_STORE) || "null") || {};
-    if (LEDGER_RANGES.some((r) => r[0] === saved.range)) ledgerRange = saved.range;
+    // 翻译表在 init() 才建立，先用稳定的范围键恢复偏好。
+    if (["all", "5", "10", "30"].includes(saved.range)) ledgerRange = saved.range;
     ledgerWeighted = !!saved.weighted;
   } catch (e) {
       if (e.name === "AbortError") return; /* 坏数据就用默认值 */ }
@@ -3420,8 +3427,108 @@
 
   // --- v0.25 (文档 C5) save-directory modal --------------------------------
   let savedirDefault = "", savedirParent = null;
+  let saveSourceBusy = false;
+
+  function saveSourceLocked() {
+    return !shareLocal || shareLockNote(L("打开存档")) || saveSourceBusy;
+  }
+
+  function setSaveSourceBusy(on) {
+    saveSourceBusy = on;
+    for (const id of ["savedir-ok", "savedir-pick", "savedir-file", "savedir-folder"])
+      $(id).disabled = on;
+  }
+
+  async function importSaveFiles(files, kind) {
+    if (saveSourceLocked()) return;
+    const saves = Array.from(files).filter(file => /\.civ6save$/i.test(file.name));
+    if (!saves.length) { setBanner(L("未找到 .Civ6Save 存档。"), true); return; }
+    setSaveSourceBusy(true);
+    setBanner(L("正在读取存档…"));
+    try {
+      const form = new FormData();
+      for (const file of saves) form.append("saves", file, file.name);
+      const response = await fetch(window.Civ6I18n.url("/api/saves/import?kind=" + kind),
+        { method: "POST", body: form });
+      const body = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(body.detail || String(response.status));
+      $("savedir-modal").classList.add("hidden");
+      await loadReplayList(body.selection);
+    } catch (error) {
+      setBanner(L("存档加载失败：") + error.message, true);
+    } finally {
+      setSaveSourceBusy(false);
+    }
+  }
+
+  // A directory reader can return only one batch per call (often 100 entries).
+  async function collectSaveEntry(entry, files) {
+    if (entry.isFile) {
+      if (/\.civ6save$/i.test(entry.name))
+        files.push(await new Promise((resolve, reject) => entry.file(resolve, reject)));
+    } else if (entry.isDirectory) {
+      const reader = entry.createReader();
+      for (;;) {
+        const batch = await new Promise((resolve, reject) => reader.readEntries(resolve, reject));
+        if (!batch.length) break;
+        for (const child of batch) await collectSaveEntry(child, files);
+      }
+    }
+  }
+
+  function wireSaveDrop() {
+    let depth = 0;
+    const overlay = $("save-drop-overlay");
+    const isFiles = event => Array.from(event.dataTransfer?.types || []).includes("Files");
+    document.addEventListener("dragenter", event => {
+      if (!isFiles(event)) return;
+      event.preventDefault(); ++depth;
+      if (shareLocal && !saveSourceBusy && !shareState?.enabled) overlay.classList.remove("hidden");
+    });
+    document.addEventListener("dragover", event => {
+      if (!isFiles(event)) return;
+      event.preventDefault();
+      event.dataTransfer.dropEffect = shareLocal && !saveSourceBusy && !shareState?.enabled ? "copy" : "none";
+    });
+    document.addEventListener("dragleave", event => {
+      if (!isFiles(event)) return;
+      if (--depth <= 0) { depth = 0; overlay.classList.add("hidden"); }
+    });
+    window.addEventListener("blur", () => { depth = 0; overlay.classList.add("hidden"); });
+    document.addEventListener("drop", async event => {
+      if (!isFiles(event)) return;
+      event.preventDefault(); depth = 0; overlay.classList.add("hidden");
+      if (saveSourceLocked()) return;
+      // Capture both entries and fallback files before yielding: the browser
+      // protects the drag data store as soon as the drop handler returns.
+      const items = Array.from(event.dataTransfer.items || []).filter(item => item.kind === "file");
+      const entries = items.map(item => item.webkitGetAsEntry?.());
+      const fallback = Array.from(event.dataTransfer.files);
+      try {
+        const files = [];
+        const useEntries = entries.length && entries.every(Boolean);
+        if (useEntries) for (const entry of entries) await collectSaveEntry(entry, files);
+        else files.push(...fallback);
+        const directory = entries.some(entry => entry?.isDirectory) || files.length > 1;
+        await importSaveFiles(files, directory ? "directory" : "file");
+      } catch (error) { setBanner(L("存档加载失败：") + error.message, true); }
+    });
+  }
 
   function wireSaveDirModal() {
+    wireSaveDrop();
+    $("savedir-input").addEventListener("keydown", event => {
+      if (event.key === "Enter") confirmSaveDir();
+    });
+    for (const [button, input, kind] of [["savedir-file", "save-file-input", "file"],
+      ["savedir-folder", "save-folder-input", "directory"]]) {
+      $(button).onclick = () => { if (!saveSourceLocked()) $(input).click(); };
+      $(input).onchange = async () => {
+        const files = Array.from($(input).files);
+        $(input).value = "";
+        if (files.length) await importSaveFiles(files, kind);
+      };
+    }
     $("savedir-close").onclick = () => $("savedir-modal").classList.add("hidden");
     $("savedir-cancel").onclick = () => $("savedir-modal").classList.add("hidden");
     $("savedir-ok").onclick = confirmSaveDir;
@@ -3477,7 +3584,7 @@
       $("savedir-current").textContent = cur.current || "—";
       $("savedir-default").textContent = savedirDefault || "—";
       $("savedir-input").value = cur.current || "";
-      await loadSaveDirTree(cur.current);
+      await loadSaveDirTree(cur.browse || cur.current);
     } catch (e) {
       if (e.name === "AbortError") return;
       showSaveDirError(L("无法读取目录信息：") + e.message);
@@ -3544,25 +3651,27 @@
   }
 
   async function confirmSaveDir() {
-    const revision = languageSeq;
+    if (saveSourceLocked()) return;
     const path = $("savedir-input").value.trim();
     if (!path) { showSaveDirError(L("请输入或从目录树选择路径")); return; }
+    setSaveSourceBusy(true);
     try {
       const resp = await fetch(window.Civ6I18n.url("/api/savedir"), {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ path: path }),
       });
       const body = await resp.json().catch(() => ({}));
-      if (revision !== languageSeq) return;
       if (!resp.ok) {
         showSaveDirError(body.detail || (L("切换失败（HTTP ") + resp.status + "）"));
         return;
       }
       $("savedir-modal").classList.add("hidden");
-      await loadReplayList();
+      await loadReplayList(body.selection);
     } catch (e) {
       if (e.name === "AbortError") return;
       showSaveDirError(L("切换失败：") + e.message);
+    } finally {
+      setSaveSourceBusy(false);
     }
   }
 
@@ -3638,7 +3747,7 @@
     // 锁定用的是「变灰但仍可点」，不能用 disabled —— 那样点上去一点反馈都没有
     for (const id of ["btn-refresh", "btn-savedir"]) $(id).classList.toggle("btn-blocked", on);
     $("btn-refresh").title = on ? L("共享中已锁定（点击看原因）") : L("重新扫描存档");
-    $("btn-savedir").title = on ? L("共享中已锁定（点击看原因）") : L("选择存档目录");
+    $("btn-savedir").title = on ? L("共享中已锁定（点击看原因）") : L("打开存档文件或文件夹");
     // 访客页面没有共享开关，自然也不给「链接」入口
     $("btn-share-link").classList.toggle("hidden", !on || !shareLocal);
     if (on) $("savedir-modal").classList.add("hidden");
@@ -3993,11 +4102,12 @@
     tip.classList.remove("hidden");
   }
 
-  // religion hash -> display name: a founded religion may carry a custom name
-  // (the current turn's religions list, falling back to staticInfo), otherwise
-  // the identity snapshot wins.
+  // Replay aliases take precedence for unknown religions; recognized religions
+  // retain the current turn's custom name or their identity name.
   function religionName(hash) {
     const h = hash >>> 0;
+    const fallback = staticInfo && staticInfo.religionFallbacks && staticInfo.religionFallbacks[hashStr(h)];
+    if (fallback) return unknownReligionName(fallback.number);
     const found = religionsNow().find((r) => (r.symbol >>> 0) === h);
     return (found && found.name) ? found.name : nameOf(h);
   }

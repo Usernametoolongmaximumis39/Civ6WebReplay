@@ -1,6 +1,8 @@
 """List captured non-official TYPEs and their source evidence; never edit game data."""
 from __future__ import annotations
 
+from tool_paths import ROOT, DEV, WORKSPACE
+
 import argparse
 from collections import Counter, defaultdict
 import hashlib
@@ -12,7 +14,7 @@ import xml.etree.ElementTree as ET
 
 from build_loc import WORKSHOP_ROOTS, _harvest, _iter_base_text, _iter_dlc_text, default_game_dir
 
-ROOT = Path(__file__).resolve().parents[1]
+
 ENGINE_KINDS = {"KIND_COLLECTION", "KIND_EFFECT", "KIND_REQUIREMENT"}
 TOKEN = re.compile(r"\b[A-Z][A-Z0-9]*(?:_[A-Z0-9]+)+\b")
 SQL_STR = re.compile(r"'((?:[^']|'')*)'")
@@ -145,7 +147,7 @@ def source_inventory(capture):
 
 
 def audit(profile, game_root, output, directory=None):
-    directory = Path(directory).resolve() if directory else ROOT / "data/gamedb" / profile
+    directory = Path(directory).resolve() if directory else WORKSPACE / "data/gamedb" / profile
     capture = json.loads((directory / "capture.json").read_text(encoding="utf-8"))
     official, official_files = official_inventory(game_root)
     sources, labels = source_inventory(capture)
@@ -216,15 +218,15 @@ def audit(profile, game_root, output, directory=None):
                          "已找到 TYPE 注册语句" if evidence else "未定位注册语句，待核对"})
     counts = dict(sorted(Counter(r["kind"] for r in rows).items()))
     doc = {"profile": profile, "capturedAt": capture["capturedAt"], "packages": capture["packages"],
-           "snapshotDirectory": directory.relative_to(ROOT).as_posix(),
+           "snapshotDirectory": directory.relative_to(WORKSPACE).as_posix(),
            "method": "Captured Types minus official Base/DLC declarations and references; exclude baseline engine types without mod registrations",
            "gameplaySha256": hashlib.sha256((directory / "gameplay.sqlite").read_bytes()).hexdigest(),
            "officialFiles": official_files, "counts": counts, "entries": rows, "excludedEngineTypes": excluded}
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(doc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    report = ROOT / "docs" / f"{profile}-additions.md"
+    report = DEV / "docs" / f"{profile}-additions.md"
     lines = [f"# {profile.upper()} 当前采集的新增内容清单", "",
-             f"采集时间：{capture['capturedAt']}。本清单依据 `{(directory / 'gameplay.sqlite').relative_to(ROOT).as_posix()}`，不受当前运行中的游戏影响。", "",
+             f"采集时间：{capture['capturedAt']}。本清单依据 `{(directory / 'gameplay.sqlite').relative_to(WORKSPACE).as_posix()}`，不受当前运行中的游戏影响。", "",
              "对比口径：原版包括游戏本体、官方 DLC、资料片与官方场景；只列新增 TYPE，不列已有内容的数值、效果和名称修改。",
              "项目 vanilla/gamedb.sqlite 已含模组条目，因此以安装目录的官方 XML/SQL 声明与引用为排除依据。",
              "未在官方文件出现的引擎类型，只有同时存在于旧基准且未找到模组注册语句时才排除。",
@@ -259,9 +261,9 @@ def audit(profile, game_root, output, directory=None):
             name = (row["zh"] or row["en"] or "—").replace("|", "\\|").replace("\n", " ")
             lines.append(f"| {name} | `{row['type']}` | `{row['hex']}` | {owners} | {status} | {coverage} |")
         lines.append("")
-    lines += ["## 复核与复现", "", f"机器可读明细：`{output.relative_to(ROOT).as_posix()}`。包含实体行、来源文件与 SHA-256，可供后续 TYPE/贴图适配。", "",
-              f"复现：`python tools/audit_mod_additions.py --profile {profile}" +
-              (f" --snapshot-dir {directory.relative_to(ROOT).as_posix()}" if directory != ROOT / "data/gamedb" / profile else "") +
+    lines += ["## 复核与复现", "", f"机器可读明细：`{output.relative_to(WORKSPACE).as_posix()}`。包含实体行、来源文件与 SHA-256，可供后续 TYPE/贴图适配。", "",
+              f"复现：`python -B data/tools/audit_mod_additions.py --profile {profile}" +
+              (f" --snapshot-dir {directory.relative_to(WORKSPACE).as_posix()}" if directory != WORKSPACE / "data/gamedb" / profile else "") +
               "`。需要本机官方游戏文件与此次采集所启用模组的相同 modinfo 版本。",
               "模组实体表是否存在只表示此次采集已加载定义；不代表这一局地图中实际出现，也不保证在所有模式中可建造。", ""]
     report.write_text("\n".join(lines), encoding="utf-8")
@@ -276,4 +278,4 @@ if __name__ == "__main__":
     parser.add_argument("--out", type=Path)
     parser.add_argument("--snapshot-dir", type=Path, help="Separate capture.json/gameplay.sqlite directory for a read-only additions audit")
     args = parser.parse_args()
-    print(json.dumps(audit(args.profile, args.game_root, args.out or ROOT / "data/gamedb" / args.profile / "additions-audit.json", args.snapshot_dir), ensure_ascii=False, indent=2))
+    print(json.dumps(audit(args.profile, args.game_root, args.out or WORKSPACE / "data/gamedb" / args.profile / "additions-audit.json", args.snapshot_dir), ensure_ascii=False, indent=2))

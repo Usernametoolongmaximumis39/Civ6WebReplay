@@ -3,6 +3,8 @@ from __future__ import annotations
 
 import gzip
 import json
+import logging
+import multiprocessing
 import os
 import re
 import ssl
@@ -11,6 +13,9 @@ import tempfile
 import threading
 import time
 from collections import OrderedDict
+from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor, wait, FIRST_COMPLETED
+from concurrent.futures.process import BrokenProcessPool
+from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Dict, List, Optional, Literal
 
@@ -18,9 +23,12 @@ import httpx
 from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.responses import Response, JSONResponse
 from fastapi.staticfiles import StaticFiles
+from starlette.concurrency import run_in_threadpool
+from starlette.datastructures import UploadFile
 
 from . import share as share_mod
 from .cache import ReplayCache, SCHEMA_VERSION
+from .loading import load_workers, parse_turn, favor_snapshot
 from .tileyields import rules_token, get_rules
 from .adjacency import district_hit_points
 from .gamedb import get_gamedb
@@ -85,8 +93,9 @@ def _steam_ssl_context() -> ssl.SSLContext:
     except Exception:                      # pragma: no cover - exotic platforms
         return ssl.create_default_context()
 
-# Background sequential loader cadence (seconds) between full re-scans.
+# Background loader cadence (seconds) between full re-scans.
 LOADER_INTERVAL = 30
+logger = logging.getLogger(__name__)
 
 
 def _load_mapwrap() -> Dict[str, bool]:
@@ -154,6 +163,32 @@ def _resolve(h, profile: str = "", lang: str = "zh") -> dict:
         "icon": ident.icon(hm, profile) or db.icon(hm),
         "description": text["description"] if text else "",
     }
+
+
+def _religion_fallbacks(state, profile: str) -> dict:
+    """Allocate replay-local display aliases from the final founded-religion catalog.
+
+    The save retains founded religions even after their last city is converted.
+    Use that catalog, rather than the viewed turn, to reserve late-game icons.
+    Never replace gameplay hashes: beliefs and yield rules still use the originals.
+    """
+    used = {_u(r.iSymbol) for r in state.religions}
+    used.update(_u(c.religion) for p in state.players for c in p.cities)
+    used.discard(0xFFFFFFFF)
+    resolved = {h: _resolve(h, profile) for h in used}
+    unknown = sorted(h for h, row in resolved.items()
+                     if row["type"].startswith("0x"))
+    occupied = {row["icon"] for row in resolved.values() if row["icon"]}
+    icons = []
+    for row in sorted(get_identities().entries.values(), key=lambda row: row["type"]):
+        icon = get_identities().icon(row["hash"], profile)
+        if (row.get("kind") == "religion" and row["hash"] not in used
+                and icon and icon not in occupied):
+            icons.append(icon)
+            occupied.add(icon)  # Different TYPEs can share the same icon.
+    return {str(h): {"number": i + 1,
+                     "icon": icons[i] if i < len(icons) else "yield/Faith.png"}
+            for i, h in enumerate(unknown)}
 
 
 def _steam_id(pseudo_with_id: str) -> Optional[str]:
@@ -233,7 +268,7 @@ def fetch_steam_name(steamid: str, *, timeout: float = STEAM_TIMEOUT) -> str:
     url = f"https://steamcommunity.com/profiles/{steamid}?xml=1"
     with httpx.Client(timeout=timeout, follow_redirects=True,
                       verify=_steam_ssl_context(),
-                     headers={"User-Agent": "civ6replay/0.42"}) as client:
+                     headers={"User-Agent": "civ6replay/0.43"}) as client:
         resp = client.get(url)
     if resp.status_code != 200:
         raise RuntimeError(f"HTTP {resp.status_code}")
@@ -544,7 +579,8 @@ def pick_folder(initial: Optional[str] = None, timeout: float = 300.0,
 
 class ReplayManager:
     def __init__(self, save_dir: Optional[str] = None,
-                 cache: Optional[ReplayCache] = None):
+                 cache: Optional[ReplayCache] = None, *, workers: int | None = None):
+        self.workers = load_workers(workers)
         self.save_dir = save_dir
         self.cache = cache or ReplayCache()
         self.infos: List[SaveInfo] = []
@@ -556,14 +592,21 @@ class ReplayManager:
         self._lock = threading.Lock()
         self._scan_lock = threading.RLock()
         self._parse_locks: dict = {}
+        self._closed = threading.Event()
+        self._pool_lock = threading.Lock()
+        self._work_pool = None
+        self._process_pool = None
         # v0.39: 「不支持」判定按存档文件缓存（``(path, mtime, size)`` -> verdict）
         self._verdicts: Dict[tuple, Optional[dict]] = {}
         self._verdict_lock = threading.Lock()
+        # Browser uploads are session copies kept beside the selected cache.
+        # Keep old copies alive while cancelled loader threads finish reading.
+        self._imports: list[tempfile.TemporaryDirectory] = []
         self.refresh()
 
     @property
     def effective_save_dir(self) -> str:
-        """The directory being scanned (session setting or the default)."""
+        """The file or directory being read (session setting or the default)."""
         return str(self.save_dir or default_save_dir())
 
     def set_save_dir(self, path: str) -> None:
@@ -573,8 +616,10 @@ class ReplayManager:
         ``Documents\\My Games\\Sid Meier's Civilization VI\\Saves\\Multi\\auto``.
         """
         target = Path(path)
-        if not target.is_dir():
-            raise ValueError(f"目录不存在：{path}")
+        if not target.exists():
+            raise ValueError(f"路径不存在：{path}")
+        if not target.is_dir() and not (target.is_file() and target.suffix.lower() == ".civ6save"):
+            raise ValueError("请选择 .Civ6Save 文件或存档文件夹。")
         with self._scan_lock:
             with self._lock:
                 for stop in self._loader_stops.values():
@@ -582,13 +627,45 @@ class ReplayManager:
                 self.save_dir = str(target.resolve())
             self.refresh()
 
+    def import_saves(self, uploads: list[UploadFile], kind: str) -> dict:
+        """Copy browser-selected saves into an isolated session workspace."""
+        saves = [upload for upload in uploads
+                 if Path(upload.filename or "").suffix.lower() == ".civ6save"]
+        if not saves:
+            raise ValueError("未找到 .Civ6Save 存档。")
+        if kind == "file" and len(saves) != 1:
+            raise ValueError("请选择一个 .Civ6Save 文件。")
+        workspace = tempfile.TemporaryDirectory(prefix="import-", dir=self.cache.path.parent)
+        root = Path(workspace.name)
+        try:
+            for index, upload in enumerate(saves):
+                # Never trust multipart filenames as paths; nested directories
+                # and duplicate basenames receive distinct local filenames.
+                target = root / f"{index:06d}.Civ6Save"
+                with target.open("wb") as output:
+                    while chunk := upload.file.read(1024 * 1024):
+                        output.write(chunk)
+            self.set_save_dir(str(target if kind == "file" else root))
+        except BaseException:
+            workspace.cleanup()
+            raise
+        self._imports.append(workspace)
+        return self.source_result()
+
+    def source_result(self) -> dict:
+        single = Path(self.effective_save_dir).is_file()
+        info = self.infos[0] if single and self.infos else None
+        return {"ok": True, "current": self.effective_save_dir,
+                "saves": len(self.infos), "kind": "file" if single else "directory",
+                "selection": {"seed": info.seed, "turn": info.turn} if info else None}
+
     def refresh(self, stop: Optional[threading.Event] = None) -> None:
         # A scan started by an old loader must never publish the previous folder
         # after a directory switch, or restart its cancelled loader.
         with self._scan_lock:
-            if stop is not None and stop.is_set():
+            if self._closed.is_set() or (stop is not None and stop.is_set()):
                 return
-            infos = discover(self.save_dir, self.cache)
+            infos = discover(self.save_dir, self.cache, workers=self.workers)
             groups = group_by_seed(infos)
             with self._lock:
                 self.infos, self.groups = infos, groups
@@ -606,7 +683,45 @@ class ReplayManager:
             return self._mapwrap[map_key]
         return True
 
-    # --- background sequential loader -------------------------------------
+    # --- background parallel loader ---------------------------------------
+    def close(self) -> None:
+        """Stop scheduling, drain active parses, then release imported files."""
+        with self._scan_lock:
+            with self._lock:
+                self._closed.set()
+                for stop in self._loader_stops.values():
+                    stop.set()
+                threads = list(self._loaders.values())
+        for thread in threads:
+            thread.join()
+        with self._pool_lock:
+            work_pool, self._work_pool = self._work_pool, None
+        if work_pool is not None:
+            work_pool.shutdown(wait=True, cancel_futures=True)
+        with self._pool_lock:
+            process_pool, self._process_pool = self._process_pool, None
+        if process_pool is not None:
+            process_pool.shutdown(wait=True, cancel_futures=True)
+        for workspace in self._imports:
+            workspace.cleanup()
+        self._imports.clear()
+
+    def _background_payload(self, save: SaveInfo) -> tuple[bytes, str]:
+        with self._pool_lock:
+            if self._process_pool is None:
+                self._process_pool = ProcessPoolExecutor(
+                    max_workers=self.workers, mp_context=multiprocessing.get_context("spawn"))
+            pool = self._process_pool
+        try:
+            return pool.submit(parse_turn, save.path, self._mapwrap).result()
+        except BrokenProcessPool:
+            # Retire a failed pool; the next scan can retry missing turns.
+            with self._pool_lock:
+                if self._process_pool is pool:
+                    self._process_pool = None
+                    pool.shutdown(wait=False, cancel_futures=True)
+            raise
+
     def unsupported(self, seed: int) -> Optional[dict]:
         """该 seed 最新存档的「不支持」判定（``None`` = 可以正常复盘）。
 
@@ -632,24 +747,61 @@ class ReplayManager:
         return verdict
 
     def advance(self, seed: int, stop: Optional[threading.Event] = None) -> None:
-        """Load every cached-missing turn of ``seed`` in ascending order.
+        """Load missing turns concurrently; publish each completed turn at once.
 
         Cached payloads are only decoded when their favour snapshot is missing.
         """
-        if self.unsupported(seed):
+        if self._closed.is_set() or (stop is not None and stop.is_set()) or self.unsupported(seed):
             return
         tm = self.turn_map(seed)
         status = self.cache.turn_status(seed)
-        for t in sorted(tm):
-            if stop is not None and stop.is_set():
+        missing = iter((t, tm[t]) for t in sorted(tm)
+                       if status.get((t, tm[t].mtime, tm[t].size)) is not True)
+        if self.workers == 1:
+            for t, save in missing:
+                if self._closed.is_set() or (stop is not None and stop.is_set()):
+                    return
+                try:
+                    self._payload_for_save(seed, t, save, stop)
+                except Exception:
+                    logger.exception("Failed to load save %s", save.path)
+            return
+        # One shared budget across games and directory switches. Only one small
+        # window per coordinator is queued, rather than every turn in the game.
+        with self._pool_lock:
+            if self._closed.is_set():
                 return
-            save = tm[t]
-            if status.get((t, save.mtime, save.size)) is True:
-                continue
-            self._payload_for_save(seed, t, save, stop)
+            if self._work_pool is None:
+                self._work_pool = ThreadPoolExecutor(
+                    max_workers=self.workers, thread_name_prefix="civ6-load")
+            pool = self._work_pool
+        pending = {}
+        try:
+            while True:
+                if self._closed.is_set() or (stop is not None and stop.is_set()):
+                    return
+                while len(pending) < self.workers:
+                    item = next(missing, None)
+                    if item is None:
+                        break
+                    t, save = item
+                    future = pool.submit(self._payload_for_save, seed, t, save, stop, background=True)
+                    pending[future] = save
+                if not pending:
+                    return
+                done, _ = wait(pending, timeout=0.1, return_when=FIRST_COMPLETED)
+                for future in done:
+                    save = pending.pop(future)
+                    try:
+                        future.result()
+                    except Exception:
+                        logger.exception("Failed to load save %s", save.path)
+        finally:
+            for future in pending:
+                future.cancel()
 
     def _payload_for_save(self, seed: int, turn: int, save: SaveInfo,
-                          stop: Optional[threading.Event] = None) -> Optional[dict]:
+                          stop: Optional[threading.Event] = None, *, background=False) -> Optional[dict]:
         # Foreground requests and the loader can miss the same row together.
         # Recheck under a per-save lock before doing the expensive save parse;
         # a cold turn must not block requests for other, already-cached turns.
@@ -657,11 +809,16 @@ class ReplayManager:
             key = (seed, turn, save.mtime, save.size)
             lock = self._parse_locks.setdefault(key, threading.Lock())
         with lock:
-            if stop is not None and stop.is_set():
+            if self._closed.is_set() or (stop is not None and stop.is_set()):
                 return None
             cached = self.cache.get_turn(seed, turn, save.mtime, save.size)
+            encoded = None
             if cached is not None:
                 payload = decode_payload(cached)
+                favor = favor_snapshot(payload)
+            elif background:
+                encoded, favor = self._background_payload(save)
+                payload = None
             else:
                 state = self.load_state(save)
                 if stop is not None and stop.is_set():
@@ -669,12 +826,16 @@ class ReplayManager:
                 payload = turn_payload(state, wrap_x=self.wrap_x(state.map_key))
                 if stop is not None and stop.is_set():
                     return None
-                self.cache.put_turn(seed, turn, save.mtime, save.size, encode_payload(payload))
-            if self.cache.get_turn_stats(seed, turn, save.mtime, save.size) is None:
-                favor = {str(p.get("iPlayer")): int(p.get("diploFavor") or 0)
-                         for p in payload.get("players", [])}
-                self.cache.put_turn_stats(seed, turn, json.dumps(favor, separators=(",", ":")),
-                                          save.mtime, save.size)
+                encoded, favor = encode_payload(payload), favor_snapshot(payload)
+            # Serialize cancellation with publication, so a switched directory
+            # cannot publish late results, including its favour snapshot.
+            with self._lock:
+                if self._closed.is_set() or (stop is not None and stop.is_set()):
+                    return None
+                if encoded is not None:
+                    self.cache.put_turn(seed, turn, save.mtime, save.size, encoded)
+                if self.cache.get_turn_stats(seed, turn, save.mtime, save.size) is None:
+                    self.cache.put_turn_stats(seed, turn, favor, save.mtime, save.size)
             return payload
 
     def ensure_loader(self, seed: int) -> None:
@@ -682,7 +843,7 @@ class ReplayManager:
         if not seed:
             return
         with self._lock:
-            if seed not in self.groups:
+            if self._closed.is_set() or seed not in self.groups:
                 return
             th = self._loaders.get(seed)
             stop = self._loader_stops.get(seed)
@@ -842,6 +1003,7 @@ class ReplayManager:
             # v0.25: founded religions (custom names), road display names and
             # the luxury-resource set used by the continent highlight
             "religions": religions,
+            "religionFallbacks": _religion_fallbacks(state, profile),
             "routeNames": _route_names(),
             "luxuryResources": _luxury_resources(profile),
             "strategicResources": _strategic_resources(profile),
@@ -919,12 +1081,20 @@ def _u(v) -> int:
 def create_app(save_dir: Optional[str] = None, *, host: str = "127.0.0.1",
                port: int = 8765, share_port: Optional[int] = None,
                share_bind: Optional[str] = None,
-               share_reuse: Optional[bool] = None) -> FastAPI:
+               share_reuse: Optional[bool] = None, workers: int | None = None) -> FastAPI:
     """``host``/``port`` 是主服务的绑定（共享时用来判断能不能直接复用主端口）。
 
     ``share_bind`` / ``share_port`` 供测试替换共享监听器的绑定与默认端口。
     """
-    app = FastAPI(title="Civ6 WebReplay", version="0.42")
+    @asynccontextmanager
+    async def lifespan(app):
+        try:
+            yield
+        finally:
+            app.state.share.stop()
+            await run_in_threadpool(app.state.manager.close)
+
+    app = FastAPI(title="Civ6 WebReplay", version="0.43", lifespan=lifespan)
     @app.exception_handler(HTTPException)
     async def localized_error(request: Request, exc: HTTPException):
         detail = exc.detail
@@ -941,7 +1111,7 @@ def create_app(save_dir: Optional[str] = None, *, host: str = "127.0.0.1",
                 else:
                     detail = ui(detail, "en")
         return JSONResponse({"detail": detail}, status_code=exc.status_code, headers=exc.headers)
-    manager = ReplayManager(save_dir)
+    manager = ReplayManager(save_dir, workers=workers)
     app.state.manager = manager
     # v0.38: 共享 —— 主进程本来就绑 0.0.0.0 时不再另起监听器，直接复用主端口。
     wildcard = str(host).strip() in ("0.0.0.0", "::", "*")
@@ -1092,7 +1262,7 @@ def create_app(save_dir: Optional[str] = None, *, host: str = "127.0.0.1",
 
         只读**默认日志目录**（存档目录同级的 ``Logs``，或 ``%LOCALAPPDATA%\\Firaxis
         Games\\…\\Logs``），不接受指定目录。日志还必须"刚写过"并且能和 ``seed``
-        对应存档的槽位 / 文明对上，否则返回 ``ok=false`` + ``reason`` —— 前端会把
+        对应存档的主文明槽位 / 文明对上，否则返回 ``ok=false`` + ``reason`` —— 前端会把
         整块金币流水隐藏掉，只留一行提示（隔夜账不再显示）。
 
         ``range`` = ``all | 5 | 10 | 30``，``weighted=1`` 按 1.036^(末回合-该期)
@@ -1105,8 +1275,10 @@ def create_app(save_dir: Optional[str] = None, *, host: str = "127.0.0.1",
             except KeyError:
                 static = None                       # 未知 seed：当"读不到本局信息"处理
             if static:
+                # 开局日志可能保留 MOD 替换前的城邦名；用主文明确认本局。
                 save_players = {int(p["iPlayer"]): str(p.get("civStr") or "")
-                                for p in static.get("players", [])}
+                                for p in static.get("players", [])
+                                if p.get("kind", "major") == "major"}
         report = build_gold_report(save_dir=manager.effective_save_dir, seed=seed or None,
                                  save_players=save_players, range_key=range_key,
                                  weighted=bool(weighted),
@@ -1118,8 +1290,10 @@ def create_app(save_dir: Optional[str] = None, *, host: str = "127.0.0.1",
     # --- v0.25: save directory selection (session scope) ------------------
     @app.get("/api/savedir")
     def api_savedir():
+        current = Path(manager.effective_save_dir)
         return {"current": manager.effective_save_dir,
-                "default": str(default_save_dir())}
+                "default": str(default_save_dir()),
+                "browse": str(current.parent if current.is_file() else current)}
 
     @app.post("/api/savedir")
     def api_set_savedir(payload: dict):
@@ -1131,8 +1305,19 @@ def create_app(save_dir: Optional[str] = None, *, host: str = "127.0.0.1",
             manager.set_save_dir(path)
         except ValueError as exc:
             raise HTTPException(400, str(exc))
-        return {"ok": True, "current": manager.effective_save_dir,
-                "saves": len(manager.infos)}
+        return manager.source_result()
+
+    @app.post("/api/saves/import")
+    async def api_import_saves(request: Request, kind: Literal["file", "directory"] = "file"):
+        _share_locked()
+        async with request.form(max_files=10000) as form:
+            uploads = [value for _, value in form.multi_items() if isinstance(value, UploadFile)]
+            # Check again after the upload in case sharing started meanwhile.
+            _share_locked()
+            try:
+                return await run_in_threadpool(manager.import_saves, uploads, kind)
+            except ValueError as exc:
+                raise HTTPException(400, str(exc))
 
     @app.get("/api/browse")
     def api_browse(path: str = Query("")):
@@ -1150,7 +1335,8 @@ def create_app(save_dir: Optional[str] = None, *, host: str = "127.0.0.1",
         _share_locked()
         try:
             # v0.27: start in the folder currently being scanned
-            picked = pick_folder(initial=manager.effective_save_dir)
+            current = Path(manager.effective_save_dir)
+            picked = pick_folder(initial=str(current.parent if current.is_file() else current))
         except NotImplementedError as exc:
             raise HTTPException(501, str(exc))
         except Exception as exc:            # pragma: no cover - dialog host

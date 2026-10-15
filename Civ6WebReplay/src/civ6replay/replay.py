@@ -1,10 +1,11 @@
-"""Discover replays from a directory of ``.Civ6Save`` files.
+"""Discover replays from a ``.Civ6Save`` file or a directory of saves.
 
 Saves are grouped by game seed; each group is one game ordered by turn.
 """
 from __future__ import annotations
 
 import os
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, List, Optional
@@ -12,6 +13,7 @@ from typing import Dict, List, Optional
 from . import container, header
 from .binary import Cursor, read_int
 from .cache import ReplayCache
+from .loading import load_workers
 
 TURN_OFFSET = 377
 M_TIMESTAMP = 0x0EFE6D64
@@ -53,14 +55,23 @@ def read_meta(data: bytes) -> dict:
 
 
 def discover(save_dir: Path | str | None = None,
-             cache: Optional[ReplayCache] = None) -> List[SaveInfo]:
+             cache: Optional[ReplayCache] = None, *, workers: int | None = None) -> List[SaveInfo]:
     save_dir = Path(save_dir or default_save_dir())
     cache = cache or ReplayCache()
     infos: List[SaveInfo] = []
     if not save_dir.exists():
         return infos
-    for path in sorted(save_dir.glob("*.Civ6Save")):
-        st = path.stat()
+    if save_dir.is_file():
+        paths = [save_dir] if save_dir.suffix.lower() == ".civ6save" else []
+    else:
+        paths = sorted(p for p in save_dir.iterdir()
+                       if p.is_file() and p.suffix.lower() == ".civ6save")
+    def inspect(path):
+        # A live autosave may disappear while the game rotates its files.
+        try:
+            st = path.stat()
+        except OSError:
+            return None
         meta = cache.get_meta(str(path), st.st_mtime, st.st_size)
         if meta is None:
             try:
@@ -69,7 +80,7 @@ def discover(save_dir: Path | str | None = None,
                 meta = {"seed": 0, "turn": 0, "timestamp": 0, "map_name": "",
                         "map_size": "", "game_speed": "", "multiplayer": False}
             cache.put_meta(str(path), st.st_mtime, st.st_size, **meta)
-        infos.append(SaveInfo(
+        return SaveInfo(
             path=str(path), mtime=st.st_mtime, size=st.st_size,
             seed=int(meta["seed"]), turn=max(0, int(meta["turn"])),
             timestamp=int(meta["timestamp"]),
@@ -78,7 +89,13 @@ def discover(save_dir: Path | str | None = None,
             multiplayer=bool(meta.get("multiplayer", False)),
             map_key=meta.get("map_key", ""),
             map_name_en=meta.get("map_name_en") or "",
-        ))
+        )
+    count = min(load_workers(workers), len(paths))
+    if count > 1:
+        with ThreadPoolExecutor(max_workers=count, thread_name_prefix="civ6-scan") as pool:
+            infos = [info for info in pool.map(inspect, paths) if info is not None]
+    else:
+        infos = [info for path in paths if (info := inspect(path)) is not None]
     return infos
 
 

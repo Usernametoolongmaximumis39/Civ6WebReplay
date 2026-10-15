@@ -1,4 +1,4 @@
-# Publish the user-facing application; keep local reference builds outside Git.
+# Keep the application and existing versioned developer inputs; ignore local artifacts.
 /*
 !/.gitignore
 !/README.md
@@ -6,6 +6,9 @@
 !/LICENSE
 !/THIRD_PARTY_NOTICES.md
 !/Civ6WebReplay/
+!/AGENTS.md
+!/pytest.ini
+!/data/
 
 # game binaries / reference build (read-only, not shipped)
 CivVIReplay_v6.0/
@@ -19,10 +22,6 @@ __pycache__/
 venv/
 .pytest_cache/
 _scratch/
-/Civ6WebReplay/data/backups/
-/Civ6WebReplay/data/.capture-staging/
-/Civ6WebReplay/data/.database-transaction/
-/Civ6WebReplay/data/.database.lock
 *.Civ6Save
 .env
 .env.*
@@ -30,29 +29,29 @@ _scratch/
 # local one-click process cleanup
 /Civ6WebReplay/stop.bat
 /Civ6WebReplay/stop.ps1
-/Civ6WebReplay/clean_scratch.ps1
 
-# Development tests, documentation, and audit outputs stay available locally.
-/Civ6WebReplay/tests/
-/Civ6WebReplay/docs/
-/Civ6WebReplay/data/gamedb/bbg/additions-audit.json
-/Civ6WebReplay/data/gamedb/ccb/additions-audit.json
-/Civ6WebReplay/data/shared/ccb-bbg-comparison.json
-/Civ6WebReplay/data/shared/icon-build.json
-
-# Standalone maintenance tools. Preserve startup and capture dependencies.
-/Civ6WebReplay/tools/build_governors.py
-/Civ6WebReplay/tools/build_mapwrap.py
-/Civ6WebReplay/tools/build_official_rule_text.py
-/Civ6WebReplay/tools/build_player_colors.py
-/Civ6WebReplay/tools/capture_bbg.py
-/Civ6WebReplay/tools/civ6_texture.py
-/Civ6WebReplay/tools/compare_mod_additions.py
-/Civ6WebReplay/tools/vendor_ccb_icons.py
-/Civ6WebReplay/tools/vendor_envoy_icon.py
-/Civ6WebReplay/tools/vendor_favicon.py
-/Civ6WebReplay/tools/vendor_plot_yield_icons.py
-/Civ6WebReplay/tools/vendor_promotion_icon.py
-/Civ6WebReplay/tools/vendor_rule_text_icons.py
-/Civ6WebReplay/tools/vendor_shared_mod_icons.py
-/Civ6WebReplay/tools/vendor_wmd_icons.py
+# Preserve the Git coverage of moved data/tools; local reports and tests stay ignored.
+/data/*
+!/data/README.md
+!/data/gamedb/
+/data/gamedb/*/additions-audit.json
+!/data/ui/
+!/data/tools/
+/data/tools/*
+!/data/tools/tool_paths.py
+!/data/tools/audit_mod_additions.py
+!/data/tools/build_adjacency.py
+!/data/tools/build_gamedb.py
+!/data/tools/build_identities.py
+!/data/tools/build_loc.py
+!/data/tools/build_rule_text.py
+!/data/tools/build_tileyields.py
+!/data/tools/build_web_localization.py
+!/data/tools/capture_database.py
+!/data/tools/database_maintenance.py
+!/data/tools/localization_sources.py
+!/data/tools/vendor_icons.py
+!/data/retired/
+/data/retired/*
+!/data/retired/capture_database.bat.disabled
+/test/

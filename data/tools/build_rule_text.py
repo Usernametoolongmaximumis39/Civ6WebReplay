@@ -5,6 +5,8 @@ runtime rules. Only that snapshot's selected packages supply translations.
 """
 from __future__ import annotations
 
+from tool_paths import ROOT, DEV, WORKSPACE
+
 import argparse
 from contextlib import closing
 from datetime import datetime, timezone
@@ -21,10 +23,10 @@ from build_loc import WORKSHOP_ROOTS, default_game_dir, _implied_language, _iter
 from audit_mod_additions import read_sql
 from localization_sources import apply_profile_text, finish_labels
 
-ROOT = Path(__file__).resolve().parents[1]
+
 sys.path.insert(0, str(ROOT / "src"))
 from civ6replay.hash import crc32_type
-from civ6replay.database_maintenance import write_json
+from database_maintenance import write_json
 
 ENTITIES = (("Policies", "PolicyType", "policy"), ("Traits", "TraitType", "trait"),
             ("UnitAbilities", "UnitAbilityType", "ability"),
@@ -255,7 +257,7 @@ def main():
     ap.add_argument("--game-dir", type=Path, default=default_game_dir())
     ap.add_argument("--out", type=Path)
     args = ap.parse_args()
-    directory = args.snapshot or ROOT / "data/gamedb" / args.profile
+    directory = args.snapshot or DEV / "gamedb" / args.profile
     if args.profile == "vanilla":
         from build_official_rule_text import build_official
         doc = build_official(args.game_dir)

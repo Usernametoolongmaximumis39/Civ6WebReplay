@@ -31,10 +31,12 @@ in the output document.
 
 Usage::
 
-    python tools/build_loc.py [--game-dir DIR] [--cache-dir DIR] [--out FILE]
+    python -B data/tools/build_loc.py [--game-dir DIR] [--cache-dir DIR] [--out FILE]
                               [--mod-dirs DIR[;DIR…] | --mod-dirs none]
 """
 from __future__ import annotations
+
+from tool_paths import ROOT, DEV, WORKSPACE
 
 import argparse
 import datetime as _dt
@@ -46,7 +48,7 @@ import sqlite3
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+
 DEFAULT_OUT = ROOT / "data" / "vanilla" / "loc.json"
 
 KEEP_LANGS = ("zh_Hans_CN", "en_US")

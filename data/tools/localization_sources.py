@@ -1,5 +1,7 @@
 """Read selected text sources and detect untranslated mod overrides."""
 from __future__ import annotations
+
+from tool_paths import ROOT, DEV, WORKSPACE
 import re
 from build_loc import _harvest
 from audit_mod_additions import read_sql

@@ -16,12 +16,12 @@
 <!-- v0.26.2: 独立对比页（?compare=1）的加载进度条 -->
 <div id="progress" class="progress hidden"><i></i><span id="progress-text"></span></div>
 <header class="topbar">
-<div class="title">Civ6 WebReplay <span class="ver">v0.42</span></div>
+<div class="title">Civ6 WebReplay <span class="ver">v0.43</span></div>
   <div class="picker">
     <label>对局</label>
     <select id="replay-select"></select>
     <button id="btn-refresh" title="重新扫描存档">↻</button>
-    <button id="btn-savedir" title="选择存档目录">存档目录</button>
+    <button id="btn-savedir" title="打开存档文件或文件夹">打开存档</button>
     <button id="btn-share" title="共享复盘">共享</button>
     <button id="btn-share-link" class="hidden" title="查看分享链接">链接</button>
   </div>
@@ -159,21 +159,28 @@
 <div id="savedir-modal" class="modal hidden">
   <div class="modal-box">
     <div class="modal-head">
-      <span>存档目录</span>
+      <span>打开存档</span>
       <button id="savedir-close" title="关闭">✕</button>
     </div>
     <div class="modal-body">
       <div class="kv">
-        <div class="k">当前目录</div><div class="v" id="savedir-current">—</div>
+        <div class="k">当前路径</div><div class="v" id="savedir-current">—</div>
         <div class="k">默认目录</div>
         <div class="v"><span id="savedir-default">—</span>
           <button id="savedir-use-default">填入默认目录</button></div>
       </div>
       <div class="search-row" style="margin-top:8px">
-        <input type="text" id="savedir-input" placeholder="粘贴路径，或从下方目录树点选" />
+        <input type="text" id="savedir-input" placeholder="粘贴存档文件或文件夹路径，或从下方目录树点选" />
         <button id="savedir-pick" title="打开系统目录选择框">浏览…</button>
         <button id="savedir-parent" title="回到上级目录">上级</button>
       </div>
+      <div class="save-import-actions">
+        <button id="savedir-file">选择单个存档…</button>
+        <button id="savedir-folder">选择文件夹…</button>
+        <input id="save-file-input" type="file" accept=".Civ6Save" hidden />
+        <input id="save-folder-input" type="file" webkitdirectory multiple hidden />
+      </div>
+      <div class="modal-note">也可将单个 .Civ6Save 文件或文件夹拖到页面上直接打开。</div>
       <div id="savedir-tree" class="dir-tree"></div>
       <div id="savedir-error" class="modal-err hidden"></div>
       <div class="modal-note">切换仅在本次进程内生效，重启后回到默认目录；确认后会自动重新扫描存档。</div>
@@ -184,6 +191,8 @@
     </div>
   </div>
 </div>
+
+<div id="save-drop-overlay" class="hidden"><span>松开以打开存档文件或文件夹</span></div>
 
 <!-- v0.38: 共享 —— 开启后在后台另起一个对外监听，并给出可复制的复盘链接 -->
 <div id="share-modal" class="modal hidden">
@@ -215,7 +224,7 @@
       <div class="modal-note">对方打不开时，多半是防火墙 / 端口映射没放行。Windows 防火墙可在管理员命令行放行：
         <code>netsh advfirewall firewall add rule name="civ6replay 共享" dir=in action=allow protocol=TCP localport=&lt;端口&gt;</code>
         ；云服务器还要在安全组里放行同一端口。</div>
-      <div class="modal-note">共享期间「刷新存档」与「存档目录」会被锁定，停止共享后恢复。</div>
+      <div class="modal-note">共享期间「刷新存档」与「打开存档」会被锁定，停止共享后恢复。</div>
     </div>
     <div class="modal-foot">
       <button id="share-stop">停止共享</button>

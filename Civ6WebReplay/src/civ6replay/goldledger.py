@@ -1,8 +1,8 @@
 """金币流水账：从文明6日志统计「打钱 / 吸钱 / 净金币交易」。
 
-口径沿用 ``elaphantguys_gold_script.exe``（复利 1.036/回合、``Turn N,`` 回合编号、
-``from player`` / ``to player`` / ``amount`` / ``duration`` 的取法），是仓库里
-``goldledger/gold.js`` 的 Python 移植版，两者数字应当一致。
+指标参考 ``elaphantguys_gold_script.exe``（复利 1.036/回合、``Turn N,`` 回合编号、
+``from player`` / ``to player`` / ``amount`` / ``duration`` 的取法）。解析时只收
+已成交的金币 item，跳过资源价值字段和到期移除记录，避免重复计账。
 
 数据来源（只读，不修改任何文件）：
 
@@ -35,6 +35,7 @@ GAMECORE_LOG = "GameCore.log"
 STATS_CSV = "Player_Stats.csv"
 
 RE_TURN = re.compile(r"^Turn\s+(\d+)\s*,")
+RE_ENACTED_ITEM = re.compile(r"(?:^|,)\s*Enacting Deal Item ID\b")
 RE_TYPE_GOLD = re.compile(r"type\s+Gold\b", re.I)
 RE_TYPE_ANY = re.compile(r"type\s+[A-Za-z_]")
 RE_LEADING_INT = re.compile(r"^[+-]?\d+")
@@ -161,7 +162,11 @@ def is_gold_item(line: str, legacy: bool = False) -> bool:
 
 
 def parse_deals(text: Optional[str], legacy: bool = False) -> List[Dict[str, int]]:
-    """``DiplomacyDeals.log`` -> 金币交易条目。"""
+    """``DiplomacyDeals.log`` -> 已成交的金币交易条目。
+
+    日志在到期移除时会再次写出同一 item，那不是一笔新的付款；只收成交行。
+    回合标记仍从所有行读取，因为真实 item 行通常以逗号开头、不带回合。
+    """
     deals: List[Dict[str, int]] = []
     if not text:
         return deals
@@ -173,7 +178,7 @@ def parse_deals(text: Optional[str], legacy: bool = False) -> List[Dict[str, int
         m = RE_TURN.match(line)
         if m:
             turn = int(m.group(1))
-        if is_gold_item(line, legacy):
+        if RE_ENACTED_ITEM.search(line) and is_gold_item(line, legacy):
             deal = get_deal_from_line(line)
             deal["turn"] = turn
             deals.append(deal)

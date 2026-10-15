@@ -6,13 +6,13 @@
 
 Civ6 WebReplay is a browser-based replay viewer for *Civilization VI*. Load a group of game saves and move through turns to inspect the map, cities, units, and civilization statistics.
 
-Current version: **v0.42**. Windows is recommended, with Chrome or Edge.
+Current version: **v0.43**. Windows is recommended, with Chrome or Edge.
 
-## What's new in v0.42
+## What's new in v0.43
 
-- Chinese and English interface, with automatic browser-language detection or a manual language menu. The selection is saved on this computer.
-- English game text is selected by ruleset. BBG and CCB core mods, civilization expansions, and Beta or WIP channels are identified separately when the save or installed files provide evidence.
-- Updated CCB 1.8 database capture. Missing Lua scripts are recorded as missing; capture does not fabricate them.
+- Open a single save or drop a save file or folder to import it. Folder scanning and turn parsing now load in parallel, and you can adjust the worker count.
+- Unrecognized religions receive stable numbers and available icons across turns. Gold ledger parsing now counts enacted deal items only, preventing expired-log entries from being counted twice.
+- Developer data and tests now live at the repository root, leaving the application package focused on runtime files. The old database capture entry point remains retired pending a rewrite.
 
 ## What you can inspect
 
@@ -36,17 +36,19 @@ Required rules and icon data are included; you do not need to build the assets. 
 
 ## Choose saves and review a replay
 
-At the top of the page, click **Save Folder** and choose the folder containing `.Civ6Save` files. The default multiplayer autosave folder is:
+Click **Open Saves** to choose a single `.Civ6Save` file or a save folder, or drop either onto the page. A single file opens at its saved turn; folders are organized by game and turn. The path box also accepts file or folder paths. The default multiplayer autosave folder is:
 
 ```text
 %USERPROFILE%\Documents\My Games\Sid Meier's Civilization VI\Saves\Multi\auto
 ```
 
-Single-player saves are usually under `Saves\Single` or its `auto` subfolder. Choose the folder that directly contains the save files; the program does not scan all subfolders recursively. If OneDrive or another setting redirects your Documents folder, choose the actual save folder in the interface.
+Single-player saves are usually under `Saves\Single` or its `auto` subfolder. Opening a folder through the path box, folder tree, or **Browse…** scans its immediate save files, and refreshing can find new saves. **Choose a folder…** and drag-and-drop also read nested folders and import session copies; import again to pick up newly added saves. If OneDrive or another setting redirects your Documents folder, choose the actual save location.
 
 Select a replay and use the turn controls to move between turns. Click a map tile to see details, then use the **Info**, **Yields**, **Districts**, and **Units** tabs to change the detail view. Open **Compare** to compare civilizations on a separate page. Click **Refresh Saves** after adding saves.
 
 A replay can show only turns present in the available saves. To preserve more turns, increase the autosave frequency in the game and keep enough autosaves.
+
+Unrecognized religions appear as “Unknown Religion 1”, “Unknown Religion 2”, and so on. Each borrows a religion icon unused in the latest save's complete catalog of founded religions. Its number and icon remain consistent across turns, civilization details, city details, and the map, and it appears only once founded. If no unused religion icons remain, the generic Faith icon is used.
 
 ## Language
 
@@ -70,28 +72,9 @@ The following are currently unsupported:
 - Mods whose title contains “Secret Society,” CCB's “Mandate of Heaven,” or “Echoes of Time.”
 - Team PVP mods that rewrite rules, except for recognized interface helper components.
 
-## Capture or update BBG / CCB databases
+## Rules databases
 
-The included data is usually ready to use. Capture a database only when you need data matching a newer BBG or CCB rules version:
-
-1. Close Civ6 WebReplay if it is running.
-2. Double-click **capture_database.bat**, choose **BBG** or **CCB**, then choose to capture new data.
-3. Follow the prompts to enable the target core mod and recognized companion mods, then start a single-player game. Do not mix BBG and CCB, and disable extra rules mods and unsupported modes.
-4. After the tool says it is ready, return to the game and save once more. Keep the current game session open.
-5. Return to the capture window and enter **Y**. Check the detected save path and follow the remaining prompts.
-6. After a successful capture, restart Civ6 WebReplay.
-
-Capture saves the active rules, localization text, and mod game scripts. It updates policy and ability text, tile yields, district adjacency, and governor data. Unsupported rules or Lua effects do not become calculable just because a new database was captured.
-
-If the game installation, cache, or save folder cannot be detected, the tool asks for the actual path. It refuses to switch data when the save is too old, the mods do not match, or the database changed during capture.
-
-New names such as “CCB正式版1.8” are supported. If the mod list references a Lua script that is not present in the installation, capture warns about it and records the missing file, then saves the database that actually took effect. It does not create a placeholder script or mark the missing script as captured.
-
-### Back up and roll back
-
-Before each capture, the tool backs up the existing data. Backups are stored under `data\backups\bbg` or `data\backups\ccb`. Run **capture_database.bat** again, choose the ruleset, and select a backup by date and version to restore or delete it.
-
-Rollback also backs up the current data. Restart the replay viewer after a successful capture or rollback. Game saves are never overwritten.
+The application uses the bundled base-game, BBG, and CCB runtime snapshots. The old capture and rollback entry points have been removed pending a rewrite. Use the snapshots included with the complete application package.
 
 ## Share a replay
 
@@ -127,11 +110,13 @@ You can also specify a save folder at launch:
 
 **The first load takes a long time.**
 
-Many saves must be parsed one by one. Parsed results are stored in `cache\replay.sqlite`, so later loads are usually faster. You can delete this cache after closing the program; the saves will be parsed again the next time.
+The initial scan reads saves using multiple threads, and background workers parse turns in multiple processes. The default concurrency is half the CPU's logical thread count, rounded down, with a minimum of 1 worker. For example, an 8-core, 16-thread CPU uses 8 workers by default. Each turn becomes available as soon as it finishes. Parsed results are stored in `cache\replay.sqlite`, so later loads are usually faster. You can delete this cache after closing the program; the saves will be parsed again the next time.
+
+Use `.\start.bat --load-workers 2` or the `CIV6_REPLAY_WORKERS` environment variable to adjust concurrency (1–16). Set it to `1` for sequential loading. More workers use more CPU and memory.
 
 **A map value or tile yield is unavailable.**
 
-Read the message shown in the interface and check the save's game mode, mods, and database ruleset. For BBG or CCB, capture a matching database using the steps above. Effects that have not been implemented will still be marked as missing.
+Read the message shown in the interface and check the save's game mode, mods, and database ruleset. Check that the application package contains the matching rules snapshot. The old capture feature is currently disabled. Effects that have not been implemented will still be marked as missing.
 
 ## Data and license
 

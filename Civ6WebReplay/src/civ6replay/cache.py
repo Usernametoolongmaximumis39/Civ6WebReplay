@@ -1,6 +1,7 @@
-"""Persistent parse cache (``cache/replay.sqlite``)."""
+"""Persistent parse cache; CIV6_REPLAY_CACHE isolates test/service workspaces."""
 from __future__ import annotations
 
+import os
 import sqlite3
 import threading
 import time
@@ -45,8 +46,8 @@ SCHEMA_VERSION = 26
 
 
 class ReplayCache:
-    def __init__(self, path: Path | str = DEFAULT_CACHE):
-        self.path = Path(path)
+    def __init__(self, path: Path | str | None = None):
+        self.path = Path(path if path is not None else os.environ.get("CIV6_REPLAY_CACHE", DEFAULT_CACHE))
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self.conn = sqlite3.connect(str(self.path), check_same_thread=False)
         self.conn.row_factory = sqlite3.Row

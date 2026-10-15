@@ -589,5 +589,20 @@ window.Civ6UIStrings = {
  "硝石": "Niter",
  "石油": "Oil",
  "鲸鱼": "Whales",
- "贸易站": "Trading Posts"
+ "贸易站": "Trading Posts",
+ "打开存档": "Open Saves",
+ "打开存档文件或文件夹": "Open a save file or folder",
+ "当前路径": "Current path",
+ "粘贴存档文件或文件夹路径，或从下方目录树点选": "Paste a save file or folder path, or select a folder below",
+ "选择单个存档…": "Choose a save file…",
+ "选择文件夹…": "Choose a folder…",
+ "也可将单个 .Civ6Save 文件或文件夹拖到页面上直接打开。": "You can also drop a .Civ6Save file or folder onto the page to open it.",
+ "松开以打开存档文件或文件夹": "Drop to open a save file or folder",
+ "未找到 .Civ6Save 存档。点击「打开存档」或拖入存档文件、文件夹。": "No .Civ6Save files found. Click Open Saves or drop a save file or folder onto the page.",
+ "未找到 .Civ6Save 存档。": "No .Civ6Save files found.",
+ "正在读取存档…": "Reading saves…",
+ "路径不存在：": "Path does not exist: ",
+ "请选择 .Civ6Save 文件或存档文件夹。": "Choose a .Civ6Save file or a save folder.",
+ "请选择一个 .Civ6Save 文件。": "Choose one .Civ6Save file.",
+ "共享期间「刷新存档」与「打开存档」会被锁定，停止共享后恢复。": "Refresh Saves and Open Saves are locked while sharing. Stop sharing to unlock them."
 };

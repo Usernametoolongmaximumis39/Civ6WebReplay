@@ -1,9 +1,11 @@
 """Freeze the loaded gameplay database for offline district adjacency.
 
-Run after loading an official game: python tools/build_adjacency.py.
+Run after loading an official game: python -B data/tools/build_adjacency.py.
 This deliberately never replaces the other game-data snapshots.
 """
 from __future__ import annotations
+
+from tool_paths import ROOT, DEV, WORKSPACE
 
 import argparse
 from contextlib import closing
@@ -16,7 +18,7 @@ import sqlite3
 import sys
 import xml.etree.ElementTree as ET
 
-ROOT = Path(__file__).resolve().parents[1]
+
 sys.path.insert(0, str(ROOT / "src"))
 from civ6replay.database_versions import component_role
 from civ6replay.mod_identity import manifest_metadata

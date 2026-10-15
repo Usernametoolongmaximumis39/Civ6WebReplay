@@ -4,6 +4,8 @@ Load the target game first; mod capture additionally requires its fresh save.
 """
 from __future__ import annotations
 
+from tool_paths import ROOT, DEV, WORKSPACE
+
 import argparse
 from contextlib import closing
 from collections import defaultdict
@@ -21,7 +23,7 @@ from build_loc import default_game_dir
 from build_loc import WORKSHOP_ROOTS
 from build_loc import _harvest, _iter_base_text, _iter_dlc_text, _iter_mod_text
 
-ROOT = Path(__file__).resolve().parents[1]
+
 sys.path.insert(0, str(ROOT / "src"))
 from civ6replay.database_versions import component_role
 from civ6replay.mods import CCB_TITLE_RE

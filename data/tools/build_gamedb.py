@@ -12,9 +12,11 @@ cache can be missing rows for content the current MOD set enables — that is ho
 
 Usage::
 
-    python tools/build_gamedb.py [--profile vanilla] [--loc-json PATH]
+    python -B data/tools/build_gamedb.py [--profile vanilla] [--loc-json PATH]
 """
 from __future__ import annotations
+
+from tool_paths import ROOT, DEV, WORKSPACE
 
 import argparse
 import datetime as _dt
@@ -23,7 +25,7 @@ import os
 import sqlite3
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+
 
 
 def _crc32_type(text: str) -> int:
@@ -416,7 +418,9 @@ def build(gameplay: Path, localization: Path, out_dir: Path, profile: str,
         "counts": counts,
         "types": len(seen),
     }
-    (out_dir / "manifest.json").write_text(
+    manifest_dir = DEV / "gamedb" / profile if out_dir.resolve().is_relative_to(ROOT / "data") else out_dir
+    manifest_dir.mkdir(parents=True, exist_ok=True)
+    (manifest_dir / "manifest.json").write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8"
     )
     return manifest

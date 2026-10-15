@@ -20,9 +20,11 @@ install at runtime:
 Every row is asserted to satisfy ``crc32_type(TYPE) == hash`` before it is
 written.  Usage::
 
-    python tools/build_identities.py [--ref ...] [--cpp ...] [--loc ...]
+    python -B data/tools/build_identities.py [--ref ...] [--cpp ...] [--loc ...]
 """
 from __future__ import annotations
+
+from tool_paths import ROOT, DEV, WORKSPACE
 
 import argparse
 import binascii
@@ -33,7 +35,7 @@ import sqlite3
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+
 DEFAULT_OUT = ROOT / "data" / "vanilla" / "identities.json"
 DEFAULT_REF = ROOT.parent / "CivVIReplay_v6.0" / "image" / "database" / "backup.sqlite"
 DEFAULT_CPP = ROOT.parent / "CivVIReplay-src" / "src" / "CivVIParser.cpp"

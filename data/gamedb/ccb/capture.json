@@ -1,0 +1,335 @@
+{
+  "format": 1,
+  "profile": "ccb",
+  "capturedAt": "2026-10-14T13:36:20.962952+00:00",
+  "packages": [
+    {
+      "key": "LOC_AZTEC_MONTEZUMA_MOD_TITLE",
+      "name": "Aztec Montezuma"
+    },
+    {
+      "key": "LOC_TEDDY_ROOSEVELT_MOD_TITLE",
+      "name": "泰迪·罗斯福领袖包"
+    },
+    {
+      "key": "LOC_EXPANSION1_MOD_TITLE",
+      "name": "Expansion1"
+    },
+    {
+      "key": "LOC_ETHIOPIA_MOD_TITLE",
+      "name": "埃塞俄比亚包"
+    },
+    {
+      "key": "LOC_INDONESIA_KHMER_MOD_TITLE",
+      "name": "Indonesia Khmer"
+    },
+    {
+      "key": "LOC_GREAT_BUILDERS_MOD_TITLE",
+      "name": "Great Builders"
+    },
+    {
+      "key": "LOC_RULERS_OF_ENGLAND_MOD_TITLE",
+      "name": "Rulers Of England"
+    },
+    {
+      "key": "LOC_MOD_VIKINGSLANDMARKS_TITLE",
+      "name": "Mod Vikingslandmarks"
+    },
+    {
+      "key": "LOC_POLAND_JADWIGA_MOD_TITLE",
+      "name": "Poland Jadwiga"
+    },
+    {
+      "key": "LOC_EXPANSION2_MOD_TITLE",
+      "name": "Expansion2"
+    },
+    {
+      "key": "LOC_NUBIA_MOD_TITLE",
+      "name": "Nubia"
+    },
+    {
+      "key": "LOC_GREAT_NEGOTIATORS_MOD_TITLE",
+      "name": "Great Negotiators"
+    },
+    {
+      "key": "LOC_RULERS_OF_CHINA_MOD_TITLE",
+      "name": "Rulers Of China"
+    },
+    {
+      "key": "LOC_RULERS_OF_THE_SAHARA_MOD_TITLE",
+      "name": "Rulers Of The Sahara"
+    },
+    {
+      "key": "LOC_BABYLON_MOD_TITLE",
+      "name": "巴比伦包"
+    },
+    {
+      "key": "CCB正式版1.8",
+      "name": "CCB正式版1.8"
+    },
+    {
+      "key": "CCB 地图 1.2.0",
+      "name": "CCB 地图 1.2.0"
+    },
+    {
+      "key": "CCB MPH 多人游戏助手 1.13",
+      "name": "CCB MPH 多人游戏助手 1.13"
+    },
+    {
+      "key": "CCB 文明拓展 2.0",
+      "name": "CCB 文明拓展 2.0"
+    },
+    {
+      "key": "CCB [COLOR:ResCultureLabelCS]多河地图包[ENDCOLOR] 2.1",
+      "name": "CCB [COLOR:ResCultureLabelCS]多河地图包[ENDCOLOR] 2.1"
+    },
+    {
+      "key": "LOC_GRANCOLOMBIA_MAYA_MOD_TITLE",
+      "name": "玛雅和大哥伦比亚包"
+    },
+    {
+      "key": "LOC_JULIUS_CAESAR_MOD_TITLE",
+      "name": "Julius Caesar"
+    },
+    {
+      "key": "LOC_BYZANTIUM_GAUL_MOD_TITLE",
+      "name": "拜占庭和高卢包"
+    },
+    {
+      "key": "LOC_KUBLAIKHAN_VIETNAM_MOD_TITLE",
+      "name": "越南和忽必烈包"
+    },
+    {
+      "key": "LOC_CATHERINE_DE_MEDICI_MOD_TITLE",
+      "name": "凯瑟琳·德·美第奇领袖包"
+    },
+    {
+      "key": "LOC_MACEDONIA_PERSIA_MOD_TITLE",
+      "name": "Macedonia Persia"
+    },
+    {
+      "key": "LOC_AUSTRALIA_MOD_TITLE",
+      "name": "Australia"
+    },
+    {
+      "key": "LOC_GREAT_WARLORDS_MOD_TITLE",
+      "name": "Great Warlords"
+    },
+    {
+      "key": "LOC_PORTUGAL_MOD_TITLE",
+      "name": "葡萄牙包"
+    },
+    {
+      "key": "LOC_MOD_SCOUT_CAT_TITLE",
+      "name": "Mod Scout Cat"
+    }
+  ],
+  "sources": [
+    {
+      "id": "8af4fe8e-5406-7d72-d9d6-a8f5d1b66e00",
+      "name": "CCB正式版1.8",
+      "version": "1800",
+      "modinfoSha256": "6adecbf4b58a028b1755b42dbeaf3b105443db3abe1b7f6ddfa1c95225b95acf",
+      "scripts": [
+        {
+          "path": "scripts/bbg_script.lua",
+          "sha256": "1ede9ad8607fda3ceec3e71cda5b3db35072b5d34a0e0e9bd86e0c7cd061cdae"
+        },
+        {
+          "path": "scripts/ccb_legacycards.lua",
+          "sha256": "736ab38d016402a5cb54d5f4467719147a6837f417f544e9170fbce104fcd040"
+        },
+        {
+          "path": "scripts/ccb_tajmahal.lua",
+          "sha256": "7946c6edd31334c89d688f9e9cce4137cd95b81ebccb49c89cca89a96b9a040f"
+        },
+        {
+          "path": "scripts/ccb_planted_forest.lua",
+          "sha256": "9b68f7fd6a2ec53f5644be29482e52a988706c3b689fff73e6db6da59cf367c4"
+        },
+        {
+          "path": "lua/BBG_Expanded/Thule.lua",
+          "sha256": "6d9ef0eb802c161098ec7c7bc30f02aaca142bb1539baeeed97d5357933c03fc"
+        },
+        {
+          "path": "lua/BBG_Expanded/Te_Kinich.lua",
+          "sha256": "e7956430220ae150e577ba57a8fc58051053274775d5d6df00493c7ecc64edec"
+        },
+        {
+          "path": "lua/BBG_Expanded/Al_Hasan.lua",
+          "sha256": "3957d7a251f54006a9d66ccc3a4353a7fe0134c3f859dc8553d1f731ecac14fe"
+        },
+        {
+          "path": "lua/BBG_Expanded/Olympia.lua",
+          "sha256": "eb5166d10945c517c8afd31c8ce1e7c73ba22ee93b56343eab8c8b28453312b9"
+        },
+        {
+          "path": "lua/BBG_Expanded/Finland.lua",
+          "sha256": "ca825a89384164b8819f27783e73f480fbfc11d62702353ea6b5a6e5dac3fafe"
+        },
+        {
+          "path": "lua/BBG_Expanded/Malaysia.lua",
+          "sha256": "a0b55f32c12910d0542511b3c0d12146e6fe4a43013dc05cb7681bab6f98443f"
+        },
+        {
+          "path": "MABC/NEW_ADJACENCY_BONUS_BY_RUIVO_GP.lua",
+          "sha256": "a5879c6bc4ba31062c12bcb650920a45d8e3388f1780903a494af8eed541005d"
+        }
+      ]
+    },
+    {
+      "id": "8af4fe8e-5406-7d72-d9d6-a8f5d1b66e10",
+      "name": "CCB 地图 1.2.0",
+      "version": "1200",
+      "modinfoSha256": "d53b664ea20b9a007f8e83da044d05f3b10e1855e7c826bb32c48be36679fd55",
+      "scripts": [
+        {
+          "path": "Data/BBS_D.lua",
+          "missing": true
+        }
+      ]
+    },
+    {
+      "id": "8af4fe8e-5406-7d72-d9d6-a8f5d1b66e20",
+      "name": "CCB MPH 多人游戏助手 1.13",
+      "version": "113",
+      "modinfoSha256": "fbd35d79a8cad891f437fbcd75dc83e136f008a640553592ecd15eac3e9a1abd",
+      "scripts": [
+        {
+          "path": "data/MP_helper.lua",
+          "sha256": "99a54161cd60f2e8e4b049b0913d9a8dcb735dbd282ffb3b149dcbc7feb04dc4"
+        }
+      ]
+    },
+    {
+      "id": "8af4fe8e-5406-7d72-d9d6-a8f5d1b66e30",
+      "name": "CCB 文明拓展 2.0",
+      "version": "2000",
+      "modinfoSha256": "9b7647e5f956ea7399fa41458eaa14a1c968cc7084a9865c0c6d0d1979857164",
+      "scripts": [
+        {
+          "path": "Africa/SwahiliAlHasanibn/Lua/Suk_Al_Hasan_CoreFunctions.lua",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "Asia/Malaysia/Core/Malaysia_Scripts.lua",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "Asia/TibetTrisongDetsen/Lua/Suk_Dzong.lua",
+          "sha256": "a11e15c7abff6cee8deecdce09c075cbd3d914811dacce21ca28c79921fcffd5"
+        },
+        {
+          "path": "Europe/GaulVercingetorix/Lua/Suk_Vercingetorix_CoreFunctions.lua",
+          "sha256": "5a64e78e17499901b67e9fa325378d2bff7cce6f35e09bd14a551f38c392f778"
+        },
+        {
+          "path": "Europe/GaulVercingetorix/Lua/Suk_Vercingetorix_CoreFunctions.lua",
+          "sha256": "5a64e78e17499901b67e9fa325378d2bff7cce6f35e09bd14a551f38c392f778"
+        },
+        {
+          "path": "Europe/Switzerland/Core/Switzerland_Scripts.lua",
+          "sha256": "c55006e9713f36ad110f7e898b5fa7ddaeec22ff13675a816c3c2016affaaeff"
+        },
+        {
+          "path": "Mediterranean/MacedonOlympias/Lua/JFD_MacedonOlympias_Functions.lua",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "Mediterranean/PhoeniciaAhiram/core/Ahiram - Lua.lua",
+          "sha256": "551f9a9366fa54d3a76e0eab8c36032e58c34288de466ecd9ce8ab4546198e31"
+        },
+        {
+          "path": "Meso/Argentina/lua/District_Estancia.lua",
+          "sha256": "1029a220804921fcde08cc7dfe833a7404d544537396025e9c0f9121a06cea5e"
+        },
+        {
+          "path": "Meso/Argentina/lua/Trait_Roca.lua",
+          "sha256": "7126ef21fdd25451906e8298d1e4c5b3f708eb5482e611b5af5b41f9176ae903"
+        },
+        {
+          "path": "Meso/MayaTeKinichII/core/Port Lime - Te Kinich - Functions.lua",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "Meso/TheoticuanasTeotihuacan/Spearthrower Owl/Spearthrower-PopConqueror.lua",
+          "sha256": "187b4862750cd68353024a7a1eebeadb7715300f8d3e5c911f0f1aacae8c998d"
+        },
+        {
+          "path": "Meso/TheoticuanasTeotihuacan/Teotihuacan/Teotihuacan-EnvoyDoubler.lua",
+          "sha256": "508d860104d91e1baaf6260dd0ce6feda80dfc83d52285f932c2be5466ddf6f4"
+        },
+        {
+          "path": "NorthAmerica/ThuleKiviuq/lua/Lime_Thule_Function.lua",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "id": "8af4fe8e-5406-7d72-d9d6-a8f5d1b66e66",
+      "name": "CCB [COLOR:ResCultureLabelCS]多河地图包[ENDCOLOR] 2.1",
+      "version": "201",
+      "modinfoSha256": "a668ee1a72db6dd7d0f5c151185db9e4bc84eb1e7fc6f1baed288e508f1f70c0",
+      "scripts": []
+    }
+  ],
+  "versions": [
+    {
+      "component": "CCB",
+      "role": "core",
+      "version": "1.8",
+      "installedVersion": "1800"
+    },
+    {
+      "component": "CCB拓展",
+      "role": "expansion",
+      "version": "2.0",
+      "installedVersion": "2000"
+    }
+  ],
+  "warnings": [
+    "MOD 声明的脚本不存在，已记录缺项：CCB Maps.modinfo / Data/BBS_D.lua"
+  ],
+  "referenceSaveSha256": "805a401237dfb5a41cf15eec3e8eaa1fa81725ead56285e9be955a99f7c75544",
+  "files": {
+    "additions-audit.json": "d083823c83b1082dafb79df98ce5d3fd98bfc678f7a3c5f051ad97973d2eaa41",
+    "adjacency.json": "e0c7e0c1b61e90257744f01b8d31d23d8b332cfd034c188520d64ef78bf92b10",
+    "gameplay.sqlite": "acb316adf0aecbf29da61652426cf64e9bcb2e85ad95039e69381113f93f921b",
+    "labels.json": "1f7e759bcf93dd6583eb2bbe88d13ff4ee4ee80dbc3a52c3957186d2d048d6bb",
+    "localization.sqlite": "c4aa1874863d503d4b5e2fa9482dafc6426542e20153bc2b54ef38ed6d5d84ed",
+    "rule-text.json": "305a5fabbedad3043d9f920dbbf87b88fc12a086679af96728d000809bbbddb9",
+    "tileyields.json": "7771ec593e13850966499149927d0698badee5ef9e740622bccdaa5325e59c5b",
+    "additions-source/capture.json": "a848b249b1b3be56e1f755c7c088b323f270ca3ff51c94f31f4a0e6160b683ae",
+    "additions-source/gameplay.sqlite": "c9849582ddf2e436b56e02a51034f966606628e08d5c38b0bdfbd71e4ef67f63",
+    "scripts/8af4fe8e-5406-7d72-d9d6-a8f5d1b66e00/CCB.modinfo": "6adecbf4b58a028b1755b42dbeaf3b105443db3abe1b7f6ddfa1c95225b95acf",
+    "scripts/8af4fe8e-5406-7d72-d9d6-a8f5d1b66e10/CCB Maps.modinfo": "d53b664ea20b9a007f8e83da044d05f3b10e1855e7c826bb32c48be36679fd55",
+    "scripts/8af4fe8e-5406-7d72-d9d6-a8f5d1b66e20/CCB MPH.modinfo": "fbd35d79a8cad891f437fbcd75dc83e136f008a640553592ecd15eac3e9a1abd",
+    "scripts/8af4fe8e-5406-7d72-d9d6-a8f5d1b66e30/CCBExpanded.modinfo": "9b7647e5f956ea7399fa41458eaa14a1c968cc7084a9865c0c6d0d1979857164",
+    "scripts/8af4fe8e-5406-7d72-d9d6-a8f5d1b66e66/rich_highlands_rivers.modinfo": "a668ee1a72db6dd7d0f5c151185db9e4bc84eb1e7fc6f1baed288e508f1f70c0",
+    "scripts/8af4fe8e-5406-7d72-d9d6-a8f5d1b66e30/NorthAmerica/ThuleKiviuq/lua/Lime_Thule_Function.lua": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "scripts/8af4fe8e-5406-7d72-d9d6-a8f5d1b66e30/Meso/TheoticuanasTeotihuacan/Spearthrower Owl/Spearthrower-PopConqueror.lua": "187b4862750cd68353024a7a1eebeadb7715300f8d3e5c911f0f1aacae8c998d",
+    "scripts/8af4fe8e-5406-7d72-d9d6-a8f5d1b66e30/Meso/TheoticuanasTeotihuacan/Teotihuacan/Teotihuacan-EnvoyDoubler.lua": "508d860104d91e1baaf6260dd0ce6feda80dfc83d52285f932c2be5466ddf6f4",
+    "scripts/8af4fe8e-5406-7d72-d9d6-a8f5d1b66e30/Meso/MayaTeKinichII/core/Port Lime - Te Kinich - Functions.lua": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "scripts/8af4fe8e-5406-7d72-d9d6-a8f5d1b66e30/Meso/Argentina/lua/District_Estancia.lua": "1029a220804921fcde08cc7dfe833a7404d544537396025e9c0f9121a06cea5e",
+    "scripts/8af4fe8e-5406-7d72-d9d6-a8f5d1b66e30/Meso/Argentina/lua/Trait_Roca.lua": "7126ef21fdd25451906e8298d1e4c5b3f708eb5482e611b5af5b41f9176ae903",
+    "scripts/8af4fe8e-5406-7d72-d9d6-a8f5d1b66e30/Mediterranean/PhoeniciaAhiram/core/Ahiram - Lua.lua": "551f9a9366fa54d3a76e0eab8c36032e58c34288de466ecd9ce8ab4546198e31",
+    "scripts/8af4fe8e-5406-7d72-d9d6-a8f5d1b66e30/Mediterranean/MacedonOlympias/Lua/JFD_MacedonOlympias_Functions.lua": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "scripts/8af4fe8e-5406-7d72-d9d6-a8f5d1b66e30/Europe/Switzerland/Core/Switzerland_Scripts.lua": "c55006e9713f36ad110f7e898b5fa7ddaeec22ff13675a816c3c2016affaaeff",
+    "scripts/8af4fe8e-5406-7d72-d9d6-a8f5d1b66e30/Europe/GaulVercingetorix/Lua/Suk_Vercingetorix_CoreFunctions.lua": "5a64e78e17499901b67e9fa325378d2bff7cce6f35e09bd14a551f38c392f778",
+    "scripts/8af4fe8e-5406-7d72-d9d6-a8f5d1b66e30/Asia/TibetTrisongDetsen/Lua/Suk_Dzong.lua": "a11e15c7abff6cee8deecdce09c075cbd3d914811dacce21ca28c79921fcffd5",
+    "scripts/8af4fe8e-5406-7d72-d9d6-a8f5d1b66e30/Asia/Malaysia/Core/Malaysia_Scripts.lua": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "scripts/8af4fe8e-5406-7d72-d9d6-a8f5d1b66e30/Africa/SwahiliAlHasanibn/Lua/Suk_Al_Hasan_CoreFunctions.lua": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "scripts/8af4fe8e-5406-7d72-d9d6-a8f5d1b66e20/data/MP_helper.lua": "99a54161cd60f2e8e4b049b0913d9a8dcb735dbd282ffb3b149dcbc7feb04dc4",
+    "scripts/8af4fe8e-5406-7d72-d9d6-a8f5d1b66e00/MABC/NEW_ADJACENCY_BONUS_BY_RUIVO_GP.lua": "a5879c6bc4ba31062c12bcb650920a45d8e3388f1780903a494af8eed541005d",
+    "scripts/8af4fe8e-5406-7d72-d9d6-a8f5d1b66e00/scripts/bbg_script.lua": "1ede9ad8607fda3ceec3e71cda5b3db35072b5d34a0e0e9bd86e0c7cd061cdae",
+    "scripts/8af4fe8e-5406-7d72-d9d6-a8f5d1b66e00/scripts/ccb_legacycards.lua": "736ab38d016402a5cb54d5f4467719147a6837f417f544e9170fbce104fcd040",
+    "scripts/8af4fe8e-5406-7d72-d9d6-a8f5d1b66e00/scripts/ccb_planted_forest.lua": "9b68f7fd6a2ec53f5644be29482e52a988706c3b689fff73e6db6da59cf367c4",
+    "scripts/8af4fe8e-5406-7d72-d9d6-a8f5d1b66e00/scripts/ccb_tajmahal.lua": "7946c6edd31334c89d688f9e9cce4137cd95b81ebccb49c89cca89a96b9a040f",
+    "scripts/8af4fe8e-5406-7d72-d9d6-a8f5d1b66e00/lua/BBG_Expanded/Al_Hasan.lua": "3957d7a251f54006a9d66ccc3a4353a7fe0134c3f859dc8553d1f731ecac14fe",
+    "scripts/8af4fe8e-5406-7d72-d9d6-a8f5d1b66e00/lua/BBG_Expanded/Finland.lua": "ca825a89384164b8819f27783e73f480fbfc11d62702353ea6b5a6e5dac3fafe",
+    "scripts/8af4fe8e-5406-7d72-d9d6-a8f5d1b66e00/lua/BBG_Expanded/Malaysia.lua": "a0b55f32c12910d0542511b3c0d12146e6fe4a43013dc05cb7681bab6f98443f",
+    "scripts/8af4fe8e-5406-7d72-d9d6-a8f5d1b66e00/lua/BBG_Expanded/Olympia.lua": "eb5166d10945c517c8afd31c8ce1e7c73ba22ee93b56343eab8c8b28453312b9",
+    "scripts/8af4fe8e-5406-7d72-d9d6-a8f5d1b66e00/lua/BBG_Expanded/Te_Kinich.lua": "e7956430220ae150e577ba57a8fc58051053274775d5d6df00493c7ecc64edec",
+    "scripts/8af4fe8e-5406-7d72-d9d6-a8f5d1b66e00/lua/BBG_Expanded/Thule.lua": "6d9ef0eb802c161098ec7c7bc30f02aaca142bb1539baeeed97d5357933c03fc"
+  }
+}
