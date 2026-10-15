@@ -43,6 +43,16 @@
   // [ICON_Inspiration] / [ICON_Tourism]），已随 `assets/icons/icon` 入库
   const ICON_EUREKA = "/assets/icons/icon/Eureka.png";
   const ICON_INSPIRATION = "/assets/icons/icon/Inspiration.png";
+  // Civics without a Boosts row in official Gathering Storm and the captured
+  // CCB/BBG rules. BBG adds inspirations to the five late-game civics below.
+  const CIVICS_WITHOUT_INSPIRATION = new Set([
+    "CIVIC_CODE_OF_LAWS", "CIVIC_IDEOLOGY", "CIVIC_FUTURE_CIVIC",
+  ]);
+  const LATE_CIVICS_WITHOUT_INSPIRATION = new Set([
+    "CIVIC_CULTURAL_HEGEMONY", "CIVIC_EXODUS_IMPERATIVE",
+    "CIVIC_GLOBAL_WARMING_MITIGATION", "CIVIC_INFORMATION_WARFARE",
+    "CIVIC_SMART_POWER_DOCTRINE",
+  ]);
   const ICON_TOURISM = "/assets/icons/icon/Tourism.png";
   // v0.40.1: 存档里的旅游业绩是定点整数，**1 点 = 256**（一开始按 1024 算是错的，
   // 实测见 README v0.40：「罗马（图拉真）回合 90 对匈牙利累积 407680 → 1592.5，
@@ -1024,7 +1034,7 @@
       resetReplayState();
       seed = null;
       sel.innerHTML = L("<option>未找到存档</option>");
-      setBanner(L("未找到 .Civ6Save 存档。点击「打开存档」或拖入存档文件、文件夹。"), true);
+      setBanner(L("未找到 .Civ6Save 存档。点击「打开存档」选择或拖入存档文件、文件夹。"), true);
       return;
     }
     for (const r of list) {
@@ -2365,7 +2375,12 @@
       return (list || []).length
         ? list.map((h) => {
             const ic = iconOf(h);
-            const mark = hits.has(hashStr(h))
+            const type = (names[hashStr(h)] || {}).type;
+            const profile = String(staticInfo?.identityProfile || staticInfo?.balanceMod || "vanilla").toLowerCase();
+            const noInspiration = icon === ICON_INSPIRATION &&
+              (CIVICS_WITHOUT_INSPIRATION.has(type) ||
+               (profile !== "bbg" && LATE_CIVICS_WITHOUT_INSPIRATION.has(type)));
+            const mark = hits.has(hashStr(h)) && !noInspiration
               ? `<img class="boost" src="${icon}" alt="" title="${label}">`
               : "";
             return `<span class="chip">${ic ? `<img src="${ic}" alt="">` : ""}` +
@@ -3480,15 +3495,21 @@
     let depth = 0;
     const overlay = $("save-drop-overlay");
     const isFiles = event => Array.from(event.dataTransfer?.types || []).includes("Files");
+    const canDrop = () => !$("savedir-modal").classList.contains("hidden") &&
+      shareLocal && !saveSourceBusy && !shareState?.enabled;
     document.addEventListener("dragenter", event => {
       if (!isFiles(event)) return;
-      event.preventDefault(); ++depth;
-      if (shareLocal && !saveSourceBusy && !shareState?.enabled) overlay.classList.remove("hidden");
+      event.preventDefault();
+      if (!canDrop()) return;
+      ++depth;
+      overlay.classList.remove("hidden");
     });
     document.addEventListener("dragover", event => {
       if (!isFiles(event)) return;
       event.preventDefault();
-      event.dataTransfer.dropEffect = shareLocal && !saveSourceBusy && !shareState?.enabled ? "copy" : "none";
+      const allowed = canDrop();
+      event.dataTransfer.dropEffect = allowed ? "copy" : "none";
+      if (!allowed) { depth = 0; overlay.classList.add("hidden"); }
     });
     document.addEventListener("dragleave", event => {
       if (!isFiles(event)) return;
@@ -3498,7 +3519,8 @@
     document.addEventListener("drop", async event => {
       if (!isFiles(event)) return;
       event.preventDefault(); depth = 0; overlay.classList.add("hidden");
-      if (saveSourceLocked()) return;
+      // Ignore files outside Open Saves, while preventing browser navigation.
+      if (!canDrop()) return;
       // Capture both entries and fallback files before yielding: the browser
       // protects the drag data store as soon as the drop handler returns.
       const items = Array.from(event.dataTransfer.items || []).filter(item => item.kind === "file");
