@@ -1,4 +1,4 @@
-# Keep the application and existing versioned developer inputs; ignore local artifacts.
+# Publish the application and user-facing documentation; keep development materials local.
 /*
 !/.gitignore
 !/README.md
@@ -6,9 +6,9 @@
 !/LICENSE
 !/THIRD_PARTY_NOTICES.md
 !/Civ6WebReplay/
-!/AGENTS.md
-!/pytest.ini
-!/data/
+/data/
+/AGENTS.md
+/pytest.ini
 
 # game binaries / reference build (read-only, not shipped)
 CivVIReplay_v6.0/
@@ -30,28 +30,5 @@ _scratch/
 /Civ6WebReplay/stop.bat
 /Civ6WebReplay/stop.ps1
 
-# Preserve the Git coverage of moved data/tools; local reports and tests stay ignored.
-/data/*
-!/data/README.md
-!/data/gamedb/
-/data/gamedb/*/additions-audit.json
-!/data/ui/
-!/data/tools/
-/data/tools/*
-!/data/tools/tool_paths.py
-!/data/tools/audit_mod_additions.py
-!/data/tools/build_adjacency.py
-!/data/tools/build_gamedb.py
-!/data/tools/build_identities.py
-!/data/tools/build_loc.py
-!/data/tools/build_rule_text.py
-!/data/tools/build_tileyields.py
-!/data/tools/build_web_localization.py
-!/data/tools/capture_database.py
-!/data/tools/database_maintenance.py
-!/data/tools/localization_sources.py
-!/data/tools/vendor_icons.py
-!/data/retired/
-/data/retired/*
-!/data/retired/capture_database.bat.disabled
+# Developer databases, source archives, tools, and reports stay local.
 /test/
