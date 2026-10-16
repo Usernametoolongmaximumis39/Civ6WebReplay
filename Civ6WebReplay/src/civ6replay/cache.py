@@ -42,7 +42,9 @@ DEFAULT_CACHE = ROOT / "cache" / "replay.sqlite"
 # Governor assignments now retain the target city owner; discard city-ID-only views.
 # Unit type keys are unsigned; military strength includes formation/damage offsets.
 # Structured package IDs and independent balance MOD release channels.
-SCHEMA_VERSION = 26
+# Received resources are now serialized separately for the luxury inventory.
+# Saved unit costs/copies and per-queue-entry military formation.
+SCHEMA_VERSION = 29
 
 
 class ReplayCache:

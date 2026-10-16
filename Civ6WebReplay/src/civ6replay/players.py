@@ -271,22 +271,30 @@ def parse_players(data, players, religions, warnings=None):
                 it.advance(4)
                 it.advance(4)
                 it.advance(4)
-                city.currentProdType = read_int(it)
+                kind = read_int(it)
+                city.currentProdKinds.append(kind)
+                if not city.currentProds:
+                    city.currentProdType = kind
                 it.advance(4)
-                if city.currentProdType > 4:
+                if kind > 4:
                     _fail("assertT(0)", it)
                 city.currentProds.append(read_int(it))
-                if city.currentProdType == PROD_UNIT:
-                    it.advance(4)
+                formation = read_int(it) if kind == PROD_UNIT else 0
+                city.currentProdFormations.append(formation)
                 it.advance(12)
             it.advance(40)
             _rmap(it)
             _rmap(it)
-            _rmap(it)
+            building_progress = _rmap(it)
             _rmap(it, 2)
-            _rmap(it)
-            _rmap(it)
-            _rmap(it)
+            unit_progress = _rmap(it)
+            district_progress = _rmap(it)
+            project_progress = _rmap(it)
+            if city.currentProds:
+                current = city.currentProds[0] & 0xFFFFFFFF
+                progress = (building_progress.get(current) or unit_progress.get(current)
+                            or district_progress.get(current) or project_progress.get(current) or 0)
+                city.currentProdProgress = progress / 256.0
             _rmap(it, 2)
             _rmap(it)
             _rmap(it)
@@ -737,14 +745,15 @@ def parse_players(data, players, religions, warnings=None):
         it.advance(4)
         _rarray(it)
         it.advance(13)
-        # The inventory also contains luxuries. Keep the saved current amount;
-        # received/given are separate trade counters, not additions to stock.
+        # Luxury resources received from other sources are stored separately
+        # from the current inventory amount; outgoing copies are already
+        # reflected in that amount.
         count = read_int(it)
         for i in _range(count, it):
             resource = read_int(it)
             it.advance(4)
             p.resources[resource] = read_int(it)
-            read_int(it)  # received
+            p.resourceReceived[resource] = read_int(it)
             read_int(it)  # given
         it.advance(4)
         for i in _range(count, it):
@@ -779,7 +788,7 @@ def parse_players(data, players, religions, warnings=None):
             read_string(it)
             it.advance(22)
         it.advance(20)
-        _rmap(it)
+        p.unitCopies = _rmap(it)
         _rmap(it)
         count = read_int(it)
         for i in _range(count, it):
@@ -929,7 +938,7 @@ def parse_players(data, players, religions, warnings=None):
         for i in _range(count, it):
             it.advance(4)
         it.advance(8)
-        _rmap(it)
+        p.unitCosts = _rmap(it)
         _rmap(it)
         _rmap(it)
         _rmap(it)

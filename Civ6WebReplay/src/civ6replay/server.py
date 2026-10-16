@@ -45,6 +45,7 @@ from .localization import (ui, localize_replays, localize_static,
 from .mods import wall_defense_override
 from .mod_identity import balance_profile
 from .database_versions import version_info
+from .production import rules_for as production_rules
 from .replay import (SaveInfo, default_save_dir, discover, group_by_seed,
                      latest_save_for_seed)
 from .state import (header_verdict, parse_save, turn_payload, encode_payload,
@@ -53,6 +54,14 @@ from .state import (header_verdict, parse_save, turn_payload, encode_payload,
 ROOT = Path(__file__).resolve().parents[2]
 WEB_DIR = ROOT / "web"
 ICONS_DIR = ROOT / "assets" / "icons"
+
+
+def production_costs(profile: str) -> dict:
+    return {h: row["cost"] for h, row in production_rules(profile).get("items", {}).items()
+            if row.get("cost", 0) > 0 and row.get("model") in (
+                "NO_COST_PROGRESSION", "NO_PROGRESSION_MODEL")}
+
+
 MAPWRAP_JSON = ROOT / "data" / "vanilla" / "mapwrap.json"
 
 # route index (``tiles.road``) -> ``LOC_ROUTE_*_NAME`` tag.  The index is the
@@ -1036,6 +1045,7 @@ class ReplayManager:
             # 「最后那栋」（升级链末端）用，见 hexmap.js ``_pickBuilding``。
             "buildingCost": {**{str(k): v for k, v in db.building_cost_map().items()},
                              **identity_map("buildingCost")},
+            "productionCost": production_costs(profile),
             "districtReplaces": {**{str(k): v for k, v in db.replaces_map().items()},
                                  **identity_map("replaces")},
             "yieldOrder": YIELD_ORDER,

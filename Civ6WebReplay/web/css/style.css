@@ -193,9 +193,29 @@ button:hover { border-color: var(--accent); }
   opacity: .9; }
 .hud-row .hmid .etok { font-variant-numeric: tabular-nums; }
 .hud-detail { background: #0f141c; border: 1px solid var(--border); border-radius: 5px; padding: 5px 8px; margin: 2px 0 4px; font-size: 11px; color: var(--muted); }
+.tourism-detail { display: flex; align-items: center; gap: 4px; color: var(--ink); font-variant-numeric: tabular-nums; }
+.tourism-detail img { width: 15px; height: 15px; object-fit: contain; }
 .city-link { display: flex; justify-content: space-between; gap: 8px; color: var(--ink); text-decoration: none; padding: 1px 2px; border-radius: 3px; }
 .city-link:hover { background: rgba(74,163,214,.16); }
 .city-link .pop { color: var(--accent); font-weight: 600; }
+.city-entry { display: flex; align-items: center; gap: 5px; min-width: 0; margin-bottom: 3px; }
+.city-entry > .city-link { flex: 1 1 auto; min-width: 76px; align-items: center; }
+.city-entry .city-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.city-entry .pop { flex: none; }
+.city-districts { display: flex; flex: 0 1 auto; min-width: 0; max-width: 70%; flex-wrap: nowrap;
+  gap: 5px; overflow-x: auto; padding: 3px 5px 5px; }
+.city-district { position: relative; flex: none; display: grid; place-items: center;
+  width: 24px; height: 24px; border: 1px solid var(--border); border-radius: 4px;
+  background: #0f141c; color: var(--ink); }
+.city-district img { width: 20px; height: 20px; object-fit: contain; }
+.city-district.wip { opacity: .65; border-style: dashed; }
+.city-district.pillaged { border-color: #e06666; }
+.city-district .district-discount { position: absolute; right: -4px; bottom: -4px;
+  min-width: 13px; height: 13px; padding: 0 2px; border-radius: 7px;
+  background: #b88625; color: #101820; font-size: 9px; font-weight: 700; line-height: 13px;
+  text-align: center; box-shadow: 0 0 0 1px #0f141c; }
+.prod-progress { display: inline-flex; align-items: center; gap: 2px; margin-left: 5px; color: var(--accent); }
+.chip .prod-progress img { width: 13px; height: 13px; }
 .muted { color: var(--muted); }
 
 /* city-state card jump targets */
@@ -374,6 +394,7 @@ body.panel-dragging { cursor: grabbing; }
 #civ-hud-minimize { display: inline-flex; align-items: center; padding: 4px; }
 #civ-hud-minimize svg, #civ-hud-restore svg { width: 16px; height: 16px; display: block; }
 #civ-hud-restore { margin-left: auto; padding: 3px; }
+#right-panel.hud-minimized { background: rgba(26,31,43,.55); }
 #right-panel.hud-minimized .panel-head { cursor: default; gap: 2px; padding: 2px 3px; }
 #right-panel.hud-minimized .panel-title,
 #right-panel.hud-minimized #hud-tabs,
@@ -385,7 +406,8 @@ body.panel-dragging { cursor: grabbing; }
 #right-panel.hud-minimized .cmp-scroll { scrollbar-gutter: auto; }
 .mini-grid.cmp-grid { width: max-content; row-gap: 0; column-gap: 2px; }
 .mini-grid .cmp-head, .mini-grid .cmp-label, .mini-grid .cmp-cell > .hud-row { cursor: default; touch-action: auto; }
-.mini-grid .cmp-head, .mini-grid .cmp-cell { border: 0; border-radius: 0; border-left: 1px solid var(--border); }
+.mini-grid .cmp-head, .mini-grid .cmp-cell { background: transparent; border: 0; border-radius: 0; border-left: 1px solid var(--border); }
+.mini-grid .mini-team-separator { border-left: 1px solid rgba(151,161,180,.5); margin-left: 4px; }
 .mini-grid .cmp-head { padding: 2px 3px; }
 .mini-grid .cmp-head .hrow { justify-content: center; min-height: 34px; gap: 0; }
 .mini-grid .cmp-cell.compact { padding: 0 3px; }

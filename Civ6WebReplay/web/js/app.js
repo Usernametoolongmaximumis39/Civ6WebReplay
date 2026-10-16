@@ -510,8 +510,7 @@
   function placeCompactHUD(size) {
     const el = panelEl("right"), grid = $("civ-hud").querySelector(".mini-grid");
     const available = Math.max(1, size.w - dockLayout.right - 2 * PANEL_EDGE);
-    const columns = grid ? Number(grid.dataset.columns) : 0;
-    const w = Math.min(available, Math.max(80, columns * CMP_COMPACT_W + Math.max(0, columns - 1) * 2 + 8));
+    const w = Math.min(available, Math.max(80, Number(grid?.dataset.width || 0) + 8));
     // Measure at the final width so overflow never hides the last data row.
     el.style.width = Math.round(w) + "px";
     const scroll = grid?.parentElement;
@@ -1368,7 +1367,7 @@
     await ensureNames(payload, seq);
     if (seq !== replaySeq || request !== turnSeq) return;
     currentTurn = payload;
-    currentTurnIndex = idx;        // v0.40: 旅游业绩要按时间轴找上一个存档
+    currentTurnIndex = idx;
     // Replace rather than push: refresh restores this view without adding a
     // browser-history entry for every slider movement. Ignore stale requests.
     const url = new URL(location.href);
@@ -1406,9 +1405,11 @@
       const j = idx + d;
       if (j < 0 || j >= turns.length) continue;
       fetchTurn(j, seq).then(() => {
-        // v0.40: 上一回合的 payload 回来之后，旅游业绩才算得出来 —— 重画一次
+        // The next save records Tourism earned during this turn; the final
+        // save falls back to the preceding interval.
         // （只在还停在同一回合时画，避免翻回合时闪一下旧数据）
-        if (seq === replaySeq && request === turnSeq && j === idx - 1 && currentTurn === payload) {
+        if (seq === replaySeq && request === turnSeq &&
+            j === (idx + 1 < turns.length ? idx + 1 : idx - 1) && currentTurn === payload) {
           renderHUD(currentTurn);
         }
       }).catch(() => {});
@@ -1448,6 +1449,7 @@
       // v0.31: 核武器库存的种类（核装置 / 热核装置）也要能解析出名字与图标
       Object.keys(p.wmd || {}).forEach((h) => push(Number(h)));
       Object.keys(p.resources || {}).forEach((h) => push(Number(h)));
+      Object.keys(p.resourceReceived || {}).forEach((h) => push(Number(h)));
       (p.cities || []).forEach((c) => {
         (c.currentProds || []).forEach(push);
         Object.keys(c.built || {}).forEach(push);
@@ -2026,13 +2028,10 @@
 
   // --- v0.40 旅游业绩 / 文化胜利进度 --------------------------------------
   // 存档只给「对每个对手累积的旅游业绩」（``players[].tourismByPlayer``），所以
-  // 「旅游业绩 / 回合」只能由相邻两个存档的**逐对手增量**算出（÷ 256，定点还原），
-  // 再从这一组流量里反推出**没有修正**的那个基准值 —— 就是游戏顶栏 / 世界排名里
-  // 那个 GetTourism()（玩家实测：罗马（图拉真）回合 90 的一组流量是
-  // 56.5 / 111 / 113 / 56.5 / 55.5 / 56.5 / 84.75，游戏顶栏下一回合是 123，
-  // 而 -50%（不同政体）之类的修正正落在那些 56.5 上，所以基准 = 113）。
-  // 返回 ``undefined`` = 上一个存档还没到（先显示 …，预取回来后会重画），
-  // ``null`` = 没有可算的基准（时间轴上第一个存档 / 没有对手的玩家）。
+  // 当前回合产生的旅游业绩写入下一份存档的逐对手累计值。差值需除以
+  // 256（定点格式），再从各对手的已修正流量推断未修正基准。
+  // 修正状态并未完整保存在存档里，因此这里只能给估算值。
+  // 返回 undefined = 相邻存档尚未载入；null = 没有可用流量。
   function fitTourismBase(flows) {
     const cands = [...new Set(flows.map((v) => Math.round(v * 100) / 100))]
       .sort((a, b) => b - a);
@@ -2055,26 +2054,30 @@
     const cur = ((currentTurn && currentTurn.players) || [])
       .find((x) => x.iPlayer === ip);
     if (!cur || !cur.tourismByPlayer) return null;
-    if (currentTurnIndex <= 0 || !turns.length) return null;
-    const prev = turns[currentTurnIndex - 1];
-    const prevPayload = turnCache.get(prev.turn);
-    if (!prevPayload) return undefined;
-    const before = (prevPayload.players || []).find((x) => x.iPlayer === ip);
+    const forward = currentTurnIndex + 1 < turns.length;
+    if (!forward && currentTurnIndex <= 0) return null;
+    const neighbor = turns[currentTurnIndex + (forward ? 1 : -1)];
+    const neighborPayload = turnCache.get(neighbor.turn);
+    if (!neighborPayload) return undefined;
+    const before = (forward ? currentTurn : neighborPayload).players.find((x) => x.iPlayer === ip);
+    const after = (forward ? neighborPayload : currentTurn).players.find((x) => x.iPlayer === ip);
     if (!before || !before.tourismByPlayer) return null;
-    const gap = Math.max(1, (Number(currentTurn.turn) || 0) - (Number(prev.turn) || 0));
+    if (!after || !after.tourismByPlayer) return null;
+    const gap = Math.max(1, Math.abs((Number(neighbor.turn) || 0) - (Number(currentTurn.turn) || 0)));
     const rows = [];
-    for (const key of Object.keys(cur.tourismByPlayer)) {
+    for (const key of Object.keys(after.tourismByPlayer)) {
       const was = Number(before.tourismByPlayer[key]) || 0;
-      const now = Number(cur.tourismByPlayer[key]) || 0;
+      const now = Number(after.tourismByPlayer[key]) || 0;
       if (!was || now < was) continue;       // 那时还没认识 / 还没开始攒旅游业绩
       rows.push({ ip: Number(key), flow: (now - was) / TOURISM_FIXED / gap,
                   accum: now / TOURISM_FIXED });
     }
     if (!rows.length) return null;
-    return { base: fitTourismBase(rows.map((r) => r.flow)), rows: rows, gap: gap };
+    return { base: fitTourismBase(rows.map((r) => r.flow)), rows: rows, gap: gap,
+      lagged: !forward };
   }
 
-  // 「文化」行正中间那个数：一位小数（游戏里也是 ``Round(GetTourism(), 1)``）
+  // 文化详情中的每回合旅游业绩：一位小数（游戏里也是 ``Round(GetTourism(), 1)``）。
   function tourismText(ip) {
     const info = tourismInfo(ip);
     if (info === undefined) return "…";
@@ -2085,8 +2088,7 @@
   // 悬停时把这一组逐文明流量也列出来（口径与游戏文化胜利面板的 tooltip 一致：
   // 「目前」= 本回合流量，「累积」= 存档里的累积值 ÷ 256），方便逐格核对。
   function tourismTitle(ip) {
-    const head = L("旅游业绩 / 回合：游戏顶栏那个数。存档只存「对每个对手累积的") +
-      L("旅游业绩」，这里用相邻两回合的逐文明增量反推（取能自洽的最大基准）");
+    const head = L("旅游业绩 / 回合估算：由相邻存档的逐文明累积增量反推。");
     const info = tourismInfo(ip);
     if (!info) return head;
     const lines = info.rows
@@ -2094,7 +2096,8 @@
       .sort((a, b) => b.flow - a.flow)
       .map((r) => `　${(playerInfo(r.ip) || {}).civName || ("P" + r.ip)} ` +
         `${fmtNum(Math.round(r.flow * 10) / 10)}${L("（累积 ")}${fmtNum(Math.round(r.accum))}）`);
-    return head + L("\n逐文明：本回合流量（累积 / 256）：\n") + lines.join("\n");
+    return head + (info.lagged ? L("\n末尾回合没有下一份存档，显示上一回合的估算。") : "") +
+      L("\n逐文明：本回合流量（累积 / 256）：\n") + lines.join("\n");
   }
 
   // 文化胜利进度 = 国际游客 / 需要超过的对手国内游客。分母与游戏
@@ -2254,7 +2257,12 @@
 
   function ownedResourcesHTML(p, category, label, showStock) {
     const items = ((staticInfo && staticInfo[category]) || [])
-      .filter(h => Number((p.resources || {})[hashStr(h)]) > 0);
+      .filter(h => {
+        const key = hashStr(h);
+        const amount = Number((p.resources || {})[key]) || 0;
+        return (category === "luxuryResources" ?
+          amount + (Number((p.resourceReceived || {})[key]) || 0) : amount) > 0;
+      });
     if (!items.length) return "";
     return `<div class="zone-title">${label}</div><div class="resource-inventory">` +
       items.map(h => {
@@ -2318,7 +2326,27 @@
 
     const cityDetail = ownedResourcesHTML(p, "luxuryResources", L("奢侈品资源"), false) + ((p.cities || []).map((c) => {
       const i = c.y * payload.width + c.x;
-      return `<a href="#" class="city-link" data-i="${i}" data-open-p="${p.iPlayer}" data-open-city="${c.id}">${c.name}<span class="pop">${c.population}</span></a>`;
+      const districts = (p.districts || [])
+        .filter((d) => d.cityId === c.id && (d.type >>> 0) !== DISTRICT_CITY_CENTER &&
+          (d.type >>> 0) !== DISTRICT_WONDER)
+        .sort((a, b) => a.id - b.id)
+        .map((d) => {
+          const ic = iconOf(d.type);
+          const status = d.built === 0 ? (d.discounted ? "（建设中，打折）" : "（建设中）") :
+            d.pillage === 1 ? (d.discounted ? "（被掠夺，打折）" : "（被掠夺）") :
+            (d.discounted ? "（已建成，打折）" : "（已建成）");
+          const label = escapeText(nameOf(d.type) + L(status));
+          const state = d.built === 0 ? " wip" : (d.pillage === 1 ? " pillaged" : "");
+          return `<span class="city-district${state}" data-district-id="${d.id}" ` +
+            `title="${label}" aria-label="${label}">` +
+            `${ic ? `<img src="${ic}" alt="">` : `<span aria-hidden="true">◇</span>`}` +
+            `${d.discounted ? `<span class="district-discount" aria-hidden="true">%</span>` : ""}</span>`;
+        }).join("");
+      return `<div class="city-entry"><a href="#" class="city-link" data-i="${i}" ` +
+        `data-open-p="${p.iPlayer}" data-open-city="${c.id}" title="${escapeText(c.name)}">` +
+        `<span class="city-name">${escapeText(c.name)}</span>` +
+        `<span class="pop">${c.population}</span></a>` +
+        (districts ? `<div class="city-districts">${districts}</div>` : "") + `</div>`;
     }).join("") || L("<span class='muted'>无城市</span>"));
     // military units: icon + name + formation (★ wording) + 血条 / 晋升 / (坐标)
     const milUnits = (payload.units || [])
@@ -2398,9 +2426,14 @@
       `${chips(p.currentTech, p.techBoosted, ICON_EUREKA, L("尤里卡已触发"))}` +
       researchedRowHTML(L("已研科技"), p.techResearched, p.techTotal, "tech", p.iPlayer) +
       `${L("<div class=\"zone-title\">城市科技（每回合，降序）</div>")}${cityRank(L("科技"))}`;
-    // v0.40: 「文化」行整行正中间 = 旅游业绩 / 回合（与「外交」行的剩余使者同一个
-    // 位置）；展开后第一行是文化胜利进度（国际游客 / 需要超过的对手国内游客）。
+    // 展开文化详情时显示旅游业绩估计值及文化胜利进度。
+    const tourism = tourismText(p.iPlayer);
+    const tourismDetail = `<div class="tourism-detail" title="${escapeText(tourismTitle(p.iPlayer))}">` +
+      `<img src="${ICON_TOURISM}" alt="${L("旅游业绩")}">` +
+      `<span>${tourism}</span>${tourism !== "…" && tourism !== "—" ?
+        `<span class="muted">${L("（估计值）")}</span>` : ""}</div>`;
     const culDetail =
+      tourismDetail +
       cultureVictoryHTML(p) +
       `${L("<div class=\"zone-title\">当前市政</div>")}` +
       `${chips(p.currentCivic, p.civicBoosted, ICON_INSPIRATION, L("鼓舞已触发"))}` +
@@ -2442,13 +2475,6 @@
     const envoyTokens = Number(p.envoyTokens) || 0;
     const envoyMid = `<img class="eicon" src="${ICON_ENVOY}${L("\" alt=\"使者\">")}` +
       `<span class="etok">${fmtNum(envoyTokens)}</span>`;
-    // v0.40: 旅游业绩（每回合）—— 和上面那一行同一个位置（整行正中间）
-    // 存档不存这个数（只存「对每个对手累积的旅游业绩」），所以标题里写清楚它是
-    // 「相邻两份存档的差」反推出来的，并把逐文明的流量一并列出来（见 tourismTitle）。
-    const tourismMid = `<img class="eicon" src="${ICON_TOURISM}${L("\" alt=\"旅游业绩\" ")}` +
-      `title="${tourismTitle(p.iPlayer)}">` +
-      `<span class="etok">${tourismText(p.iPlayer)}</span>`;
-
     const rows = [
       { key: "city", icon: ICON_CITY, value: p.cityCount, detail: cityDetail,
         mid: `<img class="eicon" src="${ICON_POPULATION}${L("\" alt=\"人口\" title=\"人口总数\">")}` +
@@ -2459,8 +2485,7 @@
       { key: "food", icon: ICON_FOOD, value: fmtNum(food), detail: foodDetail },
       { key: "prod", icon: ICON_PROD, value: fmtNum(prod), detail: prodDetail },
       { key: "sci", icon: ICON_SCI, value: fmtNum(sci), detail: sciDetail },
-      { key: "cul", icon: ICON_CUL, value: fmtNum(cul), detail: culDetail,
-        mid: tourismMid },
+      { key: "cul", icon: ICON_CUL, value: fmtNum(cul), detail: culDetail },
       { key: "gold", icon: ICON_GOLD, value: stockHTML(p.gold, gold - maint),
         detail: goldDetail },
       { key: "faith", icon: ICON_FAITH, value: stockHTML(p.faith, faith),
@@ -2711,6 +2736,17 @@
 
   function renderCompactHUD(payload, majors) {
     const box = $("civ-hud");
+    const teams = new Map();
+    for (const m of majors) {
+      if (isSpectator(m.info)) continue;
+      const value = m.info.team;
+      const team = value != null && Number.isInteger(Number(value)) && Number(value) >= 0 && Number(value) < 0xFFFFFFFF ? Number(value) : null;
+      if (!teams.has(team)) teams.set(team, []);
+      teams.get(team).push(m);
+    }
+    // Keep the selected stat order within each team; unknown teams stay last.
+    const groups = [...teams].sort(([a], [b]) => (a ?? Infinity) - (b ?? Infinity));
+    majors = groups.flatMap(([, members]) => members);
     if (!majors.length) {
       const empty = document.createElement("div");
       empty.className = "loading"; empty.textContent = L("本回合无可显示的文明");
@@ -2718,21 +2754,35 @@
       return;
     }
     // Read the same primary values as the full HUD, then discard every detail
-    // and interaction. Spectators keep their identity and have no game values.
-    const cards = majors.map(m => isSpectator(m.info) ? null : majorCard(m.p, m.info, payload));
+    // and interaction.
+    const cards = majors.map(m => majorCard(m.p, m.info, payload));
     const grid = document.createElement("div");
     grid.className = "cmp-grid mini-grid";
     grid.dataset.columns = String(majors.length);
-    grid.style.gridTemplateColumns = `repeat(${majors.length}, ${CMP_COMPACT_W}px)`;
+    const tracks = [], columns = [], separators = [];
+    groups.forEach(([, members], i) => {
+      if (i) { tracks.push(10); separators.push(tracks.length); }
+      members.forEach(() => { tracks.push(CMP_COMPACT_W); columns.push(tracks.length); });
+    });
+    grid.style.gridTemplateColumns = tracks.map(w => `${w}px`).join(" ");
+    grid.dataset.width = String(tracks.reduce((sum, w) => sum + w, 0) + Math.max(0, tracks.length - 1) * 2);
     const add = (className, col, row) => {
       const el = document.createElement("div"); el.className = className;
       el.style.gridColumn = String(col); el.style.gridRow = String(row);
       grid.appendChild(el); return el;
     };
+    separators.forEach(col => {
+      const separator = add("mini-team-separator", col, 1);
+      separator.style.gridRow = `1 / span ${Object.keys(CIV_ROW_LABELS).length + 1}`;
+      separator.setAttribute("aria-hidden", "true");
+    });
     majors.forEach((m, c) => {
-      const head = add("cmp-head compact", c + 1, 1);
+      const head = add("cmp-head compact", columns[c], 1);
       head.dataset.ip = String(m.p.iPlayer);
-      head.title = [m.info.civName, m.info.leaderName, isSpectator(m.info) ? L("观察者") : ""].filter(Boolean).join(" · ");
+      const team = m.info.team;
+      head.title = [m.info.civName, m.info.leaderName,
+        team != null && Number.isInteger(Number(team)) && Number(team) >= 0 && Number(team) < 0xFFFFFFFF ? `${L("团队 ")}${Number(team) + 1}` : ""]
+        .filter(Boolean).join(" · ");
       const portrait = iconOf(m.info.leader);
       head.innerHTML = `<span class="hrow">` +
         (portrait ? `<img class="cmp-portrait" src="${portrait}" alt="${m.info.leaderName || L("领袖头像")}">` : "") + `</span>`;
@@ -2743,7 +2793,7 @@
         const valueRow = cards[c]?.querySelector(`.hud-rows > .hud-row[data-row="${key}"]`);
         const value = !valueRow ? "—" : key === "gold" || key === "faith" ? cmpStockHTML(m.p, key)
           : valueRow.querySelector(".hval").innerHTML;
-        const cell = add("cmp-cell compact", c + 1, ri + 2);
+        const cell = add("cmp-cell compact", columns[c], ri + 2);
         cell.dataset.ip = String(m.p.iPlayer); cell.dataset.row = key;
         cell.innerHTML = compactHUDRowHTML(key, value, icons[ri]);
       });
@@ -4459,6 +4509,26 @@
     if (map) map.setCityHighlight(found.iPlayer, found.city.id);
   }
 
+  function currentProductionCost(p, c, hash) {
+    if (Object.prototype.hasOwnProperty.call(c, "currentProdCost")) return c.currentProdCost;
+    const typ = (names[hashStr(hash)] || {}).type || "";
+    if (typ.startsWith("DISTRICT_")) {
+      const district = (p.districts || []).find((d) => d.cityId === c.id &&
+        (d.type >>> 0) === (hash >>> 0));
+      if (district && Number(district.cost) > 0) return Number(district.cost);
+    }
+    // The database stores standard-speed base costs; district costs are locked
+    // in the save and take precedence. Projects can scale on repetition, so a
+    // base project cost must not be presented as the current total.
+    if (typ.startsWith("PROJECT_")) return null;
+    const base = Number(((staticInfo && staticInfo.productionCost) || {})[hashStr(hash)] ||
+      ((staticInfo && staticInfo.buildingCost) || {})[hashStr(hash)]);
+    const speed = {GAMESPEED_MARATHON: 300, GAMESPEED_EPIC: 150,
+      GAMESPEED_STANDARD: 100, GAMESPEED_QUICK: 67, GAMESPEED_ONLINE: 50}
+      [(staticInfo && staticInfo.gameSpeed) || "GAMESPEED_STANDARD"] || 100;
+    return base > 0 ? Math.floor(base * speed / 100) : null;
+  }
+
   function cityPanelHTML(p, c) {
     // v0.34: 总督一栏不再只写「晋升 N」，而是列出真正点过的词条名。
     const gov = governorCellHTML(c);
@@ -4470,9 +4540,19 @@
     html += `${L("<div class=\"sec-title\">产出</div>")}${yieldGrid(c.yields)}`;
     html += `${L("<div class=\"sec-title\">生产队列</div>")}`;
     const prods = (c.currentProds || []);
-    html += prods.length ? prods.map((ph) => {
+    html += prods.length ? prods.map((ph, index) => {
       const ic = iconOf(ph);
-      return `<span class="chip">${ic ? `<img src="${ic}">` : ""}${nameHTML(ph)}</span>`;
+      let progress = "";
+      if (index === 0) {
+        const done = Math.max(0, Math.floor(Number(c.currentProdProgress) || 0));
+        const cost = currentProductionCost(p, c, ph);
+        progress = `<span class="prod-progress"${cost > 0 ? "" : ` title="${L("当前生产造价无法从存档确定")}"`}>` +
+          `<img src="${ICON_PROD}" alt="${L("产能")}">` +
+          `${fmtNum(done)}/${cost > 0 ? fmtNum(cost) : "?"}</span>`;
+      }
+      const formation = (c.currentProdFormations || [])[index] || 0;
+      const stars = formation === 1 ? " ★★" : formation === 2 ? " ★★★" : "";
+      return `<span class="chip">${ic ? `<img src="${ic}">` : ""}${nameHTML(ph)}${stars}${progress}</span>`;
     }).join("") : L("<span class='muted'>无</span>");
     // v0.24: districts the city owns (including unfinished / specialized ones
     // such as the aqueduct) with their buildings nested, then its wonders.
@@ -4493,9 +4573,9 @@
 
   // "type（状态）" chip suffix used by the district / wonder groups
   function districtStatus(d) {
-    if (d.built === 0) return `${L("<span class=\"dstat wip\">（建设中）</span>")}`;
-    if (d.pillage === 1) return `${L("<span class=\"dstat bad\">（被掠夺）</span>")}`;
-    return `${L("<span class=\"dstat\">（已建成）</span>")}`;
+    if (d.built === 0) return `<span class="dstat wip">${L(d.discounted ? "（建设中，打折）" : "（建设中）")}</span>`;
+    if (d.pillage === 1) return `<span class="dstat bad">${L(d.discounted ? "（被掠夺，打折）" : "（被掠夺）")}</span>`;
+    return `<span class="dstat">${L(d.discounted ? "（已建成，打折）" : "（已建成）")}</span>`;
   }
 
   // v0.30: ``pillaged`` is the host city's set of pillaged building hashes; a
@@ -4518,7 +4598,7 @@
       .sort((a, b) => {
         const ac = (a.type >>> 0) === DISTRICT_CITY_CENTER ? 0 : 1;
         const bc = (b.type >>> 0) === DISTRICT_CITY_CENTER ? 0 : 1;
-        return (ac - bc) || cmpKey([nameOf(a.type)], [nameOf(b.type)]);
+        return (ac - bc) || (a.id - b.id);
       });
     if (!list.length) return L("<span class='muted'>无</span>");
     const pillaged = pillagedBuildingSet(c);

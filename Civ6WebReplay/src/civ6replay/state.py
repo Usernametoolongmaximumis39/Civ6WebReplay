@@ -18,8 +18,10 @@ from . import unsupported as unsupported_mod
 from . import visibility as visibility_mod
 from .gamedb import get_gamedb
 from .identities import get_identities
-from .adjacency import calculate_adjacencies
+from .adjacency import calculate_adjacencies, get_rules as get_adjacency_rules
+from .mod_identity import balance_profile
 from .tileyields import calculate_tile_yields, rules_token
+from .production import current_cost
 from .bcy import parse_bcy
 from .binary import Cursor, LayerError, read_int
 from .hash import crc32_type
@@ -224,11 +226,9 @@ def city_state_sort_key(city_count: int, flavour: str, max_emissary: int,
 def tourism_by_player(p: "Player") -> Dict[str, int]:
     """v0.40: ``{对手槽位: 对它的累积旅游业绩}``（自己那一格与 0 不写进去）。
 
-    存档只给累积量、不给每回合值，而且每一份都被各自的旅游修正（开边 / 商路 /
-    同宗教…）乘过 —— 所以前端拿相邻两个存档里**同名键**的差算出每个对手的增量，
-    再取**出现次数最多**的那个增量（大多数对手共用的那份 = 没被修正改过的基准）
-    ÷ 1024 ÷ 回合间隔，就是游戏文化胜利面板里的「旅游业绩 / 回合」
-    （推导见 README v0.40）。
+    存档只给累积量、不给当前每回合值。前端用下一份存档的增量
+    ÷ 256 ÷ 回合间隔，推算当前回合对各对手的流量；对手修正无法从
+    累积量唯一反解，所以总旅游业绩明确显示为估算。
     """
     me = int(getattr(p, "iPlayer", -1))
     out: Dict[str, int] = {}
@@ -425,6 +425,7 @@ def summarize_player(p: Player) -> dict:
         # length is the actual capacity (including extra slots from bonuses).
         "policySlots": [len(slot) for slot in p.policies],
         "resources": {str(_mask(k)): int(v) for k, v in p.resources.items() if v > 0},
+        "resourceReceived": {str(_mask(k)): int(v) for k, v in p.resourceReceived.items() if v > 0},
         "cityCount": len(p.cities),
         "totalPop": p.totalPop,
         "militaryStrength": p.militaryStrength,
@@ -440,6 +441,8 @@ def summarize_player(p: Player) -> dict:
              "yields": {str(k): round(v, 1) for k, v in c.yields.items()},
              "currentProds": [_mask(x) for x in c.currentProds],
              "currentProdType": int(getattr(c, "currentProdType", 0) or 0),
+             "currentProdProgress": round(float(getattr(c, "currentProdProgress", 0) or 0), 2),
+             "currentProdFormations": list(c.currentProdFormations),
              # built buildings: {building hash: tile index}; 0xFFFF = not built
              "built": {str(_mask(k)): (int(v) & 0xFFFF)
                        for k, v in getattr(c, "built", {}).items()
@@ -466,6 +469,7 @@ def summarize_player(p: Player) -> dict:
              "damage": int(getattr(d, "damage", 0) or 0),
              "wallDamage": int(getattr(d, "wallDamage", 0) or 0),
              "wall": int(getattr(d, "wall", 0) or 0),
+             "cost": int(getattr(d, "cost", 0) or 0),
              "cityId": int(getattr(d, "cityId", 0xFFFF))}
             for d in p.districts
         ],
@@ -494,7 +498,7 @@ def summarize_player(p: Player) -> dict:
                 for k, v in (getattr(p, "wmd", {}) or {}).items() if v},
         # v0.40: 旅游业绩 / 文化胜利进度（右栏文明卡「文化」行）。
         # ``tourismByPlayer`` = {对手槽位: 累积旅游业绩}（见 ``tourism_by_player()``），
-        # 前端拿相邻两个存档的逐对手增量算出「旅游业绩 / 回合」；
+        # 前端优先拿本回合与下一份存档的逐对手增量估算旅游业绩；
         # ``externalTourist`` = 国际游客（游戏文化胜利面板的分子），
         # ``internalTourist`` = 国内游客（分母取对手里最高的那个 + 1）。
         "tourismByPlayer": tourism_by_player(p),
@@ -570,11 +574,36 @@ def turn_payload(state: GameState, *, wrap_x: Optional[bool] = None) -> dict:
 
     players = [summarize_player(p) for p in state.players if p.iPlayer >= 0]
     adjacency = calculate_adjacencies(state, wrap_x=wrap_x, include_sources=True)
+    profile = balance_profile(state.modPackages or state.mods,
+                              default=(state.balanceMod or "vanilla").lower())
+    district_rules = get_adjacency_rules("official" if profile == "vanilla" else profile)
+    district_cost_rules_available = bool(district_rules) and any(
+        report is not None for report in adjacency.values())
     for p, summary in zip((p for p in state.players if p.iPlayer >= 0), players):
+        info = next((i for i in state.playersInfo if i.iPlayer == p.iPlayer), None)
+        for city, record in zip(p.cities, summary["cities"]):
+            record["currentProdCost"] = current_cost(
+                p, city, profile, state.game_speed, _mask(info.civ) if info else None)
         for district, record in zip(p.districts, summary["districts"]):
             report = adjacency.get(id(district))
             record["adjacency"] = report["yields"] if report is not None else None
             record["adjacencySources"] = report["sources"] if report is not None else None
+        # District IDs increase as plots are placed. Their saved cost remains
+        # locked, so compare each with the preceding normal-cost envelope of
+        # the same progression model after normalizing unique-district bases.
+        # A large fall identifies the game's approximately 40% district discount.
+        if district_cost_rules_available:
+            prior_normal = 0.0
+            for record in sorted(summary["districts"], key=lambda d: d["id"]):
+                typ = district_rules.types.get(record["type"])
+                row = district_rules.districts.get(typ, {})
+                if (row.get("CostProgressionModel") != "COST_PROGRESSION_NUM_UNDER_AVG_PLUS_TECH"
+                        or not record["cost"] or not row.get("Cost")):
+                    continue
+                normalized = record["cost"] / int(row["Cost"])
+                record["discounted"] = bool(prior_normal and normalized < prior_normal * 0.78)
+                if not record["discounted"]:
+                    prior_normal = max(prior_normal, normalized)
 
     # v0.28.1: religions are *per-turn* state — a religion only exists from the
     # turn it was founded and gains its beliefs over time (2 at founding, up to 4

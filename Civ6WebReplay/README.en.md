@@ -11,6 +11,9 @@ Current version: **v0.43**. Windows is recommended, with Chrome or Edge.
 ## What's new in v0.43
 
 - Open a single save or drop a save file or folder to import it. Folder scanning and turn parsing now load in parallel, and you can adjust the worker count.
+- City production queues show invested/required Production, including lifetime-copy unit cost increases, research-based project costs, and Military Academy, Seaport and Zulu discounts for Corps and Armies. The rules ship with the application.
+- City lists show district icons in placement order and infer district discounts from saved costs. Luxury inventories include resources received from other sources. The compact data panel groups teammates and hides spectators.
+- Tourism appears in culture details as an estimate, preferably calculated from the next save. The final turn explicitly falls back to the previous turn's estimate.
 - Unrecognized religions receive stable numbers and available icons across turns. Gold ledger parsing now counts enacted deal items only, preventing expired-log entries from being counted twice.
 - Developer data and tests now live at the repository root, leaving the application package focused on runtime files. The old database capture entry point remains retired pending a rewrite.
 
@@ -29,10 +32,12 @@ Current version: **v0.43**. Windows is recommended, with Chrome or Edge.
 1. Install [Python 3.11 or later](https://www.python.org/downloads/). Enable **Add Python to PATH** during setup.
 2. On GitHub, choose **Code → Download ZIP** and extract it to a local folder.
 3. Open the extracted **Civ6WebReplay** folder and double-click **start.bat**.
-4. On the first launch, the program checks for and installs required dependencies, which requires an internet connection. It then opens `http://127.0.0.1:8765/` in your browser.
+4. On the first launch, the program checks for and installs required dependencies, which requires an internet connection. It opens `http://127.0.0.1:8765/` by default. If that port is occupied, it selects an available port and opens the corresponding URL.
 5. When finished, press **Ctrl+C** in the launcher window to stop the service.
 
 Required rules and icon data are included; you do not need to build the assets. The program does not modify your game saves.
+
+The production queue denominator is total required Production. Production-rate modifiers from policies or the World Congress affect progress per turn rather than this denominator. The city yield panel reads the city's saved total yields; it does not separately estimate effective production toward a particular unit. Districts use their locked saved costs. Special projects whose costs cannot be determined reliably, such as repairing defenses, still show `?`.
 
 ## Choose saves and review a replay
 
@@ -78,7 +83,7 @@ The application uses the bundled base-game, BBG, and CCB runtime snapshots. The 
 
 ## Share a replay
 
-Click **Share** at the top of the page, enable sharing as prompted, and copy the link for other people. The default sharing port starts at **8766**; the main page continues to use **8765**.
+Click **Share** at the top of the page, enable sharing as prompted, and copy the link for other people. The default sharing port starts at **8766**; the main page uses **8765** by default and selects another port if needed.
 
 Other devices must be able to reach your computer through a LAN, virtual LAN, or configured public endpoint. Public access may require port forwarding and firewall rules. A copied link alone does not guarantee that the network path is reachable. The sharing service has no sign-in, so only share it with people you intend to let view the replay.
 
@@ -94,9 +99,9 @@ Reinstall Python with **Add Python to PATH** enabled, or check that `python --ve
 
 Check that the selected folder directly contains `.Civ6Save` files and click **Refresh Saves**. A single-turn save cannot show a complete history.
 
-**The default port is already in use.**
+**Want to choose the main page port?**
 
-Open a terminal in the Civ6WebReplay folder and run:
+Open a terminal in the Civ6WebReplay folder and run the command below. If the specified port is occupied, the launcher selects an available port:
 
 ```powershell
 .\start.bat --port 9000

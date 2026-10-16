@@ -36,6 +36,23 @@ EFFECTS = {
 UI_TITLES = {"Multiplayer Toolkits (UI)", "联机工具箱", "顶部面板拓展",
              "Better Spectator Mod", "Better Spectator Mod (BSM)",
              "Advanced Cheat Menu (Light)", "Advanced Cheat Menu (Light) Hotseat patch"}
+NEUTRAL_PACKAGE_IDS = {
+    "2e6d1093-6689-4dd5-a47a-9539bc3f8a29",  # Historical Religions
+    "9e32c85e-7b06-4b6b-8d80-3d1f5f6bb6b1",  # game statistics UI
+    "ae166b3b-fe6b-4848-8a66-a48d91bc2966",  # notification clear UI
+    "0000dd6d-1e8f-bbac-3dcc-5076e35dc63f",  # resource summary UI
+    "1745e7c5-caca-4aaa-bd3f-82e691b80e3a",  # goody hut configuration
+    "382a187f-c8ba-4094-a6a7-0d5315661f33",  # Extended Policy Cards UI
+    "6f2888d4-79dc-415f-a8ff-f9d81d7afb53",  # Better Report Screen UI
+    "9e881f4f-017f-29f5-d849-04537424be3f",  # team PVP UI
+    "c6477d9f-6bad-4d24-9e76-49cda4f0a966",  # builder charges UI
+}
+
+
+def _neutral_package(package, rules):
+    return (str(package.get("id", "")).lower() in NEUTRAL_PACKAGE_IDS
+            or _official_package(package["key"], rules)
+            or _official_package(package["name"], rules))
 
 
 def _official_package(title, rules):
@@ -45,7 +62,7 @@ def _official_package(title, rules):
 
 
 def _profile_package(package, rules):
-    if _official_package(package["key"], rules) or _official_package(package["name"], rules):
+    if _neutral_package(package, rules):
         return True
     # Exact captured package/version names; a future CCB title does not silently
     # inherit the current snapshot. Color markup is presentation, not identity.
@@ -518,7 +535,7 @@ def calculate_adjacencies(state, *, wrap_x=None, rules=None, include_sources=Fal
     if profile == "bbg":
         clean = lambda s: re.sub(r"\[(?:COLOR[^\]]*|ENDCOLOR)\]", "", s).strip()
         gameplay = lambda pkgs: {clean(m["name"]) for m in pkgs if not (
-            _official_package(m["key"], rules) or _official_package(m["name"], rules))}
+            _neutral_package(m, rules))}
         if gameplay(packages) != gameplay(rules.packages):
             return unavailable
     if state.modPackages:

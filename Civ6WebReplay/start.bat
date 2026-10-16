@@ -54,11 +54,11 @@ REM --- 启动 ---------------------------------------------------------------
 set "PYTHONPATH=%CD%\src"
 set "PYTHONUTF8=1"
 set "PYTHONIOENCODING=utf-8"
-echo [4/4] 启动服务，浏览器将自动打开 http://127.0.0.1:8765/
+echo [4/4] 启动服务，默认端口 8765；若被占用则自动选择可用端口。
 echo        按 Ctrl+C 可停止；自定义参数示例: start.bat --port 9000 --save-dir "D:\saves"
 echo        顶栏「共享」会另起一个对外监听（默认 8766，可用 --share-port 改）
 echo.
-%PY% -m civ6replay %*
+%PY% -m civ6replay --auto-port %*
 
 :end
 echo.

@@ -90,6 +90,9 @@ class City:
     yields: Dict[int, int] = field(default_factory=dict)
     currentProds: List[int] = field(default_factory=list)
     currentProdType: int = 0
+    currentProdProgress: float = 0.0
+    currentProdKinds: List[int] = field(default_factory=list)
+    currentProdFormations: List[int] = field(default_factory=list)
     built: Dict[int, int] = field(default_factory=dict)
     # {building hash: 1} for the buildings this city has *pillaged* (the game
     # tracks it per building; the host district's own flag is ``District.pillage``)
@@ -158,6 +161,9 @@ class Player:
     policies: List[List[int]] = field(default_factory=lambda: [[], [], [], []])
     # Save resource inventory includes strategic stocks and luxury copies.
     resources: Dict[int, int] = field(default_factory=dict)
+    # Current resources received from other players or game effects are stored
+    # separately from the inventory amount in the save.
+    resourceReceived: Dict[int, int] = field(default_factory=dict)
 
     visible: List[int] = field(default_factory=list)
 
@@ -182,6 +188,9 @@ class Player:
     suzerainBonusEnabled: Optional[bool] = None
 
     unitCount: int = 0
+    # Lifetime copies and current speed/progression-adjusted costs, keyed by type.
+    unitCopies: Dict[int, int] = field(default_factory=dict)
+    unitCosts: Dict[int, int] = field(default_factory=dict)
 
 
 @dataclass
