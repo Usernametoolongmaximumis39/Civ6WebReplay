@@ -155,6 +155,12 @@ def _name_of(h, profile: str = "", lang: str = "zh") -> str:
     name = get_identities().name(hm, profile, lang)
     if name:
         return name
+    typ = get_gamedb().type_str(hm)
+    if typ.startswith("GREAT_PERSON_INDIVIDUAL_"):
+        from .greatpeople import individual_name
+        name = individual_name(typ, profile, lang)
+        if name:
+            return name
     name = get_gamedb().name(hm, lang)
     return "" if name.startswith("0x") else name
 
@@ -277,7 +283,7 @@ def fetch_steam_name(steamid: str, *, timeout: float = STEAM_TIMEOUT) -> str:
     url = f"https://steamcommunity.com/profiles/{steamid}?xml=1"
     with httpx.Client(timeout=timeout, follow_redirects=True,
                       verify=_steam_ssl_context(),
-                     headers={"User-Agent": "civ6replay/0.43"}) as client:
+                     headers={"User-Agent": "civ6replay/0.44"}) as client:
         resp = client.get(url)
     if resp.status_code != 200:
         raise RuntimeError(f"HTTP {resp.status_code}")
@@ -1023,6 +1029,7 @@ class ReplayManager:
             "wallDefense": wall_defense_override(db.wall_defense(), state.mods),
             "districtHitPoints": district_hit_points("official" if profile == "vanilla" else profile),
             "mods": list(state.mods),
+            "modPackages": list(state.modPackages),
             "balanceMod": profile.upper() if profile in ("bbg", "ccb") else "",
             "identityProfile": profile,
             "balanceVersions": version_info(profile,
@@ -1104,7 +1111,7 @@ def create_app(save_dir: Optional[str] = None, *, host: str = "127.0.0.1",
             app.state.share.stop()
             await run_in_threadpool(app.state.manager.close)
 
-    app = FastAPI(title="Civ6 WebReplay", version="0.43", lifespan=lifespan)
+    app = FastAPI(title="Civ6 WebReplay", version="0.44", lifespan=lifespan)
     @app.exception_handler(HTTPException)
     async def localized_error(request: Request, exc: HTTPException):
         detail = exc.detail

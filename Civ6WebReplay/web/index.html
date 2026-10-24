@@ -16,7 +16,7 @@
 <!-- v0.26.2: 独立对比页（?compare=1）的加载进度条 -->
 <div id="progress" class="progress hidden"><i></i><span id="progress-text"></span></div>
 <header class="topbar">
-<div class="title">Civ6 WebReplay <span class="ver">v0.43</span></div>
+<div class="title">Civ6 WebReplay <span class="ver">v0.44</span></div>
   <div class="picker">
     <label>对局</label>
     <select id="replay-select"></select>
@@ -45,6 +45,7 @@
       <label><input type="checkbox" data-panel="right" /> 数据栏</label>
       <label><input type="checkbox" data-panel="tile" /> 格子面板</label>
       <label><input type="checkbox" data-panel="city" /> 城市面板</label>
+      <label><input type="checkbox" data-panel="great" /> 信息栏</label>
       <div class="lp-hint">拖动标题吸附左、右、下边缘；拖动分隔线调整同边面板比例。</div>
       <button id="layout-reset">重置布局</button>
     </div>
@@ -116,22 +117,33 @@
   <aside id="right-panel" class="panel float-panel" data-panel-kind="right">
     <div class="panel-head">
       <span class="panel-title">数据栏</span>
+        <button id="civ-hud-compare" type="button" title="在新标签页打开独立数据对比页面" aria-label="对比（新页面）">对比 <svg class="new-page-icon" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h5v5M14 2 7 9M6 3H2v11h11v-4"/></svg></button>
+        <button id="civ-hud-minimize" type="button" title="缩小文明 HUD：固定在右上角，仅显示基础数值" aria-label="缩小文明 HUD" aria-controls="civ-hud"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2l4 4M14 2l-4 4M2 14l4-4M14 14l-4-4M2 6h4V2M10 2v4h4M2 10h4v4M10 14v-4h4"/></svg></button>
       <button id="civ-hud-restore" class="hidden" type="button" title="恢复文明 HUD" aria-label="恢复文明 HUD" aria-controls="civ-hud"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2H2v4M10 2h4v4M2 10v4h4M14 10v4h-4M2 2l4 4M14 2l-4 4M2 14l4-4M14 14l-4-4"/></svg></button>
       <button class="panel-close" title="关闭" aria-label="关闭数据栏">✕</button>
     </div>
     <div class="panel-body">
-      <div class="hud-tabs" id="hud-tabs">
-        <button data-hud="civ" class="active">文明</button>
-        <button data-hud="city_state">城邦</button>
-        <button data-hud="compare" title="在新标签页打开独立数据对比页面" aria-label="对比（新页面）">对比 <svg class="new-page-icon" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h5v5M14 2 7 9M6 3H2v11h11v-4"/></svg></button>
-      </div>
       <div class="hud-sort" id="hud-sort">
         <label>排序
           <select id="civ-sort"></select>
         </label>
-        <button id="civ-hud-minimize" type="button" title="缩小文明 HUD：固定在右上角，仅显示基础数值" aria-label="缩小文明 HUD" aria-controls="civ-hud"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2l4 4M14 2l-4 4M2 14l4-4M14 14l-4-4M2 6h4V2M10 2v4h4M2 10h4v4M10 14v-4h4"/></svg></button>
       </div>
       <div id="civ-hud" class="civ-hud"></div>
+    </div>
+    <div class="panel-resize" title="调整大小"></div>
+  </aside>
+
+  <aside id="great-panel" class="panel float-panel" data-panel-kind="great">
+    <div class="panel-head">
+      <span class="panel-title">信息栏</span>
+      <button class="panel-close" title="关闭" aria-label="关闭信息栏">✕</button>
+    </div>
+    <div class="panel-body">
+      <div class="hud-tabs" id="info-tabs" aria-label="信息分类">
+        <button type="button" data-info="great" class="active">伟人</button>
+        <button type="button" data-info="city_state">城邦</button>
+      </div>
+      <div id="great-body" aria-live="polite"></div>
     </div>
     <div class="panel-resize" title="调整大小"></div>
   </aside>

@@ -6,7 +6,17 @@
 
 Civ6 WebReplay is a browser-based replay viewer for *Civilization VI*. Load a group of game saves and move through turns to inspect the map, cities, units, and civilization statistics.
 
-Current version: **v0.43**. Windows is recommended, with Chrome or Edge.
+Current version: **v0.44**. Windows is recommended, with Chrome or Edge.
+
+## What's new in v0.44
+
+- Technology and civic panels show saved research investment and costs adjusted for the ruleset, game speed, and world era. Unconfirmed costs remain unknown.
+- A new Great People panel shows current recruitment offers, required points, and each civilization's accumulated points and points per turn.
+- City-state details show Amani assignments, with related interface and Chinese/English text updates.
+- Tile yields include saved cumulative extra yields, including disaster fertility. Failed parsing is reported as missing data rather than treated as zero.
+- Research cost rules and Great Person name data ship with the application; replay caches are updated for the new fields.
+
+See [CHANGELOG.md](CHANGELOG.md) for the release history.
 
 ## What's new in v0.43
 
@@ -69,7 +79,7 @@ BBG and CCB core mods are identified separately from their civilization expansio
 
 Policy and ability descriptions, unique-content icons, and colors are selected for the relevant ruleset. Not every additional mod is supported for replay calculations. If an effect or save state is unsupported, the interface reports missing or unavailable data.
 
-**Calculated yield** on a tile means that some conditions are not covered. Disaster bonus fertility, city-level multipliers, trade routes, housing, power, and tourism are not included in tile yield totals. District adjacency is not the district's complete set of benefits.
+**Calculated yield** on a tile means that some conditions are not covered. Disaster bonus fertility is read from saved cumulative extra plot yields. City-level multipliers, trade routes, housing, power, and tourism are not included in tile yield totals. District adjacency is not the district's complete set of benefits.
 
 The following are currently unsupported:
 

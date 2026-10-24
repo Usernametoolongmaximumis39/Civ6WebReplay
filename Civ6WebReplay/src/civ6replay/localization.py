@@ -25,6 +25,7 @@ def display_token():
     paths = [ROOT / "data/ui/strings.json", ROOT / "data/ui/game-text.json",
              ROOT / "data/vanilla/loc.json", ROOT / "data/vanilla/identities.json",
              ROOT / "data/mods/governor_promotions.json", ROOT / "data/shared/identities.json",
+             ROOT / "data/vanilla/great-people.json",
              *sorted((ROOT / "data/gamedb").glob("*/rule-text.json"))]
     return hashlib.sha256("|".join(f"{p}:{p.stat().st_mtime_ns}:{p.stat().st_size}" for p in paths if p.exists()).encode()).hexdigest()[:16]
 

@@ -2,6 +2,8 @@
 
 [简体中文](README.md) | English
 
+Current version: **v0.44** · [Release notes](Civ6WebReplay/CHANGELOG.md)
+
 > **AI-generated:** This English overview was generated from the Chinese project documentation.
 
 Civ6 WebReplay is a browser-based replay viewer for *Civilization VI*. Review map changes, cities, units, civilization statistics, policy and ability descriptions, tile yields, and district adjacency across turns. It includes separate rules data for the base game, BBG, and CCB, plus a Chinese and English interface with automatic language detection.
@@ -19,7 +21,7 @@ The program runs locally by default at `http://127.0.0.1:8765/`. Your saves stay
 
 ## Development layout
 
-`Civ6WebReplay/` contains the shipped application. Local development archives and tools live in root `data/`; tests and their output live in root `test/`. Run `python -B test/run.py` from the repository root. Tests must not run or write output inside the application directory; see [AGENTS.md](AGENTS.md). Database capture is retired pending a rewrite.
+GitHub includes the `Civ6WebReplay/` application, runtime data, assets, and user documentation. Local developer archives in `data/` and tests in `test/` are excluded from the release; running the application does not require those directories.
 
 ## Open source
 

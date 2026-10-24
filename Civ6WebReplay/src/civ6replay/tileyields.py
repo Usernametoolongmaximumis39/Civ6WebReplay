@@ -1,6 +1,7 @@
 """Offline plot yields, with explicit unknown conditions and source accounting.
 
-Disaster fertility and city-wide yield multipliers are outside this calculation.
+Disaster fertility uses cumulative plot changes saved by the game.
+City-wide yield multipliers are outside this calculation.
 Unknown save state is never substituted by zero/False or inferred from tech era.
 """
 from __future__ import annotations
@@ -898,6 +899,11 @@ class TurnYields:
                 minimum = int(r.params[y + "_CITY_TERRAIN_REPLACE"])
                 add(y, max(0, minimum - sums[str(H(y))]), "城市中心最低产出")
             self.apply_bcy(index, p, c, sums, breakdown, add, missing)
+        if self.state.plotYieldChanges is None:
+            missing.add("存档地块额外产出解析失败")
+        else:
+            for key, amount in self.state.plotYieldChanges.get(index, {}).items():
+                add(r.types[key], amount, "存档额外产出（含灾害）")
         self.modifiers(index, p, c, add, missing)
         # Preserve buildings are tied to each neighboring built preserve, not
         # to the target city's buildings; two preserves can both contribute.

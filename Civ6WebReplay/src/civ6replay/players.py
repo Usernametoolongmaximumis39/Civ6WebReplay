@@ -55,7 +55,7 @@ def read_influence_tokens(it) -> int:
     return buff_to_int(it.data, it.pos + INFLUENCE_FIELDS["tokensToGive"], 4)
 
 
-def parse_players(data, players, religions, warnings=None):
+def parse_players(data, players, religions, warnings=None, great_people=None, world_era=None):
     """Parse the player records; returns the list of non-fatal tail warnings.
 
     v0.25: everything after the per-player records (``_parse_post_players``)
@@ -622,7 +622,7 @@ def parse_players(data, players, religions, warnings=None):
         it.advance(8)
         p.techDogmeInfo[DOGME].found = readMapBool(it)
         p.techDogmeInfo[DOGME].boost = readMapBool(it)
-        readMapFloat(it)
+        p.techDogmeInfo[DOGME].progress = readMapFloat(it)
         p.techDogmeInfo[DOGME].current = _rarray(it, 4, 0)
         it.advance(21)
         it.advance(4)
@@ -799,7 +799,7 @@ def parse_players(data, players, religions, warnings=None):
         it.advance(12)
         p.techDogmeInfo[TECH].found = readMapBool(it)
         p.techDogmeInfo[TECH].boost = readMapBool(it)
-        readMapFloat(it)
+        p.techDogmeInfo[TECH].progress = readMapFloat(it)
         it.advance(8)
         it.advance(4)
         it.advance(4)
@@ -1010,8 +1010,8 @@ def parse_players(data, players, religions, warnings=None):
                 _rmap(it)
         it.advance(12)
         it.advance(8)
-        readMapFloat(it)
-        readMapFloat(it)
+        p.greatPeopleCurrent = readMapFloat(it)
+        p.greatPeopleProd = readMapFloat(it)
         readMapFloat(it)
         it.advance(10)
         _rmap(it)
@@ -1736,7 +1736,7 @@ def parse_players(data, players, religions, warnings=None):
         _rarray(it, 4, 0)
         _rarray(it, 4, 0)
     try:
-        _parse_post_players(it, data, players, playerCount, warnings)
+        _parse_post_players(it, data, players, playerCount, warnings, great_people, world_era)
     except Exception as exc:
         # ``type`` is a local variable name in this ported walker, so the
         # builtin is reached through the instance instead.
@@ -1746,7 +1746,7 @@ def parse_players(data, players, religions, warnings=None):
     return warnings
 
 
-def _parse_post_players(it, data, players, playerCount, warnings) -> None:
+def _parse_post_players(it, data, players, playerCount, warnings, great_people=None, world_era=None) -> None:
     """Walk everything that follows the per-player records.
 
     Kept separate from :func:`parse_players` so a shift in this (rarely
@@ -1870,26 +1870,9 @@ def _parse_post_players(it, data, players, playerCount, warnings) -> None:
             it.advance(37)
     it.advance(8)
     it.advance(1)
-    count2 = read_int(it)
-    for i in _range(count2, it):
-        _check(peek_u32(it) == 0x05, it)
-        it.advance(4)
-        read_int(it)
-        read_int(it)
-        read_int(it)
-        read_int(it)
-        read_int(it)
-        it.advance(4)
-    count2 = read_int(it)
-    for i in _range(count2, it):
-        read_int(it)
-        _check(peek_u32(it) == 0x05, it)
-        it.advance(4)
-        read_int(it)
-        it.advance(4)
-        read_int(it)
-        read_int(it)
-        it.advance(8)
+    current = read_great_people(it)
+    if great_people is not None:
+        great_people["current"] = current
     count = read_int(it)
     for i in _range(count, it):
         _check(peek_u32(it) == 0x05, it)
@@ -2055,7 +2038,37 @@ def _parse_post_players(it, data, players, playerCount, warnings) -> None:
     it.advance(4)
     it.advance(4)
     it.advance(4)
-    _parse_tail(it, players, warnings)
+    _parse_tail(it, players, warnings, world_era)
+
+
+def read_great_people(it):
+    """Read recruitment history then the current class offers, atomically.
+
+    Layout follows CivVIReplay's GreatPeople records. Costs are saved values,
+    so speed/era scaling must not be applied a second time.
+    """
+    count = _tail_inner_count(it, "recruited great people")
+    for _ in range(count):
+        _check(peek_u32(it) == 5, it)
+        it.advance(28)
+    count = _tail_inner_count(it, "current great people")
+    current = []
+    classes = set()
+    for _ in range(count):
+        class_hash = read_int(it) & 0xFFFFFFFF
+        _check(peek_u32(it) == 5, it)
+        it.advance(4)
+        individual = read_int(it) & 0xFFFFFFFF
+        record_class = read_int(it) & 0xFFFFFFFF
+        era = read_int(it) & 0xFFFFFFFF
+        cost = read_int(it)
+        it.advance(8)
+        _check(class_hash == record_class and class_hash not in classes, it)
+        _check(cost >= 0, it)
+        classes.add(class_hash)
+        current.append({"class": class_hash, "individual": individual,
+                        "era": era, "cost": cost})
+    return current
 
 
 # --- v0.25: the shared "tail" blocks ----------------------------------------
@@ -2212,8 +2225,16 @@ def _resync_tail(it, label: str) -> bool:
     return False
 
 
-def _parse_tail(it, players, warnings) -> None:
+def _parse_tail(it, players, warnings, world_era=None) -> None:
     """Parse the shared tail blocks, one guarded segment at a time."""
+    # GameEras begins with a 0x1e record and the serialized era TYPE hash,
+    # followed by start turn, countdown and two flags before the age tables.
+    if (world_era is not None and 8 <= it.pos <= len(it.data) - 14
+            and u32(it.data, it.pos - 8) == 0x1E):
+        from .research import ERA_HASHES
+        era = ERA_HASHES.get(u32(it.data, it.pos - 4))
+        if era and u32(it.data, it.pos + 10) == TAIL_BLOCK_MARKER:
+            world_era["type"] = era
     it.advance(10)
     for label, segment in TAIL_SEGMENTS:
         try:

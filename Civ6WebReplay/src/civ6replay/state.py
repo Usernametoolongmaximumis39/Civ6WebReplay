@@ -22,7 +22,9 @@ from .adjacency import calculate_adjacencies, get_rules as get_adjacency_rules
 from .mod_identity import balance_profile
 from .tileyields import calculate_tile_yields, rules_token
 from .production import current_cost
+from .research import research_details
 from .bcy import parse_bcy
+from .plotchanges import parse_plot_changes
 from .binary import Cursor, LayerError, read_int
 from .hash import crc32_type
 from .model import (GameState, NONE_U32, Player, PlayerInfo, Religion,
@@ -300,12 +302,23 @@ def parse_save(data: bytes, *, want_visibility: bool = True) -> GameState:
         _note(state, "map", getattr(exc, "offset", None), repr(exc))
         return state
 
+    # Cumulative plot changes are independent of player-tail parsing.
+    state.plotYieldChanges = None
+    try:
+        state.plotYieldChanges = parse_plot_changes(blob, len(state.tiles))
+    except Exception as exc:
+        state.layerErrors.append(LayerError("plot_yields", getattr(exc, "offset", None), str(exc)))
+
     # --- players -----------------------------------------------------------
     players: List[Player] = []
     religions: List[Religion] = []
     try:
+        great_people = {}
+        world_era = {}
         players_mod.parse_players(blob, players, religions,
-                                  warnings=state.tailWarnings)
+                                  warnings=state.tailWarnings, great_people=great_people, world_era=world_era)
+        state.greatPeople = great_people.get("current")
+        state.eraType = world_era.get("type")
     except Exception as exc:
         # v0.25: a players failure means the (post-per-player) tail could not be
         # walked — the era / golden-age data is missing, but cities, units and
@@ -414,6 +427,12 @@ def summarize_player(p: Player) -> dict:
             }
     return {
         "iPlayer": p.iPlayer,
+        "amaniAssignments": [
+            {"cityOwner": g.cityOwner, "city": g.city}
+            for g in p.governors
+            if _mask(g.type) == crc32_type("GOVERNOR_THE_AMBASSADOR")
+            and governor_assigned_to(g, g.cityOwner, g.city)
+        ],
         "gold": p.gold,
         "faith": p.faith,
         "maintenance": round(p.maintenance, 1),
@@ -434,6 +453,10 @@ def summarize_player(p: Player) -> dict:
         # v0.32: 剩余使者（未派出的使者）—— 只有文明（major）有意义，
         # 前端只在文明卡「外交」行里画它。
         "envoyTokens": int(getattr(p, "envoyTokens", 0)),
+        "greatPeopleCurrent": ({str(k): v for k, v in p.greatPeopleCurrent.items()}
+                               if p.greatPeopleCurrent is not None else None),
+        "greatPeopleProd": ({str(k): v for k, v in p.greatPeopleProd.items()}
+                            if p.greatPeopleProd is not None else None),
         "cities": [
             {"id": c.id, "x": c.x, "y": c.y, "name": c.name,
              "nameKey": getattr(c, "nameKey", "") or c.name,
@@ -580,6 +603,7 @@ def turn_payload(state: GameState, *, wrap_x: Optional[bool] = None) -> dict:
     district_cost_rules_available = bool(district_rules) and any(
         report is not None for report in adjacency.values())
     for p, summary in zip((p for p in state.players if p.iPlayer >= 0), players):
+        summary.update(research_details(p, profile, state.game_speed, state.eraType))
         info = next((i for i in state.playersInfo if i.iPlayer == p.iPlayer), None)
         for city, record in zip(p.cities, summary["cities"]):
             record["currentProdCost"] = current_cost(
@@ -633,6 +657,7 @@ def turn_payload(state: GameState, *, wrap_x: Optional[bool] = None) -> dict:
         "units": units,
         "players": players,
         "religions": religions,
+        "greatPeople": state.greatPeople,
         "visibility": visibility,
     }
 

@@ -86,6 +86,7 @@
 
   let activeTab = "terrain";
   let hudTab = "civ";
+  let infoTab = "great";
   // Standalone comparison opens in its own tab with turn navigation only.
   const urlParams = new URLSearchParams(location.search);
   const wantCompare = urlParams.get("compare") === "1";
@@ -121,9 +122,9 @@
   // --- v0.26 floating panels ----------------------------------------------
   // Dock thickness and split weights are proportional to the stage. Floating
   // dimensions are kept separately so dragging a dock out restores a useful box.
-  const PANEL_KINDS = ["left", "right", "tile", "city"];
+  const PANEL_KINDS = ["left", "right", "tile", "city", "great"];
   const PANEL_IDS = { left: "left-panel", right: "right-panel",
-                      tile: "tile-panel", city: "city-panel" };
+                      tile: "tile-panel", city: "city-panel", great: "great-panel" };
   const PANEL_MIN_W = 200, PANEL_MIN_H = 140, PANEL_EDGE = 8;
   const PANEL_DOCK_SNAP = 24;
   const PANEL_STORE = "civ6replay.panels.v2";
@@ -140,6 +141,7 @@
       tile: { x: null, y: PANEL_EDGE, w: 340, h: tileH, dock: null, hidden: false },
       city: { x: null, y: PANEL_EDGE + tileH + PANEL_EDGE, w: 340, h: tileH,
               dock: null, hidden: false },
+      great: { x: 260, y: PANEL_EDGE, w: 430, h: 520, dock: null, hidden: false },
     };
   }
 
@@ -315,10 +317,13 @@
       localStorage.setItem("civ6replay.showCoord", showCoord ? "1" : "0");
       refreshContext();
     };
-    $("hud-tabs").querySelectorAll("button").forEach((b) => {
+    $("civ-hud-compare").onclick = openComparePage;
+    $("info-tabs").querySelectorAll("button").forEach(b => {
       b.onclick = () => {
-        if (b.dataset.hud === "compare") { openComparePage(); return; }
-        hudTab = b.dataset.hud; syncHudTabs(); refreshContext();
+        infoTab = b.dataset.info;
+        $("info-tabs").querySelectorAll("button").forEach(tab =>
+          tab.classList.toggle("active", tab.dataset.info === infoTab));
+        if (currentTurn) renderInformation(currentTurn);
       };
     });
     const sortSel = $("civ-sort");
@@ -396,22 +401,12 @@
       cb.dataset.layer = key;
       cb.onchange = () => { map.layers[key] = cb.checked; saveLayers(); map.draw(); };
       l.appendChild(cb);
-      if (key === "yield") {
-        l.classList.add("yield-layer-toggle");
-        const text = document.createElement("span");
-        text.appendChild(document.createTextNode(L("产出（")));
-        const beta = document.createElement("span"); beta.className = "yield-layer-beta";
-        beta.textContent = L("测试版"); text.appendChild(beta);
-        text.appendChild(document.createTextNode("）")); l.appendChild(text);
-      } else l.appendChild(document.createTextNode(label));
+      l.appendChild(document.createTextNode(label));
       box.insertBefore(l, fog);
     }
   }
 
   function syncHudTabs() {
-    $("hud-tabs").querySelectorAll("button").forEach(
-      (b) => b.classList.toggle("active", b.dataset.hud === hudTab));
-    // the sort order only applies to the文明 page (城邦 keeps its own order)
     $("hud-sort").classList.toggle("hidden", hudTab !== "civ");
   }
 
@@ -509,7 +504,7 @@
 
   function placeCompactHUD(size) {
     const el = panelEl("right"), grid = $("civ-hud").querySelector(".mini-grid");
-    const available = Math.max(1, size.w - dockLayout.right - 2 * PANEL_EDGE);
+    const available = Math.max(1, size.w - dockLayout.right - 2 * PANEL_EDGE - 48);
     const w = Math.min(available, Math.max(80, Number(grid?.dataset.width || 0) + 8));
     // Measure at the final width so overflow never hides the last data row.
     el.style.width = Math.round(w) + "px";
@@ -518,7 +513,7 @@
       ? scroll.offsetHeight - scroll.clientHeight : 0;
     const h = Math.min(Math.max(1, size.h - dockLayout.bottom - 2 * PANEL_EDGE),
       el.querySelector(".panel-head").offsetHeight + (grid ? grid.scrollHeight : 36) + 8 + scrollbar);
-    placePanel(el, { x: Math.max(0, size.w - dockLayout.right - w - PANEL_EDGE),
+    placePanel(el, { x: Math.max(0, size.w - dockLayout.right - w - PANEL_EDGE - 48),
       y: Math.min(PANEL_EDGE, Math.max(0, size.h - h)), w, h });
   }
 
@@ -1076,13 +1071,11 @@
     const slider = $("turn-slider");
     slider.min = 0; slider.max = 0; slider.value = 0; slider.disabled = true;
     $("turn-label").textContent = "—";
-    $("replay-meta").textContent =
-      `${info.mapName || "?"} · ${locMapSize(info.mapSize)}${L(" · 不支持")}`;
-    // v0.39: 不点名 —— 这里也不挂 MOD / DLC 列表（否则等于告诉大家是哪个 MOD 被拦了）
-    $("replay-meta").title = "";
+    renderReplayMeta(info);
     fillFogPlayers([]);
     if (map) map.fog.player = null;
     $("civ-hud").innerHTML = "";
+    $("great-body").innerHTML = "";
     $("search-count").textContent = "";
     $("search-results").innerHTML = "";
     renderLayerErrors(info);
@@ -1107,7 +1100,7 @@
     if (map) map.resetReplay();
     const nav = $("nav");
     nav.getContext("2d").clearRect(0, 0, nav.width, nav.height);
-    for (const id of ["civ-hud", "search-results", "search-count", "tile-body", "tile-tabs", "city-body"]) {
+    for (const id of ["civ-hud", "great-body", "search-results", "search-count", "tile-body", "tile-tabs", "city-body"]) {
       $(id).innerHTML = "";
     }
     $("tile-title").textContent = L("格子");
@@ -1139,27 +1132,58 @@
         meta += `${L(" · 平衡模组 ")}${core ? componentLabel(core) : info.balanceMod}`;
         if (expansion && channelLabel(expansion)) meta += ` · ${componentLabel(expansion)}`;
       }
-      $("replay-meta").textContent = meta;
-      $("replay-meta").title = (info.mods || []).length
-        ? "MOD / DLC：" + info.mods.join("、") : "";
-      if (info.balanceMod) {
+      const host = $("replay-meta");
+      host.replaceChildren();
+      host.title = "";
+      const details = document.createElement("details");
+      details.className = "game-info";
+      const button = document.createElement("summary");
+      button.textContent = L("对局信息");
+      details.appendChild(button);
+      const panel = document.createElement("div");
+      panel.className = "game-info-panel";
+      const section = (title, text) => {
+        const heading = document.createElement("h3");
+        heading.textContent = L(title);
+        const body = document.createElement("div");
+        body.textContent = text;
+        panel.append(heading, body);
+      };
+      details.addEventListener("toggle", () => {
+        if (!details.open || panel.childElementCount) return;
+        section("对局设置", meta);
         const describe = (rows) => (rows || []).length ? rows.map((r) =>
           `${r.absent ? L(r.component) : componentLabel(r)} ${r.absent ? L("未启用") : (r.version || (r.installedVersion ? `${L("安装版本 ")}${r.installedVersion}` : L("未记录")))}`
         ).join("；") : L("未记录");
-        const help = document.createElement("span");
-        help.className = "balance-version-help";
-        help.textContent = "?";
-        help.title = "";
-        help.tabIndex = 0;
-        help.setAttribute("role", "note");
-        const message = `${L("数据库版本：")}${describe(versions.database)}${L("\n存档版本：")}${describe(versions.save)}`;
-        help.setAttribute("aria-label", message);
-        const tip = document.createElement("span");
-        tip.className = "balance-version-tip";
-        tip.textContent = message;
-        help.appendChild(tip);
-        $("replay-meta").appendChild(help);
-      }
+        const profile = info.identityProfile || "vanilla";
+        section("数据库所属版本", `${profile === "vanilla" ? L("原版") : profile.toUpperCase()}${profile === "vanilla" ? "" : " · " + describe(versions.database)}`);
+        if (info.balanceMod) section("存档版本", describe(versions.save));
+        // Official package keys are filtered explicitly; localized third-party MODs remain visible.
+        const official = /^LOC_(?:EXPANSION[12]|DLC_.*|TEDDY_ROOSEVELT|CATHERINE_DE_MEDICI|JULIUS_CAESAR|POLAND_JADWIGA|INDONESIA_KHMER|GRANCOLOMBIA_MAYA|KUBLAIKHAN_VIETNAM|MACEDONIA_PERSIA|RULERS_OF_THE_SAHARA|GREAT_WARLORDS|AZTEC_MONTEZUMA|POLAND|VIKINGS|AUSTRALIA|PERSIA_MACEDON|NUBIA|KHMER_INDONESIA|MAYA_GRAN_COLOMBIA|ETHIOPIA|BYZANTIUM_GAUL|BABYLON|VIETNAM_KUBLAI_KHAN|PORTUGAL|LEADER_PASS.*|GREAT_NEGOTIATORS|GREAT_COMMANDERS|RULERS_OF_CHINA|RULERS_OF_SAHARA|GREAT_BUILDERS|RULERS_OF_ENGLAND)_MOD_TITLE$/i;
+        const packages = info.modPackages?.length ? info.modPackages : (info.mods || []).map(name => ({key: name, name}));
+        const mods = packages.filter(row => !official.test(row.key || "") && !["LOC_MOD_VIKINGSLANDMARKS_TITLE", "LOC_MOD_SCOUT_CAT_TITLE"].includes(row.key));
+        const heading = document.createElement("h3");
+        heading.textContent = `${L("启用的 MOD")} (${mods.length})`;
+        panel.appendChild(heading);
+        if (mods.length) {
+          const list = document.createElement("ul");
+          mods.forEach(row => {
+            const item = document.createElement("li");
+            item.textContent = (row.name || row.key || "")
+              .replace(/\[[^\]]*\]/g, "")
+              .replace(/\bENDCOLOR\]/gi, "")
+              .trim();
+            list.appendChild(item);
+          });
+          panel.appendChild(list);
+        } else {
+          const empty = document.createElement("div");
+          empty.textContent = L("无");
+          panel.appendChild(empty);
+        }
+      });
+      details.appendChild(panel);
+      host.appendChild(details);
   }
 
   async function loadReplay(s, requestedTurn = "") {
@@ -1426,6 +1450,9 @@
       (payload.tiles[col] || []).forEach(push);
     }
     (payload.units || []).forEach((u) => push(u.type));
+    (payload.greatPeople || []).forEach(g => {
+      push(g.class); push(g.individual); push(g.era);
+    });
     // v0.25 (文档 C2): the civ card shows the leader portrait, the age icon, the
     // dedication names, the researched tech / civic lists and the religion zone,
     // so those hashes have to be resolved as well (else they render as hex).
@@ -2128,16 +2155,15 @@
 
   // --- HUD ---------------------------------------------------------------
   function renderHUD(payload) {
+    renderInformation(payload);
     const box = $("civ-hud"); box.innerHTML = "";
     const players = payload.players || [];
-    const states = [], majors = [];
+    const majors = [];
     for (const p of players) {
       const info = playerInfo(p.iPlayer) || {};
       const kind = info.kind || "major";
       if (kind === "free_cities" || kind === "barbarian") continue;
-      if (hudTab === "city_state") {
-        if (kind === "city_state") states.push({ p, info });
-      } else if (kind === "major") {
+      if (kind === "major") {
         majors.push({ p, info });
       }
     }
@@ -2163,19 +2189,10 @@
       refreshLedgers();
       return;                      // the compare page fills #civ-hud itself
     }
-    if (hudTab === "city_state") {
-      // v0.23: living city states first, then flavour order, then the highest
-      // envoy count, then the Chinese name (mirrors state.city_state_sort_key)
-      // v0.28.3: 观察者的使者视为 0，既不算排序也不绘图
-      const key = (s) => cityStateSortKey(s.p.cityCount, s.info.flavour,
-        maxEmissary(emissariesOf(s.p)), s.info.civName);
-      states.sort((a, b) => cmpKey(key(a), key(b)));
-      for (const s of states) box.appendChild(cityStateCard(s.p, s.info));
-    }
     if (!box.children.length) {
       const empty = document.createElement("div");
       empty.className = "loading";
-      empty.textContent = hudTab === "city_state" ? L("本回合无可显示的城邦") : L("本回合无可显示的文明");
+      empty.textContent = L("本回合无可显示的文明");
       box.appendChild(empty);
     }
     syncLedgerControls();
@@ -2183,6 +2200,59 @@
   }
 
   // --- v0.23 helper table -------------------------------------------------
+
+  function renderInformation(payload) {
+    if (infoTab === "great") { renderGreatPeople(payload); return; }
+    const box = $("great-body");
+    box.innerHTML = "";
+    const states = (payload.players || []).map(p => ({ p, info: playerInfo(p.iPlayer) || {} }))
+      .filter(s => s.info.kind === "city_state");
+    const key = s => cityStateSortKey(s.p.cityCount, s.info.flavour,
+      maxEmissary(emissariesOf(s.p)), s.info.civName);
+    states.sort((a, b) => cmpKey(key(a), key(b)));
+    for (const s of states) box.appendChild(cityStateCard(s.p, s.info));
+    if (!states.length) box.innerHTML = `<div class="loading">${L("本回合无可显示的城邦")}</div>`;
+  }
+
+  function renderGreatPeople(payload) {
+    const box = $("great-body");
+    if (!Array.isArray(payload.greatPeople)) {
+      box.innerHTML = `<div class="loading">${L("本回合伟人数据不可用")}</div>`;
+      return;
+    }
+    const offers = payload.greatPeople.filter(g => g.individual != null &&
+      (g.individual >>> 0) !== 0xFFFFFFFF);
+    const civs = (payload.players || []).filter(p => {
+      const info = playerInfo(p.iPlayer);
+      return info && (info.kind || "major") === "major" && !isSpectator(info);
+    });
+    box.innerHTML = offers.length ? offers.map(g => {
+      const key = hashStr(g.class);
+      const type = (names[key] || {}).type || "";
+      const unitIcons = { GENERAL: "General", ADMIRAL: "Admiral", ENGINEER: "Engineer",
+        MERCHANT: "Merchant", PROPHET: "Prophet", SCIENTIST: "Scientist",
+        WRITER: "Writer", ARTIST: "Artist", MUSICIAN: "Musician" };
+      const unit = unitIcons[type.replace("GREAT_PERSON_CLASS_", "")];
+      const icon = iconOf(g.class) || (unit ? `/assets/icons/unit/Great_${unit}.png` : null);
+      const value = (p, field) => p[field] == null ? null :
+        (Number.isFinite(p[field][key]) ? p[field][key] : 0);
+      const ranked = civs.map(p => ({ p, points: value(p, "greatPeopleCurrent"),
+        rate: value(p, "greatPeopleProd") })).sort((a, b) =>
+          (b.points ?? -Infinity) - (a.points ?? -Infinity) || a.p.iPlayer - b.p.iPlayer);
+      return `<section class="great-card" data-great-class="${key}">` +
+        `<div class="great-heading">${icon ? `<img src="${icon}" alt="">` : ""}` +
+        `<div><strong>${nameHTML(g.class)}</strong><div class="great-person">${nameHTML(g.individual)}</div>` +
+        `<div class="muted">${fmtName(g.era)}</div></div></div>` +
+        ranked.map(({p, points, rate}) => {
+          const percent = points == null || g.cost <= 0 ? 0 : clamp(100 * points / g.cost, 0, 100);
+          return `<div class="great-progress" data-player="${p.iPlayer}">` +
+            `<div class="great-progress-label"><span>${escapeText(playerName(p.iPlayer))}</span>` +
+            `<span>${points == null ? "—" : fmtNum(points)} / ${fmtNum(g.cost)}` +
+            `<small>${rate == null ? "—" : (rate >= 0 ? "+" : "") + fmtNum(rate)}</small></span></div>` +
+            `<div class="great-track"><div style="width:${percent}%;background:${playerPrimary(p.iPlayer)}"></div></div></div>`;
+        }).join("") + `</section>`;
+    }).join("") : `<div class="loading">${L("本回合无可招募的伟人")}</div>`;
+  }
 
   // ``army``: 0 / -1 = single unit, 1 = corps / fleet, 2 = army / armada
   function armyLabel(army, sea) {
@@ -2398,7 +2468,7 @@
     // v0.40: 「当前研究 / 当前市政」的 chip 上，**已经拿到**尤里卡 / 鼓舞的再加一枚
     // 标记（``boosted`` = 存档 ``boost`` 表为真的那些哈希；两个 current 数组本身
     // 可以有多项 —— 游戏会把排队的下一项一起写进来）。
-    const chips = (list, boosted, icon, label) => {
+    const chips = (list, boosted, icon, label, research) => {
       const hits = new Set((boosted || []).map((h) => hashStr(h)));
       return (list || []).length
         ? list.map((h) => {
@@ -2411,8 +2481,13 @@
             const mark = hits.has(hashStr(h)) && !noInspiration
               ? `<img class="boost" src="${icon}" alt="" title="${label}">`
               : "";
+            const entry = (research || {})[hashStr(h)];
+            const number = (v) => Number.isFinite(v) ? fmtNum(v) : "?";
+            const progress = entry
+              ? `<span class="research-progress"><img src="${icon === ICON_INSPIRATION ? ICON_CUL : ICON_SCI}" alt="">${number(entry.progress)}/${number(entry.cost)}</span>`
+              : "";
             return `<span class="chip">${ic ? `<img src="${ic}" alt="">` : ""}` +
-              `${nameHTML(h)}${mark}</span>`;
+              `${nameHTML(h)}${mark}${progress}</span>`;
           }).join("")
         : "<span class='muted'>—</span>";
     };
@@ -2423,7 +2498,7 @@
     // 点击展开成 chips（同一张卡共用一份 expanded 状态）。
     const sciDetail =
       `${L("<div class=\"zone-title\">当前研究</div>")}` +
-      `${chips(p.currentTech, p.techBoosted, ICON_EUREKA, L("尤里卡已触发"))}` +
+      `${chips(p.currentTech, p.techBoosted, ICON_EUREKA, L("尤里卡已触发"), p.techResearch)}` +
       researchedRowHTML(L("已研科技"), p.techResearched, p.techTotal, "tech", p.iPlayer) +
       `${L("<div class=\"zone-title\">城市科技（每回合，降序）</div>")}${cityRank(L("科技"))}`;
     // 展开文化详情时显示旅游业绩估计值及文化胜利进度。
@@ -2436,7 +2511,7 @@
       tourismDetail +
       cultureVictoryHTML(p) +
       `${L("<div class=\"zone-title\">当前市政</div>")}` +
-      `${chips(p.currentCivic, p.civicBoosted, ICON_INSPIRATION, L("鼓舞已触发"))}` +
+      `${chips(p.currentCivic, p.civicBoosted, ICON_INSPIRATION, L("鼓舞已触发"), p.civicResearch)}` +
       governmentHTML(p) +
       researchedRowHTML(L("已研市政"), p.civicResearched, p.civicTotal, "civic", p.iPlayer) +
       `${L("<div class=\"zone-title\">城市文化（每回合，降序）</div>")}${cityRank(L("文化"))}`;
@@ -3176,7 +3251,16 @@
       `<span class="sub cs-flavour" style="color:${sec}"><span class="ring"></span>${info.flavour || "—"}</span></div>`;
     // v0.28.3: 观察者的使者按 0 计 —— 不画它的行 / 进度条
     const em = emissariesOf(p);
-    const entries = Object.keys(em).map((k) => [parseInt(k, 10), em[k]]).sort((a, b) => b[1] - a[1]);
+    const amaniPlayers = new Set(((currentTurn && currentTurn.players) || [])
+      .filter(q => (q.amaniAssignments || []).some(g => g.cityOwner === p.iPlayer &&
+        (p.cities || []).some(c => c.id === g.city)))
+      .filter(q => {
+        const qi = playerInfo(q.iPlayer) || {};
+        return (qi.kind || "major") === "major" && !isSpectator(qi);
+      })
+      .map(q => q.iPlayer));
+    const senders = new Set([...Object.keys(em).map(Number), ...amaniPlayers]);
+    const entries = [...senders].map(ip => [ip, em[ip] || 0]).sort((a, b) => b[1] - a[1]);
     if (!entries.length) {
       html += `${L("<div class=\"emissaries\"><div class=\"no-emissary\">无使者</div></div>")}`;
     } else {
@@ -3189,10 +3273,12 @@
         const pc = cssColor(pinfo.primary, 160);
         const pct = Math.min(100, (cnt / max) * 100);
         const mark = ip === suz ? `${L("<span class=\"suz\">（宗主国）</span>")}` : "";
+        const amani = amaniPlayers.has(ip)
+          ? `<img class="amani-icon" src="/assets/icons/governor/THE_AMBASSADOR.png" alt="${L("阿玛尼")}" title="${L("阿玛尼")}">` : "";
         // v0.33: 文明名回到默认文字色 —— 深色面板上，主色里的深蓝 / 紫
         // （美国、罗马…）几乎看不见；颜色只留给进度条。
         html += `<div class="emissary">
-          <span class="who">${playerName(ip)}${typeTag(pinfo.civStr)}${mark}</span>
+          <span class="who">${playerName(ip)}${amani}${typeTag(pinfo.civStr)}${mark}</span>
           <span class="bar"><i style="width:${pct}%;background:${pc}"></i></span>
           <span class="val">${cnt}<img class="eicon" src="${ICON_ENVOY}" alt=""></span></div>`;
       }
@@ -4414,8 +4500,7 @@
       (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
     record = record || { status: "unavailable", missing: [L("该回合尚无产出计算结果")], breakdown: [] };
     const partial = record.status === "partial";
-    let html = `<div class="sec-title">${partial ? L("已计算产出") : L("单元格产出")}` +
-      `${L("<span class=\"note\">（未计灾害额外产出）</span></div>")}`;
+    let html = `<div class="sec-title">${partial ? L("已计算产出") : L("单元格产出")}</div>`;
     if (record.status !== "unavailable") html += tileYieldGrid(record.yields);
     if ((record.missing || []).length) {
       html += `<div class="tile-yield-note">${record.status === "unavailable" ? L("暂不可用：") : L("尚未完整计算：")}` +

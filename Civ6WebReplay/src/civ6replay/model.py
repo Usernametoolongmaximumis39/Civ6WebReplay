@@ -35,6 +35,7 @@ class TechDogmeInfo:
     found: Dict[int, bool] = field(default_factory=dict)
     boost: Dict[int, bool] = field(default_factory=dict)
     current: List[int] = field(default_factory=list)
+    progress: Dict[int, float] = field(default_factory=dict)
 
 
 @dataclass
@@ -172,6 +173,9 @@ class Player:
     # ``[ICON_Envoy]`` (only meaningful for major civs - the same word inside a
     # city-state's record is a different counter, see players.parse_players).
     envoyTokens: int = 0
+    # None means the player parser did not reach this block; {} is saved zero.
+    greatPeopleCurrent: Optional[Dict[int, float]] = None
+    greatPeopleProd: Optional[Dict[int, float]] = None
 
     # v0.31: WMD stockpile (``nukes.parse_wmd``): {WMD type hash: count}
     wmd: Dict[int, int] = field(default_factory=dict)
@@ -227,12 +231,15 @@ class GameState:
     game_speed: str = ""
     multiplayer: bool = False
     tiles: List[Tile] = field(default_factory=list)
+    # Sparse current totals from the save; None means parsing failed, not zero.
+    plotYieldChanges: Optional[Dict[int, Dict[int, int]]] = field(default_factory=dict)
     # v0.31: contamination turns per tile (``nukes.parse_fallout``), same order
     # as ``tiles``; 0 = clean.
     fallout: List[int] = field(default_factory=list)
     players: List[Player] = field(default_factory=list)
     playersInfo: List[PlayerInfo] = field(default_factory=list)
     religions: List[Religion] = field(default_factory=list)
+    greatPeople: Optional[List[dict]] = None
     layerErrors: List[Any] = field(default_factory=list)
     # v0.25: non-fatal "the tail of the players block could not be walked"
     # notes; they never render in the UI, only in ``/api/replay/{seed}``.

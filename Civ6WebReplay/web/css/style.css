@@ -18,9 +18,14 @@ body {
 .picker { display: flex; align-items: center; gap: 6px; }
 .picker label { color: var(--muted); }
 .meta { color: var(--muted); font-size: 12px; margin-left: auto; }
-.balance-version-help { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 15px; height: 15px; margin-left: 6px; border: 1px solid currentColor; border-radius: 50%; font-size: 11px; cursor: help; vertical-align: middle; }
-.balance-version-tip { display: none; position: absolute; right: 0; top: calc(100% + 9px); z-index: 200; min-width: 240px; max-width: min(460px, 85vw); width: max-content; padding: 10px 12px; border: 1px solid #556170; border-radius: 6px; background: #17212b; color: #e9edf2; white-space: pre-wrap; line-height: 1.6; font-size: 12px; font-weight: normal; box-shadow: 0 4px 16px #0006; pointer-events: none; }
-.balance-version-help:hover .balance-version-tip, .balance-version-help:focus .balance-version-tip { display: block; }
+.game-info { position: relative; color: var(--ink); }
+.game-info > summary { cursor: pointer; list-style: none; padding: 5px 12px; border: 1px solid var(--border); border-radius: 5px; white-space: nowrap; }
+.game-info > summary::-webkit-details-marker { display: none; }
+.game-info[open] > summary { border-color: var(--accent); }
+.game-info-panel { position: absolute; right: 0; top: calc(100% + 9px); z-index: 200; width: min(440px, calc(100vw - 28px)); max-height: min(70vh, 640px); overflow: auto; padding: 4px 16px 16px; box-sizing: border-box; border: 1px solid var(--border); border-radius: 6px; background: var(--panel); box-shadow: 0 4px 16px #0006; line-height: 1.7; overflow-wrap: anywhere; }
+.game-info-panel h3 { font-size: 12px; margin: 12px 0 4px; color: var(--muted); }
+.game-info-panel ul { margin: 0; padding-left: 20px; }
+
 .turn-controls { display: flex; align-items: center; gap: 6px; flex: 1 1 340px; min-width: 220px; }
 .turn-controls input[type=range] { flex: 1 1 240px; min-width: 160px; }
 .turn-controls button { min-width: 38px; }
@@ -148,6 +153,7 @@ button:hover { border-color: var(--accent); }
 .emissary { display: grid; grid-template-columns: 1.1fr 1fr 30px; align-items: center; gap: 6px; font-size: 11px; }
 .emissary .swatch { width: 12px; height: 12px; border-radius: 3px; border: 1px solid rgba(255,255,255,.4); }
 .emissary .who { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.emissary .amani-icon { width: 20px; height: 20px; object-fit: contain; vertical-align: middle; margin-left: 4px; }
 .emissary .bar { height: 7px; background: #0d1119; border-radius: 4px; overflow: hidden; }
 .emissary .bar i { display: block; height: 100%; }
 .emissary .val { text-align: right; color: var(--muted); }
@@ -527,7 +533,7 @@ body.panel-dragging { cursor: grabbing; }
 /* Standalone comparison: only the data grid and turn navigation are visible. */
 .compare-page .topbar > :not(.turn-controls):not(.language-select-wrap),
 .compare-page #map, .compare-page #tooltip, .compare-page #left-panel,
-.compare-page #tile-panel,
+.compare-page #tile-panel, .compare-page #great-panel,
 .compare-page #right-panel > .panel-head, .compare-page #hud-tabs, .compare-page #hud-sort,
 .compare-page .panel-resize, .compare-page .panel-dock-resize, .compare-page .dock-splitter { display: none !important; }
 .compare-page #right-panel { inset: 0 !important; width: auto !important; height: auto !important;
@@ -555,8 +561,6 @@ html[lang="en"] .cmp-label > span:first-of-type { flex: 1; min-width: 0; white-s
 /* Per-turn plot yields and expandable source accounting. */
 .tile-yield-note { color: #c5ab65; font-size: 12px; margin-top: 7px; }
 .tile-yield-details { margin-top: 10px; font-size: 12px; }
-.yield-layer-beta { color: #e5c34b; }
-.yield-layer-toggle > span { white-space: nowrap; font-size: 11px; }
 .tile-yield-source { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 6px; }
 .tile-yield-source.excluded { color: var(--muted, #aaa); }
 .tile-body .sec-title { margin: 10px 0 4px; font-weight: 600; color: var(--muted);
@@ -619,3 +623,27 @@ button.btn-blocked:hover { border-color: var(--border); }
 /* 「文化」明细里的文化胜利进度：一行，数字用正文色 */
 .hud-detail .cv-line { color: var(--ink); font-weight: 600; font-size: 12px;
   font-variant-numeric: tabular-nums; }
+/* Great People HUD shares the draggable/resizable panel shell. */
+#great-body { overflow: auto; padding: 10px; }
+.great-card { border: 1px solid var(--border, #46515b); border-radius: 6px; padding: 12px; margin-bottom: 10px; }
+.great-heading { display: flex; align-items: center; gap: 10px; }
+.great-heading img { width: 48px; height: 48px; object-fit: contain; }
+.great-heading strong { font-size: 15px; }
+.great-person { margin: 4px 0; }
+.great-progress { margin: 8px 0; }
+.great-progress-label { display: flex; justify-content: space-between; gap: 10px; font-size: 12px; flex-wrap: wrap; }
+.great-progress-label small { margin-left: 8px; color: var(--muted, #a6b3bd); white-space: nowrap; }
+.great-track { height: 5px; background: #131c25; border-radius: 3px; margin-top: 5px; overflow: hidden; }
+.great-track > div { height: 100%; border-radius: inherit; }
+
+/* Shared information categories and data-panel header actions. */
+#right-panel > .panel-head .panel-title { margin-right: auto; }
+#civ-hud-compare { display: inline-flex; align-items: center; gap: 3px; white-space: nowrap; }
+#civ-hud-compare .new-page-icon { width: 14px; height: 14px; }
+#civ-hud-restore { margin-left: 0; }
+#right-panel.hud-minimized #civ-hud-minimize { display: none; }
+#great-body { display: flex; flex-direction: column; gap: 8px; }
+
+.research-progress { display: inline-flex; align-items: center; gap: 3px; margin-left: 5px; color: var(--muted, #9baac0); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+.chip .research-progress img { width: 13px; height: 13px; }

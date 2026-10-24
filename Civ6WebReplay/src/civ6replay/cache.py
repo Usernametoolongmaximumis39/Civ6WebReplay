@@ -44,7 +44,9 @@ DEFAULT_CACHE = ROOT / "cache" / "replay.sqlite"
 # Structured package IDs and independent balance MOD release channels.
 # Received resources are now serialized separately for the luxury inventory.
 # Saved unit costs/copies and per-queue-entry military formation.
-SCHEMA_VERSION = 29
+# City-state HUD now includes saved Amani assignment targets.
+# Current science/culture progress and world-era adjusted research prices.
+SCHEMA_VERSION = 33
 
 
 class ReplayCache:

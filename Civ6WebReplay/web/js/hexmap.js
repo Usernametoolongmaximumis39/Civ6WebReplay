@@ -27,7 +27,7 @@
     ["fallout", "\u6c61\u67d3"],
     ["road", "\u9053\u8def"],
     ["district", "\u533a\u57df/\u57ce\u5e02"], ["resource", "\u8d44\u6e90"],
-    ["yield", "产出（测试版）"],
+    ["yield", "产出"],
     ["unit", "\u5355\u4f4d"], ["river", "\u6cb3\u6d41"], ["fog", "\u8ff7\u96fe"],
   ];
 

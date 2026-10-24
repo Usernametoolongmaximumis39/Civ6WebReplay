@@ -1,7 +1,7 @@
 @echo off
 chcp 65001 >nul
 setlocal enabledelayedexpansion
-title Civ6 WebReplay v0.43
+title Civ6 WebReplay v0.44
 cd /d "%~dp0"
 
 REM --- 选择 Python ---------------------------------------------------------
@@ -35,7 +35,7 @@ if errorlevel 1 (
 
 REM --- 随附运行数据 -------------------------------------------------------
 echo [3/4] 正在检查随附运行数据 ...
-for %%F in ("data\gamedb\vanilla\gamedb.sqlite" "data\vanilla\loc.json" "data\vanilla\identities.json" "data\vanilla\mapwrap.json" "data\shared\identities.json" "data\shared\player-colors.json" "data\mods\governor_promotions.json" "data\ui\strings.json" "data\ui\game-text.json" "assets\icons\index.json") do (
+for %%F in ("data\gamedb\vanilla\gamedb.sqlite" "data\vanilla\loc.json" "data\vanilla\identities.json" "data\vanilla\mapwrap.json" "data\shared\identities.json" "data\shared\player-colors.json" "data\mods\governor_promotions.json" "data\research-costs.json" "data\production-costs.json" "data\vanilla\great-people.json" "data\ui\strings.json" "data\ui\game-text.json" "assets\icons\index.json") do (
   if not exist "%%~F" (
     echo [错误] 缺少运行数据：%%~F。请重新下载完整程序包。
     goto :end
